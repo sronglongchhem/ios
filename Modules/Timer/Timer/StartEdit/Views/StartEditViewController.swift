@@ -5,7 +5,7 @@ import Architecture
 import RxSwift
 import RxCocoa
 
-public typealias StartEditStore = Store<StartEditState, StartEditAction>
+typealias StartEditStore = Store<StartEditState, StartEditAction>
 
 public class StartEditViewController: UIViewController, Storyboarded
 {
@@ -15,7 +15,7 @@ public class StartEditViewController: UIViewController, Storyboarded
     @IBOutlet weak var playStopButton: UIButton!
     @IBOutlet weak var descriptionField: UITextField!
     
-    public var store: StartEditStore!
+    var store: StartEditStore!
     private var disposeBag = DisposeBag()
 
     public override func viewDidLoad() {

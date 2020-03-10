@@ -8,7 +8,7 @@ public final class TimerCoordinator: NavigationCoordinator
     private let timeLogCoordinator: TimeEntriesLogCoordinator
     private let startEditCoordinator: StartEditCoordinator
     
-    public init(store: Store<TimerState, TimerAction>, timeLogCoordinator: TimeEntriesLogCoordinator, startEditCoordinator: StartEditCoordinator)
+    init(store: Store<TimerState, TimerAction>, timeLogCoordinator: TimeEntriesLogCoordinator, startEditCoordinator: StartEditCoordinator)
     {
         self.store = store
         self.timeLogCoordinator = timeLogCoordinator

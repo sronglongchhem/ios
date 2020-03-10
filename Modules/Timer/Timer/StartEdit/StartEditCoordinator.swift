@@ -1,11 +1,11 @@
 import UIKit
 import Architecture
 
-public final class StartEditCoordinator: BaseCoordinator
+final class StartEditCoordinator: BaseCoordinator
 {
     private var store: Store<StartEditState, StartEditAction>
         
-    public init(store: Store<StartEditState, StartEditAction>)
+    init(store: Store<StartEditState, StartEditAction>)
     {
         self.store = store
     }

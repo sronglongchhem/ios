@@ -7,7 +7,7 @@ import RxSwift
 import RxDataSources
 import Models
 
-public typealias TimeEntriesLogStore = Store<TimeEntriesLogState, TimeEntriesLogAction>
+typealias TimeEntriesLogStore = Store<TimeEntriesLogState, TimeEntriesLogAction>
 
 public class TimeEntriesLogViewController: UIViewController, Storyboarded
 {
@@ -19,7 +19,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded
     private var disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedAnimatedDataSource<DayViewModel>!
 
-    public var store: TimeEntriesLogStore!
+    var store: TimeEntriesLogStore!
 
     public override func viewDidLoad()
     {

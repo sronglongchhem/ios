@@ -5,6 +5,7 @@ import Utils
 public struct LocalTimerState
 {
     internal var description: String = ""
+    internal var entriesToDelete: Set<Int> = Set<Int>()
     
     public init()
     {
@@ -29,10 +30,11 @@ extension TimerState
     internal var timeLogState: TimeEntriesLogState
     {
         get {
-            TimeEntriesLogState(entities: entities)
+            TimeEntriesLogState(entities: entities, entriesToDelete: localTimerState.entriesToDelete)
         }
         set {
             entities = newValue.entities
+            localTimerState.entriesToDelete = newValue.entriesToDelete
         }
     }
     

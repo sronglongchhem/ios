@@ -4,6 +4,7 @@ let timeEntriesSelector: (TimeEntriesLogState) -> [DayViewModel] = { state in
     
     guard case .loaded(_) = state.entities.loading else { return [] }
     return state.entities.timeEntries.values
+        .filter({ !state.entriesToDelete.contains($0.id) })
         .sorted(by: { $0.start > $1.start })
         .compactMap({ timeEntry in
             guard let workspace = state.entities.getWorkspace(timeEntry.workspaceId) else {

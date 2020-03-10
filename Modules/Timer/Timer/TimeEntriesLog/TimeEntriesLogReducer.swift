@@ -4,27 +4,78 @@ import Models
 import RxSwift
 import Repository
 
+class Scheduler
+{
+    var dict = [Int: PublishSubject<Void>]()
+    
+    init(){}
+    
+    func schedule(id: Int, scheduler: SchedulerType = MainScheduler.instance) -> Observable<Int>
+    {
+        let cancellation = PublishSubject<Void>()
+        dict[id] = cancellation
+        
+        return Observable.just(id)            
+            .delay(RxTimeInterval.seconds(3), scheduler: scheduler)
+            .takeUntil(cancellation)
+    }
+    
+    func cancel(id: Int)
+    {
+        guard let cancellation = dict[id] else { return }
+        cancellation.onNext(())
+    }
+}
+
+let scheduler = Scheduler()
+
 let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, Repository> { state, action, repository in
     switch action {
         
     case let .continueButtonTapped(timeEntryId):
-        guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
-        return continueTimeEntry(repository, timeEntry: timeEntry)
+        for id in state.entriesToDelete {
+            scheduler.cancel(id: id)
+        }
+        state.entriesToDelete = []
+        return .empty
+//        guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
+//        return continueTimeEntry(repository, timeEntry: timeEntry)
         
     case let .timeEntrySwiped(direction, timeEntryId):
         switch direction {
         case .left:
-            return deleteTimeEntry(repository, timeEntryId: timeEntryId)
+            if !state.entriesToDelete.isEmpty {
+                let previous = Array(state.entriesToDelete).first!
+                scheduler.cancel(id: previous)
+                state.entriesToDelete.insert(timeEntryId)// = [timeEntryId]
+
+                return Observable<TimeEntriesLogAction>.concat(
+                    deleteTimeEntry(repository, timeEntryId: previous).asObservable(),
+                    scheduleDeleteTimeEntry(timeEntryId: timeEntryId).asObservable()
+                ).toEffect()
+
+            } else {
+                state.entriesToDelete = [timeEntryId]
+                return scheduleDeleteTimeEntry(timeEntryId: timeEntryId)
+            }
+            
         case .right:
             guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
             return continueTimeEntry(repository, timeEntry: timeEntry)
         }
+        
+    case let .deleteTimeEntry(timeEntryId):
+        if state.entriesToDelete.contains(timeEntryId) {
+            return deleteTimeEntry(repository, timeEntryId: timeEntryId)
+        }
+        return .empty
         
     case let .timeEntryTapped(timeEntryId):
         //TODO Probably change the route to show the selected TE...
         return .empty
         
     case let .timeEntryDeleted(timeEntryId):
+        state.entriesToDelete.remove(timeEntryId)
         state.entities.timeEntries[timeEntryId] = nil
         return .empty
         
@@ -76,12 +127,21 @@ fileprivate func loadEntities(_ repository: Repository) -> Effect<TimeEntriesLog
     .toEffect()
 }
 
+fileprivate func scheduleDeleteTimeEntry(timeEntryId: Int) -> Effect<TimeEntriesLogAction>
+{
+    scheduler.schedule(id: timeEntryId)
+        .toEffect(
+            map: { TimeEntriesLogAction.deleteTimeEntry($0) },
+            catch: { TimeEntriesLogAction.setError($0)}
+        )
+}
+
 fileprivate func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effect<TimeEntriesLogAction>
 {
     repository.deleteTimeEntry(timeEntryId: timeEntryId)
-    .toEffect(
-        map: { TimeEntriesLogAction.timeEntryDeleted(timeEntryId) },
-        catch: { TimeEntriesLogAction.setError($0)}
+        .toEffect(
+            map: { TimeEntriesLogAction.timeEntryDeleted(timeEntryId) },
+            catch: { TimeEntriesLogAction.setError($0)}
     )
 }
 
