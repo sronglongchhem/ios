@@ -47,7 +47,7 @@ extension TimeEntriesLogAction: CustomDebugStringConvertible {
             return "FinishedLoading"
        
         case let .setEntities(entities):
-            guard let first = entities.first else { return "SetEntities: 0" } // TODO Extract specific type from array
+            guard let first = entities.first else { return "SetEntities: 0" }
             return "SetEntities (\(type(of: first))): \(entities.count)"
         
         case let .setError(error):

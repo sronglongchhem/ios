@@ -17,6 +17,7 @@
 		8C509D1D241286F800B6DF30 /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D1C241286F800B6DF30 /* UIViewController + Extensions.swift */; };
 		8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D272412885100B6DF30 /* Date+Extensions.swift */; };
 		8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D292412888D00B6DF30 /* Array+Extensions.swift */; };
+		8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		8C509D1C241286F800B6DF30 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		8C509D272412885100B6DF30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8C509D292412888D00B6DF30 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		BA966568DC4D267ABE8B8D26 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 			children = (
 				8C509D272412885100B6DF30 /* Date+Extensions.swift */,
 				8C509D292412888D00B6DF30 /* Array+Extensions.swift */,
+				8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				8C2517A92403C2AC00BAD4B5 /* BehaviorRelay+Extensions.swift in Sources */,
 				8C2517A52403C2AC00BAD4B5 /* Storyboarded.swift in Sources */,
 				8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */,
+				8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */,
 				8C2517A82403C2AC00BAD4B5 /* Observable+Extensions.swift in Sources */,
 				8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */,
 			);

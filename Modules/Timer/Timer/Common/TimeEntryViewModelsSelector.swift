@@ -7,7 +7,6 @@ let timeEntryViewModelsSelector: (TimeLogEntities) -> [TimeEntryViewModel] = { e
         .compactMap({ timeEntry in
             guard let workspace = entities.getWorkspace(timeEntry.workspaceId) else {
                 //fatalError("Workspace missing")
-                //TODO This shouldn't happen, what should we do here?
                 return nil
             }
             

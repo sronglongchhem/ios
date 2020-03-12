@@ -21,7 +21,6 @@ let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, R
         }
         
     case let .timeEntryTapped(timeEntryId):
-        //TODO Probably change the route to show the selected TE...
         return .empty
         
     case let .timeEntryDeleted(timeEntryId):
@@ -61,7 +60,6 @@ let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, R
 }
 
 private func loadEntities(_ repository: Repository) -> Effect<TimeEntriesLogAction> {
-    //TODO Shouldn't need to do all that `asObservable`
     return Observable.merge(
         repository.getWorkspaces().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getClients().map(TimeEntriesLogAction.setEntities).asObservable(),
