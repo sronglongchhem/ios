@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16AD5F00F2AA2432B5153AD4 /* libPods-TogglTrack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D254C466CC84E88FB7BF840B /* libPods-TogglTrack.a */; };
+		51543B0F241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */; };
 		8C008F9D2406744C000A0C32 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008F9C2406744C000A0C32 /* TabBarCoordinator.swift */; };
 		8C008FAD24081357000A0C32 /* TogglTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008FAC24081357000A0C32 /* TogglTrack.swift */; };
 		8C008FAF2408163D000A0C32 /* LoggingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008FAE2408163D000A0C32 /* LoggingReducer.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		5011844FD27437FDB171F288 /* Pods-TogglTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TogglTrack.release.xcconfig"; path = "Target Support Files/Pods-TogglTrack/Pods-TogglTrack.release.xcconfig"; sourceTree = "<group>"; };
+		51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckFeatureAvailabilityReducer.swift; sourceTree = "<group>"; };
 		8C008F9C2406744C000A0C32 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		8C008FAC24081357000A0C32 /* TogglTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglTrack.swift; sourceTree = "<group>"; };
 		8C008FAE2408163D000A0C32 /* LoggingReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingReducer.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				8C2517AD2403C2BC00BAD4B5 /* AppReducer.swift */,
 				8C2517B02403C2BC00BAD4B5 /* AppEnvironment.swift */,
 				8C008FAE2408163D000A0C32 /* LoggingReducer.swift */,
+				51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				8C2517B32403C2BC00BAD4B5 /* AppReducer.swift in Sources */,
 				8C008FAF2408163D000A0C32 /* LoggingReducer.swift in Sources */,
 				8CAAACB724051CCE00E9BBAF /* AppCoordinator.swift in Sources */,
+				51543B0F241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift in Sources */,
 				8CB545BF2410FFA500154473 /* AppState.swift in Sources */,
 				8CB545C52410FFF500154473 /* AppAction.swift in Sources */,
 				8CB545D024113B4600154473 /* AppFeature.swift in Sources */,
