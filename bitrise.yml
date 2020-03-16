@@ -1,0 +1,65 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+trigger_map:
+- push_branch: "*"
+  workflow: health
+workflows:
+  base:
+    steps:
+    - activate-ssh-key@4.0.5:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.18: {}
+  health:
+    steps:
+    - github-status@2.2.2:
+        inputs:
+        - status_identifier: Bitrise Health Checks
+        - auth_token: "$GITHUB_STATUS_KEY"
+    after_run:
+    - base
+    - health-linter
+    - dependencies
+    - health-tests
+  health-tests:
+    steps:
+    - xcode-test@2.4.4:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+    - github-status@2.2.2:
+        inputs:
+        - status_identifier: Unit Tests
+        - auth_token: "$GITHUB_STATUS_KEY"
+    before_run: []
+  health-linter:
+    steps:
+    - swiftlint@0.4.2:
+        inputs:
+        - strict: 'yes'
+        - linting_path: "$BITRISE_SOURCE_DIR"
+    - github-status@2.2.2:
+        inputs:
+        - status_identifier: Linter Check
+        - auth_token: "$GITHUB_STATUS_KEY"
+    before_run: []
+  dependencies:
+    steps:
+    - certificate-and-profile-installer@1.10.3: {}
+    - recreate-user-schemes@1.0.2:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+    - cocoapods-install@1.10.1: {}
+    before_run: []
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: TogglTrackiOS.xcworkspace
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: App
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: development
