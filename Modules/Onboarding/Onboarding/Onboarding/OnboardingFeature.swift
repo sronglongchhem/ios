@@ -1,11 +1,14 @@
 import UIKit
 import Architecture
+import API
 
-public let onboardingReducer = combine(
-    mainOnboardingReducer,
-    emailLoginReducer.pullback(action: \OnboardingAction.emailLogin),
-    emailSignupReducer.pullback(action: \OnboardingAction.emailSignup)
-)
+public func createOnboardingReducer(userAPI: UserAPI) -> Reducer<OnboardingState, OnboardingAction> {
+    return combine(
+        createMainOnboardingReducer(),
+        createEmailLoginReducer(api: userAPI).pullback(action: \.emailLogin),
+        createEmailSignupReducer(api: userAPI).pullback(action: \.emailSignup)
+    )
+}
 
 public class OnboardingFeature: BaseFeature<OnboardingState, OnboardingAction> {
     let features = [

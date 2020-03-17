@@ -1,16 +1,16 @@
 import Foundation
 import Architecture
 
-public func checkFeatureAvailability<State, Action, Environment>(
-    _ reducer: Reducer<State, Action, Environment>
-) -> Reducer<State, Action, Environment> {
-    return Reducer { state, action, environment in
+public func checkFeatureAvailability<State, Action>(
+    _ reducer: Reducer<State, Action>
+) -> Reducer<State, Action> {
+    return Reducer { state, action in
         switch action {
         
         //case for each action that needs feature availability checked
             
         default:
-            return reducer.reduce(&state, action, environment)
+            return reducer.reduce(&state, action)
         }
     }
 }

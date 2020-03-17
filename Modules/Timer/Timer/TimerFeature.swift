@@ -1,14 +1,13 @@
 import Foundation
 import Architecture
+import Repository
 
-public let timerReducer = combine(
-    timeEntriesLogReducer.pullback(
-        state: \TimerState.timeLogState,
-        action: \TimerAction.timeLog),
-    startEditReducer.pullback(
-        state: \TimerState.startEditState,
-        action: \TimerAction.startEdit)
-)
+public func createTimerReducer(repository: Repository) -> Reducer<TimerState, TimerAction> {
+    return combine(
+        createTimeEntriesLogReducer(repository: repository).pullback(state: \.timeLogState, action: \.timeLog),
+        createStartEditReducer(repository: repository).pullback(state: \.startEditState, action: \.startEdit)
+    )
+}
 
 public class TimerFeature: BaseFeature<TimerState, TimerAction> {
     

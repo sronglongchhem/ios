@@ -4,39 +4,41 @@ import Models
 import RxSwift
 import Repository
 
-let startEditReducer = Reducer<StartEditState, StartEditAction, Repository> { state, action, repository in
-    
-    switch action {
+func createStartEditReducer(repository: Repository) -> Reducer<StartEditState, StartEditAction> {
+    return Reducer {state, action in
         
-    case let .descriptionEntered(description):
-        state.description = description
-        
-    case .startTapped:
-        guard let defaultWorkspace = state.user.value?.defaultWorkspace else {
-            fatalError("No default workspace")
+        switch action {
+            
+        case let .descriptionEntered(description):
+            state.description = description
+            
+        case .startTapped:
+            guard let defaultWorkspace = state.user.value?.defaultWorkspace else {
+                fatalError("No default workspace")
+            }
+            
+            let timeEntry = TimeEntry(
+                id: state.entities.timeEntries.count,
+                description: state.description,
+                start: Date(),
+                duration: -1,
+                billable: false,
+                workspaceId: defaultWorkspace
+            )
+            
+            state.description = ""
+            return startTimeEntry(timeEntry, repository: repository)
+            
+        case let .timeEntryAdded(timeEntry):
+            state.entities.timeEntries[timeEntry.id] = timeEntry
+            
+        case let .setError(error):
+            state.entities.loading = .error(error)
+            return .empty
         }
         
-        let timeEntry = TimeEntry(
-            id: state.entities.timeEntries.count,
-            description: state.description,
-            start: Date(),
-            duration: -1,
-            billable: false,
-            workspaceId: defaultWorkspace
-        )
-        
-        state.description = ""
-        return startTimeEntry(timeEntry, repository: repository)
-        
-    case let .timeEntryAdded(timeEntry):
-        state.entities.timeEntries[timeEntry.id] = timeEntry
-        
-    case let .setError(error):
-        state.entities.loading = .error(error)
         return .empty
     }
-    
-    return .empty
 }
 
 func startTimeEntry(_ timeEntry: TimeEntry, repository: Repository) -> Effect<StartEditAction> {

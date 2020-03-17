@@ -16,7 +16,7 @@ public final class Store<State, Action> {
         state = stateObservable
     }
     
-    public init<Environment>(initialState: State, reducer: Reducer<State, Action, Environment>, environment: Environment) {
+    public init(initialState: State, reducer: Reducer<State, Action>) {
         let behaviorRelay = BehaviorRelay(value: initialState)
         state = behaviorRelay.asDriver()
         
@@ -24,7 +24,7 @@ public final class Store<State, Action> {
             var tempState = behaviorRelay.value
             var effects = [Effect<Action>]()
             for action in actions {
-                let effect = reducer.reduce(&tempState, action, environment)
+                let effect = reducer.reduce(&tempState, action)
                 effects.append(effect)
             }
             

@@ -19,8 +19,7 @@ public class TogglTrack {
         
         store = Store(
             initialState: AppState(),
-            reducer: logging(checkFeatureAvailability(appReducer)),
-            environment: AppEnvironment()
+            reducer: logging(checkFeatureAvailability(createAppReducer(environment: AppEnvironment())))
         )
         
         appCoordinator = (appFeature.mainCoordinator(store: store) as? AppCoordinator)!

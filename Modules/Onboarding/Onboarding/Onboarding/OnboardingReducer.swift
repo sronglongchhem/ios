@@ -3,16 +3,18 @@ import Architecture
 import RxSwift
 import API
 
-let mainOnboardingReducer = Reducer<OnboardingState, OnboardingAction, UserAPI> { state, action, _ in
-    
-    switch action {
+func createMainOnboardingReducer() -> Reducer<OnboardingState, OnboardingAction> {
+    return Reducer { state, action in
         
-    case .emailSingInTapped:
-        state.route = OnboardingRoute.emailLogin
+        switch action {
+            
+        case .emailSingInTapped:
+            state.route = OnboardingRoute.emailLogin
+            
+        case .emailLogin, .emailSignup:
+            break
+        }
         
-    case .emailLogin, .emailSignup:
-        break
+        return .empty
     }
-
-    return .empty
 }

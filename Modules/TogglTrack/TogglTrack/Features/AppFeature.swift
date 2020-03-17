@@ -3,19 +3,13 @@ import Architecture
 import Onboarding
 import Timer
 
-let appReducer = combine(
-    globalReducer,
-    onboardingReducer.pullback(
-        state: \AppState.onboardingState,
-        action: \AppAction.onboarding,
-        environment: \AppEnvironment.userAPI
-    ),
-    timerReducer.pullback(
-        state: \AppState.timerState,
-        action: \AppAction.timer,
-        environment: \AppEnvironment.repository
+func createAppReducer(environment: AppEnvironment) -> Reducer<AppState, AppAction> {
+    return combine(
+        createGlobalReducer(),
+        createOnboardingReducer(userAPI: environment.userAPI).pullback(state: \.onboardingState, action: \.onboarding),
+        createTimerReducer(repository: environment.repository).pullback(state: \.timerState, action: \.timer)
     )
-)
+}
 
 public class AppFeature: BaseFeature<AppState, AppAction> {
     
