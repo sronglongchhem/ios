@@ -1,16 +1,17 @@
 import Foundation
 import Architecture
 import Repository
+import OtherServices
 
-public func createTimerReducer(repository: Repository) -> Reducer<TimerState, TimerAction> {
+public func createTimerReducer(repository: Repository, time: Time) -> Reducer<TimerState, TimerAction> {
     return combine(
-        createTimeEntriesLogReducer(repository: repository).pullback(state: \.timeLogState, action: \.timeLog),
-        createStartEditReducer(repository: repository).pullback(state: \.startEditState, action: \.startEdit)
+        createTimeEntriesLogReducer(repository: repository, time: time).pullback(state: \.timeLogState, action: \.timeLog),
+        createStartEditReducer(repository: repository, time: time).pullback(state: \.startEditState, action: \.startEdit)
     )
 }
 
 public class TimerFeature: BaseFeature<TimerState, TimerAction> {
-    
+
     let features: [String: BaseFeature<TimerState, TimerAction>] = [
         "log": TimeEntriesLogFeature()
             .view { $0.view(
@@ -23,7 +24,7 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
                 action: { TimerAction.startEdit($0) })
         }
     ]
-    
+
     public override func mainCoordinator(store: Store<TimerState, TimerAction>) -> Coordinator {
         return TimerCoordinator(
             store: store,

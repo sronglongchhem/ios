@@ -37,6 +37,9 @@
          location = "container:"
          name = "Services">
          <FileRef
+            location = "group:Modules/OtherServices/OtherServices.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:Modules/Networking/Networking.xcodeproj">
          </FileRef>
          <FileRef

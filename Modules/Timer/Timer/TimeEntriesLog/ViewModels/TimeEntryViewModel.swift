@@ -66,15 +66,11 @@ func getProjectTaskClient(from project: Project?, task: Task?, client: Client?) 
 
 extension TimeInterval {
     var formatted: String {
-        let endingDate = Date()
-        let startingDate = endingDate.addingTimeInterval(-self)
-        let calendar = Calendar.current
-
-        let componentsNow = calendar.dateComponents([.hour, .minute, .second], from: startingDate, to: endingDate)
-        if let hour = componentsNow.hour, let minute = componentsNow.minute, let seconds = componentsNow.second {
-            return "\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", seconds))"
-        } else {
-            return "00:00:00"
-        }
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = [.pad]
+        guard let result = formatter.string(from: self) else { return "00:00:00" }
+        return result
     }
 }

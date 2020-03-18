@@ -3,19 +3,20 @@ import Architecture
 import Models
 import RxSwift
 import Repository
+import OtherServices
 
-func createTimeEntriesLogReducer(repository: Repository) -> Reducer<TimeEntriesLogState, TimeEntriesLogAction> {
+func createTimeEntriesLogReducer(repository: Repository, time: Time) -> Reducer<TimeEntriesLogState, TimeEntriesLogAction> {
     return Reducer { state, action in
         switch action {
-            
+
         case let .continueButtonTapped(timeEntryId):
             return [
-                continueTimeEntry(repository, state: state, timeEntryId: timeEntryId)
+                continueTimeEntry(repository, time: time, state: state, timeEntryId: timeEntryId)
             ]
             
         case let .timeEntrySwiped(direction, timeEntryId):
             return [
-                timeEntrySwiped(repository, state: state, direction: direction, timeEntryId: timeEntryId)
+                timeEntrySwiped(repository, time: time, state: state, direction: direction, timeEntryId: timeEntryId)
             ]
             
         case .timeEntryTapped:
@@ -33,21 +34,21 @@ func createTimeEntriesLogReducer(repository: Repository) -> Reducer<TimeEntriesL
             if state.entities.loading.isLoaded {
                 return []
             }
-            
+
             state.entities.loading = .loading
             return loadEntities(repository)
-            
+
         case .finishedLoading:
             state.entities.loading = .loaded(())
-            return []
-            
+            return []           
+          
         case let .setEntities(entities):
             let dict: [Int: Entity] = entities.reduce([:], { acc, entity in
                 var acc = acc
                 acc[entity.id] = entity
                 return acc
             })
-            
+
             state.entities.set(entities: dict)
             return []
             
@@ -76,6 +77,7 @@ private func loadEntities(_ repository: Repository) -> [Effect<TimeEntriesLogAct
 }
 
 private func timeEntrySwiped(_ repository: Repository,
+                             time: Time,
                              state: TimeEntriesLogState,
                              direction: SwipeDirection,
                              timeEntryId: Int)
@@ -84,7 +86,7 @@ private func timeEntrySwiped(_ repository: Repository,
     case .left:
         return deleteTimeEntry(repository, timeEntryId: timeEntryId)
     case .right:
-        return continueTimeEntry(repository, state: state, timeEntryId: timeEntryId)
+        return continueTimeEntry(repository, time: time, state: state, timeEntryId: timeEntryId)
     }
 }
 
@@ -96,14 +98,14 @@ private func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effe
     )
 }
 
-private func continueTimeEntry(_ repository: Repository, state: TimeEntriesLogState, timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
+private func continueTimeEntry(_ repository: Repository, time: Time, state: TimeEntriesLogState, timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
     guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
-    
+
     var copy = timeEntry
     copy.id = UUID().hashValue
-    copy.start = Date()
+    copy.start = time.now()
     copy.duration = -1
-    
+
     return repository.addTimeEntry(timeEntry: copy)
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryAdded(copy) },

@@ -3,30 +3,30 @@ import Architecture
 import Models
 import RxSwift
 import Repository
+import OtherServices
 
-func createStartEditReducer(repository: Repository) -> Reducer<StartEditState, StartEditAction> {
+func createStartEditReducer(repository: Repository, time: Time) -> Reducer<StartEditState, StartEditAction> {
     return Reducer {state, action in
-        
+
         switch action {
-            
+
         case let .descriptionEntered(description):
             state.description = description
             return []
-            
         case .startTapped:
             guard let defaultWorkspace = state.user.value?.defaultWorkspace else {
                 fatalError("No default workspace")
             }
-            
+
             let timeEntry = TimeEntry(
                 id: state.entities.timeEntries.count,
                 description: state.description,
-                start: Date(),
+                start: time.now(),
                 duration: -1,
                 billable: false,
                 workspaceId: defaultWorkspace
             )
-            
+
             state.description = ""
             return [
                 startTimeEntry(timeEntry, repository: repository)

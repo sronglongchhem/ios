@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3430C36C24213CEB009CF454 /* OtherServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C36B24213CEB009CF454 /* OtherServices.framework */; };
 		3F08D7D72EA783CBBD146B1F /* Pods_Timer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB2199F93BBF3239F419242 /* Pods_Timer.framework */; };
 		8C008FBC24081CD6000A0C32 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008FBB24081CD6000A0C32 /* BottomSheet.swift */; };
 		8C008FBE240823D6000A0C32 /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C008FBD240823D6000A0C32 /* Utils.framework */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		1774F5621311F644B3258D92 /* Pods-Timer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.debug.xcconfig"; path = "Target Support Files/Pods-Timer/Pods-Timer.debug.xcconfig"; sourceTree = "<group>"; };
 		1DB2199F93BBF3239F419242 /* Pods_Timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3430C365241A8FE4009CF454 /* Time.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Time.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3430C36B24213CEB009CF454 /* OtherServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OtherServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C008FBB24081CD6000A0C32 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		8C008FBD240823D6000A0C32 /* Utils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C008FC324090C85000A0C32 /* StartEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 			files = (
 				8C2518C02403C87200BAD4B5 /* Repository.framework in Frameworks */,
 				8C008FBE240823D6000A0C32 /* Utils.framework in Frameworks */,
+				3430C36C24213CEB009CF454 /* OtherServices.framework in Frameworks */,
 				8C2518AD2403C79000BAD4B5 /* Assets.framework in Frameworks */,
 				8C2518AA2403C78600BAD4B5 /* Models.framework in Frameworks */,
 				8C2518A62403C78100BAD4B5 /* Architecture.framework in Frameworks */,
@@ -172,6 +176,8 @@
 		8C2518A42403C78100BAD4B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3430C36B24213CEB009CF454 /* OtherServices.framework */,
+				3430C365241A8FE4009CF454 /* Time.framework */,
 				8C008FBD240823D6000A0C32 /* Utils.framework */,
 				8C2518EE2403CA5F00BAD4B5 /* RxDatasourcesDep.framework */,
 				8C2518BF2403C87200BAD4B5 /* Repository.framework */,
