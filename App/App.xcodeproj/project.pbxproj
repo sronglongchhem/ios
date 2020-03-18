@@ -456,7 +456,6 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = B227VTMZ94;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -479,7 +478,6 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = B227VTMZ94;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
