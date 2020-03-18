@@ -1,43 +1,37 @@
 import Foundation
 import RxSwift
 
-public struct Effect<Action>: ObservableType {
+public struct Effect<Action> {
     
-    public typealias Element = Action
+    let single: Single<Action>
     
-    let observable: Observable<Action>
-    
-    fileprivate init(observable: Observable<Action>) {
-        self.observable = observable
+    fileprivate init(single: Single<Action>) {
+        self.single = single
     }
         
-    public func subscribe<Observer>(_ observer: Observer) -> Disposable where Observer: ObserverType, Element == Observer.Element {
-        observable.subscribe(observer)
-    }
-    
     public func map<B>(_ transform: @escaping (Action) throws -> B) -> Effect<B> {
-        return Effect<B>(observable: observable.map(transform))
+        return Effect<B>(single: single.map(transform))
     }
     
-    public static var empty: Effect<Action> { Effect(observable: Observable.empty()) }
+    public static var empty: Effect<Action> { Observable.empty().toEffect() }
     
-    public static func from(effects: [Effect]) -> Effect {
-        return Effect(observable: Observable.from(effects).merge())
-    }
+//    public static func from(effects: [Effect]) -> Effect {
+//        return Effect(observable: Observable.from(effects).merge())
+//    }
     
     public static func from(action: Action) -> Effect {
-        return Effect(observable: Observable.just(action))
+        return Effect(single: Single.just(action))
     }
     
-    public func asObservable() -> Observable<Action> {
-        return observable
-    }
+//    public func asObservable() -> Observable<Action> {
+//        return single.asObservable()
+//    }
 }
 
 public extension ObservableConvertibleType {
     
     func toEffect() -> Effect<Element> {
-        return Effect(observable: self.asObservable())
+        return Effect(single: self.asObservable().asSingle())
     }
     
     func toEffect<Action>(

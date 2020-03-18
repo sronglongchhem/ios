@@ -1,7 +1,7 @@
 import Foundation
 import RxSwift
 
-public typealias ReduceFunction<StateType, ActionType> = (inout StateType, ActionType) -> Effect<ActionType>
+public typealias ReduceFunction<StateType, ActionType> = (inout StateType, ActionType) -> [Effect<ActionType>]
 
 public struct Reducer<StateType, ActionType> {
     public let reduce: ReduceFunction<StateType, ActionType>
@@ -15,17 +15,20 @@ public struct Reducer<StateType, ActionType> {
         action: WritableKeyPath<GlobalAction, ActionType?>
     ) -> Reducer<GlobalState, GlobalAction> {
         return Reducer<GlobalState, GlobalAction> { globalState, globalAction in
-            guard let localAction = globalAction[keyPath: action] else { return .empty }
-            return self
-                .reduce(&globalState[keyPath: state], localAction)
-                .map { localAction -> GlobalAction in
-                  var globalAction = globalAction
-                  globalAction[keyPath: action] = localAction
-                  return globalAction
+            guard let localAction = globalAction[keyPath: action] else { return [] }
+            
+            let locaEffects = self.reduce(&globalState[keyPath: state], localAction)
+            return locaEffects.map { localEffect in
+                localEffect
+                    .map { localAction -> GlobalAction in
+                        var globalAction = globalAction
+                        globalAction[keyPath: action] = localAction
+                        return globalAction
+                    }
                 }
         }
     }
-    
+
     public func pullback<GlobalAction>(
         action: WritableKeyPath<GlobalAction, ActionType?>
     ) -> Reducer<StateType, GlobalAction> {
@@ -43,7 +46,7 @@ public func combine<State, Action>(
     _ reducers: [Reducer<State, Action>]
 ) -> Reducer<State, Action> {
     return Reducer { state, action in
-        let effects = reducers.map { $0.reduce(&state, action) }
-        return Effect.from(effects: effects)
+        let effects = reducers.flatMap { $0.reduce(&state, action) }
+        return effects
     }
 }

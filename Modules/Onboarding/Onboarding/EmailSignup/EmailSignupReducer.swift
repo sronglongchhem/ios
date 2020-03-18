@@ -11,24 +11,27 @@ func createEmailSignupReducer(api: UserAPI) -> Reducer<OnboardingState, EmailSig
             
         case .goToLogin:
             state.route = OnboardingRoute.emailLogin
+            return []
             
         case .cancel:
             state.route = AppRoute.onboarding
+            return []
             
         case let .emailEntered(email):
             state.email = email
+            return []
             
         case let .passwordEntered(password):
             state.password = password
+            return []
             
         case .signupTapped:
             state.user = .loading
-            return .empty
+            return []
             
         case let .setError(error):
             state.user = .error(error)
-        }
-        
-        return .empty
+            return []
+        }                
     }
 }

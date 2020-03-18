@@ -10,11 +10,10 @@ func createMainOnboardingReducer() -> Reducer<OnboardingState, OnboardingAction>
             
         case .emailSingInTapped:
             state.route = OnboardingRoute.emailLogin
+            return []
             
         case .emailLogin, .emailSignup:
-            break
+            return []
         }
-        
-        return .empty
     }
 }

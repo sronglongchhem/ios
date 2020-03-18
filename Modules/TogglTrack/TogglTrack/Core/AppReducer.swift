@@ -11,7 +11,7 @@ func createGlobalReducer() -> Reducer<AppState, AppAction> {
             } else {
                 state.route = AppRoute.onboarding
             }
-            return .empty
+            return []
             
         case let .tabBarTapped(section):
             state.route = [
@@ -19,10 +19,10 @@ func createGlobalReducer() -> Reducer<AppState, AppAction> {
                 TabBarRoute.reports,
                 TabBarRoute.calendar
                 ][section]
-            return .empty
+            return []
             
         case .onboarding, .timer, .startEdit:
-            return .empty
+            return []
         }
     }
 }

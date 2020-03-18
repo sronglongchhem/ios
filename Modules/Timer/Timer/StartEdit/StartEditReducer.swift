@@ -11,6 +11,7 @@ func createStartEditReducer(repository: Repository) -> Reducer<StartEditState, S
             
         case let .descriptionEntered(description):
             state.description = description
+            return []
             
         case .startTapped:
             guard let defaultWorkspace = state.user.value?.defaultWorkspace else {
@@ -27,17 +28,18 @@ func createStartEditReducer(repository: Repository) -> Reducer<StartEditState, S
             )
             
             state.description = ""
-            return startTimeEntry(timeEntry, repository: repository)
+            return [
+                startTimeEntry(timeEntry, repository: repository)
+            ]
             
         case let .timeEntryAdded(timeEntry):
             state.entities.timeEntries[timeEntry.id] = timeEntry
+            return []
             
         case let .setError(error):
             state.entities.loading = .error(error)
-            return .empty
+            return []
         }
-        
-        return .empty
     }
 }
 

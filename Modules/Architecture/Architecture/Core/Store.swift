@@ -10,7 +10,7 @@ public final class Store<State, Action> {
     
     private var state: Driver<State>
     private var internalDispatch: (([Action]) -> Void)?
-            
+                
     private init(dispatch: @escaping ([Action]) -> Void, stateObservable: Driver<State>) {
         internalDispatch = dispatch
         state = stateObservable
@@ -21,18 +21,16 @@ public final class Store<State, Action> {
         state = behaviorRelay.asDriver()
         
         internalDispatch = { actions in
+            
             var tempState = behaviorRelay.value
-            var effects = [Effect<Action>]()
-            for action in actions {
-                let effect = reducer.reduce(&tempState, action)
-                effects.append(effect)
-            }
+            let effects = actions.flatMap { reducer.reduce(&tempState, $0) }
             
             behaviorRelay.accept(tempState)
             
-            _ = Observable.concat(effects.map { $0.asObservable() })
+            Observable.from(effects.map { $0.single })
+                .merge().toArray()
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: self.dispatch)
+                .subscribe(onSuccess: self.batch)
                 .disposed(by: self.disposeBag)
         }
     }
@@ -59,11 +57,11 @@ public final class Store<State, Action> {
     }
     
     public func batch(_ actions: [Action]) {
+        if actions.isEmpty { return }
         DispatchQueue.main.async { [weak self] in
             self?.internalDispatch?(actions)
         }
     }
-
 }
 
 extension Store {

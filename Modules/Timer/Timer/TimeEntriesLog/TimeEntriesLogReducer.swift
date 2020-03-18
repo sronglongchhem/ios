@@ -9,25 +9,29 @@ func createTimeEntriesLogReducer(repository: Repository) -> Reducer<TimeEntriesL
         switch action {
             
         case let .continueButtonTapped(timeEntryId):
-            return continueTimeEntry(repository, state: state, timeEntryId: timeEntryId)
+            return [
+                continueTimeEntry(repository, state: state, timeEntryId: timeEntryId)
+            ]
             
         case let .timeEntrySwiped(direction, timeEntryId):
-            return timeEntrySwiped(repository, state: state, direction: direction, timeEntryId: timeEntryId)
+            return [
+                timeEntrySwiped(repository, state: state, direction: direction, timeEntryId: timeEntryId)
+            ]
             
         case .timeEntryTapped:
-            return .empty
+            return []
             
         case let .timeEntryDeleted(timeEntryId):
             state.entities.timeEntries[timeEntryId] = nil
-            return .empty
+            return []
             
         case let .timeEntryAdded(timeEntry):
             state.entities.timeEntries[timeEntry.id] = timeEntry
-            return .empty
+            return []
             
         case .load:
             if state.entities.loading.isLoaded {
-                return .empty
+                return []
             }
             
             state.entities.loading = .loading
@@ -35,7 +39,7 @@ func createTimeEntriesLogReducer(repository: Repository) -> Reducer<TimeEntriesL
             
         case .finishedLoading:
             state.entities.loading = .loaded(())
-            return .empty
+            return []
             
         case let .setEntities(entities):
             let dict: [Int: Entity] = entities.reduce([:], { acc, entity in
@@ -45,27 +49,30 @@ func createTimeEntriesLogReducer(repository: Repository) -> Reducer<TimeEntriesL
             })
             
             state.entities.set(entities: dict)
-            return .empty
+            return []
             
         case let .setError(error):
             state.entities.loading = .error(error)
-            return .empty
+            return []
         }
     }
 }
 
-private func loadEntities(_ repository: Repository) -> Effect<TimeEntriesLogAction> {
-    return Observable.merge(
+private func loadEntities(_ repository: Repository) -> [Effect<TimeEntriesLogAction>] {
+    return [
         repository.getWorkspaces().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getClients().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getTimeEntries().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getProjects().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getTasks().map(TimeEntriesLogAction.setEntities).asObservable(),
-        repository.getTags().map(TimeEntriesLogAction.setEntities).asObservable()
-    )
-        .concat(Observable.just(.finishedLoading))
-        .catchError({ Observable.just(.setError($0)) })
-        .toEffect()
+        repository.getTags().map(TimeEntriesLogAction.setEntities).asObservable(),
+        Observable.just(.finishedLoading)
+    ]
+        .map {
+            $0
+                .catchError({ Observable.just(.setError($0)) })
+                .toEffect()
+    }
 }
 
 private func timeEntrySwiped(_ repository: Repository,
