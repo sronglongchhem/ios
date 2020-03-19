@@ -6,6 +6,7 @@ import API
 import Repository
 import Networking
 import Models
+import Utils
 
 public class TogglTrack {
     private let store: Store<AppState, AppAction>!
@@ -19,7 +20,10 @@ public class TogglTrack {
         
         store = Store(
             initialState: AppState(),
-            reducer: logging(checkFeatureAvailability(createAppReducer(environment: AppEnvironment())))
+            reducer: logging
+                <| checkFeatureAvailability
+                <| createAppReducer(environment: AppEnvironment())
+                
         )
         
         appCoordinator = (appFeature.mainCoordinator(store: store) as? AppCoordinator)!
