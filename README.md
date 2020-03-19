@@ -20,9 +20,9 @@ This is a high level overview of the different parts of the architecture.
 - **Action** Simple structs that describe an event, normally originated by the user, but also from other sources or in response to other actions (from Effects). The only way to change the state is through actions. Views dispatch actions to the store which handles them in the main thread as they come.
 - **Store** The central hub of the application. Contains the whole state of the app, handles the dispatched actions passing them to the reducers and fires Effects. It also handles the app's dependencies (Environment)
 - **App State** The single source of truth for the whole app. This will be almost empty when the application start and will be filled after every action. This won't contain any derived state (meaning any state that can be calculated from any other state). This won't be a copy of the DB, it doesn't have to necessarily contain everything in the DB all the time and also, it'll include other stuff not in the DB (like the current route or a flag indicating if the app is in the background, for example). Basically you have to ask yourself what do you need to store here so you can restart the app in the exact same place as it was before shutting it down (even if we are never going to need that)
-- **Reducers** Reducers are pure functions that take the state and an action and produce a new state. Simple as that. In our case they also take the environment (just the part they need) and optionally result in an Effect that will asynchronously dispatch further actions. All business logic should reside in them.
-- **Effects** As mentioned, Reducers optionally produce these after handling an action. They are just observables that can emit further actions. Those observables are subscribed to in the store and the emitted actions will be dispatched again. These are use as a way to handle asynchronous actions.
-- **Environment** This will hold all the dependencies our reducers need, so basically everything in the infrastructure layer. Examples could be the DataBase, the API, a timer service, a location service... This is passed into the store on construction and the store takes care of injecting it into the reducers.
+- **Reducers** Reducers are pure functions that take the state and an action and produce a new state. Simple as that. In our case they also take the environment (just the part they need) and optionally result in an array of Effects that will asynchronously dispatch further actions. All business logic should reside in them.
+- **Effects** As mentioned, Reducers optionally produce these after handling an action. They are just singles, as in observables that emit just one or no action. Those observables are subscribed to in the store and the emitted action will be dispatched again. These are use as a way to handle asynchronous actions. All the effects emitted from a reducer will be batched, meaning the state change will only be emitted once all actions are dispatched.
+- **Environment** This will hold all the dependencies our reducers need, so basically everything in the infrastructure layer. Examples could be the DataBase, the API, a timer service, a location service... The specific part of the environment they need is injected to each reducer when creating them.
 
 There's one global `Store` and one `AppState`. But we can *view* into the store to get sub-stores that only work on one part of the state. More on that later.
 
@@ -33,7 +33,7 @@ reducer.
 
 The `Store` exposes an observable which emits the whole state of the app every time there's a change and a method to dispatch actions that will modify that state.
 
-In order for it to work it uses the app `Reducer` and the `Environment`. More on these two later.
+In order for it to work it uses the app `Reducer`. More on it later.
 
 The `State` is just a struct that contains ALL the state of the application. All properties are `var`, because we are going to mutate it, but don't worry, mutations only happen in reducers. It has an initializer with no parameters which creates the initial state of the app.
 
@@ -44,8 +44,7 @@ The store is built like this:
 ```swift
 let store: Store<AppState, AppAction> = Store(
     initialState: AppState(),
-    reducer: appReducer,
-    environment: appEnvironment
+    reducer: appReducer
 )
 ```
 
@@ -109,45 +108,51 @@ public func batch(_ actions: [Action])
 
 It takes an array of actions and executes all of them before emitting the new state. It's worth noting that the state itself will update, so every action will get the updated state, but it won't be emitted outside of the store until all of them are done.
 
-TODO: Something we should look into is what happens with the Effects resulting from those actions. Maybe it makes sense to always batch all actions emitted from an effect.
+```swift
+store.batch([.start, .load])
+```
 
 ## Reducers & Effects
 
 Reducers are functions with this shape:
 
 ```swift
-(inout StateType, ActionType, Environment) -> Effect<ActionType>
+(inout StateType, ActionType) -> [Effect<ActionType>]
 ```
 
 The idea is they take the state and an action and modify the state depending on the action and its payload.
 
-Reducers also take an `Environment` which will contain all the dependencies they need to do their tasks (Repository, API, Keychain...).
+Reducers are usually constructed with part of the `Environment` which will contain all the dependencies they need to do their tasks (Repository, API, Keychain...).
 
-In order to dispatch actions asynchronously we will use `Effects`. Reducers return an `Effect` which is an observable of actions. The store subscribes to those effects and dispatches whatever actions it emits.
+In order to dispatch actions asynchronously we will use `Effects`. Reducers return an array of `Effects` which is a `Single<Action>`. The store subscribes to those effects and dispatches whatever action they emit, if any.
 
-There's a `toEffect` method on `Observable` which will map an `Observable` into an `Effect`.
+There's a `toEffect` method on `Observable` which will map a `Single` into an `Effect`.
 
 ```swift
-let emailLoginReducer = Reducer<OnboardingState, EmailLoginAction, UserAPI> { state, action, api in
-    
-    switch action {
-    
-    //...
-    
-    case .loginTapped:
-        state.user = .loading
-        return loadUser(email: state.email, password: state.password, api: api)
+func createEmailLoginReducer(api: UserAPI) -> Reducer<OnboardingState, EmailLoginAction> { api in
+    return { state, action in
         
-    case let .setUser(user):
-        state.user = .loaded(user)
-        api.setAuth(token: user.apiToken)
-        state.route = AppRoute.main(.timer)
+        switch action {
         
-    case let .setError(error):
-        state.user = .error(error)
+        //...
+        
+        case .loginTapped:
+            state.user = .loading
+            return [
+                loadUser(email: state.email, password: state.password, api: api)
+            ]
+            
+        case let .setUser(user):
+            state.user = .loaded(user)
+            api.setAuth(token: user.apiToken)
+            state.route = AppRoute.main(.timer)
+            return []
+            
+        case let .setError(error):
+            state.user = .error(error)
+            return []
+        }                
     }
-    
-    return .empty
 }
 
 func loadUser(email: String, password: String, api: UserAPI) -> Effect<EmailLoginAction>
@@ -161,29 +166,28 @@ func loadUser(email: String, password: String, api: UserAPI) -> Effect<EmailLogi
 
 ## Pullback
 
-There will be one app level reducer that gets injected into the store. This reducer will take the whole `AppState` the complete set of `AppActions` and the complete `AppEnvironments`. 
+There will be one app level reducer that gets injected into the store. This reducer will take the whole `AppState` and the complete set of `AppActions`. 
 
-The rest of the reducers will only handle one part of that state, for a particular subset of the actions and using only the part of the environment they need.
+The rest of the reducers will only handle one part of that state, for a particular subset of the actions.
 
 This will aid in modularity. But in order to merge those reducers with the app level one, their types need to be compatible. That's what `pullback` is for. It converts a specific reducer into a global one.
 
 ```swift
-public struct Reducer<StateType, ActionType, EnvironmentType>
+public struct Reducer<StateType, ActionType>
 {
     //...
 
-    public func pullback<GlobalState, GlobalAction, GlobalEnvironment>(
+    public func pullback<GlobalState, GlobalAction>(
         state: WritableKeyPath<GlobalState, StateType>,
         action: WritableKeyPath<GlobalAction, ActionType?>,
-        environment: KeyPath<GlobalEnvironment, EnvironmentType>
-    ) -> Reducer<GlobalState, GlobalAction, GlobalEnvironment>
+    ) -> Reducer<GlobalState, GlobalAction>
     {
         //...
     }
 }
 ```
 
-This method on `Reducer` takes a `WritableKeyPath` from the whole state to a part of it, a `WritableKeyPath` from the app actions to a specific type of action and a `KeyPath` from the app environment to the environment the reducer needs. 
+This method on `Reducer` takes a `WritableKeyPath` from the whole state to a part of it and a `WritableKeyPath` from the app actions to a specific type of action. 
 
 Note: For structs keypaths work automatically, but actions are enums, and for keypaths to work we need to add all that boilerplate with getters and setters. Another approach we could consider in the future is using [case paths](https://github.com/pointfreeco/swift-case-paths).
 
@@ -301,8 +305,8 @@ public func logging<State, Action, Environment>(
     }
 }
 
-// Somewhere else we "apply" it to the main app's reducer:
-let globalReducer = logging(appReducer)
+// We use the backwards application operator to compose higher order reducers with each other and with the main reducer
+let globalReducer = logging <| appReducer
 ```
 
 Analytics is something we will likely develop as a high-order reducer too.

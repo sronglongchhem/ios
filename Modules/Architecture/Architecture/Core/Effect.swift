@@ -15,17 +15,9 @@ public struct Effect<Action> {
     
     public static var empty: Effect<Action> { Observable.empty().toEffect() }
     
-//    public static func from(effects: [Effect]) -> Effect {
-//        return Effect(observable: Observable.from(effects).merge())
-//    }
-    
     public static func from(action: Action) -> Effect {
         return Effect(single: Single.just(action))
-    }
-    
-//    public func asObservable() -> Observable<Action> {
-//        return single.asObservable()
-//    }
+    }    
 }
 
 public extension ObservableConvertibleType {
