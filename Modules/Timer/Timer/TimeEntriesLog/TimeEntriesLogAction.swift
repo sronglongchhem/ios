@@ -14,9 +14,6 @@ public enum TimeEntriesLogAction {
     case timeEntryDeleted(Int)
     case timeEntryAdded(TimeEntry)
     
-    case load
-    case finishedLoading    
-    case setEntities([Entity])
     case setError(Error)
 }
 
@@ -40,16 +37,6 @@ extension TimeEntriesLogAction: CustomDebugStringConvertible {
         case let .timeEntryAdded(timeEntry):
             return "TimeEntryAdded: \(timeEntry.description)"
             
-        case .load:
-            return "Load"
-            
-        case .finishedLoading:
-            return "FinishedLoading"
-       
-        case let .setEntities(entities):
-            guard let first = entities.first else { return "SetEntities: 0" }
-            return "SetEntities (\(type(of: first))): \(entities.count)"
-        
         case let .setError(error):
             return "SetError: \(error)"
         }

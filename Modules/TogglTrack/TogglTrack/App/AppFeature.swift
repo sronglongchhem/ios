@@ -7,7 +7,8 @@ func createAppReducer(environment: AppEnvironment) -> Reducer<AppState, AppActio
     return combine(
         createGlobalReducer(),
         createOnboardingReducer(userAPI: environment.userAPI).pullback(state: \.onboardingState, action: \.onboarding),
-        createTimerReducer(repository: environment.repository, time: environment.time).pullback(state: \.timerState, action: \.timer)
+        createTimerReducer(repository: environment.repository, time: environment.time).pullback(state: \.timerState, action: \.timer),
+        createLoadingReducer(repository: environment.repository).pullback(state: \.loadingState, action: \.load)
     )
 }
 

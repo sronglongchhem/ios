@@ -3,6 +3,7 @@ import Foundation
 public enum AppRoute: String, Route {
     public var root: Route? { nil }
     
+    case start
     case loading
     case onboarding
     case main

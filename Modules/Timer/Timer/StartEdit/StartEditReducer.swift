@@ -37,8 +37,7 @@ func createStartEditReducer(repository: Repository, time: Time) -> Reducer<Start
             return []
             
         case let .setError(error):
-            state.entities.loading = .error(error)
-            return []
+            fatalError(error.localizedDescription)
         }
     }
 }

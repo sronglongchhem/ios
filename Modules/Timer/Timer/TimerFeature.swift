@@ -5,8 +5,10 @@ import OtherServices
 
 public func createTimerReducer(repository: Repository, time: Time) -> Reducer<TimerState, TimerAction> {
     return combine(
-        createTimeEntriesLogReducer(repository: repository, time: time).pullback(state: \.timeLogState, action: \.timeLog),
-        createStartEditReducer(repository: repository, time: time).pullback(state: \.startEditState, action: \.startEdit)
+        createTimeEntriesLogReducer(repository: repository, time: time)
+            .pullback(state: \.timeLogState.entities.timeEntries, action: \.timeLog),
+        createStartEditReducer(repository: repository, time: time)
+            .pullback(state: \.startEditState, action: \.startEdit)
     )
 }
 

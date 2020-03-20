@@ -30,7 +30,11 @@ public final class AppCoordinator: NavigationCoordinator {
         
         switch route {
 
+        case .start:
+            return nil
+            
         case .loading:
+            store.dispatch(.load(.startLoading))
             return nil
             
         case .onboarding:

@@ -34,7 +34,7 @@ func createEmailLoginReducer(api: UserAPI) -> Reducer<OnboardingState, EmailLogi
         case let .setUser(user):
             state.user = .loaded(user)
             api.setAuth(token: user.apiToken)
-            state.route = AppRoute.main
+            state.route = AppRoute.loading
             return []
             
         case let .setError(error):

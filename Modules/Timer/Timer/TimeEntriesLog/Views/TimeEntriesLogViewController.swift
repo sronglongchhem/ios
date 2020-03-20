@@ -67,11 +67,6 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                 .disposed(by: disposeBag)
         }
     }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        store.dispatch(.load)
-    }
 }
 
 extension TimeEntriesLogViewController: UITableViewDelegate {

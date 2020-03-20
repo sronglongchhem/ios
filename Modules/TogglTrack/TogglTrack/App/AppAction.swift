@@ -6,6 +6,7 @@ import Models
 public enum AppAction {
     case start
     
+    case load(LoadingAction)
     case tabBarTapped(Int)
     
     case onboarding(OnboardingAction)
@@ -14,6 +15,17 @@ public enum AppAction {
 }
 
 extension AppAction {
+    
+    var load: LoadingAction? {
+        get {
+            guard case let .load(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .load = self, let newValue = newValue else { return }
+            self = .load(newValue)
+        }
+    }
     
     var onboarding: OnboardingAction? {
         get {
@@ -55,6 +67,8 @@ extension AppAction: CustomDebugStringConvertible {
         switch self {
         case .start:
             return "Start"
+        case let .load(action):
+            return action.debugDescription
         case let .tabBarTapped(tab):
             return "TabSelected: \(tab)"
         case let .onboarding(action):

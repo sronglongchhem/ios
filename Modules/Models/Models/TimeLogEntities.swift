@@ -1,8 +1,6 @@
 import Foundation
 
-public struct TimeLogEntities {
-    public var loading: Loadable<Void> = .nothing
-    
+public struct TimeLogEntities {    
     public var workspaces = [Int: Workspace]()
     public var clients = [Int: Client]()
     public var timeEntries = [Int: TimeEntry]()
