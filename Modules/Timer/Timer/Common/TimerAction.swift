@@ -1,7 +1,7 @@
 import Foundation
 import Models
 
-public enum TimerAction {
+public enum TimerAction: Equatable {
     case timeLog(TimeEntriesLogAction)
     case startEdit(StartEditAction)
 }

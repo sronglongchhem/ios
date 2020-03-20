@@ -9,7 +9,7 @@ func createMainOnboardingReducer() -> Reducer<OnboardingState, OnboardingAction>
         switch action {
             
         case .emailSingInTapped:
-            state.route = OnboardingRoute.emailLogin
+            state.route = OnboardingRoute.emailLogin.path
             return []
             
         case .emailLogin, .emailSignup:

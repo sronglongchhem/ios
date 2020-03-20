@@ -3,7 +3,7 @@ import Onboarding
 import Timer
 import Models
 
-public enum AppAction {
+public enum AppAction: Equatable {
     case start
     
     case load(LoadingAction)

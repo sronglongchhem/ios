@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Tag: Codable, Entity {
+public struct Tag: Codable, Entity, Equatable {
     
     public var id: Int
     public var name: String

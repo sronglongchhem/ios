@@ -1,7 +1,9 @@
 import Foundation
 
+public typealias RoutePath = String
+
 public protocol Route {
-    var path: String { get }
+    var path: RoutePath { get }
     var root: Route? { get }
 }
 

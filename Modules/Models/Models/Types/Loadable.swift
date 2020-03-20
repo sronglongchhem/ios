@@ -3,9 +3,11 @@ import Foundation
 public enum Loadable<Value> {
     case nothing
     case loading
-    case error(Error)
+    case error(ErrorType)
     case loaded(Value)
 }
+
+extension Loadable: Equatable where Value: Equatable {}
 
 public extension Loadable {
     

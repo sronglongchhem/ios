@@ -1,7 +1,7 @@
 import Foundation
 import Models
 
-public enum EmailLoginAction {
+public enum EmailLoginAction: Equatable {
     case goToSignup
     case cancel
     
@@ -10,7 +10,7 @@ public enum EmailLoginAction {
     case loginTapped
     
     case setUser(User)
-    case setError(Error)
+    case setError(ErrorType)
 }
 
 extension EmailLoginAction: CustomDebugStringConvertible {

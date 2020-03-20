@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TimeEntry: Entity {
+public struct TimeEntry: Entity, Equatable {
     
     public var id: Int
     public var description: String

@@ -1,7 +1,7 @@
 import Foundation
 import Models
 
-public enum LoadingAction {
+public enum LoadingAction: Equatable {
     case startLoading
     case loadingFinished
     case setWorkspaces([Workspace])

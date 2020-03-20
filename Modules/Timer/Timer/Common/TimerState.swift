@@ -2,14 +2,14 @@ import Foundation
 import Models
 import Utils
 
-public struct LocalTimerState {
+public struct LocalTimerState: Equatable {
     internal var description: String = ""
     
     public init() {
     }
 }
 
-public struct TimerState {
+public struct TimerState: Equatable {
     public var user: Loadable<User>
     public var entities: TimeLogEntities
     public var localTimerState: LocalTimerState

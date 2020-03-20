@@ -37,7 +37,7 @@ func createStartEditReducer(repository: Repository, time: Time) -> Reducer<Start
             return []
             
         case let .setError(error):
-            fatalError(error.localizedDescription)
+            fatalError(error.description)
         }
     }
 }
@@ -46,5 +46,5 @@ func startTimeEntry(_ timeEntry: TimeEntry, repository: Repository) -> Effect<St
     return repository.addTimeEntry(timeEntry: timeEntry)
         .toEffect(
             map: { StartEditAction.timeEntryAdded(timeEntry) },
-            catch: { StartEditAction.setError($0) })
+            catch: { StartEditAction.setError($0.toErrorType()) })
 }

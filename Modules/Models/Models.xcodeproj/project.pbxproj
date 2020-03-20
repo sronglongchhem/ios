@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2130C12424B297000FC72C /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2130C02424B297000FC72C /* ErrorType.swift */; };
 		8C2518332403C5FC00BAD4B5 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2518292403C5FC00BAD4B5 /* Models.framework */; };
 		8C2518382403C5FC00BAD4B5 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2518372403C5FC00BAD4B5 /* ModelsTests.swift */; };
 		8C25183A2403C5FC00BAD4B5 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C25182C2403C5FC00BAD4B5 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C2130C02424B297000FC72C /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 		8C2518292403C5FC00BAD4B5 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C25182C2403C5FC00BAD4B5 /* Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		8C25182D2403C5FC00BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				8C38E2412419008400C9E053 /* Loadable.swift */,
+				8C2130C02424B297000FC72C /* ErrorType.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				8C25187C2403C62E00BAD4B5 /* User.swift in Sources */,
 				8CB5452C240D6F5B00154473 /* Entity.swift in Sources */,
 				8C25187A2403C62E00BAD4B5 /* Task.swift in Sources */,
+				8C2130C12424B297000FC72C /* ErrorType.swift in Sources */,
 				8C25187B2403C62E00BAD4B5 /* Project.swift in Sources */,
 				8C2518752403C62E00BAD4B5 /* TimeEntry.swift in Sources */,
 				8C5A8C95241A8EC5003DC3D0 /* TimeLogEntities.swift in Sources */,

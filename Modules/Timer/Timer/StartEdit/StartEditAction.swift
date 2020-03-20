@@ -1,11 +1,11 @@
 import Foundation
 import Models
 
-public enum StartEditAction {
+public enum StartEditAction: Equatable {
     case descriptionEntered(String)
     case startTapped
     case timeEntryAdded(TimeEntry)
-    case setError(Error)
+    case setError(ErrorType)
 }
 
 extension StartEditAction: CustomDebugStringConvertible {

@@ -6,7 +6,7 @@ import Timer
 import Utils
 
 public struct AppState {
-    public var route: Route = AppRoute.start
+    public var route: RoutePath = AppRoute.start.path
     public var user: Loadable<User> = .nothing
     public var entities: TimeLogEntities =  TimeLogEntities()
     

@@ -14,7 +14,7 @@ func createLoadingReducer(repository: Repository) -> Reducer<LoadingState, Loadi
             
         case .loadingFinished:
             state.loading = false
-            state.route = AppRoute.main
+            state.route = AppRoute.main.path
             return []
             
         case let .setWorkspaces(workspaces):

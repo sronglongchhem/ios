@@ -10,11 +10,11 @@ func createEmailSignupReducer(api: UserAPI) -> Reducer<OnboardingState, EmailSig
         switch action {
             
         case .goToLogin:
-            state.route = OnboardingRoute.emailLogin
+            state.route = OnboardingRoute.emailLogin.path
             return []
             
         case .cancel:
-            state.route = AppRoute.onboarding
+            state.route = AppRoute.onboarding.path
             return []
             
         case let .emailEntered(email):

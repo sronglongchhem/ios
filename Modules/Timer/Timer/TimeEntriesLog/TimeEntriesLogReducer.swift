@@ -31,7 +31,7 @@ func createTimeEntriesLogReducer(repository: Repository, time: Time) -> Reducer<
             return []
             
         case let .setError(error):
-            fatalError(error.localizedDescription)
+            fatalError(error.description)
         }
     }
 }
@@ -54,7 +54,7 @@ private func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effe
     repository.deleteTimeEntry(timeEntryId: timeEntryId)
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryDeleted(timeEntryId) },
-            catch: { TimeEntriesLogAction.setError($0)}
+            catch: { TimeEntriesLogAction.setError($0.toErrorType())}
     )
 }
 
@@ -69,6 +69,6 @@ private func continueTimeEntry(_ repository: Repository, time: Time, state: [Int
     return repository.addTimeEntry(timeEntry: copy)
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryAdded(copy) },
-            catch: { TimeEntriesLogAction.setError($0)}
+            catch: { TimeEntriesLogAction.setError($0.toErrorType())}
     )
 }

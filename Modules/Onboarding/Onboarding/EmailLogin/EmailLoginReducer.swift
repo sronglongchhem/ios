@@ -10,11 +10,11 @@ func createEmailLoginReducer(api: UserAPI) -> Reducer<OnboardingState, EmailLogi
         switch action {
             
         case .goToSignup:
-            state.route = OnboardingRoute.emailSignup
+            state.route = OnboardingRoute.emailSignup.path
             return []
             
         case .cancel:
-            state.route = AppRoute.onboarding
+            state.route = AppRoute.onboarding.path
             return []
             
         case let .emailEntered(email):
@@ -34,7 +34,7 @@ func createEmailLoginReducer(api: UserAPI) -> Reducer<OnboardingState, EmailLogi
         case let .setUser(user):
             state.user = .loaded(user)
             api.setAuth(token: user.apiToken)
-            state.route = AppRoute.loading
+            state.route = AppRoute.loading.path
             return []
             
         case let .setError(error):
@@ -47,6 +47,6 @@ func createEmailLoginReducer(api: UserAPI) -> Reducer<OnboardingState, EmailLogi
 private func loadUser(email: String, password: String, api: UserAPI) -> Effect<EmailLoginAction> {
     return api.loginUser(email: email, password: password)
         .map({ EmailLoginAction.setUser($0) })
-        .catchError({ Observable.just(EmailLoginAction.setError($0)) })
+        .catchError({ Observable.just(EmailLoginAction.setError($0.toErrorType())) })
         .toEffect()
 }

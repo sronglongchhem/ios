@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TimeLogEntities {    
+public struct TimeLogEntities: Equatable {
     public var workspaces = [Int: Workspace]()
     public var clients = [Int: Client]()
     public var timeEntries = [Int: TimeEntry]()

@@ -3,7 +3,7 @@ import Models
 import Architecture
 import Utils
 
-public struct LocalOnboardingState {
+public struct LocalOnboardingState: Equatable {
     internal var email: String = ""
     internal var password: String = ""
     
@@ -11,12 +11,12 @@ public struct LocalOnboardingState {
     }
 }
 
-public struct OnboardingState {
+public struct OnboardingState: Equatable {
     public var user: Loadable<User>
-    public var route: Route
+    public var route: RoutePath
     public var localOnboardingState: LocalOnboardingState
     
-    public init(user: Loadable<User>, route: Route, localOnboardingState: LocalOnboardingState) {
+    public init(user: Loadable<User>, route: RoutePath, localOnboardingState: LocalOnboardingState) {
         self.user = user
         self.route = route
         self.localOnboardingState = localOnboardingState

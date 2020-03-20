@@ -7,17 +7,17 @@ func createGlobalReducer() -> Reducer<AppState, AppAction> {
         switch action {
         case .start:
             if state.user.isLoaded {
-                state.route = AppRoute.main
+                state.route = AppRoute.main.path
             } else {
-                state.route = AppRoute.onboarding
+                state.route = AppRoute.onboarding.path
             }
             return []
             
         case let .tabBarTapped(section):
             state.route = [
-                TabBarRoute.timer,
-                TabBarRoute.reports,
-                TabBarRoute.calendar
+                TabBarRoute.timer.path,
+                TabBarRoute.reports.path,
+                TabBarRoute.calendar.path
                 ][section]
             return []
             

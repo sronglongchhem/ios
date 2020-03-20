@@ -34,7 +34,7 @@ public class TogglTrack {
             .disposed(by: disposeBag)
         
         store
-            .select({ $0.route.path })
+            .select({ $0.route })
             .distinctUntilChanged()
             .do(onNext: { print("Route: \($0)") })
             .drive(onNext: router.navigate)

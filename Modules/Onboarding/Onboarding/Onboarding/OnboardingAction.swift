@@ -1,7 +1,7 @@
 import Foundation
 import Models
 
-public enum OnboardingAction {
+public enum OnboardingAction: Equatable {
     case emailSingInTapped    
     case emailLogin(EmailLoginAction)
     case emailSignup(EmailSignupAction)

@@ -6,7 +6,7 @@ public enum SwipeDirection {
     case right
 }
 
-public enum TimeEntriesLogAction {
+public enum TimeEntriesLogAction: Equatable {
     case continueButtonTapped(Int)
     case timeEntrySwiped(SwipeDirection, Int)
     case timeEntryTapped(Int)
@@ -14,7 +14,7 @@ public enum TimeEntriesLogAction {
     case timeEntryDeleted(Int)
     case timeEntryAdded(TimeEntry)
     
-    case setError(Error)
+    case setError(ErrorType)
 }
 
 extension TimeEntriesLogAction: CustomDebugStringConvertible {

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Client: Codable, Entity {
+public struct Client: Codable, Entity, Equatable {
     
     public var id: Int
     public var name: String
