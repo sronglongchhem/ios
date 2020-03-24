@@ -3,6 +3,17 @@ import RxSwift
 import Models
 import API
 
+public protocol TimeLogRepository {
+    func getWorkspaces() -> Single<[Workspace]>
+    func getClients() -> Single<[Client]>
+    func getTimeEntries() -> Single<[TimeEntry]>
+    func getProjects() -> Single<[Project]>
+    func getTasks() -> Single<[Task]>
+    func getTags() -> Single<[Tag]>
+    func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
+    func deleteTimeEntry(timeEntryId: Int) -> Single<Void>
+}
+
 public class Repository {
     // These mock the DB
     private var workspaces = [Workspace]()
@@ -18,7 +29,10 @@ public class Repository {
     public init(api: TimelineAPI) {
         self.api = api
     }
-    
+}
+
+extension Repository: TimeLogRepository {
+        
     public func getWorkspaces() -> Single<[Workspace]> {
         if workspaces.isEmpty {
             return api.loadWorkspaces()
@@ -27,7 +41,7 @@ public class Repository {
         
         return Single.just(workspaces)
     }
-    
+
     public func getClients() -> Single<[Client]> {
         if clients.isEmpty {
             return api.loadClients()
@@ -73,9 +87,20 @@ public class Repository {
         return Single.just(tags)
     }
     
-    public func addTimeEntry(timeEntry: TimeEntry) -> Single<Void> {
+    public func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
+        
+        var stoppedTimeEntry: TimeEntry?
+        if let runningEntryIndex = timeEntries.firstIndex(where: { $0.duration == 0}) {
+            stoppedTimeEntry = timeEntries[runningEntryIndex]
+            stoppedTimeEntry!.duration = timeEntry.start.timeIntervalSince(stoppedTimeEntry!.start)
+            timeEntries[runningEntryIndex] = stoppedTimeEntry!
+        }
+        
+        var newTimeEntry = timeEntry
+        newTimeEntry.id = (timeEntries.map({ $0.id }).max() ?? 0) + 1
         timeEntries.append(timeEntry)
-        return Single.just(())
+        
+        return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
     }
     
     public func deleteTimeEntry(timeEntryId: Int) -> Single<Void> {

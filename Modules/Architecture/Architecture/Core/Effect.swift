@@ -17,7 +17,11 @@ public struct Effect<Action> {
     
     public static func from(action: Action) -> Effect {
         return Effect(single: Single.just(action))
-    }    
+    }
+    
+    public func asSingle() -> Single<Action> {
+        return single
+    }
 }
 
 public extension ObservableConvertibleType {

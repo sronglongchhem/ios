@@ -5,7 +5,7 @@ import RxSwift
 import Repository
 import OtherServices
 
-func createStartEditReducer(repository: Repository, time: Time) -> Reducer<StartEditState, StartEditAction> {
+func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reducer<StartEditState, StartEditAction> {
     return Reducer {state, action in
 
         switch action {
@@ -42,9 +42,6 @@ func createStartEditReducer(repository: Repository, time: Time) -> Reducer<Start
     }
 }
 
-func startTimeEntry(_ timeEntry: TimeEntry, repository: Repository) -> Effect<StartEditAction> {
-    return repository.addTimeEntry(timeEntry: timeEntry)
-        .toEffect(
-            map: { StartEditAction.timeEntryAdded(timeEntry) },
-            catch: { StartEditAction.setError($0.toErrorType()) })
+func startTimeEntry(_ timeEntry: TimeEntry, repository: TimeLogRepository) -> Effect<StartEditAction> {
+    return Effect.empty
 }

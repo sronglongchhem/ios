@@ -12,7 +12,7 @@ public enum TimeEntriesLogAction: Equatable {
     case timeEntryTapped(Int)
     
     case timeEntryDeleted(Int)
-    case timeEntryAdded(TimeEntry)
+    case timeEntryStarted(TimeEntry, TimeEntry?)
     
     case setError(ErrorType)
 }
@@ -34,8 +34,8 @@ extension TimeEntriesLogAction: CustomDebugStringConvertible {
         case let .timeEntryDeleted(timeEntryId):
             return "TimeEntryDeleted: \(timeEntryId)"
 
-        case let .timeEntryAdded(timeEntry):
-            return "TimeEntryAdded: \(timeEntry.description)"
+        case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
+            return "TimeEntryStarted: \(startedTimeEntry.description), stopped: \(String(describing: stoppedTimeEntry?.description))"
             
         case let .setError(error):
             return "SetError: \(error)"

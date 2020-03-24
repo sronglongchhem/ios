@@ -5,7 +5,7 @@ import RxSwift
 import Repository
 import OtherServices
 
-func createTimeEntriesLogReducer(repository: Repository, time: Time) -> Reducer<[Int: TimeEntry], TimeEntriesLogAction> {
+func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> Reducer<[Int: TimeEntry], TimeEntriesLogAction> {
     return Reducer { state, action in
         switch action {
 
@@ -26,8 +26,11 @@ func createTimeEntriesLogReducer(repository: Repository, time: Time) -> Reducer<
             state[timeEntryId] = nil
             return []
             
-        case let .timeEntryAdded(timeEntry):
-            state[timeEntry.id] = timeEntry
+        case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
+            if let stoppedTimeEntry = stoppedTimeEntry {
+                state[stoppedTimeEntry.id] = stoppedTimeEntry
+            }
+            state[startedTimeEntry.id] = startedTimeEntry
             return []
             
         case let .setError(error):
@@ -36,7 +39,7 @@ func createTimeEntriesLogReducer(repository: Repository, time: Time) -> Reducer<
     }
 }
 
-private func timeEntrySwiped(_ repository: Repository,
+private func timeEntrySwiped(_ repository: TimeLogRepository,
                              time: Time,
                              state: [Int: TimeEntry],
                              direction: SwipeDirection,
@@ -50,7 +53,7 @@ private func timeEntrySwiped(_ repository: Repository,
     }
 }
 
-private func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
+private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
     repository.deleteTimeEntry(timeEntryId: timeEntryId)
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryDeleted(timeEntryId) },
@@ -58,17 +61,20 @@ private func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effe
     )
 }
 
-private func continueTimeEntry(_ repository: Repository, time: Time, state: [Int: TimeEntry], timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
-    guard let timeEntry = state[timeEntryId] else { fatalError() }
-
-    var copy = timeEntry
-    copy.id = UUID().hashValue
-    copy.start = time.now()
-    copy.duration = -1
-
-    return repository.addTimeEntry(timeEntry: copy)
-        .toEffect(
-            map: { TimeEntriesLogAction.timeEntryAdded(copy) },
-            catch: { TimeEntriesLogAction.setError($0.toErrorType())}
-    )
+private func continueTimeEntry(_ repository: TimeLogRepository,
+                               time: Time,
+                               state: [Int: TimeEntry],
+                               timeEntryId: Int)
+    -> Effect<TimeEntriesLogAction> {
+        guard let timeEntry = state[timeEntryId] else { fatalError() }
+        
+        var copy = timeEntry
+        copy.start = time.now()
+        copy.duration = 0
+        
+        return repository.startTimeEntry(timeEntry: copy)
+            .toEffect(
+                map: { TimeEntriesLogAction.timeEntryStarted($0, $1) },
+                catch: { TimeEntriesLogAction.setError($0.toErrorType())}
+        )
 }

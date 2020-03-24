@@ -16,6 +16,11 @@ def rxdatasources
     pod 'RxDataSources', '~> 4.0'
 end
 
+def rxtests
+  pod 'RxBlocking', '~> 5'
+  pod 'RxTest', '~> 5'
+end
+
 project 'App/App.xcodeproj'
 project 'Modules/TogglTrack/TogglTrack.xcodeproj'
 project 'Modules/API/API.xcodeproj'
@@ -50,6 +55,10 @@ target :Timer do
     rxswift
     rxcocoa
     rxdatasources
+    
+    target :TimerTests do
+      rxtests
+    end
 end
 
 target :Architecture do
