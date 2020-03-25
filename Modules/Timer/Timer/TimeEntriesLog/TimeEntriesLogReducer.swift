@@ -38,8 +38,8 @@ let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, R
         }
         state.entriesToDelete = []
         return .empty
-//        guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
-//        return continueTimeEntry(repository, timeEntry: timeEntry)
+        //        guard let timeEntry = state.entities.timeEntries[timeEntryId] else { fatalError() }
+        //        return continueTimeEntry(repository, timeEntry: timeEntry)
         
     case let .timeEntrySwiped(direction, timeEntryId):
         switch direction {
@@ -48,12 +48,12 @@ let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, R
                 let previous = Array(state.entriesToDelete).first!
                 scheduler.cancel(id: previous)
                 state.entriesToDelete.insert(timeEntryId)// = [timeEntryId]
-
+                
                 return Observable<TimeEntriesLogAction>.concat(
                     deleteTimeEntry(repository, timeEntryId: previous).asObservable(),
                     scheduleDeleteTimeEntry(timeEntryId: timeEntryId).asObservable()
                 ).toEffect()
-
+                
             } else {
                 state.entriesToDelete = [timeEntryId]
                 return scheduleDeleteTimeEntry(timeEntryId: timeEntryId)
@@ -122,9 +122,9 @@ fileprivate func loadEntities(_ repository: Repository) -> Effect<TimeEntriesLog
         repository.getTasks().map(TimeEntriesLogAction.setEntities).asObservable(),
         repository.getTags().map(TimeEntriesLogAction.setEntities).asObservable()
     )
-    .concat(Observable.just(.finishedLoading))
-    .catchError({ Observable.just(.setError($0)) })
-    .toEffect()
+        .concat(Observable.just(.finishedLoading))
+        .catchError({ Observable.just(.setError($0)) })
+        .toEffect()
 }
 
 fileprivate func scheduleDeleteTimeEntry(timeEntryId: Int) -> Effect<TimeEntriesLogAction>
@@ -133,7 +133,7 @@ fileprivate func scheduleDeleteTimeEntry(timeEntryId: Int) -> Effect<TimeEntries
         .toEffect(
             map: { TimeEntriesLogAction.deleteTimeEntry($0) },
             catch: { TimeEntriesLogAction.setError($0)}
-        )
+    )
 }
 
 fileprivate func deleteTimeEntry(_ repository: Repository, timeEntryId: Int) -> Effect<TimeEntriesLogAction>
@@ -153,8 +153,8 @@ fileprivate func continueTimeEntry(_ repository: Repository, timeEntry: TimeEntr
     copy.duration = -1
     
     return repository.addTimeEntry(timeEntry: copy)
-    .toEffect(
-        map: { TimeEntriesLogAction.timeEntryAdded(copy) },
-        catch: { TimeEntriesLogAction.setError($0)}
+        .toEffect(
+            map: { TimeEntriesLogAction.timeEntryAdded(copy) },
+            catch: { TimeEntriesLogAction.setError($0)}
     )
 }

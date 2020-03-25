@@ -1,0 +1,6 @@
+module Pods_TogglTrack {
+  umbrella header "Pods-TogglTrack-umbrella.h"
+
+  export *
+  module * { export * }
+}
