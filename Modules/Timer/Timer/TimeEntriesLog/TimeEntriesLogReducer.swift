@@ -33,6 +33,7 @@ let timeEntriesLogReducer = Reducer<TimeEntriesLogState, TimeEntriesLogAction, R
     switch action {
         
     case let .continueButtonTapped(timeEntryId):
+        // FAKE UNDO BUTTON
         for id in state.entriesToDelete {
             scheduler.cancel(id: id)
         }
