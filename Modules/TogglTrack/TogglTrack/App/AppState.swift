@@ -10,7 +10,6 @@ public struct AppState {
     public var user: Loadable<User> = .nothing
     public var entities: TimeLogEntities =  TimeLogEntities()
     
-    public var localLoadingState: LocalLoadingState = LocalLoadingState()
     public var localOnboardingState: LocalOnboardingState = LocalOnboardingState()
     public var localTimerState: LocalTimerState = LocalTimerState()
 }
@@ -22,14 +21,12 @@ extension AppState {
         get {
             LoadingState(
                 entities: entities,
-                route: route,
-                localLoadingState: localLoadingState
+                route: route
             )
         }
         set {
             entities = newValue.entities
             route = newValue.route
-            localLoadingState = newValue.localLoadingState
         }
     }
     

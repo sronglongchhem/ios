@@ -9,35 +9,33 @@ func createLoadingReducer(repository: Repository) -> Reducer<LoadingState, Loadi
         switch action {
             
         case .startLoading:
-            state.loading = true
             return loadEntities(repository)
             
         case .loadingFinished:
-            state.loading = false
             state.route = AppRoute.main.path
             return []
             
-        case let .setWorkspaces(workspaces):
+        case let .workspacesLoaded(workspaces):
             state.entities.workspaces = arrayToDict(entities: workspaces)
             return []
             
-        case let .setClients(clients):
+        case let .clientsLoaded(clients):
             state.entities.clients = arrayToDict(entities: clients)
             return []
             
-        case let .setProjects(projects):
+        case let .projectsLoaded(projects):
             state.entities.projects = arrayToDict(entities: projects)
             return []
             
-        case let .setTasks(tasks):
+        case let .tasksLoaded(tasks):
             state.entities.tasks = arrayToDict(entities: tasks)
             return []
             
-        case let .setTimeEntries(timeEntries):
+        case let .timeEntriesLoaded(timeEntries):
             state.entities.timeEntries = arrayToDict(entities: timeEntries)
             return []
             
-        case let .setTags(tags):
+        case let .tagsLoaded(tags):
             state.entities.tags = arrayToDict(entities: tags)
             return []
 
@@ -47,12 +45,12 @@ func createLoadingReducer(repository: Repository) -> Reducer<LoadingState, Loadi
 
 private func loadEntities(_ repository: Repository) -> [Effect<LoadingAction>] {
     return [
-        repository.getWorkspaces().map(LoadingAction.setWorkspaces),
-        repository.getClients().map(LoadingAction.setClients),
-        repository.getTimeEntries().map(LoadingAction.setTimeEntries),
-        repository.getProjects().map(LoadingAction.setProjects),
-        repository.getTasks().map(LoadingAction.setTasks),
-        repository.getTags().map(LoadingAction.setTags),
+        repository.getWorkspaces().map(LoadingAction.workspacesLoaded),
+        repository.getClients().map(LoadingAction.clientsLoaded),
+        repository.getTimeEntries().map(LoadingAction.timeEntriesLoaded),
+        repository.getProjects().map(LoadingAction.projectsLoaded),
+        repository.getTasks().map(LoadingAction.tasksLoaded),
+        repository.getTags().map(LoadingAction.tagsLoaded),
         Single.just(LoadingAction.loadingFinished)
     ]
         .map { $0.toEffect() }
