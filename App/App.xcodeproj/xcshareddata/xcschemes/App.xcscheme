@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -36,6 +37,106 @@
                BuildableName = "AppTests.xctest"
                BlueprintName = "AppTests"
                ReferencedContainer = "container:App.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2518552403C60C00BAD4B5"
+               BuildableName = "ArchitectureTests.xctest"
+               BlueprintName = "ArchitectureTests"
+               ReferencedContainer = "container:../Modules/Architecture/Architecture.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2516A32403C19D00BAD4B5"
+               BuildableName = "AssetsTests.xctest"
+               BlueprintName = "AssetsTests"
+               ReferencedContainer = "container:../Modules/Assets/Assets.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2518312403C5FC00BAD4B5"
+               BuildableName = "ModelsTests.xctest"
+               BlueprintName = "ModelsTests"
+               ReferencedContainer = "container:../Modules/Models/Models.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2517332403C20400BAD4B5"
+               BuildableName = "NetworkingTests.xctest"
+               BlueprintName = "NetworkingTests"
+               ReferencedContainer = "container:../Modules/Networking/Networking.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2516372403C15300BAD4B5"
+               BuildableName = "OnboardingTests.xctest"
+               BlueprintName = "OnboardingTests"
+               ReferencedContainer = "container:../Modules/Onboarding/Onboarding.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3430C38124213E3F009CF454"
+               BuildableName = "OtherServicesTests.xctest"
+               BlueprintName = "OtherServicesTests"
+               ReferencedContainer = "container:../Modules/OtherServices/OtherServices.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2516EB2403C1E200BAD4B5"
+               BuildableName = "RepositoryTests.xctest"
+               BlueprintName = "RepositoryTests"
+               ReferencedContainer = "container:../Modules/Repository/Repository.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2516C72403C1B000BAD4B5"
+               BuildableName = "TimerTests.xctest"
+               BlueprintName = "TimerTests"
+               ReferencedContainer = "container:../Modules/Timer/Timer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C25165B2403C17500BAD4B5"
+               BuildableName = "TogglTrackTests.xctest"
+               BlueprintName = "TogglTrackTests"
+               ReferencedContainer = "container:../Modules/TogglTrack/TogglTrack.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C2517572403C21900BAD4B5"
+               BuildableName = "UtilsTests.xctest"
+               BlueprintName = "UtilsTests"
+               ReferencedContainer = "container:../Modules/Utils/Utils.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

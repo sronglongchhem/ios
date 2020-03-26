@@ -64,4 +64,94 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
+    
+    func testTimeEntrySwipedLeftHappyFlow() {
+        
+        let swipedTimeEntryId = 0
+        
+        var state = [Int: TimeEntry]()
+        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)),
+            Step(.receive, .timeEntryDeleted(swipedTimeEntryId)) {
+                $0[swipedTimeEntryId] = nil
+            }
+        )
+    }
+    
+    func testTimeEntrySwipedRightHappyFlow() {
+        
+        let swipedTimeEntryId = 0
+        
+        var state = [Int: TimeEntry]()
+        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+        
+        var expectedNewTimeEntry = state[0]!
+        expectedNewTimeEntry.id = mockRepository.newTimeEntryId
+        expectedNewTimeEntry.start = now
+        expectedNewTimeEntry.duration = 0
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntrySwiped(.right, swipedTimeEntryId)),
+            Step(.receive, .timeEntryStarted(expectedNewTimeEntry, nil)) {
+                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
+            }
+        )
+    }
+    
+    func testTimeEntrySwipedRightWithRunningEntry() {
+        
+        let swipedTimeEntryId = 0
+        
+        var state = [Int: TimeEntry]()
+        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
+        
+        var expectedNewTimeEntry = state[0]!
+        expectedNewTimeEntry.id = mockRepository.newTimeEntryId
+        expectedNewTimeEntry.start = now
+        expectedNewTimeEntry.duration = 0
+        
+        var expectedStoppedTimeEntry = state[1]!
+        expectedStoppedTimeEntry.duration = 100
+        
+        mockRepository.stoppedTimeEntry = expectedStoppedTimeEntry
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntrySwiped(.right, swipedTimeEntryId)),
+            Step(.receive, .timeEntryStarted(expectedNewTimeEntry, expectedStoppedTimeEntry)) {
+                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
+                $0[expectedStoppedTimeEntry.id] = expectedStoppedTimeEntry
+            }
+        )
+    }
+    
+    func testTimeEntryTapped() {
+        
+        let timeEntryTappedId = 0
+        
+        var state = [Int: TimeEntry]()
+        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntryTapped(timeEntryTappedId))
+            // This tests this action does nothing for now. Fill the rest of the steps here
+        )
+    }
 }
