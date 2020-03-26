@@ -1,15 +1,30 @@
 import Foundation
 import Utils
+import RxSwift
+import RxCocoa
 
-public struct DayViewModel {
+struct DayViewModel: Equatable {
     
-    public var day: Date
-    public var dayString: String
-    public var timeEntries: [TimeEntryViewModel]
+    public static func == (lhs: DayViewModel, rhs: DayViewModel) -> Bool {
+        return lhs.durationString == rhs.durationString && lhs.dayString == rhs.dayString && lhs.items == rhs.items
+    }
     
-    public init(timeEntries: [TimeEntryViewModel]) {
-        day = timeEntries.first!.start.ignoreTimeComponents()
+    let day: Date
+    let dayString: String
+    let durationString: String
+    
+    var timeLogCells: [TimeLogCellViewModel]
+        
+    init(timeLogCells: [TimeLogCellViewModel]) {
+        day = timeLogCells.first!.start.ignoreTimeComponents()
         dayString = day.toDayString()
-        self.timeEntries = timeEntries
+        self.timeLogCells = timeLogCells
+        
+        durationString = self.timeLogCells
+                .filter({ !$0.isInGroup })
+                .map({ $0.duration ?? 0 })
+                .reduce(0, +)
+                .formattedDuration(ending: Date())
+
     }
 }

@@ -11,6 +11,9 @@ public enum TimeEntriesLogAction: Equatable {
     case timeEntrySwiped(SwipeDirection, Int)
     case timeEntryTapped(Int)
     
+    case toggleTimeEntryGroupTapped(Int)
+    case timeEntryGroupSwiped(SwipeDirection, [Int])
+    
     case timeEntryDeleted(Int)
     case timeEntryStarted(TimeEntry, TimeEntry?)
     
@@ -30,6 +33,12 @@ extension TimeEntriesLogAction: CustomDebugStringConvertible {
             
         case let .timeEntryTapped(timeEntryId):
             return "TimeEntryTapped: \(timeEntryId)"
+            
+        case let .toggleTimeEntryGroupTapped(groupId):
+            return "ToggleTimeEntryGroupTapped: \(groupId)"
+            
+        case let .timeEntryGroupSwiped(direction, timeEntryIds):
+            return "TimeEntryGroupSwiped \(direction): \(timeEntryIds)"
 
         case let .timeEntryDeleted(timeEntryId):
             return "TimeEntryDeleted: \(timeEntryId)"

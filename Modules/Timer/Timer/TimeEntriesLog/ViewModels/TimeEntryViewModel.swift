@@ -11,6 +11,7 @@ public struct TimeEntryViewModel: Equatable {
     }
     
     public var id: Int
+    public var groupId: Int
     public var description: String
     public var projectTaskClient: String
     public var billable: Bool
@@ -24,18 +25,17 @@ public struct TimeEntryViewModel: Equatable {
     public var descriptionColor: UIColor
     public var projectColor: UIColor
     
-    public let workspace: Workspace
     public let tags: [Tag]?
     
     public init(
         timeEntry: TimeEntry,
-        workspace: Workspace,
         project: Project? = nil,
         client: Client? = nil,
         task: Task? = nil,
         tags: [Tag]? = nil) {
                 
         self.id = timeEntry.id
+        self.groupId = timeEntry.groupId
         self.description = timeEntry.description.isEmpty ? "No description" : timeEntry.description
         self.projectTaskClient = getProjectTaskClient(from: project, task: task, client: client)
         self.billable = timeEntry.billable
@@ -43,7 +43,7 @@ public struct TimeEntryViewModel: Equatable {
         self.start = timeEntry.start
         self.duration = timeEntry.duration >= 0 ? timeEntry.duration : nil
         if let duration = duration {
-            self.durationString = duration.formatted
+            self.durationString = duration.formattedDuration(ending: Date())
             self.end = timeEntry.start.addingTimeInterval(duration)
         }
         isRunning = duration == nil
@@ -51,7 +51,6 @@ public struct TimeEntryViewModel: Equatable {
         descriptionColor = timeEntry.description.isEmpty ? .lightGray : .darkGray
         projectColor = project == nil ? .white : UIColor(hex: project!.color)
         
-        self.workspace = workspace
         self.tags = tags
     }
 }
@@ -62,15 +61,4 @@ func getProjectTaskClient(from project: Project?, task: Task?, client: Client?) 
     if let task = task { value.append(": " + task.name) }
     if let client = client { value.append(" · " + client.name) }
     return value
-}
-
-extension TimeInterval {
-    var formatted: String {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.zeroFormattingBehavior = [.pad]
-        guard let result = formatter.string(from: self) else { return "00:00:00" }
-        return result
-    }
 }

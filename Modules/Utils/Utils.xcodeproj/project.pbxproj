@@ -15,6 +15,7 @@
 		8C2517A52403C2AC00BAD4B5 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25179E2403C2AC00BAD4B5 /* Storyboarded.swift */; };
 		8C2517A82403C2AC00BAD4B5 /* Observable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2517A32403C2AC00BAD4B5 /* Observable+Extensions.swift */; };
 		8C2517A92403C2AC00BAD4B5 /* BehaviorRelay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2517A42403C2AC00BAD4B5 /* BehaviorRelay+Extensions.swift */; };
+		8C4EDC592429034000C03E14 /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EDC582429034000C03E14 /* TimeInterval+Extensions.swift */; };
 		8C509D1D241286F800B6DF30 /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D1C241286F800B6DF30 /* UIViewController + Extensions.swift */; };
 		8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D272412885100B6DF30 /* Date+Extensions.swift */; };
 		8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D292412888D00B6DF30 /* Array+Extensions.swift */; };
@@ -46,6 +47,7 @@
 		8C2517A42403C2AC00BAD4B5 /* BehaviorRelay+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BehaviorRelay+Extensions.swift"; sourceTree = "<group>"; };
 		8C2518182403C5B800BAD4B5 /* RxCocoaDep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoaDep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2518192403C5B800BAD4B5 /* RxSwiftDep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwiftDep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4EDC582429034000C03E14 /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		8C509D1C241286F800B6DF30 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		8C509D272412885100B6DF30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8C509D292412888D00B6DF30 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				8C509D272412885100B6DF30 /* Date+Extensions.swift */,
 				8C509D292412888D00B6DF30 /* Array+Extensions.swift */,
 				8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */,
+				8C4EDC582429034000C03E14 /* TimeInterval+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				3430C397242259BC009CF454 /* Apply.swift in Sources */,
 				8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */,
 				8C2517A82403C2AC00BAD4B5 /* Observable+Extensions.swift in Sources */,
+				8C4EDC592429034000C03E14 /* TimeInterval+Extensions.swift in Sources */,
 				8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

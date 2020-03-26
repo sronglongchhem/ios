@@ -42,7 +42,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                     cell.projectClientTaskLabel.text = item.projectTaskClient
                     cell.durationLabel.text = item.durationString
                     cell.continueButton.rx.tap
-                        .mapTo(TimeEntriesLogAction.continueButtonTapped(item.id))
+                        .mapTo(TimeEntriesLogAction.continueButtonTapped(item.mainEntryId))
                         .subscribe(onNext: self?.store.dispatch)
                         .disposed(by: cell.disposeBag)
                     return cell
@@ -54,7 +54,11 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
               return dataSource.sectionModels[index].dayString
             }
             
-            store.select(timeEntriesSelector)
+            Driver.combineLatest(
+                store.select(timeEntryViewModelsSelector),
+                store.select(expandedGroupsSelector),
+                resultSelector: toDaysMapper
+            )
                 .drive(tableView.rx.items(dataSource: dataSource!))
                 .disposed(by: disposeBag)
             
@@ -73,8 +77,8 @@ extension TimeEntriesLogViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Continue") { _, _, _ in
-            let timeEntryId = self.dataSource.sectionModels[indexPath.section].items[indexPath.item].id
-            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.right, timeEntryId))
+            let timeLogCellViewModel = self.dataSource.sectionModels[indexPath.section].items[indexPath.item]
+            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.right, timeLogCellViewModel.mainEntryId))
         }
         action.backgroundColor = .green
         return UISwipeActionsConfiguration(actions: [action])
@@ -82,8 +86,8 @@ extension TimeEntriesLogViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            let timeEntryId = self.dataSource.sectionModels[indexPath.section].items[indexPath.item].id
-            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.left, timeEntryId))
+            let timeLogCellViewModel = self.dataSource.sectionModels[indexPath.section].items[indexPath.item]
+            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.left, timeLogCellViewModel.mainEntryId))
         }
         return UISwipeActionsConfiguration(actions: [action])
     }
@@ -91,17 +95,17 @@ extension TimeEntriesLogViewController: UITableViewDelegate {
 
 // ANIMATED DATASOURCE EXTENSIONS
 
-extension TimeEntryViewModel: IdentifiableType {
-    public var identity: Int { id }
+extension TimeLogCellViewModel: IdentifiableType {
+    public var identity: String { id }
 }
 
 extension DayViewModel: AnimatableSectionModelType {
     
-    public init(original: DayViewModel, items: [TimeEntryViewModel]) {
+    public init(original: DayViewModel, items: [TimeLogCellViewModel]) {
         self = original
-        self.timeEntries = items
+        self.timeLogCells = items
     }
     
     public var identity: Date { day }
-    public var items: [TimeEntryViewModel] { timeEntries }
+    public var items: [TimeLogCellViewModel] { timeLogCells }
 }

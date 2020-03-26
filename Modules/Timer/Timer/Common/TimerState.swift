@@ -4,7 +4,8 @@ import Utils
 
 public struct LocalTimerState: Equatable {
     internal var description: String = ""
-    
+    internal var expandedGroups = Set<Int>()
+
     public init() {
     }
 }
@@ -25,10 +26,14 @@ extension TimerState {
     
     internal var timeLogState: TimeEntriesLogState {
         get {
-            TimeEntriesLogState(entities: entities)
+            TimeEntriesLogState(
+                entities: entities,
+                expandedGroups: localTimerState.expandedGroups
+            )
         }
         set {
             entities = newValue.entities
+            localTimerState.expandedGroups = newValue.expandedGroups
         }
     }
     

@@ -10,7 +10,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
     var now = Date(timeIntervalSince1970: 987654321)
     var mockRepository: MockTimeLogRepository = MockTimeLogRepository()
     lazy var mockTime = { Time(getNow: { return self.now }) }()
-    var reducer: Reducer<[Int: TimeEntry], TimeEntriesLogAction>!
+    var reducer: Reducer<TimeEntriesLogState, TimeEntriesLogAction>!
     
     override func setUp() {
         reducer = createTimeEntriesLogReducer(repository: mockRepository, time: mockTime)
@@ -18,13 +18,17 @@ class TimeEntriesLogReducerTests: XCTestCase {
 
     func testContinueTappedHappyFlow() {
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-100), duration: 100)
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-100), duration: 100)
         
-        var expectedNewTimeEntry = state[0]!
+        var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = 0
+        
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
         
         assertReducerFlow(
             initialState: state,
@@ -32,26 +36,30 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps:
             Step(.send, .continueButtonTapped(0)),
             Step(.receive, .timeEntryStarted(expectedNewTimeEntry, nil)) {
-                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
+                $0.entities.timeEntries[expectedNewTimeEntry.id] = expectedNewTimeEntry
             }
         )
     }
     
     func testContinueTappedStoppingPreviousFlow() {
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
-        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
-        
-        var expectedNewTimeEntry = state[0]!
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
+                
+        var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = 0
         
-        var expectedStoppedTimeEntry = state[1]!
+        var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100
         
         mockRepository.stoppedTimeEntry = expectedStoppedTimeEntry
+        
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
         
         assertReducerFlow(
             initialState: state,
@@ -59,8 +67,8 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps:
             Step(.send, .continueButtonTapped(0)),
             Step(.receive, .timeEntryStarted(expectedNewTimeEntry, expectedStoppedTimeEntry)) {
-                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
-                $0[expectedStoppedTimeEntry.id] = expectedStoppedTimeEntry
+                $0.entities.timeEntries[expectedNewTimeEntry.id] = expectedNewTimeEntry
+                $0.entities.timeEntries[expectedStoppedTimeEntry.id] = expectedStoppedTimeEntry
             }
         )
     }
@@ -69,17 +77,21 @@ class TimeEntriesLogReducerTests: XCTestCase {
         
         let swipedTimeEntryId = 0
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
-        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
 
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
+        
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
             steps:
             Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)),
             Step(.receive, .timeEntryDeleted(swipedTimeEntryId)) {
-                $0[swipedTimeEntryId] = nil
+                $0.entities.timeEntries[swipedTimeEntryId] = nil
             }
         )
     }
@@ -88,14 +100,18 @@ class TimeEntriesLogReducerTests: XCTestCase {
         
         let swipedTimeEntryId = 0
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
-        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
         
-        var expectedNewTimeEntry = state[0]!
+        var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = 0
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
 
         assertReducerFlow(
             initialState: state,
@@ -103,7 +119,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps:
             Step(.send, .timeEntrySwiped(.right, swipedTimeEntryId)),
             Step(.receive, .timeEntryStarted(expectedNewTimeEntry, nil)) {
-                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
+                $0.entities.timeEntries[expectedNewTimeEntry.id] = expectedNewTimeEntry
             }
         )
     }
@@ -112,19 +128,23 @@ class TimeEntriesLogReducerTests: XCTestCase {
         
         let swipedTimeEntryId = 0
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
-        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
         
-        var expectedNewTimeEntry = state[0]!
+        var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = 0
         
-        var expectedStoppedTimeEntry = state[1]!
+        var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100
         
         mockRepository.stoppedTimeEntry = expectedStoppedTimeEntry
+        
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
 
         assertReducerFlow(
             initialState: state,
@@ -132,8 +152,8 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps:
             Step(.send, .timeEntrySwiped(.right, swipedTimeEntryId)),
             Step(.receive, .timeEntryStarted(expectedNewTimeEntry, expectedStoppedTimeEntry)) {
-                $0[expectedNewTimeEntry.id] = expectedNewTimeEntry
-                $0[expectedStoppedTimeEntry.id] = expectedStoppedTimeEntry
+                $0.entities.timeEntries[expectedNewTimeEntry.id] = expectedNewTimeEntry
+                $0.entities.timeEntries[expectedStoppedTimeEntry.id] = expectedStoppedTimeEntry
             }
         )
     }
@@ -142,9 +162,13 @@ class TimeEntriesLogReducerTests: XCTestCase {
         
         let timeEntryTappedId = 0
         
-        var state = [Int: TimeEntry]()
-        state[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
-        state[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+        var timeEntries = [Int: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
 
         assertReducerFlow(
             initialState: state,

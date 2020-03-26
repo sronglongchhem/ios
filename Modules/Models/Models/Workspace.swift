@@ -11,4 +11,10 @@ public struct Workspace: Codable, Entity, Equatable {
          case name
          case admin
      }
+    
+    public init(id: Int, name: String, admin: Bool) {
+        self.id = id
+        self.name = name
+        self.admin = admin
+    }
 }
