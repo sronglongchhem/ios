@@ -24,7 +24,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
-        expectedNewTimeEntry.duration = 0
+        expectedNewTimeEntry.duration = nil
         
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
@@ -50,7 +50,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
-        expectedNewTimeEntry.duration = 0
+        expectedNewTimeEntry.duration = nil
         
         var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100
@@ -107,7 +107,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
-        expectedNewTimeEntry.duration = 0
+        expectedNewTimeEntry.duration = nil
 
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
@@ -135,7 +135,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
-        expectedNewTimeEntry.duration = 0
+        expectedNewTimeEntry.duration = nil
         
         var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100

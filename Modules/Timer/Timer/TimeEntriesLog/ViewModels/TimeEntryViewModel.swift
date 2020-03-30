@@ -41,7 +41,7 @@ public struct TimeEntryViewModel: Equatable {
         self.billable = timeEntry.billable
                 
         self.start = timeEntry.start
-        self.duration = timeEntry.duration >= 0 ? timeEntry.duration : nil
+        self.duration = timeEntry.duration
         if let duration = duration {
             self.durationString = duration.formattedDuration(ending: Date())
             self.end = timeEntry.start.addingTimeInterval(duration)

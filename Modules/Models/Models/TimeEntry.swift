@@ -5,7 +5,7 @@ public struct TimeEntry: Entity, Equatable {
     public var id: Int
     public var description: String
     public var start: Date
-    public var duration: Double
+    public var duration: Double?
     public var billable: Bool
 
     public var workspaceId: Int
@@ -17,7 +17,7 @@ public struct TimeEntry: Entity, Equatable {
         id: Int,
         description: String,
         start: Date,
-        duration: Double,
+        duration: Double?,
         billable: Bool,
         workspaceId: Int
     ) {
@@ -35,7 +35,7 @@ extension TimeEntry: Codable {
     private var createdWith: String { "AppleWatchApp" }
     
     private var encodedDuration: Int64 {
-        guard duration >= 0 else { return Int64(-start.timeIntervalSince1970) }
+        guard let duration = duration, duration >= 0 else { return Int64(-start.timeIntervalSince1970) }
         return Int64(duration)
     }
 

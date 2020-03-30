@@ -2,6 +2,7 @@ import Foundation
 import RxSwift
 import Models
 import API
+import Database
 
 public protocol TimeLogRepository {
     func getWorkspaces() -> Single<[Workspace]>
@@ -18,21 +19,22 @@ public class Repository {
     // These mock the DB
     private var workspaces = [Workspace]()
     private var clients = [Client]()
-    private var timeEntries = [TimeEntry]()
     private var projects = [Project]()
     private var tasks = [Task]()
     private var tags = [Tag]()
     // ------------------------
     
     private let api: TimelineAPI
+    private let database: Database
     
-    public init(api: TimelineAPI) {
+    public init(api: TimelineAPI, database: Database) {
         self.api = api
+        self.database = database
     }
 }
 
 extension Repository: TimeLogRepository {
-        
+
     public func getWorkspaces() -> Single<[Workspace]> {
         if workspaces.isEmpty {
             return api.loadWorkspaces()
@@ -41,7 +43,7 @@ extension Repository: TimeLogRepository {
         
         return Single.just(workspaces)
     }
-
+    
     public func getClients() -> Single<[Client]> {
         if clients.isEmpty {
             return api.loadClients()
@@ -52,12 +54,12 @@ extension Repository: TimeLogRepository {
     }
     
     public func getTimeEntries() -> Single<[TimeEntry]> {
-        if timeEntries.isEmpty {
-            return api.loadEntries()
-                .do(onSuccess: { self.timeEntries = $0 })
+        do {
+            let timeEntries = try database.timeEntries.getAll()
+            return Single.just(timeEntries.map({ $0.toTimeEntry() }))
+        } catch let error {
+            return Single.error(error)
         }
-        
-        return Single.just(timeEntries)
     }
     
     public func getProjects() -> Single<[Project]> {
@@ -86,25 +88,32 @@ extension Repository: TimeLogRepository {
         
         return Single.just(tags)
     }
-    
+
     public func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
-        
-        var stoppedTimeEntry: TimeEntry?
-        if let runningEntryIndex = timeEntries.firstIndex(where: { $0.duration == 0}) {
-            stoppedTimeEntry = timeEntries[runningEntryIndex]
-            stoppedTimeEntry!.duration = timeEntry.start.timeIntervalSince(stoppedTimeEntry!.start)
-            timeEntries[runningEntryIndex] = stoppedTimeEntry!
+        do {
+            let timeEntries = try database.timeEntries.getAllRunning()
+            
+            var stoppedTimeEntry: TimeEntry?
+            if var runningEntryDAO = timeEntries.first {
+                runningEntryDAO.duration = NSNumber.fromDouble(timeEntry.start.timeIntervalSince(runningEntryDAO.start))
+                try database.timeEntries.update(timeEntry: runningEntryDAO)
+                stoppedTimeEntry = runningEntryDAO.toTimeEntry()
+            }
+
+            let newTimeEntry = timeEntry
+            _ = try database.timeEntries.insert(timeEntry: newTimeEntry.toDAO())
+            return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
+        } catch let error {
+            return Single.error(error)
         }
-        
-        var newTimeEntry = timeEntry
-        newTimeEntry.id = (timeEntries.map({ $0.id }).max() ?? 0) + 1
-        timeEntries.append(timeEntry)
-        
-        return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
     }
     
     public func deleteTimeEntry(timeEntryId: Int) -> Single<Void> {
-        timeEntries = timeEntries.filter { $0.id != timeEntryId }
-        return Single.just(())
+        do {
+            try database.timeEntries.delete(id: Int64(timeEntryId))
+            return Single.just(())
+        } catch let error {
+            return Single.error(error)
+        }
     }
 }

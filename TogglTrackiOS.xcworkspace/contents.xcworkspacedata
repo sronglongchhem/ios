@@ -8,6 +8,9 @@
       location = "container:"
       name = "Modules">
       <FileRef
+         location = "group:Modules/Database/Database.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Modules/Assets/Assets.xcodeproj">
       </FileRef>
       <FileRef

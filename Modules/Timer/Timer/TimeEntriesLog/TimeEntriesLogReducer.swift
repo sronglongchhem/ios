@@ -73,7 +73,7 @@ private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int) 
 private func continueTimeEntry(_ repository: TimeLogRepository, time: Time, timeEntry: TimeEntry) -> Effect<TimeEntriesLogAction> {
     var copy = timeEntry
     copy.start = time.now()
-    copy.duration = 0
+    copy.duration = nil
 
     return repository.startTimeEntry(timeEntry: copy)
         .toEffect(
