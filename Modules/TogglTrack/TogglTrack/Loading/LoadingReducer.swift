@@ -56,7 +56,7 @@ private func loadEntities(_ repository: Repository) -> [Effect<LoadingAction>] {
         .map { $0.toEffect() }
 }
 
-private func arrayToDict<EntityType: Entity>(entities: [EntityType]) -> [Int: EntityType] {
+private func arrayToDict<EntityType: Entity>(entities: [EntityType]) -> [Int64: EntityType] {
     return entities.reduce([:], { acc, entity in
         var acc = acc
         acc[entity.id] = entity

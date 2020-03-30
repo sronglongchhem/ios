@@ -92,7 +92,7 @@ enum TimeLogCellViewModel: Equatable {
         return sample.start
     }
     
-    var mainEntryId: Int {
+    var mainEntryId: Int64 {
         return sample.id
     }
     
@@ -105,7 +105,7 @@ enum TimeLogCellViewModel: Equatable {
         }
     }
     
-    var allIds: [Int] {
+    var allIds: [Int64] {
         switch self {
         case let .groupedEntriesHeader(timeEntries, _ ):
             return timeEntries.map { $0.id }

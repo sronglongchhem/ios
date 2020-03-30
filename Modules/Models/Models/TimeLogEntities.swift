@@ -1,63 +1,42 @@
 import Foundation
 
 public struct TimeLogEntities: Equatable {
-    public var workspaces = [Int: Workspace]()
-    public var clients = [Int: Client]()
-    public var timeEntries = [Int: TimeEntry]()
-    public var projects = [Int: Project]()
-    public var tasks = [Int: Task]()
-    public var tags = [Int: Tag]()
+    public var workspaces = [Int64: Workspace]()
+    public var clients = [Int64: Client]()
+    public var timeEntries = [Int64: TimeEntry]()
+    public var projects = [Int64: Project]()
+    public var tasks = [Int64: Task]()
+    public var tags = [Int64: Tag]()
     
     public init() {
     }
     
-    public mutating func set(entities: [Int: Entity]) {
-        guard let first = entities.values.first else { return }
-        
-        switch first {
-        case _ as Workspace:
-            workspaces = (entities as? [Int: Workspace])!
-        case _ as Client:
-            clients = (entities as? [Int: Client])!
-        case _ as TimeEntry:
-            timeEntries = (entities as? [Int: TimeEntry])!
-        case _ as Project:
-            projects = (entities as? [Int: Project])!
-        case _ as Task:
-            tasks = (entities as? [Int: Task])!
-        case _ as Tag:
-            tags = (entities as? [Int: Tag])!
-        default:
-            break
-        }
-    }
-    
-    public func getWorkspace(_ id: Int?) -> Workspace? {
+    public func getWorkspace(_ id: Int64?) -> Workspace? {
         guard let id = id else { return nil }
         return workspaces[id]
     }
     
-    public func getClient(_ id: Int?) -> Client? {
+    public func getClient(_ id: Int64?) -> Client? {
         guard let id = id else { return nil }
         return clients[id]
     }
     
-    public func getTimeEntry(_ id: Int?) -> TimeEntry? {
+    public func getTimeEntry(_ id: Int64?) -> TimeEntry? {
         guard let id = id else { return nil }
         return timeEntries[id]
     }
     
-    public func getProject(_ id: Int?) -> Project? {
+    public func getProject(_ id: Int64?) -> Project? {
         guard let id = id else { return nil }
         return projects[id]
     }
     
-    public func getTask(_ id: Int?) -> Task? {
+    public func getTask(_ id: Int64?) -> Task? {
         guard let id = id else { return nil }
         return tasks[id]
     }
     
-    public func getTag(_ id: Int?) -> Tag? {
+    public func getTag(_ id: Int64?) -> Tag? {
         guard let id = id else { return nil }
         return tags[id]
     }

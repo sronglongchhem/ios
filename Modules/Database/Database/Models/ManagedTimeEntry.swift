@@ -7,7 +7,7 @@ public protocol TimeEntryDAOProtocol {
     var start: Date { get set }
     var duration: NSNumber? { get set }
     var billable: Bool { get set }
-    var workspaceId: Int { get set }
+    var workspaceId: Int64 { get set }
 }
 
 @objc(ManagedTimeEntry)
@@ -17,7 +17,7 @@ final class ManagedTimeEntry: NSManagedObject, TimeEntryDAOProtocol {
     @NSManaged var start: Date
     @NSManaged var duration: NSNumber?
     @NSManaged var billable: Bool
-    @NSManaged var workspaceId: Int
+    @NSManaged var workspaceId: Int64
 }
 
 extension ManagedTimeEntry {

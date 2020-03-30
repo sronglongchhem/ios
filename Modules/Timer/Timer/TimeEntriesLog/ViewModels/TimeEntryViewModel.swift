@@ -10,7 +10,7 @@ public struct TimeEntryViewModel: Equatable {
             && lhs.end == rhs.end && lhs.isRunning == rhs.isRunning //&& lhs.tags == rhs.tags
     }
     
-    public var id: Int
+    public var id: Int64
     public var groupId: Int
     public var description: String
     public var projectTaskClient: String

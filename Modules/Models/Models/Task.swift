@@ -2,15 +2,15 @@ import Foundation
 
 public struct Task: Codable, Entity, Equatable {
     
-    public var id: Int
+    public var id: Int64
     public var name: String
     public var active: Bool
     public var estimatedSeconds: Int
     public var trackedSeconds: Int
     
-    public var projectId: Int
-    public var workspaceId: Int
-    public var userId: Int?
+    public var projectId: Int64
+    public var workspaceId: Int64
+    public var userId: Int64?
 
     enum CodingKeys: String, CodingKey {
         case id

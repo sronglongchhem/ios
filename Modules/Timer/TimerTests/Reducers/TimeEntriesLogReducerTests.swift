@@ -18,7 +18,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
 
     func testContinueTappedHappyFlow() {
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-100), duration: 100)
         
         var expectedNewTimeEntry = timeEntries[0]!
@@ -43,7 +43,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
     
     func testContinueTappedStoppingPreviousFlow() {
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
         timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
                 
@@ -75,9 +75,9 @@ class TimeEntriesLogReducerTests: XCTestCase {
     
     func testTimeEntrySwipedLeftHappyFlow() {
         
-        let swipedTimeEntryId = 0
+        let swipedTimeEntryId: Int64 = 0
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
         timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
 
@@ -98,9 +98,9 @@ class TimeEntriesLogReducerTests: XCTestCase {
     
     func testTimeEntrySwipedRightHappyFlow() {
         
-        let swipedTimeEntryId = 0
+        let swipedTimeEntryId: Int64 = 0
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
         timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
         
@@ -126,9 +126,9 @@ class TimeEntriesLogReducerTests: XCTestCase {
     
     func testTimeEntrySwipedRightWithRunningEntry() {
         
-        let swipedTimeEntryId = 0
+        let swipedTimeEntryId: Int64 = 0
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
         timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 0)
         
@@ -160,9 +160,9 @@ class TimeEntriesLogReducerTests: XCTestCase {
     
     func testTimeEntryTapped() {
         
-        let timeEntryTappedId = 0
+        let timeEntryTappedId: Int64 = 0
         
-        var timeEntries = [Int: TimeEntry]()
+        var timeEntries = [Int64: TimeEntry]()
         timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-200), duration: 100)
         timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-100), duration: 200)
 

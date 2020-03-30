@@ -19,7 +19,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             }
 
             let timeEntry = TimeEntry(
-                id: state.entities.timeEntries.count,
+                id: Int64(state.entities.timeEntries.count),
                 description: state.description,
                 start: time.now(),
                 duration: -1,

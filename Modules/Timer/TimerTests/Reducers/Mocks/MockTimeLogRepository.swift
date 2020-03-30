@@ -6,7 +6,7 @@ import RxSwift
 class MockTimeLogRepository: TimeLogRepository {
     
     var stoppedTimeEntry: TimeEntry?
-    var newTimeEntryId: Int = 999
+    var newTimeEntryId: Int64 = 999
     
     var workspaces = [Workspace]()
     var clients = [Client]()
@@ -47,7 +47,7 @@ class MockTimeLogRepository: TimeLogRepository {
         return Single.just((newTimeEntry, stoppedTimeEntry))
     }
     
-    func deleteTimeEntry(timeEntryId: Int) -> Single<Void> {
+    func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
         return Single.just(())
     }
 }

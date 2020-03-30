@@ -2,7 +2,7 @@ import Foundation
 
 public struct Workspace: Codable, Entity, Equatable {
     
-    public var id: Int
+    public var id: Int64
     public var name: String
     public var admin: Bool
     
@@ -12,7 +12,7 @@ public struct Workspace: Codable, Entity, Equatable {
          case admin
      }
     
-    public init(id: Int, name: String, admin: Bool) {
+    public init(id: Int64, name: String, admin: Bool) {
         self.id = id
         self.name = name
         self.admin = admin

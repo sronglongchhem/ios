@@ -8,13 +8,13 @@ struct TimeEntryDAO: TimeEntryDAOProtocol {
     var start: Date
     var duration: NSNumber?
     var billable: Bool
-    var workspaceId: Int
+    var workspaceId: Int64
 }
 
 extension TimeEntryDAOProtocol {
     func toTimeEntry() -> TimeEntry {
         return TimeEntry(
-            id: Int(self.id),
+            id: self.id,
             description: self.textDescription,
             start: self.start,
             duration: self.duration?.doubleValue,

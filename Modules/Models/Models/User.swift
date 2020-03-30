@@ -2,9 +2,9 @@ import Foundation
 
 public struct User: Codable, Equatable {
     
-    public var id: Int
+    public var id: Int64
     public var apiToken: String
-    public var defaultWorkspace: Int
+    public var defaultWorkspace: Int64
 
     enum CodingKeys: String, CodingKey {
         case id    

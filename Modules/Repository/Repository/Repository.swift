@@ -12,7 +12,7 @@ public protocol TimeLogRepository {
     func getTasks() -> Single<[Task]>
     func getTags() -> Single<[Tag]>
     func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
-    func deleteTimeEntry(timeEntryId: Int) -> Single<Void>
+    func deleteTimeEntry(timeEntryId: Int64) -> Single<Void>
 }
 
 public class Repository {
@@ -108,7 +108,7 @@ extension Repository: TimeLogRepository {
         }
     }
     
-    public func deleteTimeEntry(timeEntryId: Int) -> Single<Void> {
+    public func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
         do {
             try database.timeEntries.delete(id: Int64(timeEntryId))
             return Single.just(())

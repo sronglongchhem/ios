@@ -7,14 +7,14 @@ public enum SwipeDirection {
 }
 
 public enum TimeEntriesLogAction: Equatable {
-    case continueButtonTapped(Int)
-    case timeEntrySwiped(SwipeDirection, Int)
-    case timeEntryTapped(Int)
+    case continueButtonTapped(Int64)
+    case timeEntrySwiped(SwipeDirection, Int64)
+    case timeEntryTapped(Int64)
     
     case toggleTimeEntryGroupTapped(Int)
-    case timeEntryGroupSwiped(SwipeDirection, [Int])
+    case timeEntryGroupSwiped(SwipeDirection, [Int64])
     
-    case timeEntryDeleted(Int)
+    case timeEntryDeleted(Int64)
     case timeEntryStarted(TimeEntry, TimeEntry?)
     
     case setError(ErrorType)

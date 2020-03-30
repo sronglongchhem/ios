@@ -2,24 +2,24 @@ import Foundation
 
 public struct TimeEntry: Entity, Equatable {
     
-    public var id: Int
+    public var id: Int64
     public var description: String
     public var start: Date
     public var duration: Double?
     public var billable: Bool
 
-    public var workspaceId: Int
-    public var projectId: Int?
-    public var taskId: Int?
-    public var tagIds: [Int]?
+    public var workspaceId: Int64
+    public var projectId: Int64?
+    public var taskId: Int64?
+    public var tagIds: [Int64]?
     
     public init (
-        id: Int,
+        id: Int64,
         description: String,
         start: Date,
         duration: Double?,
         billable: Bool,
-        workspaceId: Int
+        workspaceId: Int64
     ) {
         self.id = id
         self.description = description
@@ -75,7 +75,7 @@ extension TimeEntry: Codable {
         try container.encode(workspaceId, forKey: .workspaceId)
         try container.encode(projectId, forKey: .projectId)
         try container.encode(taskId, forKey: .taskId)
-        try container.encode(tagIds ?? [Int](), forKey: .tagIds)
+        try container.encode(tagIds ?? [Int64](), forKey: .tagIds)
         try container.encode(createdWith, forKey: .createdWith)
     }
 }

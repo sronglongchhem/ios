@@ -180,7 +180,7 @@ class TimeEntriesSelectorTests: XCTestCase {
         file: StaticString = #file,
         line: UInt = #line) {
         
-        state.entities.timeEntries = timeEntries.reduce([Int: TimeEntry]()) { acc, timeEntry in
+        state.entities.timeEntries = timeEntries.reduce([Int64: TimeEntry]()) { acc, timeEntry in
             var copy = acc
             copy[timeEntry.id] = timeEntry
             return copy

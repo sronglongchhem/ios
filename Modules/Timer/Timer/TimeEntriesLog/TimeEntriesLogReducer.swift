@@ -62,7 +62,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
     }
 }
 
-private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int) -> Effect<TimeEntriesLogAction> {
+private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int64) -> Effect<TimeEntriesLogAction> {
     repository.deleteTimeEntry(timeEntryId: timeEntryId)
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryDeleted(timeEntryId) },
