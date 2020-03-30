@@ -45,6 +45,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                         .mapTo(TimeEntriesLogAction.continueButtonTapped(item.mainEntryId))
                         .subscribe(onNext: self?.store.dispatch)
                         .disposed(by: cell.disposeBag)
+                    cell.hasTagsImageView.isHidden = item.tags?.isEmpty ?? true
                     return cell
             })
             

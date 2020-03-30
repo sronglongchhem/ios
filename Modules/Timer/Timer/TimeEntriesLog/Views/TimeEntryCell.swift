@@ -7,6 +7,7 @@ class TimeEntryCell: UITableViewCell {
     @IBOutlet weak var projectClientTaskLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var hasTagsImageView: UIImageView!
     
     var disposeBag = DisposeBag()
     

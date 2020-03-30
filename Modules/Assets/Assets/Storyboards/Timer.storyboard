@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,9 +56,18 @@
                                                     </constraints>
                                                     <state key="normal" title="▶️"/>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vOj-kF-nD4">
+                                                    <rect key="frame" x="262" y="15.5" width="12" height="13"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="CkN-mf-Kes"/>
+                                                        <constraint firstAttribute="width" constant="12" id="bkI-G8-byF"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="E97-7i-kLN" firstAttribute="centerY" secondItem="0j9-8D-Ze1" secondAttribute="centerY" id="DID-re-LSd"/>
+                                                <constraint firstItem="hww-Qc-bFn" firstAttribute="leading" secondItem="vOj-kF-nD4" secondAttribute="trailing" constant="8" symbolic="YES" id="Hjy-ih-5mR"/>
                                                 <constraint firstAttribute="bottom" secondItem="kdP-wT-g9i" secondAttribute="bottom" constant="15" id="IhB-dC-ub6"/>
                                                 <constraint firstItem="fX6-dN-zWc" firstAttribute="leading" secondItem="0j9-8D-Ze1" secondAttribute="leading" constant="20" id="JSr-A0-kTh"/>
                                                 <constraint firstAttribute="trailing" secondItem="E97-7i-kLN" secondAttribute="trailing" constant="12" id="Jn2-jN-tPv"/>
@@ -65,6 +75,7 @@
                                                 <constraint firstItem="hww-Qc-bFn" firstAttribute="leading" secondItem="fX6-dN-zWc" secondAttribute="trailing" constant="10" id="TMs-8P-riT"/>
                                                 <constraint firstItem="kdP-wT-g9i" firstAttribute="leading" secondItem="0j9-8D-Ze1" secondAttribute="leading" constant="20" id="TTW-hH-5rk"/>
                                                 <constraint firstItem="hww-Qc-bFn" firstAttribute="centerY" secondItem="fX6-dN-zWc" secondAttribute="centerY" id="UnD-IL-UWz"/>
+                                                <constraint firstItem="vOj-kF-nD4" firstAttribute="centerY" secondItem="hww-Qc-bFn" secondAttribute="centerY" id="Zmo-eW-hFR"/>
                                                 <constraint firstItem="fX6-dN-zWc" firstAttribute="top" secondItem="0j9-8D-Ze1" secondAttribute="top" constant="11" id="b3q-Sf-YYe"/>
                                                 <constraint firstItem="E97-7i-kLN" firstAttribute="leading" secondItem="hww-Qc-bFn" secondAttribute="trailing" constant="10" id="qai-63-HAe"/>
                                             </constraints>
@@ -73,6 +84,7 @@
                                             <outlet property="continueButton" destination="E97-7i-kLN" id="oz6-EC-i8I"/>
                                             <outlet property="descriptionLabel" destination="fX6-dN-zWc" id="eEj-AN-U84"/>
                                             <outlet property="durationLabel" destination="hww-Qc-bFn" id="7Hb-PQ-4al"/>
+                                            <outlet property="hasTagsImageView" destination="vOj-kF-nD4" id="DIl-x6-BFE"/>
                                             <outlet property="projectClientTaskLabel" destination="kdP-wT-g9i" id="yH2-Wq-07w"/>
                                         </connections>
                                     </tableViewCell>
@@ -101,7 +113,7 @@
                     <viewLayoutGuide key="safeArea" id="Qdt-yi-N3J"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1613" y="-163"/>
+            <point key="canvasLocation" x="1611.5942028985507" y="-163.39285714285714"/>
         </scene>
         <!--Start Edit View Controller-->
         <scene sceneID="8eg-hi-Vkm">
@@ -118,7 +130,7 @@
                                         <rect key="frame" x="16" y="18.5" width="318" height="35"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="I'm working on..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibu-Uh-OXl">
-                                                <rect key="frame" x="20" y="5.5" width="278" height="24"/>
+                                                <rect key="frame" x="20" y="5" width="278" height="25.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -174,4 +186,7 @@
             <point key="canvasLocation" x="2350.7246376811595" y="-163.39285714285714"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tag.fill" catalog="system" width="128" height="116"/>
+    </resources>
 </document>
