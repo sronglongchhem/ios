@@ -3,14 +3,14 @@ import CoreData
 
 public protocol TagDAOProtocol {
     var id: Int64 { get set }
-    var workspaceId: Int { get set }
+    var workspaceId: Int64 { get set }
     var name: String { get set }
 }
 
 @objc(ManagedTag)
 final class ManagedTag: NSManagedObject, TagDAOProtocol {
     @NSManaged var id: Int64
-    @NSManaged var workspaceId: Int
+    @NSManaged var workspaceId: Int64
     @NSManaged var name: String
 }
 

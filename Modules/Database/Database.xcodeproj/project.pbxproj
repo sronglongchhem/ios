@@ -17,6 +17,7 @@
 		B49CDBF324323EF600BFBBFB /* ManagedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF224323EF600BFBBFB /* ManagedTag.swift */; };
 		B49CDBF5243243DE00BFBBFB /* ManagedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */; };
 		B49CDBF924326BD700BFBBFB /* ManagedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF824326BD700BFBBFB /* ManagedClient.swift */; };
+		B49CDBFB2433676600BFBBFB /* ManagedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBFA2433676600BFBBFB /* ManagedProject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		B49CDBF224323EF600BFBBFB /* ManagedTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTag.swift; sourceTree = "<group>"; };
 		B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedEntity.swift; sourceTree = "<group>"; };
 		B49CDBF824326BD700BFBBFB /* ManagedClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedClient.swift; sourceTree = "<group>"; };
+		B49CDBFA2433676600BFBBFB /* ManagedProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedProject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			children = (
 				B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */,
 				B49CDBF824326BD700BFBBFB /* ManagedClient.swift */,
+				B49CDBFA2433676600BFBBFB /* ManagedProject.swift */,
 				B49CDBF224323EF600BFBBFB /* ManagedTag.swift */,
 				3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */,
 			);
@@ -240,6 +243,7 @@
 				3430C4212423BDBD009CF454 /* Database.xcdatamodeld in Sources */,
 				3430C41E2423BD9F009CF454 /* Database.swift in Sources */,
 				3430C42B242402B7009CF454 /* ManagedTimeEntry.swift in Sources */,
+				B49CDBFB2433676600BFBBFB /* ManagedProject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
