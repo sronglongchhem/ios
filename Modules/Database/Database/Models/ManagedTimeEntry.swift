@@ -31,6 +31,10 @@ extension ManagedTimeEntry {
     }
 }
 
+extension ManagedTimeEntry: ManagedEntity {
+    static var entityName = String(describing: ManagedTimeEntry.self)
+}
+
 public protocol TimeEntriesDatabase {
     func getAll() throws -> [TimeEntryDAOProtocol]
     func getAllRunning() throws -> [TimeEntryDAOProtocol]
@@ -53,20 +57,20 @@ struct TimeEntries: TimeEntriesDatabase {
 
     // Query("SELECT * FROM TimeEntry WHERE NOT isDeleted")
     public func getAll() throws -> [TimeEntryDAOProtocol] {
-        let request = NSFetchRequest<ManagedTimeEntry>(entityName: String(describing: ManagedTimeEntry.self))
+        let request = ManagedTimeEntry.fetchRequest() as NSFetchRequest<ManagedTimeEntry>
         return try executeFetchRequest(request)
     }
 
     // Query("SELECT * FROM TimeEntry WHERE NOT isDeleted AND duration is null")
     public func getAllRunning() throws -> [TimeEntryDAOProtocol] {
-        let request = NSFetchRequest<ManagedTimeEntry>(entityName: String(describing: ManagedTimeEntry.self))
-        request.predicate = NSPredicate(format: "duration == nil")
+        let predicate = NSPredicate(format: "duration == nil")
+        let request = ManagedTimeEntry.fetchRequest(predicate: predicate)
         return try executeFetchRequest(request)
     }
 
     // Query("SELECT * FROM TimeEntry WHERE NOT isDeleted AND id = :id")
     public func getOne(id: Int64) throws -> TimeEntryDAOProtocol {
-        let request = generateFetchByIdRequest(id)
+        let request = ManagedTimeEntry.fetchRequest(id: id)
         return try executeFetchRequest(request).first!
     }
 
@@ -74,10 +78,7 @@ struct TimeEntries: TimeEntriesDatabase {
     public func insertAll(timeEntries: [TimeEntryDAOProtocol]) throws -> [Int] {
         let context = database.persistentContainer.viewContext
         let managedTimeEntries = try timeEntries.compactMap { timeEntry -> ManagedTimeEntry in
-            guard let managedTimeEntry = NSEntityDescription.insertNewObject(
-                forEntityName: String(describing: ManagedTimeEntry.self),
-                into: context)
-                as? ManagedTimeEntry else { throw SaveFailedError() }
+            let managedTimeEntry = try ManagedTimeEntry.insert(into: context)
             managedTimeEntry.fromDAO(timeEntryDAO: timeEntry)
             return managedTimeEntry
         }
@@ -88,10 +89,7 @@ struct TimeEntries: TimeEntriesDatabase {
     // Insert
     public func insert(timeEntry: TimeEntryDAOProtocol) throws -> Int {
         let context = database.persistentContainer.viewContext
-        guard let managedTimeEntry = NSEntityDescription.insertNewObject(
-            forEntityName: String(describing: ManagedTimeEntry.self),
-            into: context)
-            as? ManagedTimeEntry else { throw SaveFailedError() }
+        let managedTimeEntry = try ManagedTimeEntry.insert(into: context)
         managedTimeEntry.fromDAO(timeEntryDAO: timeEntry)
         let lastId = try getAll().last?.id ?? -1
         managedTimeEntry.id = Int64(lastId + 1)
@@ -102,7 +100,7 @@ struct TimeEntries: TimeEntriesDatabase {
     // Update
     public func update(timeEntry: TimeEntryDAOProtocol) throws {
         let context = database.persistentContainer.viewContext
-        let request = generateFetchByIdRequest(Int64(timeEntry.id))
+        let request = ManagedTimeEntry.fetchRequest(id: timeEntry.id)
         guard let managedTimeEntry = try context.fetch(request).first else { throw FetchFailedError() }
         managedTimeEntry.fromDAO(timeEntryDAO: timeEntry)
         try context.save()
@@ -121,15 +119,9 @@ struct TimeEntries: TimeEntriesDatabase {
     // Delete by id
     public func delete(id: Int64) throws {
         let context = database.persistentContainer.viewContext
-        let request = generateFetchByIdRequest(id)
+        let request = ManagedTimeEntry.fetchRequest(id: id)
         guard let managedTimeEntry = try context.fetch(request).first else { throw FetchFailedError() }
         context.delete(managedTimeEntry)
-    }
-
-    private func generateFetchByIdRequest(_ id: Int64) -> NSFetchRequest<ManagedTimeEntry> {
-        let request = NSFetchRequest<ManagedTimeEntry>(entityName: String(describing: ManagedTimeEntry.self))
-        request.predicate = NSPredicate(format: "id == %@", id)
-        return request
     }
 
     private func executeFetchRequest(_ request: NSFetchRequest<ManagedTimeEntry>) throws -> [TimeEntryDAOProtocol] {

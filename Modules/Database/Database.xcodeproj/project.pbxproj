@@ -14,6 +14,8 @@
 		3430C4212423BDBD009CF454 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3430C41F2423BDBD009CF454 /* Database.xcdatamodeld */; };
 		3430C42B242402B7009CF454 /* ManagedTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */; };
 		3430C42E242405FC009CF454 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C42D242405FC009CF454 /* Models.framework */; };
+		B49CDBF324323EF600BFBBFB /* ManagedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF224323EF600BFBBFB /* ManagedTag.swift */; };
+		B49CDBF5243243DE00BFBBFB /* ManagedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		3430C4202423BDBD009CF454 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimeEntry.swift; sourceTree = "<group>"; };
 		3430C42D242405FC009CF454 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49CDBF224323EF600BFBBFB /* ManagedTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTag.swift; sourceTree = "<group>"; };
+		B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 		3430C429242402A7009CF454 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */,
+				B49CDBF224323EF600BFBBFB /* ManagedTag.swift */,
 				3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */,
 			);
 			path = Models;
@@ -225,6 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49CDBF324323EF600BFBBFB /* ManagedTag.swift in Sources */,
+				B49CDBF5243243DE00BFBBFB /* ManagedEntity.swift in Sources */,
 				3430C4212423BDBD009CF454 /* Database.xcdatamodeld in Sources */,
 				3430C41E2423BD9F009CF454 /* Database.swift in Sources */,
 				3430C42B242402B7009CF454 /* ManagedTimeEntry.swift in Sources */,

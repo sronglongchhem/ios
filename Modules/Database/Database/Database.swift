@@ -14,6 +14,7 @@ public class Database {
     private let model = "Database"
     
     lazy public var timeEntries: TimeEntriesDatabase = TimeEntries(database: self)
+    lazy public var tags: TagsDatabase = Tags(database: self)
     
     public init() { }
 
