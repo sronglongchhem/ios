@@ -46,6 +46,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                         .subscribe(onNext: self?.store.dispatch)
                         .disposed(by: cell.disposeBag)
                     cell.hasTagsImageView.isHidden = item.tags?.isEmpty ?? true
+                    cell.isBillableImage.isHidden = item.billable
                     return cell
             })
             
