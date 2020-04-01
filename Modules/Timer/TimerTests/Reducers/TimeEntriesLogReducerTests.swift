@@ -8,11 +8,13 @@ import RxBlocking
 class TimeEntriesLogReducerTests: XCTestCase {
 
     var now = Date(timeIntervalSince1970: 987654321)
-    var mockRepository: MockTimeLogRepository = MockTimeLogRepository()
-    lazy var mockTime = { Time(getNow: { return self.now }) }()
+    var mockRepository: MockTimeLogRepository!
+    var mockTime: Time!
     var reducer: Reducer<TimeEntriesLogState, TimeEntriesLogAction>!
     
     override func setUp() {
+        mockTime = Time(getNow: { return self.now })
+        mockRepository = MockTimeLogRepository(time: mockTime)
         reducer = createTimeEntriesLogReducer(repository: mockRepository, time: mockTime)
     }
 

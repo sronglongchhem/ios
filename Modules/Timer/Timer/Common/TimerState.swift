@@ -3,9 +3,8 @@ import Models
 import Utils
 
 public struct LocalTimerState: Equatable {
-    internal var description: String = ""
-    internal var expandedGroups = Set<Int>()
-
+    internal var editableTimeEntry: EditableTimeEntry?
+    internal var expandedGroups: Set<Int> = Set<Int>()
     public init() {
     }
 }
@@ -42,13 +41,13 @@ extension TimerState {
             StartEditState(
                 user: user,
                 entities: entities,
-                description: localTimerState.description
+                editableTimeEntry: localTimerState.editableTimeEntry
             )
         }
         set {
             user = newValue.user
             entities = newValue.entities
-            localTimerState.description = newValue.description
+            localTimerState.editableTimeEntry = newValue.editableTimeEntry
         }
     }
 }

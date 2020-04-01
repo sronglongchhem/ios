@@ -5,5 +5,5 @@ import Utils
 public struct StartEditState {
     var user: Loadable<User>
     var entities: TimeLogEntities
-    var description: String
+    var editableTimeEntry: EditableTimeEntry?
 }

@@ -20,7 +20,7 @@ public class StartEditViewController: UIViewController, Storyboarded {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        store.select({ $0.description })
+        store.select({ $0.editableTimeEntry?.description ?? "" })
             .drive(descriptionField.rx.text)
             .disposed(by: disposeBag)
         

@@ -2,8 +2,10 @@ import Foundation
 import Repository
 import Models
 import RxSwift
+import OtherServices
 
 class MockTimeLogRepository: TimeLogRepository {
+    private let time: Time
     
     var stoppedTimeEntry: TimeEntry?
     var newTimeEntryId: Int64 = 999
@@ -15,7 +17,9 @@ class MockTimeLogRepository: TimeLogRepository {
     var tasks = [Task]()
     var tags = [Tag]()
     
-    init() {}
+    init(time: Time) {
+        self.time = time
+    }
     
     func getWorkspaces() -> Single<[Workspace]> {
         return Single.just(workspaces)
@@ -41,10 +45,15 @@ class MockTimeLogRepository: TimeLogRepository {
         return Single.just(tags)
     }
     
-    func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
-        var newTimeEntry = timeEntry
-        newTimeEntry.id = newTimeEntryId
-        return Single.just((newTimeEntry, stoppedTimeEntry))
+    func startTimeEntry(_ timeEntry: StartTimeEntryDto) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
+        let startedTimeEntry = TimeEntry(
+            id: newTimeEntryId,
+            description: timeEntry.description,
+            start: time.now(),
+            duration: nil,
+            billable: false,
+            workspaceId: timeEntry.workspaceId)
+        return Single.just((startedTimeEntry, stoppedTimeEntry))
     }
     
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {

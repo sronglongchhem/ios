@@ -71,11 +71,7 @@ private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int64
 }
 
 private func continueTimeEntry(_ repository: TimeLogRepository, time: Time, timeEntry: TimeEntry) -> Effect<TimeEntriesLogAction> {
-    var copy = timeEntry
-    copy.start = time.now()
-    copy.duration = nil
-
-    return repository.startTimeEntry(timeEntry: copy)
+    return repository.startTimeEntry(timeEntry.toStartTimeEntryDto())
         .toEffect(
             map: { TimeEntriesLogAction.timeEntryStarted($0, $1) },
             catch: { TimeEntriesLogAction.setError($0.toErrorType())}

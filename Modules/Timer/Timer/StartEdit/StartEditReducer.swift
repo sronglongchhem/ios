@@ -7,29 +7,24 @@ import OtherServices
 
 func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reducer<StartEditState, StartEditAction> {
     return Reducer {state, action in
-
+        
         switch action {
-
+            
         case let .descriptionEntered(description):
-            state.description = description
+            if state.editableTimeEntry != nil {
+                state.editableTimeEntry!.description = description
+            }
             return []
+            
         case .startTapped:
-            guard let defaultWorkspace = state.user.value?.defaultWorkspace else {
+            guard let defaultWorkspaceId = state.user.value?.defaultWorkspace else {
                 fatalError("No default workspace")
             }
-
-            let timeEntry = TimeEntry(
-                id: Int64(state.entities.timeEntries.count),
-                description: state.description,
-                start: time.now(),
-                duration: -1,
-                billable: false,
-                workspaceId: defaultWorkspace
-            )
-
-            state.description = ""
+          
+            state.editableTimeEntry = EditableTimeEntry.empty(workspaceId: defaultWorkspaceId)
+            
             return [
-                startTimeEntry(timeEntry, repository: repository)
+                startTimeEntry(state.editableTimeEntry!.toStartTimeEntryDto(), repository: repository)
             ]
             
         case let .timeEntryAdded(timeEntry):
@@ -42,6 +37,9 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
     }
 }
 
-func startTimeEntry(_ timeEntry: TimeEntry, repository: TimeLogRepository) -> Effect<StartEditAction> {
-    return Effect.empty
+func startTimeEntry(_ timeEntry: StartTimeEntryDto, repository: TimeLogRepository) -> Effect<StartEditAction> {
+    return repository
+        .startTimeEntry(timeEntry)
+        .toEffect(map: { (started, _) in StartEditAction.timeEntryAdded(started) },
+                  catch: { error in StartEditAction.setError(error.toErrorType()) })
 }

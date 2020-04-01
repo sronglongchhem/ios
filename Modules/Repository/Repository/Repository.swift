@@ -2,6 +2,7 @@ import Foundation
 import RxSwift
 import Models
 import API
+import OtherServices
 import Database
 
 public protocol TimeLogRepository {
@@ -11,7 +12,7 @@ public protocol TimeLogRepository {
     func getProjects() -> Single<[Project]>
     func getTasks() -> Single<[Task]>
     func getTags() -> Single<[Tag]>
-    func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
+    func startTimeEntry(_ timeEntry: StartTimeEntryDto) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void>
 }
 
@@ -24,11 +25,13 @@ public class Repository {
     private var tags = [Tag]()
     // ------------------------
     
+    private let time: Time
     private let api: TimelineAPI
     private let database: Database
-    
-    public init(api: TimelineAPI, database: Database) {
+  
+    public init(api: TimelineAPI, database: Database, time: Time) {
         self.api = api
+        self.time = time
         self.database = database
     }
 }
@@ -89,18 +92,24 @@ extension Repository: TimeLogRepository {
         return Single.just(tags)
     }
 
-    public func startTimeEntry(timeEntry: TimeEntry) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
+    public func startTimeEntry(_ timeEntry: StartTimeEntryDto) -> Single<(started: TimeEntry, stopped: TimeEntry?)> {
         do {
             let timeEntries = try database.timeEntries.getAllRunning()
             
             var stoppedTimeEntry: TimeEntry?
             if var runningEntryDAO = timeEntries.first {
-                runningEntryDAO.duration = NSNumber.fromDouble(timeEntry.start.timeIntervalSince(runningEntryDAO.start))
+                runningEntryDAO.duration = NSNumber.fromDouble(time.now().timeIntervalSince(runningEntryDAO.start))
                 try database.timeEntries.update(timeEntry: runningEntryDAO)
                 stoppedTimeEntry = runningEntryDAO.toTimeEntry()
             }
-
-            let newTimeEntry = timeEntry
+            
+            let newTimeEntry = TimeEntry(
+                id: (timeEntries.map({ $0.id }).max() ?? 0) + 1,
+                description: timeEntry.description,
+                start: time.now(),
+                duration: nil,
+                billable: false,
+                workspaceId: timeEntry.workspaceId)
             _ = try database.timeEntries.insert(timeEntry: newTimeEntry.toDAO())
             return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
         } catch let error {
