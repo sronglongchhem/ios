@@ -9,22 +9,22 @@ public struct TimeEntryViewModel: Equatable {
             && lhs.start == rhs.start && lhs.duration == rhs.duration
             && lhs.end == rhs.end && lhs.isRunning == rhs.isRunning //&& lhs.tags == rhs.tags
     }
-    
-    public var id: Int64
-    public var groupId: Int
-    public var description: String
-    public var projectTaskClient: String
-    public var billable: Bool
-    
-    public var start: Date
-    public var duration: TimeInterval?
-    public var durationString: String?
-    public var end: Date?
-    public var isRunning: Bool
-    
-    public var descriptionColor: UIColor
-    public var projectColor: UIColor
-    
+
+    public let id: Int64
+    public let groupId: Int
+    public let description: String
+    public let projectTaskClient: NSAttributedString
+    public let billable: Bool
+
+    public let start: Date
+    public let duration: TimeInterval?
+    public let durationString: String?
+    public let end: Date?
+    public let isRunning: Bool
+
+    public let descriptionColor: UIColor
+    public let projectColor: UIColor
+
     public let tags: [Tag]?
     
     public init(
@@ -37,15 +37,13 @@ public struct TimeEntryViewModel: Equatable {
         self.id = timeEntry.id
         self.groupId = timeEntry.groupId
         self.description = timeEntry.description.isEmpty ? "No description" : timeEntry.description
-        self.projectTaskClient = getProjectTaskClient(from: project, task: task, client: client)
+        self.projectTaskClient = attributedStringFrom(project: project, task: task, client: client)
         self.billable = timeEntry.billable
                 
         self.start = timeEntry.start
         self.duration = timeEntry.duration
-        if let duration = duration {
-            self.durationString = duration.formattedDuration(ending: Date())
-            self.end = timeEntry.start.addingTimeInterval(duration)
-        }
+        self.durationString = duration?.formattedDuration(ending: Date()) ?? nil
+        self.end = duration.map({ timeEntry.start.addingTimeInterval($0) }) ?? nil
         isRunning = duration == nil
         
         descriptionColor = timeEntry.description.isEmpty ? .lightGray : .darkGray
@@ -55,10 +53,22 @@ public struct TimeEntryViewModel: Equatable {
     }
 }
 
-func getProjectTaskClient(from project: Project?, task: Task?, client: Client?) -> String {
-    var value = ""
-    if let project = project { value.append(project.name) }
-    if let task = task { value.append(": " + task.name) }
-    if let client = client { value.append(" · " + client.name) }
-    return value
+private func attributedStringFrom(project: Project?, task: Task?, client: Client?) -> NSAttributedString {
+    let attributedString = NSMutableAttributedString()
+    if let project = project {
+        var string = project.name
+        if let task = task {
+            string += ": \(task.name)"
+        }
+        let part = NSAttributedString.init(string: project.name, attributes: [.foregroundColor: project.color])
+        attributedString.append(part)
+    }
+
+    if let client = client {
+        let string = " · \(client.name)"
+        let part = NSAttributedString.init(string: string, attributes: [.foregroundColor: UIColor.black])
+        attributedString.append(part)
+    }
+
+    return attributedString
 }

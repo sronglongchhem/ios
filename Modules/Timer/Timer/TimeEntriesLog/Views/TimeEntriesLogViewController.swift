@@ -41,7 +41,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                     cell.descriptionLabel.text = item.description
                     cell.descriptionLabel.textColor = item.descriptionColor
                     cell.projectClientTaskLabel.textColor = item.projectColor
-                    cell.projectClientTaskLabel.text = item.projectTaskClient
+                    cell.projectClientTaskLabel.attributedText = item.projectTaskClient
                     cell.durationLabel.text = item.durationString
                     cell.continueButton.rx.tap
                         .mapTo(TimeEntriesLogAction.continueButtonTapped(item.mainEntryId))

@@ -68,7 +68,7 @@ enum TimeLogCellViewModel: Equatable {
         }
     }
     
-    var projectTaskClient: String {
+    var projectTaskClient: NSAttributedString {
         return sample.projectTaskClient
     }
     
