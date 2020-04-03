@@ -5,6 +5,8 @@ import Utils
 public struct LocalTimerState: Equatable {
     internal var editableTimeEntry: EditableTimeEntry?
     internal var expandedGroups: Set<Int> = Set<Int>()
+    internal var entriesPendingDeletion = Set<Int64>()
+    
     public init() {
     }
 }

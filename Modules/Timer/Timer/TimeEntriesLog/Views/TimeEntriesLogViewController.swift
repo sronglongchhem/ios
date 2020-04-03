@@ -61,6 +61,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
             Driver.combineLatest(
                 store.select(timeEntryViewModelsSelector),
                 store.select(expandedGroupsSelector),
+                store.select(entriesPendingDeletionSelector),
                 resultSelector: toDaysMapper
             )
                 .drive(tableView.rx.items(dataSource: dataSource!))

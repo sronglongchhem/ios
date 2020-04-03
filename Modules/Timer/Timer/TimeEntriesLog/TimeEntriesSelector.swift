@@ -4,6 +4,10 @@ let expandedGroupsSelector: (TimeEntriesLogState) -> Set<Int> = { state in
     return state.expandedGroups
 }
 
+let entriesPendingDeletionSelector: (TimeEntriesLogState) -> Set<Int64> = { state in
+    return state.entriesPendingDeletion
+}
+
 let timeEntryViewModelsSelector: (TimeEntriesLogState) -> [TimeEntryViewModel] = { state in
     
     return state.entities.timeEntries.values
@@ -25,9 +29,10 @@ let timeEntryViewModelsSelector: (TimeEntriesLogState) -> [TimeEntryViewModel] =
         })
 }
 
-let toDaysMapper: ([TimeEntryViewModel], Set<Int>) -> [DayViewModel] = { timeEntries, expandedGroups in
+let toDaysMapper: ([TimeEntryViewModel], Set<Int>, Set<Int64>) -> [DayViewModel] = { timeEntries, expandedGroups, entriesPendingDeletion in
     
     return timeEntries
+        .filter({ !entriesPendingDeletion.contains($0.id) })
         .grouped(by: { $0.start.ignoreTimeComponents() })
         .map(groupTimeEntries(expandedGroups))
         .map(DayViewModel.init)
