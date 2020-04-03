@@ -29,6 +29,7 @@ project 'Modules/Networking/Networking.xcodeproj'
 project 'Modules/Onboarding/Onboarding.xcodeproj'
 project 'Modules/Timer/Timer.xcodeproj'
 project 'Modules/Repository/Repository.xcodeproj'
+project 'Modules/UIUtils/UIUtils.xcodeproj'
 project 'Modules/Utils/Utils.xcodeproj'
 
 target :App do
@@ -84,6 +85,13 @@ target :Repository do
     use_frameworks!
     project 'Modules/Repository/Repository.xcodeproj'
     rxswift
+end
+
+target :UIUtils do
+  use_frameworks!
+  project 'Modules/UIUtils/UIUtils.xcodeproj'
+  rxswift
+  rxcocoa
 end
 
 target :Utils do
