@@ -1,7 +1,7 @@
 import UIKit
 import Architecture
 
-public final class TimeEntriesLogCoordinator: BaseCoordinator {
+public final class TimeEntriesLogCoordinator: NavigationCoordinator {
     
     private var store: Store<TimeEntriesLogState, TimeEntriesLogAction>
     public init(store: Store<TimeEntriesLogState, TimeEntriesLogAction>) {
@@ -11,6 +11,7 @@ public final class TimeEntriesLogCoordinator: BaseCoordinator {
     public override func start() {
         let viewController = TimeEntriesLogViewController.instantiate()
         viewController.store = store
-        self.rootViewController = viewController
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

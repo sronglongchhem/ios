@@ -73,10 +73,6 @@ public class LoginViewController: UIViewController, Storyboarded {
         
         self.navigationController?.presentationController?.delegate = self
     }
-    
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 }
 
 extension LoginViewController: UIAdaptivePresentationControllerDelegate {

@@ -8,24 +8,16 @@ import Assets
 
 public class TimerViewController: UIViewController {
     public var startEditViewController: StartEditViewController!
-    public var timeLogViewController: TimeEntriesLogViewController!
+    public var timeLogViewController: UIViewController!
 
-    private var bottomSheet: BottomSheet!
+    private var bottomSheet: StartEditBottomSheet<StartEditViewController>!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Timer"
-        navigationController?.navigationBar.prefersLargeTitles = true
-
         install(timeLogViewController)
         
-        bottomSheet = BottomSheet(viewController: startEditViewController)
+        bottomSheet = StartEditBottomSheet(viewController: startEditViewController)
         install(bottomSheet, customConstraints: true)
-    }
-    
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        timeLogViewController.additionalSafeAreaInsets.bottom = bottomSheet.view.frame.height
     }
 }

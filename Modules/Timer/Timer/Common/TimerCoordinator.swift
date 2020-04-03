@@ -1,7 +1,7 @@
 import UIKit
 import Architecture
 
-public final class TimerCoordinator: NavigationCoordinator {
+public final class TimerCoordinator: BaseCoordinator {
     
     private var store: Store<TimerState, TimerAction>
     
@@ -18,8 +18,8 @@ public final class TimerCoordinator: NavigationCoordinator {
         timeLogCoordinator.start()
         startEditCoordinator.start()
         let viewController = TimerViewController()
-        viewController.timeLogViewController = timeLogCoordinator.rootViewController as? TimeEntriesLogViewController
+        viewController.timeLogViewController = timeLogCoordinator.rootViewController
         viewController.startEditViewController = startEditCoordinator.rootViewController as? StartEditViewController
-        navigationController.pushViewController(viewController, animated: true)
+        self.rootViewController = viewController        
     }
 }

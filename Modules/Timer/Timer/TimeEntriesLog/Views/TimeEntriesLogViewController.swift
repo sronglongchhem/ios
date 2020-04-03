@@ -23,6 +23,8 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.title = "Time Log"
         tableView.rowHeight = 72
     }
     
