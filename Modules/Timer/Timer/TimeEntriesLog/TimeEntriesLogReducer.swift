@@ -15,7 +15,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             return [
                 continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryId]!)
             ]
-            
+
         case let .timeEntrySwiped(direction, timeEntryId):
             switch direction {
             case .left:
@@ -23,10 +23,10 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryId]!)]
             }
-            
+
         case .timeEntryTapped:
             return []
-            
+
         case let .toggleTimeEntryGroupTapped(groupId):
             if state.expandedGroups.contains(groupId) {
                  state.expandedGroups.remove(groupId)
@@ -34,7 +34,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
                  state.expandedGroups.insert(groupId)
              }
              return []
-            
+
         case let .timeEntryGroupSwiped(direction, timeEntryIds):
             switch direction {
             case .left:
@@ -44,11 +44,11 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryIds.first!]!)]
             }
-            
+
         case let .timeEntryDeleted(timeEntryId):
             state.entities.timeEntries[timeEntryId] = nil
             return []
-            
+
         case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
             if let stoppedTimeEntry = stoppedTimeEntry {
                 state.entities.timeEntries[stoppedTimeEntry.id] = stoppedTimeEntry
@@ -56,7 +56,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             state.entities.timeEntries[startedTimeEntry.id] = startedTimeEntry
 
             return []
-            
+
         case let .setError(error):
             fatalError(error.description)
 
@@ -71,6 +71,10 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             return timeEntryIdsToDelete.sorted().map {
                 deleteTimeEntry(repository, timeEntryId: $0)
             }
+            
+        case .undoButtonTapped:
+            state.entriesPendingDeletion.removeAll()
+            return []
         }
     }
 }

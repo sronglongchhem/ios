@@ -11,7 +11,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
     var mockRepository: MockTimeLogRepository!
     var mockTime: Time!
     var reducer: Reducer<TimeEntriesLogState, TimeEntriesLogAction>!
-    
+
     override func setUp() {
         mockTime = Time(getNow: { return self.now })
         mockRepository = MockTimeLogRepository(time: mockTime)
@@ -19,18 +19,18 @@ class TimeEntriesLogReducerTests: XCTestCase {
     }
 
     func testContinueTappedHappyFlow() {
-        
+
         let timeEntries = createTimeEntries(now)
-        
+
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = nil
-        
+
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
         let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
-        
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
@@ -41,25 +41,25 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func testContinueTappedStoppingPreviousFlow() {
-        
+
         let timeEntries = createTimeEntries(now)
-                
+
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = nil
-        
+
         var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100
-        
+
         mockRepository.stoppedTimeEntry = expectedStoppedTimeEntry
-        
+
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
         let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
-        
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
@@ -71,17 +71,17 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func testTimeEntrySwipedLeftHappyFlow() {
-        
+
         let swipedTimeEntryId: Int64 = 0
-        
+
         let timeEntries = createTimeEntries(now)
 
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
         let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
-        
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
@@ -92,13 +92,13 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func testTimeEntrySwipedRightHappyFlow() {
-        
+
         let swipedTimeEntryId: Int64 = 0
-        
+
         let timeEntries = createTimeEntries(now)
-        
+
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
@@ -118,23 +118,23 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func testTimeEntrySwipedRightWithRunningEntry() {
-        
+
         let swipedTimeEntryId: Int64 = 0
-        
+
         let timeEntries = createTimeEntries(now)
-        
+
         var expectedNewTimeEntry = timeEntries[0]!
         expectedNewTimeEntry.id = mockRepository.newTimeEntryId
         expectedNewTimeEntry.start = now
         expectedNewTimeEntry.duration = nil
-        
+
         var expectedStoppedTimeEntry = timeEntries[1]!
         expectedStoppedTimeEntry.duration = 100
-        
+
         mockRepository.stoppedTimeEntry = expectedStoppedTimeEntry
-        
+
         var entities = TimeLogEntities()
         entities.timeEntries = timeEntries
         let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
@@ -150,11 +150,11 @@ class TimeEntriesLogReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func testTimeEntryTapped() {
-        
+
         let timeEntryTappedId: Int64 = 0
-        
+
         let timeEntries = createTimeEntries(now)
 
         var entities = TimeLogEntities()
@@ -167,6 +167,42 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps:
             Step(.send, .timeEntryTapped(timeEntryTappedId))
             // This tests this action does nothing for now. Fill the rest of the steps here
+        )
+    }
+
+    func testUndoButtonTappedWhenEntriesPendingDeletionHasValues() {
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [], entriesPendingDeletion: [0, 1])
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .undoButtonTapped) {
+                $0.entriesPendingDeletion.removeAll()
+            }
+        )
+    }
+
+    func testUndoButtonTappedWhenEntriesPendingDeletionHasNoValues() {
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [], entriesPendingDeletion: [])
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .undoButtonTapped) {
+                $0.entriesPendingDeletion.removeAll()
+            }
         )
     }
 
