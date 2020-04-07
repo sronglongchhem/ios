@@ -18,6 +18,8 @@ public enum TimeEntriesLogAction: Equatable {
     case timeEntryStarted(TimeEntry, TimeEntry?)
     
     case setError(ErrorType)
+
+    case commitDeletion(Set<Int64>)
 }
 
 extension TimeEntriesLogAction: CustomDebugStringConvertible {
@@ -48,6 +50,9 @@ extension TimeEntriesLogAction: CustomDebugStringConvertible {
             
         case let .setError(error):
             return "SetError: \(error)"
+
+        case let .commitDeletion(timeEntryIds):
+            return "CommitDeletion: \(timeEntryIds)"
         }
     }
 }

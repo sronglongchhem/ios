@@ -6,6 +6,7 @@ import Repository
 import OtherServices
 
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
 func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> Reducer<TimeEntriesLogState, TimeEntriesLogAction> {
     return Reducer { state, action in
         switch action {
@@ -58,6 +59,18 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
             
         case let .setError(error):
             fatalError(error.description)
+
+        case let .commitDeletion(timeEntryIds):
+            let timeEntryIdsToDelete = state.entriesPendingDeletion == timeEntryIds
+                ? timeEntryIds
+                : []
+
+            guard !timeEntryIdsToDelete.isEmpty else { return [] }
+
+            state.entriesPendingDeletion.removeAll()
+            return timeEntryIdsToDelete.sorted().map {
+                deleteTimeEntry(repository, timeEntryId: $0)
+            }
         }
     }
 }
