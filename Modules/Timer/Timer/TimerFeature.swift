@@ -35,3 +35,7 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
         )
     }
 }
+
+public struct TimerConstants {
+    static let timeEntryDeletionDelaySeconds: Int = 5
+}

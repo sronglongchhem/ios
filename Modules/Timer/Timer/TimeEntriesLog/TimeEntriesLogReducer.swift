@@ -19,7 +19,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
         case let .timeEntrySwiped(direction, timeEntryId):
             switch direction {
             case .left:
-                return [deleteTimeEntry(repository, timeEntryId: timeEntryId)]
+                return deleteWithUndo(timeEntryIds: [timeEntryId], state: &state, repository: repository)
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryId]!)]
             }
@@ -38,9 +38,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
         case let .timeEntryGroupSwiped(direction, timeEntryIds):
             switch direction {
             case .left:
-                return timeEntryIds.map {
-                    deleteTimeEntry(repository, timeEntryId: $0)
-                }
+                return deleteWithUndo(timeEntryIds: Set(timeEntryIds), state: &state, repository: repository)
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryIds.first!]!)]
             }
@@ -79,6 +77,26 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
     }
 }
 
+private func deleteWithUndo(
+    timeEntryIds: Set<Int64>,
+    state: inout TimeEntriesLogState,
+    repository: TimeLogRepository
+) -> [Effect<TimeEntriesLogAction>] {
+    let timeEntryIdsSet = timeEntryIds
+    if state.entriesPendingDeletion.isEmpty {
+        state.entriesPendingDeletion = timeEntryIdsSet
+        return [waitForUndoEffect(timeEntryIdsSet)]
+    } else {
+        let teIdsToDeleteImmediately = state.entriesPendingDeletion
+        state.entriesPendingDeletion = timeEntryIdsSet
+        var actions = teIdsToDeleteImmediately.sorted().map {
+            deleteTimeEntry(repository, timeEntryId: $0)
+        }
+        actions.append(waitForUndoEffect(timeEntryIdsSet))
+        return actions
+    }
+}
+
 private func deleteTimeEntry(_ repository: TimeLogRepository, timeEntryId: Int64) -> Effect<TimeEntriesLogAction> {
     repository.deleteTimeEntry(timeEntryId: timeEntryId)
         .toEffect(
@@ -93,4 +111,10 @@ private func continueTimeEntry(_ repository: TimeLogRepository, time: Time, time
             map: { TimeEntriesLogAction.timeEntryStarted($0, $1) },
             catch: { TimeEntriesLogAction.setError($0.toErrorType())}
     )
+}
+
+private func waitForUndoEffect(_ entriesToDelete: Set<Int64>) -> Effect<TimeEntriesLogAction> {
+    return Observable.just(TimeEntriesLogAction.commitDeletion(entriesToDelete))
+        .delay(RxTimeInterval.seconds(TimerConstants.timeEntryDeletionDelaySeconds), scheduler: MainScheduler.instance)
+        .toEffect()
 }

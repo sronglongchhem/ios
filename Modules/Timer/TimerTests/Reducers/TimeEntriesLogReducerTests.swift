@@ -5,6 +5,8 @@ import OtherServices
 import RxBlocking
 @testable import Timer
 
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class TimeEntriesLogReducerTests: XCTestCase {
 
     var now = Date(timeIntervalSince1970: 987654321)
@@ -72,7 +74,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         )
     }
 
-    func testTimeEntrySwipedLeftHappyFlow() {
+    func testTimeEntrySwipedLeftWhenNoOtherIdIsScheduledForDeletion() {
 
         let swipedTimeEntryId: Int64 = 0
 
@@ -86,9 +88,106 @@ class TimeEntriesLogReducerTests: XCTestCase {
             initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)),
+            Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)) {
+                $0.entriesPendingDeletion = [swipedTimeEntryId]
+            },
+            Step(.receive, .commitDeletion([swipedTimeEntryId])) {
+                $0.entriesPendingDeletion.removeAll()
+            },
             Step(.receive, .timeEntryDeleted(swipedTimeEntryId)) {
                 $0.entities.timeEntries[swipedTimeEntryId] = nil
+            }
+        )
+    }
+
+    func testTimeEntrySwipedLeftWhenOtherIdIsScheduledForDeletion() {
+
+        let swipedTimeEntryId: Int64 = 0
+        let waitingToBeDeletedId: Int64 = 1
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [], entriesPendingDeletion: [waitingToBeDeletedId])
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)) {
+                $0.entriesPendingDeletion = [swipedTimeEntryId]
+            },
+            Step(.receive, .timeEntryDeleted(waitingToBeDeletedId)) {
+                $0.entities.timeEntries[waitingToBeDeletedId] = nil
+            },
+            Step(.receive, .commitDeletion([swipedTimeEntryId])) {
+                $0.entriesPendingDeletion.removeAll()
+            },
+            Step(.receive, .timeEntryDeleted(swipedTimeEntryId)) {
+                $0.entities.timeEntries[swipedTimeEntryId] = nil
+            }
+        )
+    }
+
+    func testTimeEntrySwipedLeftGroupWhenNoOtherIdIsScheduledForDeletion() {
+
+        let swipedTimeEntryIds: Set<Int64> = [0, 1]
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntryGroupSwiped(.left, Array(swipedTimeEntryIds))) {
+                $0.entriesPendingDeletion = swipedTimeEntryIds
+            },
+            Step(.receive, .commitDeletion(swipedTimeEntryIds)) {
+                $0.entriesPendingDeletion.removeAll()
+            },
+            Step(.receive, .timeEntryDeleted(0)) {
+                $0.entities.timeEntries[0] = nil
+            },
+            Step(.receive, .timeEntryDeleted(1)) {
+                $0.entities.timeEntries[1] = nil
+            }
+        )
+    }
+
+    func testTimeEntrySwipedLeftGroupWhenOtherIdIsScheduledForDeletion() {
+
+        let swipedTimeEntryIds: Set<Int64> = [0, 1]
+        let waitingToBeDeletedId: Int64 = 2
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [], entriesPendingDeletion: [waitingToBeDeletedId])
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntryGroupSwiped(.left, Array(swipedTimeEntryIds))) {
+                $0.entriesPendingDeletion = swipedTimeEntryIds
+            },
+            Step(.receive, .timeEntryDeleted(waitingToBeDeletedId)) {
+                $0.entities.timeEntries[waitingToBeDeletedId] = nil
+            },
+            Step(.receive, .commitDeletion(swipedTimeEntryIds)) {
+                $0.entriesPendingDeletion.removeAll()
+            },
+            Step(.receive, .timeEntryDeleted(0)) {
+                $0.entities.timeEntries[0] = nil
+            },
+            Step(.receive, .timeEntryDeleted(1)) {
+                $0.entities.timeEntries[1] = nil
             }
         )
     }
