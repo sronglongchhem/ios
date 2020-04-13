@@ -2,6 +2,7 @@ disabled_rules: # rule identifiers to exclude from running
   - trailing_whitespace
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
+  - Templates
 
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level

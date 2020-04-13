@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Icon</key>
+	<string>TemplateIcon</string>
+	<key>Description</key>
+	<string>Simple View Contrller</string>
+	<key>Summary</key>
+	<string>ViewController files with boilerplate code</string>
+	<key>SortOrder</key>
+	<string>30</string>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.swift-source</string>
+	</array>
+	<key>DefaultCompletionName</key>
+	<string>Hit &quot;Create&quot; (don&apos;t change this text)</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>featureName</string>
+			<key>Required</key>
+			<true/>
+			<key>Name</key>
+			<string>Name (no need for &quot;ViewContrller&quot; at the end):</string>
+			<key>Description</key>
+			<string>The name of the View Controller</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Default</key>
+			<string>Reports</string>
+		</dict>
+	</array>
+</dict>
+</plist>
