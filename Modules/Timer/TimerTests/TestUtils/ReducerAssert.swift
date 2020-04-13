@@ -10,11 +10,25 @@ enum StepType {
 
 struct Step<State, Action> {
     let type: StepType
-    let action: Action
+    let actions: [Action]
     let update: (inout State) -> Void
     let file: StaticString
     let line: UInt
     
+    init(
+        _ type: StepType,
+        _ actions: [Action],
+        file: StaticString = #file,
+        line: UInt = #line,
+        _ update: @escaping (inout State ) -> Void = { _ in }
+    ) {
+        self.type = type
+        self.actions = actions
+        self.update = update
+        self.file = file
+        self.line = line
+    }
+
     init(
         _ type: StepType,
         _ action: Action,
@@ -22,11 +36,7 @@ struct Step<State, Action> {
         line: UInt = #line,
         _ update: @escaping (inout State ) -> Void = { _ in }
     ) {
-        self.type = type
-        self.action = action
-        self.update = update
-        self.file = file
-        self.line = line
+        self.init(type, [action], file: file, line: line, update)
     }
 }
 
@@ -48,7 +58,7 @@ func assertReducerFlow<State: Equatable, Action: Equatable>(
             if !effects.isEmpty {
                 XCTFail("Action sent before handling \(effects.count) pending effect(s)", file: step.file, line: step.line)
             }
-            let reducerEffects = reducer.reduce(&state, step.action)
+            let reducerEffects = step.actions.flatMap { reducer.reduce(&state, $0) }
             effects.append(contentsOf: reducerEffects)
             
         case .receive:
@@ -56,13 +66,12 @@ func assertReducerFlow<State: Equatable, Action: Equatable>(
                 XCTFail("No pending effects to receive from", file: step.file, line: step.line)
                 break
             }
-            let effect = effects.removeFirst()
-            guard let action = try? effect.asSingle().toBlocking().first() else {
-                XCTFail("No action emitted from effect", file: step.file, line: step.line)
-                break
-            }
-            XCTAssertEqual(action, step.action, file: step.file, line: step.line)
-            let reducerEffects = reducer.reduce(&state, action)
+
+            let actions = effects.compactMap { try? $0.asSingle().toBlocking().first() }
+            effects = []
+
+            XCTAssert(actions.equalContents(to: step.actions), file: step.file, line: step.line)
+            let reducerEffects = actions.flatMap { reducer.reduce(&state, $0) }
             effects.append(contentsOf: reducerEffects)
         }
         
@@ -72,5 +81,17 @@ func assertReducerFlow<State: Equatable, Action: Equatable>(
     
     if !effects.isEmpty {
         XCTFail("Assertion failed to handle \(effects.count) pending effect(s)", file: file, line: line)
+    }
+}
+
+extension Array where Element: Equatable {
+    func equalContents(to other: [Element]) -> Bool {
+        guard self.count == other.count else {return false}
+        for element in self {
+            guard self.filter({ $0 == element }).count == other.filter({ $0 == element }).count else {
+                return false
+            }
+        }
+        return true
     }
 }

@@ -118,10 +118,8 @@ class TimeEntriesLogReducerTests: XCTestCase {
             Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)) {
                 $0.entriesPendingDeletion = [swipedTimeEntryId]
             },
-            Step(.receive, .timeEntryDeleted(waitingToBeDeletedId)) {
+            Step(.receive, [.timeEntryDeleted(waitingToBeDeletedId), .commitDeletion([swipedTimeEntryId])]) {
                 $0.entities.timeEntries[waitingToBeDeletedId] = nil
-            },
-            Step(.receive, .commitDeletion([swipedTimeEntryId])) {
                 $0.entriesPendingDeletion.removeAll()
             },
             Step(.receive, .timeEntryDeleted(swipedTimeEntryId)) {
@@ -150,10 +148,8 @@ class TimeEntriesLogReducerTests: XCTestCase {
             Step(.receive, .commitDeletion(swipedTimeEntryIds)) {
                 $0.entriesPendingDeletion.removeAll()
             },
-            Step(.receive, .timeEntryDeleted(0)) {
+            Step(.receive, [.timeEntryDeleted(1), .timeEntryDeleted(0)]) {
                 $0.entities.timeEntries[0] = nil
-            },
-            Step(.receive, .timeEntryDeleted(1)) {
                 $0.entities.timeEntries[1] = nil
             }
         )
@@ -177,16 +173,12 @@ class TimeEntriesLogReducerTests: XCTestCase {
             Step(.send, .timeEntryGroupSwiped(.left, Array(swipedTimeEntryIds))) {
                 $0.entriesPendingDeletion = swipedTimeEntryIds
             },
-            Step(.receive, .timeEntryDeleted(waitingToBeDeletedId)) {
+            Step(.receive, [.timeEntryDeleted(waitingToBeDeletedId), .commitDeletion(swipedTimeEntryIds)]) {
                 $0.entities.timeEntries[waitingToBeDeletedId] = nil
-            },
-            Step(.receive, .commitDeletion(swipedTimeEntryIds)) {
                 $0.entriesPendingDeletion.removeAll()
             },
-            Step(.receive, .timeEntryDeleted(0)) {
+            Step(.receive, [.timeEntryDeleted(0), .timeEntryDeleted(1)]) {
                 $0.entities.timeEntries[0] = nil
-            },
-            Step(.receive, .timeEntryDeleted(1)) {
                 $0.entities.timeEntries[1] = nil
             }
         )
@@ -321,10 +313,8 @@ class TimeEntriesLogReducerTests: XCTestCase {
             steps: Step(.send, .commitDeletion(entriesToBeDeleted)) {
                 $0.entriesPendingDeletion = []
             },
-            Step(.receive, .timeEntryDeleted(0)) { (state) in
+            Step(.receive, [.timeEntryDeleted(0), .timeEntryDeleted(1)]) { (state) in
                 state.entities.timeEntries[0] = nil
-            },
-            Step(.receive, .timeEntryDeleted(1)) { (state) in
                 state.entities.timeEntries[1] = nil
             }
         )

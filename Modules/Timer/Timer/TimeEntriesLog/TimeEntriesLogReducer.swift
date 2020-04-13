@@ -89,7 +89,7 @@ private func deleteWithUndo(
     } else {
         let teIdsToDeleteImmediately = state.entriesPendingDeletion
         state.entriesPendingDeletion = timeEntryIdsSet
-        var actions = teIdsToDeleteImmediately.sorted().map {
+        var actions = teIdsToDeleteImmediately.map {
             deleteTimeEntry(repository, timeEntryId: $0)
         }
         actions.append(waitForUndoEffect(timeEntryIdsSet))
