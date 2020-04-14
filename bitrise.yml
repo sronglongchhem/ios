@@ -52,6 +52,17 @@ workflows:
         - project_path: "$BITRISE_PROJECT_PATH"
     - cocoapods-install@1.10.1: {}
     before_run: []
+  AppStore:
+    before_run:
+    - base
+    - dependencies
+    steps:
+    - xcode-archive@2: {}
+    - deploy-to-itunesconnect-deliver@2:
+        inputs:
+        - password: "$TOGGL_APPSTORE_UPLOADER_PASSWORD"
+        - app_id: '1500044755'
+        - itunescon_user: "$TOGGL_APPSTORE_UPLOADER_USER"
 app:
   envs:
   - opts:
