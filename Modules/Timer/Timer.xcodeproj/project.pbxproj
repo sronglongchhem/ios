@@ -46,6 +46,14 @@
 		8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D242412879200B6DF30 /* DayViewModel.swift */; };
 		8CB54533240E7DA100154473 /* TimeEntriesLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB54532240E7DA100154473 /* TimeEntriesLogViewController.swift */; };
 		8CB54535240EA67400154473 /* StartEditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB54534240EA67400154473 /* StartEditState.swift */; };
+		ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */; };
+		ACAA58272433A7ED003FDECA /* RunningTimeEntryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */; };
+		ACAA58282433A7ED003FDECA /* RunningTimeEntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */; };
+		ACAA58292433A7ED003FDECA /* RunningTimeEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58232433A7ED003FDECA /* RunningTimeEntryFeature.swift */; };
+		ACAA582A2433A7ED003FDECA /* RunningTimeEntryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58252433A7ED003FDECA /* RunningTimeEntryReducer.swift */; };
+		ACAA583024349F02003FDECA /* RunningTimeEntrySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA582F24349F02003FDECA /* RunningTimeEntrySelector.swift */; };
+		ACAA58322434A1EE003FDECA /* RunningTimeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58312434A1EE003FDECA /* RunningTimeEntryViewController.swift */; };
+		ACAA585D24378106003FDECA /* SimpleBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */; };
 		B4B4F0A324362F1400DFBF2E /* UIUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B4F0A224362F1400DFBF2E /* UIUtils.framework */; };
 		8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */; };
 		8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */; };
@@ -109,6 +117,14 @@
 		8C509D242412879200B6DF30 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		8CB54532240E7DA100154473 /* TimeEntriesLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntriesLogViewController.swift; sourceTree = "<group>"; };
 		8CB54534240EA67400154473 /* StartEditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditState.swift; sourceTree = "<group>"; };
+		ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryCoordinator.swift; sourceTree = "<group>"; };
+		ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryState.swift; sourceTree = "<group>"; };
+		ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryAction.swift; sourceTree = "<group>"; };
+		ACAA58232433A7ED003FDECA /* RunningTimeEntryFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryFeature.swift; sourceTree = "<group>"; };
+		ACAA58252433A7ED003FDECA /* RunningTimeEntryReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryReducer.swift; sourceTree = "<group>"; };
+		ACAA582F24349F02003FDECA /* RunningTimeEntrySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimeEntrySelector.swift; sourceTree = "<group>"; };
+		ACAA58312434A1EE003FDECA /* RunningTimeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryViewController.swift; sourceTree = "<group>"; };
+		ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBottomSheet.swift; sourceTree = "<group>"; };
 		B4B4F0A224362F1400DFBF2E /* UIUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditInputAccessoryView.swift; sourceTree = "<group>"; };
 		8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyLabelCell.swift; sourceTree = "<group>"; };
@@ -226,6 +242,7 @@
 				8C509D362413E2C000B6DF30 /* Common */,
 				8C509D342413E29300B6DF30 /* TimeEntriesLog */,
 				8C509D352413E29B00B6DF30 /* StartEdit */,
+				ACAA581F2433A7BC003FDECA /* RunningTimrEntry */,
 				8C2516C22403C1B000BAD4B5 /* Timer.h */,
 				8C2516C32403C1B000BAD4B5 /* Info.plist */,
 			);
@@ -297,6 +314,7 @@
 				51FF7C3B2429120500CC2002 /* EditableTimeEntry.swift */,
 				8C509D0D2412567900B6DF30 /* TimerAction.swift */,
 				8C509D1A241264A200B6DF30 /* TimerCoordinator.swift */,
+				ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -336,6 +354,28 @@
 				8C008FC324090C85000A0C32 /* StartEditViewController.swift */,
 				8C1F535A243487EC00D9F979 /* StartEditCellType.swift */,
 				8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ACAA581F2433A7BC003FDECA /* RunningTimrEntry */ = {
+			isa = PBXGroup;
+			children = (
+				ACAA58242433A7ED003FDECA /* Views */,
+				ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */,
+				ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */,
+				ACAA58232433A7ED003FDECA /* RunningTimeEntryFeature.swift */,
+				ACAA58252433A7ED003FDECA /* RunningTimeEntryReducer.swift */,
+				ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */,
+				ACAA582F24349F02003FDECA /* RunningTimeEntrySelector.swift */,
+			);
+			path = RunningTimrEntry;
+			sourceTree = "<group>";
+		};
+		ACAA58242433A7ED003FDECA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ACAA58312434A1EE003FDECA /* RunningTimeEntryViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -518,22 +558,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C25178B2403C27200BAD4B5 /* TimeEntriesLogState.swift in Sources */,
+				ACAA58292433A7ED003FDECA /* RunningTimeEntryFeature.swift in Sources */,
 				8C509D0A2412509F00B6DF30 /* TimerFeature.swift in Sources */,
+				ACAA583024349F02003FDECA /* RunningTimeEntrySelector.swift in Sources */,
 				8C1F53552434804500D9F979 /* StartEditBottomSheet.swift in Sources */,
 				8C25178A2403C27200BAD4B5 /* TimerViewController.swift in Sources */,
 				8C25178C2403C27200BAD4B5 /* TimeEntriesLogAction.swift in Sources */,
 				8C509D172412641600B6DF30 /* TimeEntriesLogFeature.swift in Sources */,
+				ACAA58272433A7ED003FDECA /* RunningTimeEntryState.swift in Sources */,
 				8CB54533240E7DA100154473 /* TimeEntriesLogViewController.swift in Sources */,
 				8C008FD22409407B000A0C32 /* StartEditReducer.swift in Sources */,
+				ACAA58282433A7ED003FDECA /* RunningTimeEntryAction.swift in Sources */,
 				8C25178D2403C27200BAD4B5 /* TimeEntriesLogReducer.swift in Sources */,
 				8C509D112412591E00B6DF30 /* TimeEntriesLogCoordinator.swift in Sources */,
 				8C4EDC57242902FF00C03E14 /* TimeLogCellViewModel.swift in Sources */,
 				8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */,
 				8C008FC424090C85000A0C32 /* StartEditViewController.swift in Sources */,
 				8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */,
+				ACAA582A2433A7ED003FDECA /* RunningTimeEntryReducer.swift in Sources */,
 				8C008FD024093FF8000A0C32 /* StartEditAction.swift in Sources */,
+				ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */,
 				8C509D232412876A00B6DF30 /* TimeEntryViewModel.swift in Sources */,
 				8CB54535240EA67400154473 /* StartEditState.swift in Sources */,
+				ACAA585D24378106003FDECA /* SimpleBottomSheet.swift in Sources */,
+				ACAA58322434A1EE003FDECA /* RunningTimeEntryViewController.swift in Sources */,
 				8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */,
 				8C2517892403C27200BAD4B5 /* TimeEntryCell.swift in Sources */,
 				8C509D202412874100B6DF30 /* TimeEntriesSelector.swift in Sources */,

@@ -4,6 +4,7 @@ import Models
 public enum TimerAction: Equatable {
     case timeLog(TimeEntriesLogAction)
     case startEdit(StartEditAction)
+    case runningTimeEntry(RunningTimeEntryAction)
 }
 
 extension TimerAction {
@@ -28,6 +29,17 @@ extension TimerAction {
             self = .startEdit(newValue)
         }
     }
+
+    var runningTimeEntry: RunningTimeEntryAction? {
+        get {
+            guard case let .runningTimeEntry(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .runningTimeEntry = self, let newValue = newValue else { return }
+            self = .runningTimeEntry(newValue)
+        }
+    }
 }
 
 extension TimerAction: CustomDebugStringConvertible {
@@ -39,6 +51,9 @@ extension TimerAction: CustomDebugStringConvertible {
             return action.debugDescription
             
         case let .startEdit(action):
+            return action.debugDescription
+
+        case let .runningTimeEntry(action):
             return action.debugDescription
         }
     }

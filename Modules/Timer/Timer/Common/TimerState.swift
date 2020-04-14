@@ -52,4 +52,15 @@ extension TimerState {
             localTimerState.editableTimeEntry = newValue.editableTimeEntry
         }
     }
+
+    internal var runningTimeEntryState: RunningTimeEntryState {
+        get {
+            RunningTimeEntryState(
+                entities: entities
+            )
+        }
+        set {
+            entities = newValue.entities
+        }
+    }
 }

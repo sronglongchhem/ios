@@ -8,7 +8,9 @@ public func createTimerReducer(repository: Repository, time: Time) -> Reducer<Ti
         createTimeEntriesLogReducer(repository: repository, time: time)
             .pullback(state: \.timeLogState, action: \.timeLog),
         createStartEditReducer(repository: repository, time: time)
-            .pullback(state: \.startEditState, action: \.startEdit)
+            .pullback(state: \.startEditState, action: \.startEdit),
+        createRunningTimeEntryReducer(repository: repository, time: time)
+            .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry)
     )
 }
 
@@ -24,6 +26,11 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
             .view { $0.view(
                 state: { $0.startEditState },
                 action: { TimerAction.startEdit($0) })
+        },
+        "runningTimeEntry": RunningTimeEntryFeature()
+            .view { $0.view(
+                state: { $0.runningTimeEntryState },
+                action: { TimerAction.runningTimeEntry($0) })
         }
     ]
 
@@ -31,7 +38,8 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
         return TimerCoordinator(
             store: store,
             timeLogCoordinator: (features["log"]!.mainCoordinator(store: store) as? TimeEntriesLogCoordinator)!,
-            startEditCoordinator: (features["startEdit"]!.mainCoordinator(store: store) as? StartEditCoordinator)!
+            startEditCoordinator: (features["startEdit"]!.mainCoordinator(store: store) as? StartEditCoordinator)!,
+            runningTimeEntryCoordinator: (features["runningTimeEntry"]!.mainCoordinator(store: store) as? RunningTimeEntryCoordinator)!
         )
     }
 }
