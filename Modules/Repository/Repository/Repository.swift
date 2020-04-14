@@ -13,6 +13,7 @@ public protocol TimeLogRepository {
     func getTasks() -> Single<[Task]>
     func getTags() -> Single<[Tag]>
     func startTimeEntry(_ timeEntry: StartTimeEntryDto) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
+    func updateTimeEntry(_ timeEntry: TimeEntry) -> Single<Void>
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void>
 }
 
@@ -115,6 +116,10 @@ extension Repository: TimeLogRepository {
         } catch let error {
             return Single.error(error)
         }
+    }
+    
+    public func updateTimeEntry(_ timeEntry: TimeEntry) -> Single<Void> {
+        return Single.just(())
     }
     
     public func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {

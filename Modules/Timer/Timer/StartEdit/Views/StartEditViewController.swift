@@ -21,7 +21,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var descriptionTextField: UITextField!
-    
+
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 
     public override var inputAccessoryView: UIView? { startEditInputAccessoryView }
@@ -67,11 +67,11 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .bind(to: tableView.rx.items(dataSource: dataSource!))
             .disposed(by: disposeBag)
     }
-    
+
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     public func dragged() {
         descriptionTextField.resignFirstResponder()
     }

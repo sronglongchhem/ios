@@ -55,7 +55,11 @@ class MockTimeLogRepository: TimeLogRepository {
             workspaceId: timeEntry.workspaceId)
         return Single.just((startedTimeEntry, stoppedTimeEntry))
     }
-    
+
+    func updateTimeEntry(_ timeEntry: TimeEntry) -> Single<Void> {
+        return Single.just(())
+    }
+
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
         return Single.just(())
     }

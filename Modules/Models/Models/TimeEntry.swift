@@ -79,3 +79,15 @@ extension TimeEntry: Codable {
         try container.encode(createdWith, forKey: .createdWith)
     }
 }
+
+public extension TimeEntry {
+    func with(description: String? = nil, billable: Bool? = nil) -> TimeEntry {
+        return TimeEntry(
+            id: self.id,
+            description: description ?? self.description,
+            start: self.start,
+            duration: self.duration,
+            billable: billable ?? self.billable,
+            workspaceId: self.workspaceId)
+    }
+}

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		51A7DFFE242B9A0B0015B02C /* StartTimeEntryDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */; };
 		3430C4262423BF10009CF454 /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C4252423BF10009CF454 /* Database.framework */; };
 		34348ABF242CD3F700B7B006 /* TimeEntryDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */; };
+		51A7DFFE242B9A0B0015B02C /* StartTimeEntryDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */; };
 		8C2516ED2403C1E200BAD4B5 /* Repository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2516E32403C1E200BAD4B5 /* Repository.framework */; };
 		8C2516F22403C1E200BAD4B5 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2516F12403C1E200BAD4B5 /* RepositoryTests.swift */; };
 		8C2516F42403C1E200BAD4B5 /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2516E62403C1E200BAD4B5 /* Repository.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,9 +30,9 @@
 
 /* Begin PBXFileReference section */
 		1635ECD25702805E7A912F1F /* Pods-Repository.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Repository.release.xcconfig"; path = "Target Support Files/Pods-Repository/Pods-Repository.release.xcconfig"; sourceTree = "<group>"; };
-		51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTimeEntryDto.swift; sourceTree = "<group>"; };
 		3430C4252423BF10009CF454 /* Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryDAO.swift; sourceTree = "<group>"; };
+		51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTimeEntryDto.swift; sourceTree = "<group>"; };
 		8C2516E32403C1E200BAD4B5 /* Repository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Repository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2516E62403C1E200BAD4B5 /* Repository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
 		8C2516E72403C1E200BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +70,7 @@
 		34348ABD242CD3E400B7B006 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */,
 				34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */,
 			);
 			path = Models;
@@ -98,7 +99,6 @@
 		8C2516E52403C1E200BAD4B5 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */,
 				34348ABD242CD3E400B7B006 /* Models */,
 				8C25179B2403C29F00BAD4B5 /* Repository.swift */,
 				8C2516E62403C1E200BAD4B5 /* Repository.h */,

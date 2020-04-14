@@ -16,23 +16,39 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             }
             return []
             
-        case .startTapped:
-            guard let defaultWorkspaceId = state.user.value?.defaultWorkspace else {
-                fatalError("No default workspace")
-            }
-          
-            state.editableTimeEntry = EditableTimeEntry.empty(workspaceId: defaultWorkspaceId)
-            
-            return [
-                startTimeEntry(state.editableTimeEntry!.toStartTimeEntryDto(), repository: repository)
-            ]
-            
-        case let .timeEntryAdded(timeEntry):
-            state.entities.timeEntries[timeEntry.id] = timeEntry
-            return []
-            
         case let .setError(error):
             fatalError(error.description)
+            
+        case .doneButtonTapped:
+            let editableTimeEntry = state.editableTimeEntry!
+            state.editableTimeEntry = nil
+            let shouldStartNewTimeEntry = editableTimeEntry.ids.isEmpty
+            if shouldStartNewTimeEntry {
+                return [startTimeEntry(editableTimeEntry.toStartTimeEntryDto(), repository: repository)]
+            }
+
+            let updatedTimeEnries = editableTimeEntry.ids
+                .map { state.entities.getTimeEntry($0) }
+                .filter { $0 != nil }
+                .map { $0!.with(
+                    description: editableTimeEntry.description,
+                    billable: editableTimeEntry.billable) }
+
+            persistUpdatedTimeEntries(updatedTimeEnries)
+            return []
+            
+        case let .timeEntryUpdated(timeEntry):
+            state.entities.timeEntries[timeEntry.id] = timeEntry
+            state.editableTimeEntry = nil
+            return []
+            
+        case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
+            state.editableTimeEntry = nil
+            state.entities.timeEntries[startedTimeEntry.id] = startedTimeEntry
+            if let stoppedTimeEntry = stoppedTimeEntry {
+                state.entities.timeEntries[stoppedTimeEntry.id] = stoppedTimeEntry
+            }
+            return []
         }
     }
 }
@@ -40,6 +56,10 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
 func startTimeEntry(_ timeEntry: StartTimeEntryDto, repository: TimeLogRepository) -> Effect<StartEditAction> {
     return repository
         .startTimeEntry(timeEntry)
-        .toEffect(map: { (started, _) in StartEditAction.timeEntryAdded(started) },
+        .toEffect(map: StartEditAction.timeEntryStarted ,
                   catch: { error in StartEditAction.setError(error.toErrorType()) })
+}
+
+func persistUpdatedTimeEntries(_ timeEntries: [TimeEntry]) {
+    //repository.update()
 }
