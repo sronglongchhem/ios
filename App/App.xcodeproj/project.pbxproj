@@ -171,6 +171,7 @@
 				8C2515B62403C0BC00BAD4B5 /* Resources */,
 				8C2518162403C59F00BAD4B5 /* Embed Frameworks */,
 				8C1B1F26244585870098EB3B /* Set Build Number */,
+				AC1183A424462A4A008B2078 /* Setup templates */,
 			);
 			buildRules = (
 			);
@@ -292,6 +293,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint lint --path \"$SRCROOT\"/..\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		AC1183A424462A4A008B2078 /* Setup templates */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup templates";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p ~/Library/Developer/Xcode/Templates/\nln -sf \"$PROJECT_DIR\"/../Templates/Toggl\\ Aurora ~/Library/Developer/Xcode/Templates/\n";
 		};
 		E90F329F2553038312FC049E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
