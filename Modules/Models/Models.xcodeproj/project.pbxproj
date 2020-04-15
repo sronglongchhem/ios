@@ -21,6 +21,7 @@
 		8C38E2422419008400C9E053 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38E2412419008400C9E053 /* Loadable.swift */; };
 		8C5A8C95241A8EC5003DC3D0 /* TimeLogEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5A8C94241A8EC5003DC3D0 /* TimeLogEntities.swift */; };
 		8CB5452C240D6F5B00154473 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5452B240D6F5B00154473 /* Entity.swift */; };
+		ACCFF3E32444A61F0056CEF4 /* AutocompleteSuggestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCFF3E22444A61F0056CEF4 /* AutocompleteSuggestionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		8C38E2412419008400C9E053 /* Loadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		8C5A8C94241A8EC5003DC3D0 /* TimeLogEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogEntities.swift; sourceTree = "<group>"; };
 		8CB5452B240D6F5B00154473 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		ACCFF3E22444A61F0056CEF4 /* AutocompleteSuggestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSuggestionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				8C38E2412419008400C9E053 /* Loadable.swift */,
 				8C2130C02424B297000FC72C /* ErrorType.swift */,
+				ACCFF3E22444A61F0056CEF4 /* AutocompleteSuggestionType.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				8C2130C12424B297000FC72C /* ErrorType.swift in Sources */,
 				8C25187B2403C62E00BAD4B5 /* Project.swift in Sources */,
 				8C2518752403C62E00BAD4B5 /* TimeEntry.swift in Sources */,
+				ACCFF3E32444A61F0056CEF4 /* AutocompleteSuggestionType.swift in Sources */,
 				8C5A8C95241A8EC5003DC3D0 /* TimeLogEntities.swift in Sources */,
 				8C38E2422419008400C9E053 /* Loadable.swift in Sources */,
 			);
