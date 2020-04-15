@@ -1,5 +1,6 @@
 import UIKit
 import Utils
+import UIUtils
 import Assets
 import Architecture
 import RxCocoa
@@ -9,6 +10,7 @@ import Models
 
 public typealias TimeEntriesLogStore = Store<TimeEntriesLogState, TimeEntriesLogAction>
 
+// swiftlint:disable function_body_length
 public class TimeEntriesLogViewController: UIViewController, Storyboarded {
     
     public static var storyboardName = "Timer"
@@ -18,6 +20,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
     
     private var disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedAnimatedDataSource<DayViewModel>!
+    private var snackbar: Snackbar?
 
     public var store: TimeEntriesLogStore!
 
@@ -74,7 +77,28 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
             
             tableView.rx.setDelegate(self)
                 .disposed(by: disposeBag)
+
+            store.select(entriesPendingDeletionSelector)
+                .map { [weak self] setOfIds -> Snackbar? in
+                    self?.snackbar?.dismiss()
+                    if setOfIds.count > 0 {
+                        self?.snackbar = self?.createSnackbar(for: setOfIds)
+                    }
+                    return self?.snackbar
+                }
+                .drive(onNext: { $0?.show(in: self) })
+                .disposed(by: disposeBag)
         }
+    }
+
+    private func createSnackbar(for setOfIds: Set<Int64>) -> Snackbar {
+        return Snackbar.with(
+            text: setOfIds.count > 1
+                ? String(format: NSLocalizedString("%d time entries deleted", comment: ""), setOfIds.count)
+                : NSLocalizedString("Time entry was deleted", comment: ""),
+            buttonTitle: NSLocalizedString("UNDO", comment: ""),
+            store: store,
+            action: .undoButtonTapped)
     }
 }
 

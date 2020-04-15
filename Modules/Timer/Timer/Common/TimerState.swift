@@ -29,12 +29,14 @@ extension TimerState {
         get {
             TimeEntriesLogState(
                 entities: entities,
-                expandedGroups: localTimerState.expandedGroups
+                expandedGroups: localTimerState.expandedGroups,
+                entriesPendingDeletion: localTimerState.entriesPendingDeletion
             )
         }
         set {
             entities = newValue.entities
             localTimerState.expandedGroups = newValue.expandedGroups
+            localTimerState.entriesPendingDeletion = newValue.entriesPendingDeletion
         }
     }
     

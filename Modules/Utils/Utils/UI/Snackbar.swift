@@ -60,15 +60,17 @@ public final class Snackbar: UIView {
 
     // MARK: Snackbar's lifecycle
 
-    public func show(in viewController: UIViewController, duration: TimeInterval) {
+    public func show(in viewController: UIViewController, duration: TimeInterval? = nil) {
         // Dismiss any presented Snackbar
         if let shared = Snackbar.shared {
             shared.dismiss()
         }
         Snackbar.shared = self
 
-        // Self-destroy after the duration
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: self.destroy)
+        if let duration = duration {
+            // Self-destroy after the duration
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: self.destroy)
+        }
 
         // Adds itself to the ViewController's view and sets contraints
         viewController.view.addSubview(self)
