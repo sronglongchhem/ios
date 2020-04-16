@@ -6,6 +6,7 @@ public struct LocalTimerState: Equatable {
     internal var editableTimeEntry: EditableTimeEntry?
     internal var expandedGroups: Set<Int> = Set<Int>()
     internal var entriesPendingDeletion = Set<Int64>()
+    internal var autocompleteSuggestions: [AutocompleteSuggestionType] = []
     
     public init() {
     }
@@ -45,13 +46,15 @@ extension TimerState {
             StartEditState(
                 user: user,
                 entities: entities,
-                editableTimeEntry: localTimerState.editableTimeEntry
+                editableTimeEntry: localTimerState.editableTimeEntry,
+                autocompleteSuggestions: localTimerState.autocompleteSuggestions
             )
         }
         set {
             user = newValue.user
             entities = newValue.entities
             localTimerState.editableTimeEntry = newValue.editableTimeEntry
+            localTimerState.autocompleteSuggestions = newValue.autocompleteSuggestions
         }
     }
 

@@ -49,6 +49,10 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
                 state.entities.timeEntries[stoppedTimeEntry.id] = stoppedTimeEntry
             }
             return []
+
+        case let .autocompleteSuggestionsUpdated(suggestions):
+            state.autocompleteSuggestions = suggestions
+            return []
         }
     }
 }

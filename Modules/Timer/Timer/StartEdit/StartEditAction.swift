@@ -7,6 +7,7 @@ public enum StartEditAction: Equatable {
     case timeEntryStarted(startedTimeEntry: TimeEntry, stoppedTimeEntry: TimeEntry?)
     case timeEntryUpdated(TimeEntry)
     case setError(ErrorType)
+    case autocompleteSuggestionsUpdated([AutocompleteSuggestionType])
 }
 
 extension StartEditAction: CustomDebugStringConvertible {
@@ -28,6 +29,9 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case let .setError(error):
             return "SetError: \(error)"
+
+        case let .autocompleteSuggestionsUpdated(suggestions):
+            return "AutocompleteSuggestionsUpdated \(suggestions)"
         }
     }
 }

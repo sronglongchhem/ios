@@ -27,7 +27,8 @@ class StartEditReducerTests: XCTestCase {
         let initialState = StartEditState(
             user: Loadable.loaded(user),
             entities: entities,
-            editableTimeEntry: editableTimeEntry)
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [])
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
@@ -65,7 +66,8 @@ class StartEditReducerTests: XCTestCase {
         let initialState = StartEditState(
             user: Loadable.loaded(user),
             entities: entities,
-            editableTimeEntry: editableTimeEntry)
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [])
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
@@ -94,7 +96,8 @@ class StartEditReducerTests: XCTestCase {
         let initialState = StartEditState(
             user: Loadable.loaded(user),
             entities: entities,
-            editableTimeEntry: editableTimeEntry)
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [])
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
@@ -124,6 +127,29 @@ class StartEditReducerTests: XCTestCase {
             Step(.receive, StartEditAction.timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: nil)) {
                 $0.editableTimeEntry = nil
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
+            })
+    }
+
+    func testAutocompleteSuggestionsUpdatedUpdatesState() {
+        let entities = TimeLogEntities()
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: user.defaultWorkspace)
+        let initialState = StartEditState(
+            user: Loadable.loaded(user),
+            entities: entities,
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [])
+
+        let autocompleteSuggestions: [AutocompleteSuggestionType] = [
+            .timeEntrySuggestion(timeEntry: TimeEntry.with(id: 0, start: now.addingTimeInterval(-300), duration: 100)),
+            .timeEntrySuggestion(timeEntry: TimeEntry.with(id: 1, start: now.addingTimeInterval(-200), duration: 100))
+        ]
+
+        assertReducerFlow(
+            initialState: initialState,
+            reducer: reducer,
+            steps:
+            Step(.send, StartEditAction.autocompleteSuggestionsUpdated(autocompleteSuggestions)) {
+                $0.autocompleteSuggestions = autocompleteSuggestions
             })
     }
 }
