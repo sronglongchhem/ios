@@ -34,6 +34,14 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
         store.select(runningTimeEntryViewModelSelector)
             .drive(onNext: updateUI)
             .disposed(by: disposeBag)
+
+        let tapGesture = UITapGestureRecognizer()
+        view.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event
+            .mapTo(RunningTimeEntryAction.cardTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
     }
 
     private func updateUI(runningTimeEntry: TimeEntryViewModel?) {

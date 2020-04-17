@@ -5,6 +5,7 @@ import RxSwift
 import Repository
 import OtherServices
 
+// swiftlint:disable cyclomatic_complexity
 func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reducer<StartEditState, StartEditAction> {
     return Reducer {state, action in
         
@@ -15,13 +16,17 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
                 state.editableTimeEntry!.description = description
             }
             return []
-            
-        case let .setError(error):
-            fatalError(error.description)
-            
+
+        case .closeButtonTapped:
+            state.editableTimeEntry = nil
+            return []
+
+        case .dialogDismissed:
+            state.editableTimeEntry = nil
+            return []
+
         case .doneButtonTapped:
             let editableTimeEntry = state.editableTimeEntry!
-            state.editableTimeEntry = nil
             let shouldStartNewTimeEntry = editableTimeEntry.ids.isEmpty
             if shouldStartNewTimeEntry {
                 return [startTimeEntry(editableTimeEntry.toStartTimeEntryDto(), repository: repository)]
@@ -36,12 +41,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
 
             persistUpdatedTimeEntries(updatedTimeEnries)
             return []
-            
-        case let .timeEntryUpdated(timeEntry):
-            state.entities.timeEntries[timeEntry.id] = timeEntry
-            state.editableTimeEntry = nil
-            return []
-            
+
         case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
             state.editableTimeEntry = nil
             state.entities.timeEntries[startedTimeEntry.id] = startedTimeEntry
@@ -50,9 +50,17 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             }
             return []
 
+        case let .timeEntryUpdated(timeEntry):
+            state.entities.timeEntries[timeEntry.id] = timeEntry
+            state.editableTimeEntry = nil
+            return []
+
         case let .autocompleteSuggestionsUpdated(suggestions):
             state.autocompleteSuggestions = suggestions
             return []
+
+        case let .setError(error):
+            fatalError(error.description)
         }
     }
 }

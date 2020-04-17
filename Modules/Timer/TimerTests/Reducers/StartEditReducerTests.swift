@@ -2,69 +2,131 @@ import XCTest
 import Architecture
 import Models
 import OtherServices
-import RxBlocking
 @testable import Timer
 
 class StartEditReducerTests: XCTestCase {
-    let defaultWorkspaceId: Int64 = 10
-
     var now = Date(timeIntervalSince1970: 987654321)
     var mockRepository: MockTimeLogRepository!
     var mockTime: Time!
+    var mockUser: User!
     var reducer: Reducer<StartEditState, StartEditAction>!
-    var user: User!
 
     override func setUp() {
         mockTime = Time(getNow: { return self.now })
         mockRepository = MockTimeLogRepository(time: mockTime)
+        mockUser = User(id: 0, apiToken: "token", defaultWorkspace: 0)
+
         reducer = createStartEditReducer(repository: mockRepository, time: mockTime)
-        user = User(id: 1, apiToken: "SECRET", defaultWorkspace: defaultWorkspaceId)
     }
 
-    func testPressingTheDoneButtonWhenEditableEntryIsEmpty() {
-        let entities = TimeLogEntities()
-        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: user.defaultWorkspace)
-        let initialState = StartEditState(
-            user: Loadable.loaded(user),
-            entities: entities,
+    func testDescriptionEntered() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        let expectedDescription = "whatever"
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .descriptionEntered(expectedDescription)) {
+                $0.editableTimeEntry?.description = expectedDescription
+            }
+        )
+    }
+
+    func testCloseButtonTapped() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .closeButtonTapped) {
+                $0.editableTimeEntry = nil
+            }
+        )
+    }
+
+    func testDialogDismissed() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dialogDismissed) {
+                $0.editableTimeEntry = nil
+            }
+        )
+    }
+
+    func testDoneButtonTappedWhenTheresNoRunningEntry() {
+
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
             editableTimeEntry: editableTimeEntry,
-            autocompleteSuggestions: [])
+            autocompleteSuggestions: []
+        )
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
             description: editableTimeEntry.description,
             start: mockTime.now(),
             duration: nil,
-            billable: false,
-            workspaceId: editableTimeEntry.workspaceId)
+            billable: editableTimeEntry.billable,
+            workspaceId: mockUser.defaultWorkspace
+        )
 
         assertReducerFlow(
-            initialState: initialState,
+            initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, StartEditAction.doneButtonTapped) {
-                $0.editableTimeEntry = nil
-            },
-            Step(.receive, StartEditAction.timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: nil)) {
+            Step(.send, .doneButtonTapped),
+            Step(.receive, .timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: nil)) {
                 $0.editableTimeEntry = nil
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
-            })
+            }
+        )
     }
 
-    func testPressingTheDoneButtonWhenEditableEntryIsEmptyAndAnEntryIsAlreadyRunning() {
-        var entities = TimeLogEntities()
+    func testDoneButtonTappedWhenTheresARunningEntry() {
+
         let runningTimeEntry = TimeEntry(
             id: 100,
             description: "Doing stuff",
             start: now.addingTimeInterval(-90),
             duration: nil,
             billable: false,
-            workspaceId: user.defaultWorkspace)
+            workspaceId: mockUser.defaultWorkspace
+        )
+
+        var entities = TimeLogEntities()
         entities.timeEntries[runningTimeEntry.id] = runningTimeEntry
         mockRepository.stoppedTimeEntry = runningTimeEntry
-        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: user.defaultWorkspace)
-        let initialState = StartEditState(
-            user: Loadable.loaded(user),
+
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [])
@@ -78,23 +140,21 @@ class StartEditReducerTests: XCTestCase {
             workspaceId: editableTimeEntry.workspaceId)
 
         assertReducerFlow(
-            initialState: initialState,
+            initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, StartEditAction.doneButtonTapped) {
-                $0.editableTimeEntry = nil
-            },
+            Step(.send, StartEditAction.doneButtonTapped),
             Step(.receive, StartEditAction.timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: runningTimeEntry)) {
                 $0.editableTimeEntry = nil
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
-            })
+        })
     }
 
     func testEnteringDescriptionAndThenPressingDone() {
         let entities = TimeLogEntities()
-        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: user.defaultWorkspace)
-        let initialState = StartEditState(
-            user: Loadable.loaded(user),
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [])
@@ -107,13 +167,8 @@ class StartEditReducerTests: XCTestCase {
             billable: false,
             workspaceId: editableTimeEntry.workspaceId)
 
-        func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
-            return Step(.send, StartEditAction.descriptionEntered(description)) {
-                    $0.editableTimeEntry!.description = description
-            }
-        }
         assertReducerFlow(
-            initialState: initialState,
+            initialState: state,
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "h"),
@@ -121,20 +176,18 @@ class StartEditReducerTests: XCTestCase {
             descriptionEnteredStep(for: "hel"),
             descriptionEnteredStep(for: "hell"),
             descriptionEnteredStep(for: "hello"),
-            Step(.send, StartEditAction.doneButtonTapped) {
-                $0.editableTimeEntry = nil
-            },
+            Step(.send, StartEditAction.doneButtonTapped),
             Step(.receive, StartEditAction.timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: nil)) {
                 $0.editableTimeEntry = nil
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
-            })
+        })
     }
 
     func testAutocompleteSuggestionsUpdatedUpdatesState() {
         let entities = TimeLogEntities()
-        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: user.defaultWorkspace)
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
         let initialState = StartEditState(
-            user: Loadable.loaded(user),
+            user: Loadable.loaded(mockUser),
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [])
@@ -151,5 +204,11 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, StartEditAction.autocompleteSuggestionsUpdated(autocompleteSuggestions)) {
                 $0.autocompleteSuggestions = autocompleteSuggestions
             })
+    }
+
+    private func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
+        return Step(.send, StartEditAction.descriptionEntered(description)) {
+            $0.editableTimeEntry!.description = description
+        }
     }
 }

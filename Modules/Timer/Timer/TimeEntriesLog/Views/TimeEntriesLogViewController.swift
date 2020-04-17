@@ -70,8 +70,8 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
                 .drive(tableView.rx.items(dataSource: dataSource!))
                 .disposed(by: disposeBag)
             
-            tableView.rx.modelSelected(TimeEntryViewModel.self)
-                .map({ timeEntry in TimeEntriesLogAction.timeEntryTapped(timeEntry.id) })
+            tableView.rx.modelSelected(TimeLogCellViewModel.self)
+                .map { $0.tappedAction }
                 .subscribe(onNext: store.dispatch)
                 .disposed(by: disposeBag)
             
@@ -107,7 +107,7 @@ extension TimeEntriesLogViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Continue") { _, _, _ in
             let timeLogCellViewModel = self.dataSource.sectionModels[indexPath.section].items[indexPath.item]
-            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.right, timeLogCellViewModel.mainEntryId))
+            self.store.dispatch(timeLogCellViewModel.swipedAction(direction: .right))
         }
         action.backgroundColor = .green
         return UISwipeActionsConfiguration(actions: [action])
@@ -116,9 +116,29 @@ extension TimeEntriesLogViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             let timeLogCellViewModel = self.dataSource.sectionModels[indexPath.section].items[indexPath.item]
-            self.store.dispatch(TimeEntriesLogAction.timeEntrySwiped(.left, timeLogCellViewModel.mainEntryId))
+            self.store.dispatch(timeLogCellViewModel.swipedAction(direction: .left))
         }
         return UISwipeActionsConfiguration(actions: [action])
+    }
+}
+
+extension TimeLogCellViewModel {
+    var tappedAction: TimeEntriesLogAction {
+        switch self {
+        case let .singleEntry(timeEntry, inGroup: _):
+            return TimeEntriesLogAction.timeEntryTapped(timeEntry.id)
+        case let .groupedEntriesHeader(timeEntries, open: _):
+            return TimeEntriesLogAction.timeEntryGroupTapped(timeEntries.map { $0.id })
+        }
+    }
+
+    func swipedAction(direction: SwipeDirection) -> TimeEntriesLogAction {
+        switch self {
+        case let .singleEntry(timeEntry, inGroup: _):
+            return TimeEntriesLogAction.timeEntrySwiped(direction, timeEntry.id)
+        case let .groupedEntriesHeader(timeEntries, open: _):
+            return TimeEntriesLogAction.timeEntryGroupSwiped(direction, timeEntries.map { $0.id })
+        }
     }
 }
 

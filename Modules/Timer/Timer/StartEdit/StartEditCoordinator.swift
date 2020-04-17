@@ -9,8 +9,12 @@ public final class StartEditCoordinator: BaseCoordinator {
     }
     
     public override func start() {
-        let viewController = StartEditViewController.instantiate()
-        viewController.store = store
-        self.rootViewController = viewController
+        let startEditViewController = StartEditViewController.instantiate()
+        startEditViewController.store = store
+
+        let sheetController = StartEditBottomSheet(viewController: startEditViewController)
+        sheetController.store = store
+
+        self.rootViewController = sheetController
     }
 }

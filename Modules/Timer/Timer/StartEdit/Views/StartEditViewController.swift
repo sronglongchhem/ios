@@ -66,17 +66,39 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .map({ [SectionModel(model: "", items: $0)] })
             .bind(to: tableView.rx.items(dataSource: dataSource!))
             .disposed(by: disposeBag)
+
+        store.select({ $0.editableTimeEntry })
+            .drive(onNext: displayTimeEntry)
+            .disposed(by: disposeBag)
+
+        closeButton.rx.tap
+            .mapTo(StartEditAction.closeButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
     }
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
-    public func dragged() {
+    public func loseFocus() {
         descriptionTextField.resignFirstResponder()
     }
 
+    public func focus() {
+        descriptionTextField.becomeFirstResponder()
+    }
+
     public override var canBecomeFirstResponder: Bool { true }
+
+    private func displayTimeEntry(timeEntry: EditableTimeEntry?) {
+        guard let timeEntry = timeEntry else {
+            descriptionTextField.text = nil
+            return
+        }
+
+        descriptionTextField.text = timeEntry.description
+    }
 }
 
 extension StartEditViewController: UITableViewDelegate {

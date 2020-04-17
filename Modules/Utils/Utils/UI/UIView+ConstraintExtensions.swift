@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIView {
+public extension UIView {
 
     func constraintToParent(constant: CGFloat = 0) {
         guard let parent = superview else { fatalError() }

@@ -7,7 +7,8 @@ import RxSwift
 protocol BottomSheetContent: class {
     var scrollView: UIScrollView? { get }
     var smallStateHeight: CGFloat { get }
-    func dragged()
+    func loseFocus()
+    func focus()
 }
 
 enum BottomSheetState {
@@ -17,6 +18,8 @@ enum BottomSheetState {
 }
 
 class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, UIGestureRecognizerDelegate where ContainedView: BottomSheetContent {
+
+    var store: StartEditStore!
     
     private var topConstraint: NSLayoutConstraint!
     private var fullViewHeight: CGFloat = 0
@@ -24,8 +27,8 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
     private var partialViewConstant: CGFloat = 0
     private var hiddenViewConstant: CGFloat = 0
 
-    private var layedOut: Bool = false
     private let containedViewController: ContainedView
+    private let overlay = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
     private var disposeBag = DisposeBag()
 
@@ -60,6 +63,16 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
             .subscribe(onNext: keyboardWillChange(intersectionHeight:))
             .disposed(by: disposeBag)
 
+        store.select({ $0.editableTimeEntry })
+            .drive(onNext: { [weak self] editableTimeEntry in
+                if editableTimeEntry == nil {
+                    self?.hide()
+                } else {
+                    self?.show()
+                }
+            })
+            .disposed(by: disposeBag)
+
         let navigationController = UINavigationController(rootViewController: containedViewController)
         navigationController.navigationBar.isHidden = true
 
@@ -82,6 +95,10 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
         navigationController.view.layer.shadowOpacity = 0.2
         navigationController.view.clipsToBounds = false
 
+        overlay.backgroundColor = UIColor(white: 0, alpha: 0.3)
+        overlay.alpha = 0
+        view.insertSubview(overlay, at: 0)
+        overlay.constraintToParent()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +116,20 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
         layout()
     }
 
+    private func hide() {
+        state = .hidden
+        containedViewController.loseFocus()
+        containedViewController.resignFirstResponder()
+    }
+
+    private func show() {
+        state = .partial
+        containedViewController.focus()
+    }
+
     private func layout() {
+        guard view.superview != nil else { return }
+        
         switch state {
         case .hidden:
             view.isUserInteractionEnabled = false
@@ -115,6 +145,10 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
         containedViewController.scrollView?.isScrollEnabled = true
         containedViewController.scrollView?.setContentOffset(.zero, animated: false)
 
+        UIView.animate(withDuration: 0.3) {
+            self.overlay.alpha = self.state == .hidden ? 0 : 1
+        }
+        
         UIView.animate(
             withDuration: 0.35,
             delay: 0,
@@ -153,7 +187,9 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
         switch recognizer.state {
         case .changed:
             topConstraint.constant += translation
-            self.containedViewController.dragged()
+            if translation > 0 {
+                self.containedViewController.loseFocus()
+            }
 
         case .ended, .cancelled:
             let finalPosition = self.topConstraint.constant + translation + velocity * 0.1
@@ -162,7 +198,7 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
             } else if finalPosition < hiddenViewConstant {
                 state = .partial
             } else {
-                state = .hidden
+                store.dispatch(.dialogDismissed)
             }
 
             layout()
@@ -186,8 +222,6 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
     }
 
     private func keyboardWillChange(intersectionHeight: CGFloat) {
-        self.parent?.additionalSafeAreaInsets.bottom = intersectionHeight
-
         if state == .partial {
             topConstraint.constant = partialViewConstant - intersectionHeight
         }

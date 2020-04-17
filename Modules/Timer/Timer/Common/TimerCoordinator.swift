@@ -25,7 +25,7 @@ public final class TimerCoordinator: BaseCoordinator {
         runningTimeEntryCoordinator.start()
         let viewController = TimerViewController()
         viewController.timeLogViewController = timeLogCoordinator.rootViewController
-        viewController.startEditViewController = startEditCoordinator.rootViewController as? StartEditViewController
+        viewController.startEditBottomSheet = startEditCoordinator.rootViewController as? StartEditBottomSheet<StartEditViewController>
         viewController.runningTimeEntryViewController = runningTimeEntryCoordinator.rootViewController as? RunningTimeEntryViewController
         self.rootViewController = viewController
     }

@@ -24,7 +24,15 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryId]!)]
             }
 
-        case .timeEntryTapped:
+        case let .timeEntryTapped(timeEntryId):
+            state.editableTimeEntry = EditableTimeEntry.fromSingle(state.entities.timeEntries[timeEntryId]!)
+            return []
+
+        case let .timeEntryGroupTapped(timeEntryIds):
+            state.editableTimeEntry = EditableTimeEntry.fromGroup(
+                ids: timeEntryIds,
+                groupSample: state.entities.timeEntries[timeEntryIds.first!]!
+            )
             return []
 
         case let .toggleTimeEntryGroupTapped(groupId):

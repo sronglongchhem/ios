@@ -252,12 +252,36 @@ class TimeEntriesLogReducerTests: XCTestCase {
         entities.timeEntries = timeEntries
         let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
 
+        let editableTimeEntry = EditableTimeEntry.fromSingle(timeEntries[timeEntryTappedId]!)
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, .timeEntryTapped(timeEntryTappedId))
-            // This tests this action does nothing for now. Fill the rest of the steps here
+            Step(.send, .timeEntryTapped(timeEntryTappedId)) {
+                $0.editableTimeEntry = editableTimeEntry
+            }
+        )
+    }
+
+    func testTimeEntryGroupTapped() {
+
+        let timeEntries = createTimeEntries(now)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = TimeEntriesLogState(entities: entities, expandedGroups: [])
+
+        let allIds = entities.timeEntries.values.map({ $0.id })
+        let editableTimeEntry = EditableTimeEntry.fromGroup(ids: allIds, groupSample: timeEntries.values.first!)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .timeEntryGroupTapped(allIds)) {
+                $0.editableTimeEntry = editableTimeEntry
+            }
         )
     }
 

@@ -6,19 +6,18 @@ import RxSwift
 import Utils
 import Assets
 
-public typealias TimerStore = Store<TimerState, TimerAction>
+typealias TimerStore = Store<TimerState, TimerAction>
 
-public class TimerViewController: UIViewController {
-    public var runningTimeEntryViewController: RunningTimeEntryViewController!
-    public var startEditViewController: StartEditViewController!
-    public var timeLogViewController: UIViewController!
+class TimerViewController: UIViewController {
+    var runningTimeEntryViewController: RunningTimeEntryViewController!
+    var startEditBottomSheet: StartEditBottomSheet<StartEditViewController>!
+    var timeLogViewController: UIViewController!
 
-    private var startEditBottomSheet: StartEditBottomSheet<StartEditViewController>!
     private var runningTimeEntryBottomSheet: SimpleBottomSheet!
 
     private var disposeBag = DisposeBag()
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         install(timeLogViewController)
@@ -26,11 +25,10 @@ public class TimerViewController: UIViewController {
         runningTimeEntryBottomSheet = SimpleBottomSheet(viewController: runningTimeEntryViewController)
         install(runningTimeEntryBottomSheet, customConstraints: true)
 
-        startEditBottomSheet = StartEditBottomSheet(viewController: startEditViewController)
         install(startEditBottomSheet, customConstraints: true)
     }
 
-    public override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         timeLogViewController.additionalSafeAreaInsets.bottom = runningTimeEntryBottomSheet.view.frame.height
     }

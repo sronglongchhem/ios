@@ -31,12 +31,14 @@ extension TimerState {
             TimeEntriesLogState(
                 entities: entities,
                 expandedGroups: localTimerState.expandedGroups,
+                editableTimeEntry: localTimerState.editableTimeEntry,
                 entriesPendingDeletion: localTimerState.entriesPendingDeletion
             )
         }
         set {
             entities = newValue.entities
             localTimerState.expandedGroups = newValue.expandedGroups
+            localTimerState.editableTimeEntry = newValue.editableTimeEntry
             localTimerState.entriesPendingDeletion = newValue.entriesPendingDeletion
         }
     }
@@ -61,11 +63,15 @@ extension TimerState {
     internal var runningTimeEntryState: RunningTimeEntryState {
         get {
             RunningTimeEntryState(
-                entities: entities
+                user: user,
+                entities: entities,
+                editableTimeEntry: localTimerState.editableTimeEntry
             )
         }
         set {
+            user = newValue.user
             entities = newValue.entities
+            localTimerState.editableTimeEntry = newValue.editableTimeEntry
         }
     }
 }
