@@ -17,13 +17,14 @@ public class TogglTrack {
     public init(window: UIWindow) {
         
         let appFeature = AppFeature()
+        let appEnvironment = AppEnvironment()
         
         store = Store(
             initialState: AppState(),
             reducer: logging
+                <| createAnalyticsReducer(analyticsService: appEnvironment.analytics)
                 <| checkFeatureAvailability
-                <| createAppReducer(environment: AppEnvironment())
-                
+                <| createAppReducer(environment: appEnvironment)
         )
         
         appCoordinator = (appFeature.mainCoordinator(store: store) as? AppCoordinator)!

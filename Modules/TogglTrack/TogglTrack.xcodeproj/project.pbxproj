@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		16AD5F00F2AA2432B5153AD4 /* libPods-TogglTrack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D254C466CC84E88FB7BF840B /* libPods-TogglTrack.a */; };
+		343E37AA244725C700A65AFD /* Analytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343E37A9244725C700A65AFD /* Analytics.framework */; };
+		34406B032446171000C65C99 /* AnalyticsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34406B022446171000C65C99 /* AnalyticsReducer.swift */; };
 		51543B0F241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */; };
+		8136261B0DCE89BF32D2212F /* libPods-TogglTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAC61717E8732DF58E1EB41 /* libPods-TogglTrackTests.a */; };
 		8C008F9D2406744C000A0C32 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008F9C2406744C000A0C32 /* TabBarCoordinator.swift */; };
 		8C008FAD24081357000A0C32 /* TogglTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008FAC24081357000A0C32 /* TogglTrack.swift */; };
 		8C008FAF2408163D000A0C32 /* LoggingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C008FAE2408163D000A0C32 /* LoggingReducer.swift */; };
@@ -44,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		343E37A9244725C700A65AFD /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34406B022446171000C65C99 /* AnalyticsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReducer.swift; sourceTree = "<group>"; };
 		5011844FD27437FDB171F288 /* Pods-TogglTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TogglTrack.release.xcconfig"; path = "Target Support Files/Pods-TogglTrack/Pods-TogglTrack.release.xcconfig"; sourceTree = "<group>"; };
 		51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckFeatureAvailabilityReducer.swift; sourceTree = "<group>"; };
 		8C008F9C2406744C000A0C32 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -74,7 +79,10 @@
 		8CB545C42410FFF500154473 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		8CB545CF24113B4600154473 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		B4B4F0A62436313200DFBF2E /* UIUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8C39E8FDBC8ACFDEB789B75 /* Pods-TogglTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TogglTrackTests.debug.xcconfig"; path = "Target Support Files/Pods-TogglTrackTests/Pods-TogglTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BBAC61717E8732DF58E1EB41 /* libPods-TogglTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TogglTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D254C466CC84E88FB7BF840B /* libPods-TogglTrack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TogglTrack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0D2116865E0B7BEFA65DCAE /* Pods-TogglTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TogglTrackTests.release.xcconfig"; path = "Target Support Files/Pods-TogglTrackTests/Pods-TogglTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		EAF812E5FB6DBE7F05896418 /* Pods-TogglTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TogglTrack.debug.xcconfig"; path = "Target Support Files/Pods-TogglTrack/Pods-TogglTrack.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +96,7 @@
 				8C38E24E2419058C00C9E053 /* Repository.framework in Frameworks */,
 				8C38E2522419058F00C9E053 /* Utils.framework in Frameworks */,
 				B4B4F0A72436313200DFBF2E /* UIUtils.framework in Frameworks */,
+				343E37AA244725C700A65AFD /* Analytics.framework in Frameworks */,
 				8C38E24A2419058900C9E053 /* Onboarding.framework in Frameworks */,
 				8C38E2482419058800C9E053 /* Networking.framework in Frameworks */,
 				16AD5F00F2AA2432B5153AD4 /* libPods-TogglTrack.a in Frameworks */,
@@ -99,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C25165D2403C17500BAD4B5 /* TogglTrack.framework in Frameworks */,
+				8136261B0DCE89BF32D2212F /* libPods-TogglTrackTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +159,7 @@
 				8C008FAC24081357000A0C32 /* TogglTrack.swift */,
 				8C008FAE2408163D000A0C32 /* LoggingReducer.swift */,
 				51543B0E241FBB8C00FC8FBB /* CheckFeatureAvailabilityReducer.swift */,
+				34406B022446171000C65C99 /* AnalyticsReducer.swift */,
 				8CB545C62411022A00154473 /* App */,
 				8C2130BC2424A988000FC72C /* Loading */,
 				8C2130BD2424A98D000FC72C /* TabBar */,
@@ -170,6 +181,7 @@
 		8C2517F52403C58200BAD4B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				343E37A9244725C700A65AFD /* Analytics.framework */,
 				B4B4F0A62436313200DFBF2E /* UIUtils.framework */,
 				8C2518F52403CA9900BAD4B5 /* RxDatasourcesDep.framework */,
 				8C2518C72403C89E00BAD4B5 /* RxCocoaDep.framework */,
@@ -181,6 +193,7 @@
 				8C2517FA2403C58200BAD4B5 /* Timer.framework */,
 				8C2517FB2403C58200BAD4B5 /* Utils.framework */,
 				D254C466CC84E88FB7BF840B /* libPods-TogglTrack.a */,
+				BBAC61717E8732DF58E1EB41 /* libPods-TogglTrackTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,6 +216,8 @@
 			children = (
 				EAF812E5FB6DBE7F05896418 /* Pods-TogglTrack.debug.xcconfig */,
 				5011844FD27437FDB171F288 /* Pods-TogglTrack.release.xcconfig */,
+				B8C39E8FDBC8ACFDEB789B75 /* Pods-TogglTrackTests.debug.xcconfig */,
+				E0D2116865E0B7BEFA65DCAE /* Pods-TogglTrackTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../../Pods;
@@ -245,6 +260,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C25166A2403C17500BAD4B5 /* Build configuration list for PBXNativeTarget "TogglTrackTests" */;
 			buildPhases = (
+				1CA4E940B47E20C934CC0B40 /* [CP] Check Pods Manifest.lock */,
 				8C2516582403C17500BAD4B5 /* Sources */,
 				8C2516592403C17500BAD4B5 /* Frameworks */,
 				8C25165A2403C17500BAD4B5 /* Resources */,
@@ -315,6 +331,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1CA4E940B47E20C934CC0B40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TogglTrackTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8547A5CB383BC8F94C7ED9CC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -353,6 +391,7 @@
 				8CB545BF2410FFA500154473 /* AppState.swift in Sources */,
 				8CB545C52410FFF500154473 /* AppAction.swift in Sources */,
 				8CB545D024113B4600154473 /* AppFeature.swift in Sources */,
+				34406B032446171000C65C99 /* AnalyticsReducer.swift in Sources */,
 				8C2517B62403C2BC00BAD4B5 /* AppEnvironment.swift in Sources */,
 				8C2130B62424A6F9000FC72C /* LoadingAction.swift in Sources */,
 				8C008F9D2406744C000A0C32 /* TabBarCoordinator.swift in Sources */,
@@ -560,6 +599,7 @@
 		};
 		8C25166B2403C17500BAD4B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8C39E8FDBC8ACFDEB789B75 /* Pods-TogglTrackTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -583,6 +623,7 @@
 		};
 		8C25166C2403C17500BAD4B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0D2116865E0B7BEFA65DCAE /* Pods-TogglTrackTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";

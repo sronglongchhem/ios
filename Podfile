@@ -5,7 +5,7 @@ platform :ios, '11.0'
 # inhibit_all_warnings!
 
 def rxswift
-    pod 'RxSwift', '~> 5'    
+    pod 'RxSwift', '~> 5'
 end
 
 def rxcocoa
@@ -21,6 +21,11 @@ def rxtests
   pod 'RxTest', '~> 5'
 end
 
+def analytics
+  pod 'Firebase/Analytics'
+  pod 'AppCenter'
+end
+
 project 'App/App.xcodeproj'
 project 'Modules/TogglTrack/TogglTrack.xcodeproj'
 project 'Modules/API/API.xcodeproj'
@@ -31,9 +36,14 @@ project 'Modules/Timer/Timer.xcodeproj'
 project 'Modules/Repository/Repository.xcodeproj'
 project 'Modules/UIUtils/UIUtils.xcodeproj'
 project 'Modules/Utils/Utils.xcodeproj'
+project 'Modules/Analytics/Analytics.xcodeproj'
 
 target :App do
     project 'App/App.xcodeproj'
+
+    target :AppTests do
+        inherit! :search_paths
+    end
 end
 
 target :TogglTrack do
@@ -41,6 +51,10 @@ target :TogglTrack do
     rxswift
     rxcocoa
     rxdatasources
+
+    target :TogglTrackTests do
+        inherit! :search_paths
+    end
 end
 
 target :Onboarding do
@@ -56,7 +70,7 @@ target :Timer do
     rxswift
     rxcocoa
     rxdatasources
-    
+
     target :TimerTests do
       rxtests
     end
@@ -101,7 +115,13 @@ target :Utils do
     rxcocoa
 end
 
-dynamic_frameworks = []
+target :Analytics do
+    use_frameworks!
+    project 'Modules/Analytics/Analytics.xcodeproj'
+    analytics
+end
+
+dynamic_frameworks = [analytics]
 # Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
 pre_install do |installer|
   installer.pod_targets.each do |pod|

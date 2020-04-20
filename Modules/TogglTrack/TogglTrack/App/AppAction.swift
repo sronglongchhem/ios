@@ -2,6 +2,7 @@ import Foundation
 import Onboarding
 import Timer
 import Models
+import Analytics
 
 public enum AppAction: Equatable {
     case start
@@ -78,5 +79,11 @@ extension AppAction: CustomDebugStringConvertible {
         case let .startEdit(action):
             return action.debugDescription
         }
+    }
+}
+
+extension AppAction: Analytics.EventConvertible {
+    public func toEvent() -> Event? {
+        return nil
     }
 }

@@ -1,5 +1,9 @@
 import UIKit
 import TogglTrack
+import Firebase
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,7 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13, *) {
             return true
         }
-
+        
+        #if !DEBUG
+        FirebaseApp.configure()
+        MSAppCenter.start("{Our App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
+        #endif
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         togglTrack = TogglTrack(window: window!)
         
