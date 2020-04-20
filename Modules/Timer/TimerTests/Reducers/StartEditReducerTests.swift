@@ -205,6 +205,24 @@ class StartEditReducerTests: XCTestCase {
                 $0.autocompleteSuggestions = autocompleteSuggestions
             })
     }
+    
+    func testBillableButtonTapped() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .billableButtonTapped) { $0.editableTimeEntry?.billable = true },
+            Step(.send, .billableButtonTapped) { $0.editableTimeEntry?.billable = false }
+        )
+    }
 
     private func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
         return Step(.send, StartEditAction.descriptionEntered(description)) {

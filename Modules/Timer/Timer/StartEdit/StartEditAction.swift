@@ -8,6 +8,8 @@ public enum StartEditAction: Equatable {
     case doneButtonTapped
     case timeEntryStarted(startedTimeEntry: TimeEntry, stoppedTimeEntry: TimeEntry?)
     case timeEntryUpdated(TimeEntry)
+    
+    case billableButtonTapped
 
     case setError(ErrorType)
     case autocompleteSuggestionsUpdated([AutocompleteSuggestionType])
@@ -33,8 +35,11 @@ extension StartEditAction: CustomDebugStringConvertible {
         case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
             return "TimeEntryStarted: \(startedTimeEntry.description) stopped: \(stoppedTimeEntry?.description ?? "nil")"
             
-        case let.timeEntryUpdated(timeEntry):
+        case let .timeEntryUpdated(timeEntry):
             return "TimeEntryUpdated: \(timeEntry.description)"
+            
+        case .billableButtonTapped:
+            return "BillableButtonTapped"
             
         case let .setError(error):
             return "SetError: \(error)"

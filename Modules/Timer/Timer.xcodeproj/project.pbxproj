@@ -119,7 +119,6 @@
 		8C509D1F2412874100B6DF30 /* TimeEntriesSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntriesSelector.swift; sourceTree = "<group>"; };
 		8C509D222412876A00B6DF30 /* TimeEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryViewModel.swift; sourceTree = "<group>"; };
 		8C509D242412879200B6DF30 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
-		8CABAF2824470ECF00F03E28 /* StartEditReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditReducerTests.swift; sourceTree = "<group>"; };
 		8CABAF2A24471C5C00F03E28 /* RunningTimeEntryReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryReducerTests.swift; sourceTree = "<group>"; };
 		8CB54532240E7DA100154473 /* TimeEntriesLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntriesLogViewController.swift; sourceTree = "<group>"; };
 		8CB54534240EA67400154473 /* StartEditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditState.swift; sourceTree = "<group>"; };
@@ -203,7 +202,6 @@
 				8C2130C32424F46D000FC72C /* TimeEntriesLogReducerTests.swift */,
 				510BD5B724363CF80028C445 /* StartEditReducerTests.swift */,
 				8CABAF2A24471C5C00F03E28 /* RunningTimeEntryReducerTests.swift */,
-				8CABAF2824470ECF00F03E28 /* StartEditReducerTests.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";

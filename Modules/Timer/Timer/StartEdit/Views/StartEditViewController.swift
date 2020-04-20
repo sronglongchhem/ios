@@ -75,6 +75,11 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .mapTo(StartEditAction.closeButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
+        
+        startEditInputAccessoryView.billableButton.rx.tap
+            .mapTo(StartEditAction.billableButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
     }
 
     public override func viewDidAppear(_ animated: Bool) {
