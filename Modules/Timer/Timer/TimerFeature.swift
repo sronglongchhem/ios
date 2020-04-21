@@ -10,38 +10,54 @@ public func createTimerReducer(repository: Repository, time: Time, schedulerProv
         createStartEditReducer(repository: repository, time: time)
             .pullback(state: \.startEditState, action: \.startEdit),
         createRunningTimeEntryReducer(repository: repository, time: time)
-            .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry)
+            .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry),
+        createProjectReducer(repository: repository)
+            .pullback(state: \.projectState, action: \.project)
     )
 }
 
 public class TimerFeature: BaseFeature<TimerState, TimerAction> {
+    private enum Features {
+        case timeEntriesLog
+        case startEdit
+        case runningTimeEntry
+        case project
+    }
 
-    let features: [String: BaseFeature<TimerState, TimerAction>] = [
-        "log": TimeEntriesLogFeature()
+    private let features: [Features: BaseFeature<TimerState, TimerAction>] = [
+        .timeEntriesLog: TimeEntriesLogFeature()
             .view { $0.view(
                 state: { $0.timeLogState },
                 action: { TimerAction.timeLog($0) })
         },
-        "startEdit": StartEditFeature()
+        .startEdit: StartEditFeature()
             .view { $0.view(
                 state: { $0.startEditState },
                 action: { TimerAction.startEdit($0) })
         },
-        "runningTimeEntry": RunningTimeEntryFeature()
+        .runningTimeEntry: RunningTimeEntryFeature()
             .view { $0.view(
                 state: { $0.runningTimeEntryState },
                 action: { TimerAction.runningTimeEntry($0) })
+        },
+        .project: ProjectFeature()
+            .view { $0.view(
+                state: { $0.projectState },
+                action: { TimerAction.project($0) })
         }
     ]
 
+    // swiftlint:disable force_cast
     public override func mainCoordinator(store: Store<TimerState, TimerAction>) -> Coordinator {
         return TimerCoordinator(
             store: store,
-            timeLogCoordinator: (features["log"]!.mainCoordinator(store: store) as? TimeEntriesLogCoordinator)!,
-            startEditCoordinator: (features["startEdit"]!.mainCoordinator(store: store) as? StartEditCoordinator)!,
-            runningTimeEntryCoordinator: (features["runningTimeEntry"]!.mainCoordinator(store: store) as? RunningTimeEntryCoordinator)!
+            timeLogCoordinator: features[.timeEntriesLog]!.mainCoordinator(store: store) as! TimeEntriesLogCoordinator,
+            startEditCoordinator: features[.startEdit]!.mainCoordinator(store: store) as! StartEditCoordinator,
+            runningTimeEntryCoordinator: features[.runningTimeEntry]!.mainCoordinator(store: store) as! RunningTimeEntryCoordinator,
+            projectCoordinator: features[.project]!.mainCoordinator(store: store) as! ProjectCoordinator
         )
     }
+    // swiftlint:enable force_cast
 }
 
 public struct TimerConstants {

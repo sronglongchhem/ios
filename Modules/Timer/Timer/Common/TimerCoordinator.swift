@@ -8,15 +8,19 @@ public final class TimerCoordinator: BaseCoordinator {
     private let timeLogCoordinator: TimeEntriesLogCoordinator
     private let startEditCoordinator: StartEditCoordinator
     private let runningTimeEntryCoordinator: RunningTimeEntryCoordinator
+    private let projectCoordinator: ProjectCoordinator
 
-    public init(store: Store<TimerState, TimerAction>,
-                timeLogCoordinator: TimeEntriesLogCoordinator,
-                startEditCoordinator: StartEditCoordinator,
-                runningTimeEntryCoordinator: RunningTimeEntryCoordinator) {
+    public init(
+        store: Store<TimerState, TimerAction>,
+        timeLogCoordinator: TimeEntriesLogCoordinator,
+        startEditCoordinator: StartEditCoordinator,
+        runningTimeEntryCoordinator: RunningTimeEntryCoordinator,
+        projectCoordinator: ProjectCoordinator) {
         self.store = store
         self.timeLogCoordinator = timeLogCoordinator
         self.startEditCoordinator = startEditCoordinator
         self.runningTimeEntryCoordinator = runningTimeEntryCoordinator
+        self.projectCoordinator = projectCoordinator
     }
 
     public override func start() {

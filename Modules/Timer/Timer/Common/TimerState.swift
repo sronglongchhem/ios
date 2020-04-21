@@ -74,4 +74,18 @@ extension TimerState {
             localTimerState.editableTimeEntry = newValue.editableTimeEntry
         }
     }
+    
+    internal var projectState: ProjectState {
+        get {
+            ProjectState(
+                editableProject: localTimerState.editableTimeEntry?.editableProject,
+                projects: entities.projects
+            )
+        }
+        set {
+            entities.projects = newValue.projects
+            guard var timeEntry = localTimerState.editableTimeEntry else { return }
+            timeEntry.editableProject = newValue.editableProject
+        }
+    }
 }

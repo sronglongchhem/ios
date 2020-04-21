@@ -60,6 +60,14 @@
 		ACAA585D24378106003FDECA /* SimpleBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */; };
 		B4B4F0A324362F1400DFBF2E /* UIUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B4F0A224362F1400DFBF2E /* UIUtils.framework */; };
 		B795B8AF1298D91041CBE3A8 /* Pods_Timer_TimerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A6B75657C3B9CF1F0B3ED1 /* Pods_Timer_TimerTests.framework */; };
+		CC03C2782448AE1B0071FA55 /* ProjectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2712448AE1B0071FA55 /* ProjectAction.swift */; };
+		CC03C2792448AE1C0071FA55 /* ProjectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2722448AE1B0071FA55 /* ProjectCoordinator.swift */; };
+		CC03C27A2448AE1C0071FA55 /* ProjectFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2732448AE1B0071FA55 /* ProjectFeature.swift */; };
+		CC03C27B2448AE1C0071FA55 /* ProjectReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2742448AE1B0071FA55 /* ProjectReducer.swift */; };
+		CC03C27C2448AE1C0071FA55 /* ProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2752448AE1B0071FA55 /* ProjectState.swift */; };
+		CC03C27D2448AE1C0071FA55 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */; };
+		CC03C27E2448AE1C0071FA55 /* ProjectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */; };
+		CC03C2802448AF0A0071FA55 /* EditableProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C27F2448AF0A0071FA55 /* EditableProject.swift */; };
 		CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +142,14 @@
 		ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBottomSheet.swift; sourceTree = "<group>"; };
 		B4B4F0A224362F1400DFBF2E /* UIUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5130F9C5AE2977FBE3C1DD9 /* Pods-Timer-TimerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer-TimerTests.release.xcconfig"; path = "Target Support Files/Pods-Timer-TimerTests/Pods-Timer-TimerTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC03C2712448AE1B0071FA55 /* ProjectAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAction.swift; sourceTree = "<group>"; };
+		CC03C2722448AE1B0071FA55 /* ProjectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCoordinator.swift; sourceTree = "<group>"; };
+		CC03C2732448AE1B0071FA55 /* ProjectFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFeature.swift; sourceTree = "<group>"; };
+		CC03C2742448AE1B0071FA55 /* ProjectReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectReducer.swift; sourceTree = "<group>"; };
+		CC03C2752448AE1B0071FA55 /* ProjectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectState.swift; sourceTree = "<group>"; };
+		CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelector.swift; sourceTree = "<group>"; };
+		CC03C27F2448AF0A0071FA55 /* EditableProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableProject.swift; sourceTree = "<group>"; };
 		CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryReducerTests.swift; sourceTree = "<group>"; };
 		D1A6B75657C3B9CF1F0B3ED1 /* Pods_Timer_TimerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer_TimerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB24E55169F474422BCBE49 /* Pods-Timer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.release.xcconfig"; path = "Target Support Files/Pods-Timer/Pods-Timer.release.xcconfig"; sourceTree = "<group>"; };
@@ -251,6 +267,7 @@
 				8C509D342413E29300B6DF30 /* TimeEntriesLog */,
 				8C509D352413E29B00B6DF30 /* StartEdit */,
 				ACAA581F2433A7BC003FDECA /* Running */,
+				CC2E552A2448AD8C005A3B40 /* Project */,
 				8C2516C22403C1B000BAD4B5 /* Timer.h */,
 				8C2516C32403C1B000BAD4B5 /* Info.plist */,
 				AC61F9082440BBF500534713 /* Localizable.strings */,
@@ -387,6 +404,21 @@
 				ACAA58312434A1EE003FDECA /* RunningTimeEntryViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CC2E552A2448AD8C005A3B40 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				CC03C2712448AE1B0071FA55 /* ProjectAction.swift */,
+				CC03C2722448AE1B0071FA55 /* ProjectCoordinator.swift */,
+				CC03C2732448AE1B0071FA55 /* ProjectFeature.swift */,
+				CC03C2742448AE1B0071FA55 /* ProjectReducer.swift */,
+				CC03C2752448AE1B0071FA55 /* ProjectState.swift */,
+				CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */,
+				CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */,
+				CC03C27F2448AF0A0071FA55 /* EditableProject.swift */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,15 +599,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC03C27B2448AE1C0071FA55 /* ProjectReducer.swift in Sources */,
 				8C25178B2403C27200BAD4B5 /* TimeEntriesLogState.swift in Sources */,
 				ACAA58292433A7ED003FDECA /* RunningTimeEntryFeature.swift in Sources */,
 				8C509D0A2412509F00B6DF30 /* TimerFeature.swift in Sources */,
+				CC03C2792448AE1C0071FA55 /* ProjectCoordinator.swift in Sources */,
 				ACAA583024349F02003FDECA /* RunningTimeEntrySelector.swift in Sources */,
 				8C1F53552434804500D9F979 /* StartEditBottomSheet.swift in Sources */,
 				8C25178A2403C27200BAD4B5 /* TimerViewController.swift in Sources */,
 				8C25178C2403C27200BAD4B5 /* TimeEntriesLogAction.swift in Sources */,
+				CC03C27D2448AE1C0071FA55 /* ProjectViewController.swift in Sources */,
 				8C509D172412641600B6DF30 /* TimeEntriesLogFeature.swift in Sources */,
 				ACAA58272433A7ED003FDECA /* RunningTimeEntryState.swift in Sources */,
+				CC03C27E2448AE1C0071FA55 /* ProjectSelector.swift in Sources */,
 				8CB54533240E7DA100154473 /* TimeEntriesLogViewController.swift in Sources */,
 				8C008FD22409407B000A0C32 /* StartEditReducer.swift in Sources */,
 				ACAA58282433A7ED003FDECA /* RunningTimeEntryAction.swift in Sources */,
@@ -584,8 +620,10 @@
 				8C4EDC57242902FF00C03E14 /* TimeLogCellViewModel.swift in Sources */,
 				8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */,
 				8C008FC424090C85000A0C32 /* StartEditViewController.swift in Sources */,
+				CC03C2802448AF0A0071FA55 /* EditableProject.swift in Sources */,
 				8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */,
 				ACAA582A2433A7ED003FDECA /* RunningTimeEntryReducer.swift in Sources */,
+				CC03C27C2448AE1C0071FA55 /* ProjectState.swift in Sources */,
 				8C008FD024093FF8000A0C32 /* StartEditAction.swift in Sources */,
 				ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */,
 				8C509D232412876A00B6DF30 /* TimeEntryViewModel.swift in Sources */,
@@ -594,6 +632,7 @@
 				ACAA58322434A1EE003FDECA /* RunningTimeEntryViewController.swift in Sources */,
 				8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */,
 				8C2517892403C27200BAD4B5 /* TimeEntryCell.swift in Sources */,
+				CC03C2782448AE1B0071FA55 /* ProjectAction.swift in Sources */,
 				8C509D202412874100B6DF30 /* TimeEntriesSelector.swift in Sources */,
 				8C509D152412603800B6DF30 /* TimerState.swift in Sources */,
 				8C509D0E2412567900B6DF30 /* TimerAction.swift in Sources */,
@@ -601,6 +640,7 @@
 				51FF7C3C2429120500CC2002 /* EditableTimeEntry.swift in Sources */,
 				8C509D1324125AB500B6DF30 /* StartEditCoordinator.swift in Sources */,
 				8C509D192412644300B6DF30 /* StartEditFeature.swift in Sources */,
+				CC03C27A2448AE1C0071FA55 /* ProjectFeature.swift in Sources */,
 				8C1F535B243487EC00D9F979 /* StartEditCellType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

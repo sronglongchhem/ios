@@ -7,17 +7,20 @@ public struct EditableTimeEntry: Equatable {
     public var workspaceId: Int64
     public var description: String
     public var billable: Bool
+    public var editableProject: EditableProject?
     
     private init(
         ids: [Int64],
         workspaceId: Int64,
         description: String,
-        billable: Bool
+        billable: Bool,
+        editableProject: EditableProject? = nil
     ) {
         self.ids = ids
         self.workspaceId = workspaceId
         self.description = description
         self.billable = billable
+        self.editableProject = editableProject
     }
     
     public static func empty(workspaceId: Int64) -> EditableTimeEntry {
@@ -25,7 +28,8 @@ public struct EditableTimeEntry: Equatable {
             ids: [],
             workspaceId: workspaceId,
             description: "",
-            billable: false)
+            billable: false
+        )
     }
     
     public static func fromSingle(_ timeEntry: TimeEntry) -> EditableTimeEntry {
@@ -33,7 +37,8 @@ public struct EditableTimeEntry: Equatable {
             ids: [timeEntry.id],
             workspaceId: timeEntry.workspaceId,
             description: timeEntry.description,
-            billable: timeEntry.billable)
+            billable: timeEntry.billable
+        )
     }
     
     public static func fromGroup(ids: [Int64], groupSample: TimeEntry) -> EditableTimeEntry {
