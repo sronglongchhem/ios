@@ -64,4 +64,33 @@ class RunningTimeEntryReducerTests: XCTestCase {
             }
         )
     }
+    
+    func testStartTimeEntryTapped() {
+
+        mockUser.defaultWorkspace = 1
+        let expectedStartedEntry = TimeEntry(
+            id: mockRepository.newTimeEntryId,
+            description: "",
+            start: mockTime.now(),
+            duration: nil,
+            billable: false,
+            workspaceId: mockUser.defaultWorkspace
+        )
+ 
+        let state = RunningTimeEntryState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: nil
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, RunningTimeEntryAction.startButtonTapped),
+            Step(.receive, RunningTimeEntryAction.timeEntryStarted(started: expectedStartedEntry, stopped: nil)) {
+                $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
+            }
+        )
+    }
 }

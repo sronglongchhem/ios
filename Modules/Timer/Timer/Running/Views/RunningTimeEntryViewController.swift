@@ -17,6 +17,7 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var runningTimeEntryView: UIView!
+    @IBOutlet var startButton: UIButton!
     @IBOutlet var startTimeEntryView: UIView!
     
     public var store: RunningTimeEntryStore!
@@ -33,6 +34,11 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
 
         store.select(runningTimeEntryViewModelSelector)
             .drive(onNext: updateUI)
+            .disposed(by: disposeBag)
+
+        startButton.rx.tap
+            .mapTo(RunningTimeEntryAction.startButtonTapped)
+            .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
         let tapGesture = UITapGestureRecognizer()

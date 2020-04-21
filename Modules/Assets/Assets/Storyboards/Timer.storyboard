@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -421,6 +421,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="j9N-82-b62" id="BkN-9l-vIa"/>
                         <outlet property="runningTimeEntryView" destination="wiV-2C-xXg" id="1IO-8V-9Np"/>
+                        <outlet property="startButton" destination="Avd-ei-17S" id="a6n-0g-et0"/>
                         <outlet property="startTimeEntryView" destination="Alx-Ww-lIF" id="cwo-Ud-by8"/>
                         <outlet property="stopButtom" destination="oJo-TA-zgS" id="Qfo-98-GOT"/>
                         <outlet property="timerLabel" destination="PVj-gb-U6y" id="OjO-Q8-UQ3"/>
