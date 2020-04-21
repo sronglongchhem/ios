@@ -13,7 +13,7 @@ extension TimeEntry {
             id: timeEntryId,
             description: description,
             start: start ?? Date(),
-            duration: duration ?? 0,
+            duration: duration,
             billable: false,
             workspaceId: workspaceId)
     }

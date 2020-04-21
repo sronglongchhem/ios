@@ -3,6 +3,7 @@ import Models
 
 public enum RunningTimeEntryAction: Equatable {
     case cardTapped
+    case stopButtonTapped
     case startButtonTapped
     case timeEntryStarted(started: TimeEntry, stopped: TimeEntry?)
     case setError(ErrorType)
@@ -15,6 +16,9 @@ extension RunningTimeEntryAction: CustomDebugStringConvertible {
         case .cardTapped:
             return "CardTapped"
             
+        case .stopButtonTapped:
+            return "StopButtonTapped"
+
         case .startButtonTapped:
             return "StartButtonTapped"
 

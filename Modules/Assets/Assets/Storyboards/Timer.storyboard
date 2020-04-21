@@ -423,7 +423,7 @@
                         <outlet property="runningTimeEntryView" destination="wiV-2C-xXg" id="1IO-8V-9Np"/>
                         <outlet property="startButton" destination="Avd-ei-17S" id="a6n-0g-et0"/>
                         <outlet property="startTimeEntryView" destination="Alx-Ww-lIF" id="cwo-Ud-by8"/>
-                        <outlet property="stopButtom" destination="oJo-TA-zgS" id="Qfo-98-GOT"/>
+                        <outlet property="stopButton" destination="oJo-TA-zgS" id="smi-i5-Ne0"/>
                         <outlet property="timerLabel" destination="PVj-gb-U6y" id="OjO-Q8-UQ3"/>
                     </connections>
                 </viewController>

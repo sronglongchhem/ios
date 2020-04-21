@@ -2,6 +2,7 @@ import XCTest
 import Architecture
 import Models
 import OtherServices
+import RxBlocking
 @testable import Timer
 
 class RunningTimeEntryReducerTests: XCTestCase {
@@ -16,7 +17,6 @@ class RunningTimeEntryReducerTests: XCTestCase {
         mockTime = Time(getNow: { return self.now })
         mockRepository = MockTimeLogRepository(time: mockTime)
         mockUser = User(id: 0, apiToken: "token", defaultWorkspace: 0)
-
         reducer = createRunningTimeEntryReducer(repository: mockRepository, time: mockTime)
     }
 
@@ -64,7 +64,50 @@ class RunningTimeEntryReducerTests: XCTestCase {
             }
         )
     }
-    
+
+    func testStopButtonTappedStopsTimeEntry() {
+        var timeEntries = [Int64: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-300), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-200), duration: nil)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = RunningTimeEntryState(
+            user: Loadable.loaded(mockUser),
+            entities: entities,
+            editableTimeEntry: nil
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .stopButtonTapped) {
+                $0.entities.timeEntries[1]!.duration = 200
+            }
+        )
+    }
+
+    func testStopButtonTappedDoesNothingIfThereIsNoRunninTE() {
+        var timeEntries = [Int64: TimeEntry]()
+        timeEntries[0] = TimeEntry.with(id: 0, start: now.addingTimeInterval(-300), duration: 100)
+        timeEntries[1] = TimeEntry.with(id: 1, start: now.addingTimeInterval(-200), duration: 100)
+
+        var entities = TimeLogEntities()
+        entities.timeEntries = timeEntries
+        let state = RunningTimeEntryState(
+            user: Loadable.loaded(mockUser),
+            entities: entities,
+            editableTimeEntry: nil
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .stopButtonTapped))
+    }
+
     func testStartTimeEntryTapped() {
 
         mockUser.defaultWorkspace = 1
@@ -76,7 +119,7 @@ class RunningTimeEntryReducerTests: XCTestCase {
             billable: false,
             workspaceId: mockUser.defaultWorkspace
         )
- 
+
         let state = RunningTimeEntryState(
             user: Loadable.loaded(mockUser),
             entities: TimeLogEntities(),

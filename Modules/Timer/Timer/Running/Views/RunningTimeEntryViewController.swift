@@ -13,13 +13,13 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
     public static var storyboardName = "Timer"
     public static var storyboardBundle = Assets.bundle
 
-    @IBOutlet var stopButtom: UIButton!
+    @IBOutlet var stopButton: UIButton!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var runningTimeEntryView: UIView!
     @IBOutlet var startButton: UIButton!
     @IBOutlet var startTimeEntryView: UIView!
-    
+
     public var store: RunningTimeEntryStore!
     private var disposeBag = DisposeBag()
     private var timer: Timer?
@@ -36,6 +36,11 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
             .drive(onNext: updateUI)
             .disposed(by: disposeBag)
 
+        stopButton.rx.tap
+            .mapTo(RunningTimeEntryAction.stopButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+            
         startButton.rx.tap
             .mapTo(RunningTimeEntryAction.startButtonTapped)
             .subscribe(onNext: store.dispatch)
