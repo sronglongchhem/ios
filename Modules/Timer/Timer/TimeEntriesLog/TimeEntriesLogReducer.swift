@@ -7,7 +7,11 @@ import OtherServices
 
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
-func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> Reducer<TimeEntriesLogState, TimeEntriesLogAction> {
+func createTimeEntriesLogReducer(
+    repository: TimeLogRepository,
+    time: Time,
+    schedulerProvider: SchedulerProvider
+) -> Reducer<TimeEntriesLogState, TimeEntriesLogAction> {
     return Reducer { state, action in
         switch action {
 
@@ -19,7 +23,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
         case let .timeEntrySwiped(direction, timeEntryId):
             switch direction {
             case .left:
-                return deleteWithUndo(timeEntryIds: [timeEntryId], state: &state, repository: repository)
+                return deleteWithUndo(timeEntryIds: [timeEntryId], state: &state, repository: repository, schedulerProvider: schedulerProvider)
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryId]!)]
             }
@@ -46,7 +50,7 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
         case let .timeEntryGroupSwiped(direction, timeEntryIds):
             switch direction {
             case .left:
-                return deleteWithUndo(timeEntryIds: Set(timeEntryIds), state: &state, repository: repository)
+                return deleteWithUndo(timeEntryIds: Set(timeEntryIds), state: &state, repository: repository, schedulerProvider: schedulerProvider)
             case .right:
                 return [continueTimeEntry(repository, time: time, timeEntry: state.entities.timeEntries[timeEntryIds.first!]!)]
             }
@@ -88,19 +92,20 @@ func createTimeEntriesLogReducer(repository: TimeLogRepository, time: Time) -> R
 private func deleteWithUndo(
     timeEntryIds: Set<Int64>,
     state: inout TimeEntriesLogState,
-    repository: TimeLogRepository
+    repository: TimeLogRepository,
+    schedulerProvider: SchedulerProvider
 ) -> [Effect<TimeEntriesLogAction>] {
     let timeEntryIdsSet = timeEntryIds
     if state.entriesPendingDeletion.isEmpty {
         state.entriesPendingDeletion = timeEntryIdsSet
-        return [waitForUndoEffect(timeEntryIdsSet)]
+        return [waitForUndoEffect(timeEntryIdsSet, schedulerProvider: schedulerProvider)]
     } else {
         let teIdsToDeleteImmediately = state.entriesPendingDeletion
         state.entriesPendingDeletion = timeEntryIdsSet
         var actions = teIdsToDeleteImmediately.map {
             deleteTimeEntry(repository, timeEntryId: $0)
         }
-        actions.append(waitForUndoEffect(timeEntryIdsSet))
+        actions.append(waitForUndoEffect(timeEntryIdsSet, schedulerProvider: schedulerProvider))
         return actions
     }
 }
@@ -121,8 +126,8 @@ private func continueTimeEntry(_ repository: TimeLogRepository, time: Time, time
     )
 }
 
-private func waitForUndoEffect(_ entriesToDelete: Set<Int64>) -> Effect<TimeEntriesLogAction> {
+private func waitForUndoEffect(_ entriesToDelete: Set<Int64>, schedulerProvider: SchedulerProvider) -> Effect<TimeEntriesLogAction> {
     return Observable.just(TimeEntriesLogAction.commitDeletion(entriesToDelete))
-        .delay(RxTimeInterval.seconds(TimerConstants.timeEntryDeletionDelaySeconds), scheduler: MainScheduler.instance)
+        .delay(RxTimeInterval.seconds(TimerConstants.timeEntryDeletionDelaySeconds), scheduler: schedulerProvider.mainScheduler)
         .toEffect()
 }

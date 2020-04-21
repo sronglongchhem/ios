@@ -2,6 +2,8 @@ import Foundation
 import XCTest
 import Architecture
 import RxBlocking
+import RxSwift
+import RxTest
 
 enum StepType {
     case send
@@ -43,6 +45,7 @@ struct Step<State, Action> {
 func assertReducerFlow<State: Equatable, Action: Equatable>(
     initialState: State,
     reducer: Reducer<State, Action>,
+    testScheduler: TestScheduler? = nil,
     steps: Step<State, Action>...,
     file: StaticString = #file,
     line: UInt = #line
@@ -67,7 +70,16 @@ func assertReducerFlow<State: Equatable, Action: Equatable>(
                 break
             }
 
-            let actions = effects.compactMap { try? $0.asSingle().toBlocking().first() }
+            var actions = [Action]()
+            if testScheduler == nil {
+                actions = effects.compactMap { try? $0.asSingle().toBlocking().first() }
+            } else {
+                _ = Observable.from(effects.map({ $0.asSingle().asObservable() }))
+                    .merge()
+                    .toArray()
+                    .subscribe(onSuccess: { actions = $0 })
+                testScheduler!.start()
+            }
             effects = []
 
             XCTAssert(actions.equalContents(to: step.actions), file: step.file, line: step.line)

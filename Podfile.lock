@@ -1,11 +1,11 @@
 PODS:
-  - AppCenter (3.1.0):
-    - AppCenter/Analytics (= 3.1.0)
-    - AppCenter/Crashes (= 3.1.0)
-  - AppCenter/Analytics (3.1.0):
+  - AppCenter (3.1.1):
+    - AppCenter/Analytics (= 3.1.1)
+    - AppCenter/Crashes (= 3.1.1)
+  - AppCenter/Analytics (3.1.1):
     - AppCenter/Core
-  - AppCenter/Core (3.1.0)
-  - AppCenter/Crashes (3.1.0):
+  - AppCenter/Core (3.1.1)
+  - AppCenter/Crashes (3.1.1):
     - AppCenter/Core
   - Differentiator (4.0.1)
   - Firebase/Analytics (6.22.0):
@@ -122,7 +122,7 @@ SPEC REPOS:
     - RxTest
 
 SPEC CHECKSUMS:
-  AppCenter: a1c30c47b7882a04a615ffa5ab26c007326436d8
+  AppCenter: 513d32888854d67d8cfbd3a8db16aeb5fb2e2a75
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
@@ -143,6 +143,6 @@ SPEC CHECKSUMS:
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   RxTest: 0132f952a61da82d5233abedaa559df91e5330e5
 
-PODFILE CHECKSUM: 617bee3227dcda420a4d87d97f4d8582c3d0a394
+PODFILE CHECKSUM: 89487fad01d8aa921ed575e4d30dec63f7832f98
 
 COCOAPODS: 1.9.1

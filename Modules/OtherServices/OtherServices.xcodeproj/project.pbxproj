@@ -11,6 +11,8 @@
 		3430C38824213E3F009CF454 /* OtherServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C38724213E3F009CF454 /* OtherServicesTests.swift */; };
 		3430C38A24213E3F009CF454 /* OtherServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 3430C37C24213E3F009CF454 /* OtherServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3430C39424213E4F009CF454 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C39324213E4F009CF454 /* Time.swift */; };
+		8CE16DF42444AEBC00B138EC /* SchedulerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE16DF32444AEBC00B138EC /* SchedulerProvider.swift */; };
+		CA2ECD612C866BDB3457129D /* Pods_OtherServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC564E3FC537386A615E777 /* Pods_OtherServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,11 @@
 		3430C38724213E3F009CF454 /* OtherServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherServicesTests.swift; sourceTree = "<group>"; };
 		3430C38924213E3F009CF454 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3430C39324213E4F009CF454 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		8CE16DF32444AEBC00B138EC /* SchedulerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerProvider.swift; sourceTree = "<group>"; };
+		8CE16DF62444AFE500B138EC /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC564E3FC537386A615E777 /* Pods_OtherServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OtherServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAB8FBB005E428D6855ED6EC /* Pods-OtherServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OtherServices.release.xcconfig"; path = "Target Support Files/Pods-OtherServices/Pods-OtherServices.release.xcconfig"; sourceTree = "<group>"; };
+		DEFE6D582988EB16829962D7 /* Pods-OtherServices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OtherServices.debug.xcconfig"; path = "Target Support Files/Pods-OtherServices/Pods-OtherServices.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA2ECD612C866BDB3457129D /* Pods_OtherServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +66,8 @@
 				3430C37B24213E3F009CF454 /* OtherServices */,
 				3430C38624213E3F009CF454 /* OtherServicesTests */,
 				3430C37A24213E3F009CF454 /* Products */,
+				8CE16DF52444AFE500B138EC /* Frameworks */,
+				E8015BB3F643CC41049742DF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +86,7 @@
 				3430C37C24213E3F009CF454 /* OtherServices.h */,
 				3430C37D24213E3F009CF454 /* Info.plist */,
 				3430C39324213E4F009CF454 /* Time.swift */,
+				8CE16DF32444AEBC00B138EC /* SchedulerProvider.swift */,
 			);
 			path = OtherServices;
 			sourceTree = "<group>";
@@ -87,6 +98,25 @@
 				3430C38924213E3F009CF454 /* Info.plist */,
 			);
 			path = OtherServicesTests;
+			sourceTree = "<group>";
+		};
+		8CE16DF52444AFE500B138EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CE16DF62444AFE500B138EC /* RxSwift.framework */,
+				8EC564E3FC537386A615E777 /* Pods_OtherServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8015BB3F643CC41049742DF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DEFE6D582988EB16829962D7 /* Pods-OtherServices.debug.xcconfig */,
+				CAB8FBB005E428D6855ED6EC /* Pods-OtherServices.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +137,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3430C38D24213E3F009CF454 /* Build configuration list for PBXNativeTarget "OtherServices" */;
 			buildPhases = (
+				C557412FB22EB044FF885A40 /* [CP] Check Pods Manifest.lock */,
 				3430C37424213E3F009CF454 /* Headers */,
 				3430C37524213E3F009CF454 /* Sources */,
 				3430C37624213E3F009CF454 /* Frameworks */,
@@ -194,12 +225,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C557412FB22EB044FF885A40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OtherServices-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3430C37524213E3F009CF454 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3430C39424213E4F009CF454 /* Time.swift in Sources */,
+				8CE16DF42444AEBC00B138EC /* SchedulerProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +403,7 @@
 		};
 		3430C38E24213E3F009CF454 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEFE6D582988EB16829962D7 /* Pods-OtherServices.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -376,6 +434,7 @@
 		};
 		3430C38F24213E3F009CF454 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAB8FBB005E428D6855ED6EC /* Pods-OtherServices.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

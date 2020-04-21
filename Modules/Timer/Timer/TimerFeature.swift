@@ -3,9 +3,9 @@ import Architecture
 import Repository
 import OtherServices
 
-public func createTimerReducer(repository: Repository, time: Time) -> Reducer<TimerState, TimerAction> {
+public func createTimerReducer(repository: Repository, time: Time, schedulerProvider: SchedulerProvider) -> Reducer<TimerState, TimerAction> {
     return combine(
-        createTimeEntriesLogReducer(repository: repository, time: time)
+        createTimeEntriesLogReducer(repository: repository, time: time, schedulerProvider: schedulerProvider)
             .pullback(state: \.timeLogState, action: \.timeLog),
         createStartEditReducer(repository: repository, time: time)
             .pullback(state: \.startEditState, action: \.startEdit),

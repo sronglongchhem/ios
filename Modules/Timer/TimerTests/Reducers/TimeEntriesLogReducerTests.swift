@@ -3,6 +3,7 @@ import Architecture
 import Models
 import OtherServices
 import RxBlocking
+import RxTest
 @testable import Timer
 
 // swiftlint:disable type_body_length
@@ -13,11 +14,14 @@ class TimeEntriesLogReducerTests: XCTestCase {
     var mockRepository: MockTimeLogRepository!
     var mockTime: Time!
     var reducer: Reducer<TimeEntriesLogState, TimeEntriesLogAction>!
+    var testScheduler = TestScheduler(initialClock: 0)
 
     override func setUp() {
         mockTime = Time(getNow: { return self.now })
         mockRepository = MockTimeLogRepository(time: mockTime)
-        reducer = createTimeEntriesLogReducer(repository: mockRepository, time: mockTime)
+        reducer = createTimeEntriesLogReducer(repository: mockRepository, time: mockTime, schedulerProvider: SchedulerProvider(
+            mainScheduler: testScheduler, backgroundScheduler: testScheduler
+        ))
     }
 
     func testContinueTappedHappyFlow() {
@@ -87,6 +91,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
+            testScheduler: testScheduler,
             steps:
             Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)) {
                 $0.entriesPendingDeletion = [swipedTimeEntryId]
@@ -114,6 +119,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
+            testScheduler: testScheduler,
             steps:
             Step(.send, .timeEntrySwiped(.left, swipedTimeEntryId)) {
                 $0.entriesPendingDeletion = [swipedTimeEntryId]
@@ -141,6 +147,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
+            testScheduler: testScheduler,
             steps:
             Step(.send, .timeEntryGroupSwiped(.left, Array(swipedTimeEntryIds))) {
                 $0.entriesPendingDeletion = swipedTimeEntryIds
@@ -169,6 +176,7 @@ class TimeEntriesLogReducerTests: XCTestCase {
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
+            testScheduler: testScheduler,
             steps:
             Step(.send, .timeEntryGroupSwiped(.left, Array(swipedTimeEntryIds))) {
                 $0.entriesPendingDeletion = swipedTimeEntryIds
