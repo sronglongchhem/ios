@@ -20,6 +20,7 @@
 		8C2517C92403C2EF00BAD4B5 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2517C72403C2EF00BAD4B5 /* Onboarding.storyboard */; };
 		8C2517CA2403C2EF00BAD4B5 /* Timer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2517C82403C2EF00BAD4B5 /* Timer.storyboard */; };
 		8CB5452E240E49C300154473 /* tasks.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5452D240E49C300154473 /* tasks.txt */; };
+		B4E1B2D2244E1E340082A68C /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4E1B2D1244E1E340082A68C /* Project.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8C2517C72403C2EF00BAD4B5 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		8C2517C82403C2EF00BAD4B5 /* Timer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timer.storyboard; sourceTree = "<group>"; };
 		8CB5452D240E49C300154473 /* tasks.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tasks.txt; sourceTree = "<group>"; };
+		B4E1B2D1244E1E340082A68C /* Project.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				8C2517C72403C2EF00BAD4B5 /* Onboarding.storyboard */,
 				8C2517C82403C2EF00BAD4B5 /* Timer.storyboard */,
+				B4E1B2D1244E1E340082A68C /* Project.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			files = (
 				8C2517CA2403C2EF00BAD4B5 /* Timer.storyboard in Resources */,
 				8C2517C32403C2CA00BAD4B5 /* timeentries.txt in Resources */,
+				B4E1B2D2244E1E340082A68C /* Project.storyboard in Resources */,
 				8C2517C42403C2CA00BAD4B5 /* tags.txt in Resources */,
 				8C2517C02403C2CA00BAD4B5 /* me.txt in Resources */,
 				8C2517BF2403C2CA00BAD4B5 /* workspaces.txt in Resources */,

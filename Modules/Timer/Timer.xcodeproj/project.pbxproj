@@ -406,15 +406,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B417E98B244F76F0004D251F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CC2E552A2448AD8C005A3B40 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				B417E98B244F76F0004D251F /* Views */,
 				CC03C2712448AE1B0071FA55 /* ProjectAction.swift */,
 				CC03C2722448AE1B0071FA55 /* ProjectCoordinator.swift */,
 				CC03C2732448AE1B0071FA55 /* ProjectFeature.swift */,
 				CC03C2742448AE1B0071FA55 /* ProjectReducer.swift */,
 				CC03C2752448AE1B0071FA55 /* ProjectState.swift */,
-				CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */,
 				CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */,
 				CC03C27F2448AF0A0071FA55 /* EditableProject.swift */,
 			);
