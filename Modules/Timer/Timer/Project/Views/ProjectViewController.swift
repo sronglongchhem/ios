@@ -34,5 +34,14 @@ public class ProjectViewController: UIViewController, Storyboarded {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        store.select({ $0.editableProject })
+            .map({ $0?.name })
+            .drive(projectNameTextField.rx.text)
+            .disposed(by: disposeBag)
+
+        projectNameTextField.rx.text.compactMap({ $0 })
+            .map(ProjectAction.nameEntered)
+            .bind(onNext: store.dispatch)
+            .disposed(by: disposeBag)
     }
 }
