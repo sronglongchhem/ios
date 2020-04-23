@@ -9,6 +9,8 @@ public enum StartEditAction: Equatable {
     case timeEntryStarted(startedTimeEntry: TimeEntry, stoppedTimeEntry: TimeEntry?)
     case timeEntryUpdated(TimeEntry)
     
+    case projectButtonTapped
+    case tagButtonTapped
     case billableButtonTapped
 
     case setError(ErrorType)
@@ -40,6 +42,12 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case .billableButtonTapped:
             return "BillableButtonTapped"
+            
+        case .tagButtonTapped:
+            return "TagButtonTapped"
+            
+        case .projectButtonTapped:
+            return "ProjectButtonTapped"
             
         case let .setError(error):
             return "SetError: \(error)"

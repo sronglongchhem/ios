@@ -70,16 +70,18 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         store.select({ $0.editableTimeEntry })
             .drive(onNext: displayTimeEntry)
             .disposed(by: disposeBag)
+        
+        descriptionTextField.rx.text.compactMap({ $0 })
+            .map(StartEditAction.descriptionEntered)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
 
         closeButton.rx.tap
             .mapTo(StartEditAction.closeButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
         
-        startEditInputAccessoryView.billableButton.rx.tap
-            .mapTo(StartEditAction.billableButtonTapped)
-            .subscribe(onNext: store.dispatch)
-            .disposed(by: disposeBag)
+        connectAccessoryViewButtons()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
@@ -95,6 +97,23 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     }
 
     public override var canBecomeFirstResponder: Bool { true }
+    
+    private func connectAccessoryViewButtons() {
+        startEditInputAccessoryView.projectButton.rx.tap
+            .mapTo(StartEditAction.projectButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+        
+        startEditInputAccessoryView.tagButton.rx.tap
+            .mapTo(StartEditAction.tagButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+        
+        startEditInputAccessoryView.billableButton.rx.tap
+            .mapTo(StartEditAction.billableButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+    }
 
     private func displayTimeEntry(timeEntry: EditableTimeEntry?) {
         guard let timeEntry = timeEntry else {

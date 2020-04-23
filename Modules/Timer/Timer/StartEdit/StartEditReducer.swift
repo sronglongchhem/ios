@@ -45,6 +45,16 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
         case let .autocompleteSuggestionsUpdated(suggestions):
             state.autocompleteSuggestions = suggestions
             return []
+            
+        case .projectButtonTapped:
+            guard let editableTimeEntry = state.editableTimeEntry else { return [] }
+            state.editableTimeEntry?.description = appendCharacter("@", toString: editableTimeEntry.description)
+            return []
+            
+        case .tagButtonTapped:
+            guard let editableTimeEntry = state.editableTimeEntry else { return [] }
+            state.editableTimeEntry?.description = appendCharacter("#", toString: editableTimeEntry.description)
+            return []
 
         case let .setError(error):
             fatalError(error.description)
@@ -79,4 +89,12 @@ func doneButtonTapped(_ state: StartEditState, _ repository: TimeLogRepository) 
 
 func persistUpdatedTimeEntries(_ timeEntries: [TimeEntry]) {
     //repository.update()
+}
+
+func appendCharacter( _ character: String, toString string: String) -> String {
+    var stringToAppend = character
+    if let lastChar = string.last, lastChar != " " {
+        stringToAppend = " " + stringToAppend
+    }
+    return string + stringToAppend
 }

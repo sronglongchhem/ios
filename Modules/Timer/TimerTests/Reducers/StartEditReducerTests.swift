@@ -4,6 +4,7 @@ import Models
 import OtherServices
 @testable import Timer
 
+// swiftlint:disable type_body_length
 class StartEditReducerTests: XCTestCase {
     var now = Date(timeIntervalSince1970: 987654321)
     var mockRepository: MockTimeLogRepository!
@@ -204,6 +205,78 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, StartEditAction.autocompleteSuggestionsUpdated(autocompleteSuggestions)) {
                 $0.autocompleteSuggestions = autocompleteSuggestions
             })
+    }
+    
+    func testProjectButtonTappedNoSpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.send, .projectButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end @" }
+        )
+    }
+    
+    func testProjectButtonTappedASpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.send, .projectButtonTapped) { $0.editableTimeEntry?.description = "test with a space at the end @" }
+        )
+    }
+    
+    func testTagButtonTappedWithNoSpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end #" }
+        )
+    }
+    
+    func testTagButtonTappedWithASpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: []
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with a space at the end #" }
+        )
     }
     
     func testBillableButtonTapped() {
