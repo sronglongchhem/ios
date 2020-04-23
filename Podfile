@@ -36,6 +36,7 @@ project 'Modules/Timer/Timer.xcodeproj'
 project 'Modules/Repository/Repository.xcodeproj'
 project 'Modules/UIUtils/UIUtils.xcodeproj'
 project 'Modules/Utils/Utils.xcodeproj'
+project 'Modules/Database/Database.xcodeproj'
 project 'Modules/OtherServices/OtherServices.xcodeproj'
 project 'Modules/Analytics/Analytics.xcodeproj'
 
@@ -114,6 +115,16 @@ target :Utils do
     project 'Modules/Utils/Utils.xcodeproj'
     rxswift
     rxcocoa
+end
+
+target :Database do
+    use_frameworks!
+    project 'Modules/Database/Database.xcodeproj'
+    rxswift
+
+    target :DatabaseTests do
+      rxtests
+    end
 end
 
 target :OtherServices do

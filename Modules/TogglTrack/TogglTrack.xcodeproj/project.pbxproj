@@ -23,6 +23,7 @@
 		8C2516642403C17500BAD4B5 /* TogglTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2516562403C17500BAD4B5 /* TogglTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C2517B32403C2BC00BAD4B5 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2517AD2403C2BC00BAD4B5 /* AppReducer.swift */; };
 		8C2517B62403C2BC00BAD4B5 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2517B02403C2BC00BAD4B5 /* AppEnvironment.swift */; };
+		8C2EBA192451D99000A86FC3 /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2EBA182451D99000A86FC3 /* Database.framework */; };
 		8C38E2452419058700C9E053 /* API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2517F62403C58200BAD4B5 /* API.framework */; };
 		8C38E2482419058800C9E053 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2517F72403C58200BAD4B5 /* Networking.framework */; };
 		8C38E24A2419058900C9E053 /* Onboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2517F82403C58200BAD4B5 /* Onboarding.framework */; };
@@ -74,6 +75,7 @@
 		8C2518C72403C89E00BAD4B5 /* RxCocoaDep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoaDep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2518C82403C89E00BAD4B5 /* RxSwiftDep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwiftDep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2518F52403CA9900BAD4B5 /* RxDatasourcesDep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxDatasourcesDep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2EBA182451D99000A86FC3 /* Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAAACB624051CCE00E9BBAF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8CB545BC2410FFA500154473 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8CB545C42410FFF500154473 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C38E2452419058700C9E053 /* API.framework in Frameworks */,
+				8C2EBA192451D99000A86FC3 /* Database.framework in Frameworks */,
 				8C38E2502419058E00C9E053 /* Timer.framework in Frameworks */,
 				8C38E24E2419058C00C9E053 /* Repository.framework in Frameworks */,
 				8C38E2522419058F00C9E053 /* Utils.framework in Frameworks */,
@@ -181,6 +184,7 @@
 		8C2517F52403C58200BAD4B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C2EBA182451D99000A86FC3 /* Database.framework */,
 				343E37A9244725C700A65AFD /* Analytics.framework */,
 				B4B4F0A62436313200DFBF2E /* UIUtils.framework */,
 				8C2518F52403CA9900BAD4B5 /* RxDatasourcesDep.framework */,
@@ -282,7 +286,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Ricardo Sánchez Sotres";
 				TargetAttributes = {
 					8C2516522403C17500BAD4B5 = {
@@ -543,7 +547,7 @@
 			baseConfigurationReference = EAF812E5FB6DBE7F05896418 /* Pods-TogglTrack.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -573,7 +577,7 @@
 			baseConfigurationReference = 5011844FD27437FDB171F288 /* Pods-TogglTrack.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";

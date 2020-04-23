@@ -13,4 +13,14 @@ public struct Client: Codable, Entity, Equatable {
     
         case workspaceId = "wid"
     }
+
+    public init(
+        id: Int64,
+        name: String,
+        workspaceId: Int64
+    ) {
+        self.id = id
+        self.name = name
+        self.workspaceId = workspaceId
+    }
 }

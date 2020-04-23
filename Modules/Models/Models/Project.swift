@@ -24,4 +24,24 @@ public struct Project: Codable, Entity, Equatable {
         case workspaceId = "workspace_id"
         case clientId = "client_id"
     }
+
+    public init(
+        id: Int64,
+        name: String,
+        isPrivate: Bool,
+        isActive: Bool,
+        color: String,
+        billable: Bool?,
+        workspaceId: Int64,
+        clientId: Int64?
+    ) {
+        self.id = id
+        self.name = name
+        self.isPrivate = isPrivate
+        self.isActive = isActive
+        self.color = color
+        self.billable = billable
+        self.workspaceId = workspaceId
+        self.clientId = clientId
+    }
 }

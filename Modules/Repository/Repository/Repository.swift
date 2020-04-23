@@ -58,12 +58,7 @@ extension Repository: TimeLogRepository {
     }
     
     public func getTimeEntries() -> Single<[TimeEntry]> {
-        do {
-            let timeEntries = try database.timeEntries.getAll()
-            return Single.just(timeEntries.map({ $0.toTimeEntry() }))
-        } catch let error {
-            return Single.error(error)
-        }
+        database.timeEntries.rx.getAll()
     }
     
     public func getProjects() -> Single<[Project]> {
@@ -98,10 +93,10 @@ extension Repository: TimeLogRepository {
             let timeEntries = try database.timeEntries.getAllRunning()
             
             var stoppedTimeEntry: TimeEntry?
-            if var runningEntryDAO = timeEntries.first {
-                runningEntryDAO.duration = NSNumber.fromDouble(time.now().timeIntervalSince(runningEntryDAO.start))
-                try database.timeEntries.update(timeEntry: runningEntryDAO)
-                stoppedTimeEntry = runningEntryDAO.toTimeEntry()
+            if var runningEntry = timeEntries.first {
+                runningEntry.duration = time.now().timeIntervalSince(runningEntry.start)
+                try database.timeEntries.update(entity: runningEntry)
+                stoppedTimeEntry = runningEntry
             }
             
             let newTimeEntry = TimeEntry(
@@ -111,7 +106,7 @@ extension Repository: TimeLogRepository {
                 duration: nil,
                 billable: false,
                 workspaceId: timeEntry.workspaceId)
-            _ = try database.timeEntries.insert(timeEntry: newTimeEntry.toDAO())
+            try database.timeEntries.insert(entity: newTimeEntry)
             return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
         } catch let error {
             return Single.error(error)
@@ -123,11 +118,6 @@ extension Repository: TimeLogRepository {
     }
     
     public func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
-        do {
-            try database.timeEntries.delete(id: Int64(timeEntryId))
-            return Single.just(())
-        } catch let error {
-            return Single.error(error)
-        }
+        return database.timeEntries.rx.delete(id: timeEntryId)
     }
 }

@@ -3,152 +3,304 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3430C40D2423BD83009CF454 /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C4032423BD83009CF454 /* Database.framework */; };
-		3430C4122423BD83009CF454 /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C4112423BD83009CF454 /* DatabaseTests.swift */; };
-		3430C4142423BD83009CF454 /* Database.h in Headers */ = {isa = PBXBuildFile; fileRef = 3430C4062423BD83009CF454 /* Database.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3430C41E2423BD9F009CF454 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C41D2423BD9F009CF454 /* Database.swift */; };
-		3430C4212423BDBD009CF454 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3430C41F2423BDBD009CF454 /* Database.xcdatamodeld */; };
-		3430C42B242402B7009CF454 /* ManagedTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */; };
-		3430C42E242405FC009CF454 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C42D242405FC009CF454 /* Models.framework */; };
-		B49CDBF324323EF600BFBBFB /* ManagedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF224323EF600BFBBFB /* ManagedTag.swift */; };
-		B49CDBF5243243DE00BFBBFB /* ManagedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */; };
-		B49CDBF924326BD700BFBBFB /* ManagedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBF824326BD700BFBBFB /* ManagedClient.swift */; };
-		B49CDBFB2433676600BFBBFB /* ManagedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49CDBFA2433676600BFBBFB /* ManagedProject.swift */; };
+		665CD4EE80A71EE3D0DEFC31 /* Pods_Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B839C78EE62B94AF3A3BC5 /* Pods_Database.framework */; };
+		69CB67C47D2427767757D33D /* Pods_Database_DatabaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF1AF5C3A0F2B4E0C427A13 /* Pods_Database_DatabaseTests.framework */; };
+		8CCC1BD72451E8070065EE4E /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCC1BCD2451E8070065EE4E /* Database.framework */; };
+		8CCC1BDC2451E8070065EE4E /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BDB2451E8070065EE4E /* DatabaseTests.swift */; };
+		8CCC1BDE2451E8070065EE4E /* Database.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CCC1BD02451E8070065EE4E /* Database.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CCC1C042451E8330065EE4E /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BE82451E8320065EE4E /* CoreDataModel.swift */; };
+		8CCC1C052451E8330065EE4E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BE92451E8320065EE4E /* CoreDataStack.swift */; };
+		8CCC1C062451E8330065EE4E /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BEA2451E8320065EE4E /* Managed.swift */; };
+		8CCC1C072451E8330065EE4E /* Project+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BED2451E8320065EE4E /* Project+CoreDataModel.swift */; };
+		8CCC1C082451E8330065EE4E /* Task+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BEE2451E8320065EE4E /* Task+CoreDataModel.swift */; };
+		8CCC1C092451E8330065EE4E /* Tag+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BEF2451E8320065EE4E /* Tag+CoreDataModel.swift */; };
+		8CCC1C0A2451E8330065EE4E /* Client+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF02451E8320065EE4E /* Client+CoreDataModel.swift */; };
+		8CCC1C0B2451E8330065EE4E /* TimeEntry+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF12451E8320065EE4E /* TimeEntry+CoreDataModel.swift */; };
+		8CCC1C0C2451E8330065EE4E /* Workspace+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF22451E8320065EE4E /* Workspace+CoreDataModel.swift */; };
+		8CCC1C0D2451E8330065EE4E /* ManagedTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF42451E8320065EE4E /* ManagedTimeEntry.swift */; };
+		8CCC1C0E2451E8330065EE4E /* ManagedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF52451E8320065EE4E /* ManagedEntity.swift */; };
+		8CCC1C0F2451E8330065EE4E /* ManagedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF62451E8320065EE4E /* ManagedTag.swift */; };
+		8CCC1C102451E8330065EE4E /* ManagedProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF72451E8320065EE4E /* ManagedProject.swift */; };
+		8CCC1C112451E8330065EE4E /* ManagedWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF82451E8320065EE4E /* ManagedWorkspace.swift */; };
+		8CCC1C122451E8330065EE4E /* ManagedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BF92451E8320065EE4E /* ManagedClient.swift */; };
+		8CCC1C132451E8330065EE4E /* ManagedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BFA2451E8320065EE4E /* ManagedTask.swift */; };
+		8CCC1C142451E8330065EE4E /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BFC2451E8320065EE4E /* ModelExtensions.swift */; };
+		8CCC1C152451E8330065EE4E /* EntityDatabase+TimeEntry+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BFD2451E8320065EE4E /* EntityDatabase+TimeEntry+Rx.swift */; };
+		8CCC1C162451E8330065EE4E /* EntityDatabase+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BFE2451E8320065EE4E /* EntityDatabase+Rx.swift */; };
+		8CCC1C172451E8330065EE4E /* CoreDataModel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1BFF2451E8320065EE4E /* CoreDataModel+Rx.swift */; };
+		8CCC1C182451E8330065EE4E /* EntityDatabase+TimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C002451E8320065EE4E /* EntityDatabase+TimeEntry.swift */; };
+		8CCC1C192451E8330065EE4E /* EntityDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C012451E8320065EE4E /* EntityDatabase.swift */; };
+		8CCC1C1A2451E8330065EE4E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C022451E8320065EE4E /* Database.swift */; };
+		8CCC1C1B2451E8330065EE4E /* EntityDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C032451E8330065EE4E /* EntityDatabaseProtocol.swift */; };
+		8CCC1C262451E8470065EE4E /* TimeEntryDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C1C2451E8470065EE4E /* TimeEntryDatabaseTests.swift */; };
+		8CCC1C272451E8470065EE4E /* ClientDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C1D2451E8470065EE4E /* ClientDatabaseTests.swift */; };
+		8CCC1C282451E8470065EE4E /* EntityDatabaseRxExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C1E2451E8470065EE4E /* EntityDatabaseRxExtensionsTests.swift */; };
+		8CCC1C292451E8470065EE4E /* WorkspaceDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C1F2451E8470065EE4E /* WorkspaceDatabaseTests.swift */; };
+		8CCC1C2A2451E8470065EE4E /* TagDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C202451E8470065EE4E /* TagDatabaseTests.swift */; };
+		8CCC1C2B2451E8470065EE4E /* MockPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C222451E8470065EE4E /* MockPersistentContainer.swift */; };
+		8CCC1C2C2451E8470065EE4E /* EntityDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C232451E8470065EE4E /* EntityDatabaseTests.swift */; };
+		8CCC1C2D2451E8470065EE4E /* ProjectDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C242451E8470065EE4E /* ProjectDatabaseTests.swift */; };
+		8CCC1C2E2451E8470065EE4E /* TaskDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC1C252451E8470065EE4E /* TaskDatabaseTests.swift */; };
+		8CD947A72451E86F00C45A4D /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD947A62451E86F00C45A4D /* Models.framework */; };
+		8CD947AB2451E87400C45A4D /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD947AA2451E87400C45A4D /* Utils.framework */; };
+		8CD947AE2451E87A00C45A4D /* Assets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD947AD2451E87A00C45A4D /* Assets.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3430C40E2423BD83009CF454 /* PBXContainerItemProxy */ = {
+		8CCC1BD82451E8070065EE4E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3430C3FA2423BD83009CF454 /* Project object */;
+			containerPortal = 8CCC1BC42451E8070065EE4E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3430C4022423BD83009CF454;
+			remoteGlobalIDString = 8CCC1BCC2451E8070065EE4E;
 			remoteInfo = Database;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3430C4032423BD83009CF454 /* Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3430C4062423BD83009CF454 /* Database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
-		3430C4072423BD83009CF454 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3430C40C2423BD83009CF454 /* DatabaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatabaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3430C4112423BD83009CF454 /* DatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTests.swift; sourceTree = "<group>"; };
-		3430C4132423BD83009CF454 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3430C41D2423BD9F009CF454 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		3430C4202423BDBD009CF454 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
-		3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimeEntry.swift; sourceTree = "<group>"; };
-		3430C42D242405FC009CF454 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B49CDBF224323EF600BFBBFB /* ManagedTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTag.swift; sourceTree = "<group>"; };
-		B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedEntity.swift; sourceTree = "<group>"; };
-		B49CDBF824326BD700BFBBFB /* ManagedClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedClient.swift; sourceTree = "<group>"; };
-		B49CDBFA2433676600BFBBFB /* ManagedProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedProject.swift; sourceTree = "<group>"; };
+		2FF1AF5C3A0F2B4E0C427A13 /* Pods_Database_DatabaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Database_DatabaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DCB3B65FCCEDA76728B7A44 /* Pods-Database.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database.release.xcconfig"; path = "Target Support Files/Pods-Database/Pods-Database.release.xcconfig"; sourceTree = "<group>"; };
+		7ECC3CEC9682125AF62D40EE /* Pods-Database-DatabaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database-DatabaseTests.release.xcconfig"; path = "Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C29963185E04CB03444D877 /* Pods-Database-DatabaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database-DatabaseTests.debug.xcconfig"; path = "Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8CCC1BCD2451E8070065EE4E /* Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CCC1BD02451E8070065EE4E /* Database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		8CCC1BD12451E8070065EE4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CCC1BD62451E8070065EE4E /* DatabaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatabaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CCC1BDB2451E8070065EE4E /* DatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1BDD2451E8070065EE4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CCC1BE82451E8320065EE4E /* CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		8CCC1BE92451E8320065EE4E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		8CCC1BEA2451E8320065EE4E /* Managed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		8CCC1BED2451E8320065EE4E /* Project+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BEE2451E8320065EE4E /* Task+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BEF2451E8320065EE4E /* Tag+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BF02451E8320065EE4E /* Client+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Client+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BF12451E8320065EE4E /* TimeEntry+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeEntry+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BF22451E8320065EE4E /* Workspace+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Workspace+CoreDataModel.swift"; sourceTree = "<group>"; };
+		8CCC1BF42451E8320065EE4E /* ManagedTimeEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTimeEntry.swift; sourceTree = "<group>"; };
+		8CCC1BF52451E8320065EE4E /* ManagedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedEntity.swift; sourceTree = "<group>"; };
+		8CCC1BF62451E8320065EE4E /* ManagedTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTag.swift; sourceTree = "<group>"; };
+		8CCC1BF72451E8320065EE4E /* ManagedProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedProject.swift; sourceTree = "<group>"; };
+		8CCC1BF82451E8320065EE4E /* ManagedWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedWorkspace.swift; sourceTree = "<group>"; };
+		8CCC1BF92451E8320065EE4E /* ManagedClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedClient.swift; sourceTree = "<group>"; };
+		8CCC1BFA2451E8320065EE4E /* ManagedTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTask.swift; sourceTree = "<group>"; };
+		8CCC1BFC2451E8320065EE4E /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
+		8CCC1BFD2451E8320065EE4E /* EntityDatabase+TimeEntry+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EntityDatabase+TimeEntry+Rx.swift"; sourceTree = "<group>"; };
+		8CCC1BFE2451E8320065EE4E /* EntityDatabase+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EntityDatabase+Rx.swift"; sourceTree = "<group>"; };
+		8CCC1BFF2451E8320065EE4E /* CoreDataModel+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataModel+Rx.swift"; sourceTree = "<group>"; };
+		8CCC1C002451E8320065EE4E /* EntityDatabase+TimeEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EntityDatabase+TimeEntry.swift"; sourceTree = "<group>"; };
+		8CCC1C012451E8320065EE4E /* EntityDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityDatabase.swift; sourceTree = "<group>"; };
+		8CCC1C022451E8320065EE4E /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		8CCC1C032451E8330065EE4E /* EntityDatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityDatabaseProtocol.swift; sourceTree = "<group>"; };
+		8CCC1C1C2451E8470065EE4E /* TimeEntryDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C1D2451E8470065EE4E /* ClientDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C1E2451E8470065EE4E /* EntityDatabaseRxExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityDatabaseRxExtensionsTests.swift; sourceTree = "<group>"; };
+		8CCC1C1F2451E8470065EE4E /* WorkspaceDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C202451E8470065EE4E /* TagDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C222451E8470065EE4E /* MockPersistentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockPersistentContainer.swift; sourceTree = "<group>"; };
+		8CCC1C232451E8470065EE4E /* EntityDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C242451E8470065EE4E /* ProjectDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDatabaseTests.swift; sourceTree = "<group>"; };
+		8CCC1C252451E8470065EE4E /* TaskDatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDatabaseTests.swift; sourceTree = "<group>"; };
+		8CD947A62451E86F00C45A4D /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CD947AA2451E87400C45A4D /* Utils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CD947AD2451E87A00C45A4D /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD73A9B85790856127435AAE /* Pods-Database.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database.debug.xcconfig"; path = "Target Support Files/Pods-Database/Pods-Database.debug.xcconfig"; sourceTree = "<group>"; };
+		E9B839C78EE62B94AF3A3BC5 /* Pods_Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3430C4002423BD83009CF454 /* Frameworks */ = {
+		8CCC1BCA2451E8070065EE4E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3430C42E242405FC009CF454 /* Models.framework in Frameworks */,
+				8CD947A72451E86F00C45A4D /* Models.framework in Frameworks */,
+				8CD947AB2451E87400C45A4D /* Utils.framework in Frameworks */,
+				665CD4EE80A71EE3D0DEFC31 /* Pods_Database.framework in Frameworks */,
+				8CD947AE2451E87A00C45A4D /* Assets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3430C4092423BD83009CF454 /* Frameworks */ = {
+		8CCC1BD32451E8070065EE4E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3430C40D2423BD83009CF454 /* Database.framework in Frameworks */,
+				8CCC1BD72451E8070065EE4E /* Database.framework in Frameworks */,
+				69CB67C47D2427767757D33D /* Pods_Database_DatabaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3430C3F92423BD83009CF454 = {
+		8CCC1BC32451E8070065EE4E = {
 			isa = PBXGroup;
 			children = (
-				3430C41F2423BDBD009CF454 /* Database.xcdatamodeld */,
-				3430C4052423BD83009CF454 /* Database */,
-				3430C4102423BD83009CF454 /* DatabaseTests */,
-				3430C4042423BD83009CF454 /* Products */,
-				3430C42C242405FC009CF454 /* Frameworks */,
+				8CCC1BCF2451E8070065EE4E /* Database */,
+				8CCC1BDA2451E8070065EE4E /* DatabaseTests */,
+				8CCC1BCE2451E8070065EE4E /* Products */,
+				F4A8B70844EF24E96787827C /* Pods */,
+				E14C47761BBEC2D5DB655D97 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		3430C4042423BD83009CF454 /* Products */ = {
+		8CCC1BCE2451E8070065EE4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3430C4032423BD83009CF454 /* Database.framework */,
-				3430C40C2423BD83009CF454 /* DatabaseTests.xctest */,
+				8CCC1BCD2451E8070065EE4E /* Database.framework */,
+				8CCC1BD62451E8070065EE4E /* DatabaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3430C4052423BD83009CF454 /* Database */ = {
+		8CCC1BCF2451E8070065EE4E /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				3430C429242402A7009CF454 /* Models */,
-				3430C4062423BD83009CF454 /* Database.h */,
-				3430C4072423BD83009CF454 /* Info.plist */,
-				3430C41D2423BD9F009CF454 /* Database.swift */,
+				8CCC1C022451E8320065EE4E /* Database.swift */,
+				8CCC1C012451E8320065EE4E /* EntityDatabase.swift */,
+				8CCC1C002451E8320065EE4E /* EntityDatabase+TimeEntry.swift */,
+				8CCC1C032451E8330065EE4E /* EntityDatabaseProtocol.swift */,
+				8CCC1BE72451E8320065EE4E /* CoreData */,
+				8CCC1BFB2451E8320065EE4E /* Database RxExtensions */,
+				8CCC1BEB2451E8320065EE4E /* Models */,
+				8CCC1BD02451E8070065EE4E /* Database.h */,
+				8CCC1BD12451E8070065EE4E /* Info.plist */,
 			);
 			path = Database;
 			sourceTree = "<group>";
 		};
-		3430C4102423BD83009CF454 /* DatabaseTests */ = {
+		8CCC1BDA2451E8070065EE4E /* DatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				3430C4112423BD83009CF454 /* DatabaseTests.swift */,
-				3430C4132423BD83009CF454 /* Info.plist */,
+				8CCC1C212451E8470065EE4E /* Mocks */,
+				8CCC1C1D2451E8470065EE4E /* ClientDatabaseTests.swift */,
+				8CCC1C1E2451E8470065EE4E /* EntityDatabaseRxExtensionsTests.swift */,
+				8CCC1C232451E8470065EE4E /* EntityDatabaseTests.swift */,
+				8CCC1C242451E8470065EE4E /* ProjectDatabaseTests.swift */,
+				8CCC1C202451E8470065EE4E /* TagDatabaseTests.swift */,
+				8CCC1C252451E8470065EE4E /* TaskDatabaseTests.swift */,
+				8CCC1C1C2451E8470065EE4E /* TimeEntryDatabaseTests.swift */,
+				8CCC1C1F2451E8470065EE4E /* WorkspaceDatabaseTests.swift */,
+				8CCC1BDB2451E8070065EE4E /* DatabaseTests.swift */,
+				8CCC1BDD2451E8070065EE4E /* Info.plist */,
 			);
 			path = DatabaseTests;
 			sourceTree = "<group>";
 		};
-		3430C429242402A7009CF454 /* Models */ = {
+		8CCC1BE72451E8320065EE4E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				B49CDBF4243243DE00BFBBFB /* ManagedEntity.swift */,
-				B49CDBF824326BD700BFBBFB /* ManagedClient.swift */,
-				B49CDBFA2433676600BFBBFB /* ManagedProject.swift */,
-				B49CDBF224323EF600BFBBFB /* ManagedTag.swift */,
-				3430C42A242402B7009CF454 /* ManagedTimeEntry.swift */,
+				8CCC1BE82451E8320065EE4E /* CoreDataModel.swift */,
+				8CCC1BE92451E8320065EE4E /* CoreDataStack.swift */,
+				8CCC1BEA2451E8320065EE4E /* Managed.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8CCC1BEB2451E8320065EE4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8CCC1BEC2451E8320065EE4E /* ModelExtensions */,
+				8CCC1BF32451E8320065EE4E /* ManagedObjects */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		3430C42C242405FC009CF454 /* Frameworks */ = {
+		8CCC1BEC2451E8320065EE4E /* ModelExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				3430C42D242405FC009CF454 /* Models.framework */,
+				8CCC1BED2451E8320065EE4E /* Project+CoreDataModel.swift */,
+				8CCC1BEE2451E8320065EE4E /* Task+CoreDataModel.swift */,
+				8CCC1BEF2451E8320065EE4E /* Tag+CoreDataModel.swift */,
+				8CCC1BF02451E8320065EE4E /* Client+CoreDataModel.swift */,
+				8CCC1BF12451E8320065EE4E /* TimeEntry+CoreDataModel.swift */,
+				8CCC1BF22451E8320065EE4E /* Workspace+CoreDataModel.swift */,
+			);
+			path = ModelExtensions;
+			sourceTree = "<group>";
+		};
+		8CCC1BF32451E8320065EE4E /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				8CCC1BF42451E8320065EE4E /* ManagedTimeEntry.swift */,
+				8CCC1BF52451E8320065EE4E /* ManagedEntity.swift */,
+				8CCC1BF62451E8320065EE4E /* ManagedTag.swift */,
+				8CCC1BF72451E8320065EE4E /* ManagedProject.swift */,
+				8CCC1BF82451E8320065EE4E /* ManagedWorkspace.swift */,
+				8CCC1BF92451E8320065EE4E /* ManagedClient.swift */,
+				8CCC1BFA2451E8320065EE4E /* ManagedTask.swift */,
+			);
+			path = ManagedObjects;
+			sourceTree = "<group>";
+		};
+		8CCC1BFB2451E8320065EE4E /* Database RxExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				8CCC1BFC2451E8320065EE4E /* ModelExtensions.swift */,
+				8CCC1BFD2451E8320065EE4E /* EntityDatabase+TimeEntry+Rx.swift */,
+				8CCC1BFE2451E8320065EE4E /* EntityDatabase+Rx.swift */,
+				8CCC1BFF2451E8320065EE4E /* CoreDataModel+Rx.swift */,
+			);
+			path = "Database RxExtensions";
+			sourceTree = "<group>";
+		};
+		8CCC1C212451E8470065EE4E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				8CCC1C222451E8470065EE4E /* MockPersistentContainer.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E14C47761BBEC2D5DB655D97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CD947AD2451E87A00C45A4D /* Assets.framework */,
+				8CD947AA2451E87400C45A4D /* Utils.framework */,
+				8CD947A62451E86F00C45A4D /* Models.framework */,
+				E9B839C78EE62B94AF3A3BC5 /* Pods_Database.framework */,
+				2FF1AF5C3A0F2B4E0C427A13 /* Pods_Database_DatabaseTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4A8B70844EF24E96787827C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD73A9B85790856127435AAE /* Pods-Database.debug.xcconfig */,
+				4DCB3B65FCCEDA76728B7A44 /* Pods-Database.release.xcconfig */,
+				8C29963185E04CB03444D877 /* Pods-Database-DatabaseTests.debug.xcconfig */,
+				7ECC3CEC9682125AF62D40EE /* Pods-Database-DatabaseTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3430C3FE2423BD83009CF454 /* Headers */ = {
+		8CCC1BC82451E8070065EE4E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3430C4142423BD83009CF454 /* Database.h in Headers */,
+				8CCC1BDE2451E8070065EE4E /* Database.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3430C4022423BD83009CF454 /* Database */ = {
+		8CCC1BCC2451E8070065EE4E /* Database */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3430C4172423BD83009CF454 /* Build configuration list for PBXNativeTarget "Database" */;
+			buildConfigurationList = 8CCC1BE12451E8070065EE4E /* Build configuration list for PBXNativeTarget "Database" */;
 			buildPhases = (
-				3430C3FE2423BD83009CF454 /* Headers */,
-				3430C3FF2423BD83009CF454 /* Sources */,
-				3430C4002423BD83009CF454 /* Frameworks */,
-				3430C4012423BD83009CF454 /* Resources */,
+				01F5C0FABDD8912FC9152442 /* [CP] Check Pods Manifest.lock */,
+				8CCC1BC82451E8070065EE4E /* Headers */,
+				8CCC1BC92451E8070065EE4E /* Sources */,
+				8CCC1BCA2451E8070065EE4E /* Frameworks */,
+				8CCC1BCB2451E8070065EE4E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -156,47 +308,49 @@
 			);
 			name = Database;
 			productName = Database;
-			productReference = 3430C4032423BD83009CF454 /* Database.framework */;
+			productReference = 8CCC1BCD2451E8070065EE4E /* Database.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3430C40B2423BD83009CF454 /* DatabaseTests */ = {
+		8CCC1BD52451E8070065EE4E /* DatabaseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3430C41A2423BD83009CF454 /* Build configuration list for PBXNativeTarget "DatabaseTests" */;
+			buildConfigurationList = 8CCC1BE42451E8070065EE4E /* Build configuration list for PBXNativeTarget "DatabaseTests" */;
 			buildPhases = (
-				3430C4082423BD83009CF454 /* Sources */,
-				3430C4092423BD83009CF454 /* Frameworks */,
-				3430C40A2423BD83009CF454 /* Resources */,
+				076BC50BAEF88EA0BE1E5535 /* [CP] Check Pods Manifest.lock */,
+				8CCC1BD22451E8070065EE4E /* Sources */,
+				8CCC1BD32451E8070065EE4E /* Frameworks */,
+				8CCC1BD42451E8070065EE4E /* Resources */,
+				E8321B27AF2EAE5B3EE74866 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3430C40F2423BD83009CF454 /* PBXTargetDependency */,
+				8CCC1BD92451E8070065EE4E /* PBXTargetDependency */,
 			);
 			name = DatabaseTests;
 			productName = DatabaseTests;
-			productReference = 3430C40C2423BD83009CF454 /* DatabaseTests.xctest */;
+			productReference = 8CCC1BD62451E8070065EE4E /* DatabaseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3430C3FA2423BD83009CF454 /* Project object */ = {
+		8CCC1BC42451E8070065EE4E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = Toggl;
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Toggl OUT";
 				TargetAttributes = {
-					3430C4022423BD83009CF454 = {
-						CreatedOnToolsVersion = 11.3.1;
-						LastSwiftMigration = 1130;
+					8CCC1BCC2451E8070065EE4E = {
+						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
 					};
-					3430C40B2423BD83009CF454 = {
-						CreatedOnToolsVersion = 11.3.1;
+					8CCC1BD52451E8070065EE4E = {
+						CreatedOnToolsVersion = 11.4;
 					};
 				};
 			};
-			buildConfigurationList = 3430C3FD2423BD83009CF454 /* Build configuration list for PBXProject "Database" */;
+			buildConfigurationList = 8CCC1BC72451E8070065EE4E /* Build configuration list for PBXProject "Database" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -204,26 +358,26 @@
 				en,
 				Base,
 			);
-			mainGroup = 3430C3F92423BD83009CF454;
-			productRefGroup = 3430C4042423BD83009CF454 /* Products */;
+			mainGroup = 8CCC1BC32451E8070065EE4E;
+			productRefGroup = 8CCC1BCE2451E8070065EE4E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3430C4022423BD83009CF454 /* Database */,
-				3430C40B2423BD83009CF454 /* DatabaseTests */,
+				8CCC1BCC2451E8070065EE4E /* Database */,
+				8CCC1BD52451E8070065EE4E /* DatabaseTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3430C4012423BD83009CF454 /* Resources */ = {
+		8CCC1BCB2451E8070065EE4E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3430C40A2423BD83009CF454 /* Resources */ = {
+		8CCC1BD42451E8070065EE4E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,41 +386,131 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01F5C0FABDD8912FC9152442 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Database-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		076BC50BAEF88EA0BE1E5535 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Database-DatabaseTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8321B27AF2EAE5B3EE74866 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		3430C3FF2423BD83009CF454 /* Sources */ = {
+		8CCC1BC92451E8070065EE4E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B49CDBF324323EF600BFBBFB /* ManagedTag.swift in Sources */,
-				B49CDBF5243243DE00BFBBFB /* ManagedEntity.swift in Sources */,
-				B49CDBF924326BD700BFBBFB /* ManagedClient.swift in Sources */,
-				3430C4212423BDBD009CF454 /* Database.xcdatamodeld in Sources */,
-				3430C41E2423BD9F009CF454 /* Database.swift in Sources */,
-				3430C42B242402B7009CF454 /* ManagedTimeEntry.swift in Sources */,
-				B49CDBFB2433676600BFBBFB /* ManagedProject.swift in Sources */,
+				8CCC1C0F2451E8330065EE4E /* ManagedTag.swift in Sources */,
+				8CCC1C0B2451E8330065EE4E /* TimeEntry+CoreDataModel.swift in Sources */,
+				8CCC1C082451E8330065EE4E /* Task+CoreDataModel.swift in Sources */,
+				8CCC1C182451E8330065EE4E /* EntityDatabase+TimeEntry.swift in Sources */,
+				8CCC1C092451E8330065EE4E /* Tag+CoreDataModel.swift in Sources */,
+				8CCC1C072451E8330065EE4E /* Project+CoreDataModel.swift in Sources */,
+				8CCC1C142451E8330065EE4E /* ModelExtensions.swift in Sources */,
+				8CCC1C0E2451E8330065EE4E /* ManagedEntity.swift in Sources */,
+				8CCC1C042451E8330065EE4E /* CoreDataModel.swift in Sources */,
+				8CCC1C0A2451E8330065EE4E /* Client+CoreDataModel.swift in Sources */,
+				8CCC1C152451E8330065EE4E /* EntityDatabase+TimeEntry+Rx.swift in Sources */,
+				8CCC1C172451E8330065EE4E /* CoreDataModel+Rx.swift in Sources */,
+				8CCC1C062451E8330065EE4E /* Managed.swift in Sources */,
+				8CCC1C192451E8330065EE4E /* EntityDatabase.swift in Sources */,
+				8CCC1C102451E8330065EE4E /* ManagedProject.swift in Sources */,
+				8CCC1C0D2451E8330065EE4E /* ManagedTimeEntry.swift in Sources */,
+				8CCC1C162451E8330065EE4E /* EntityDatabase+Rx.swift in Sources */,
+				8CCC1C112451E8330065EE4E /* ManagedWorkspace.swift in Sources */,
+				8CCC1C132451E8330065EE4E /* ManagedTask.swift in Sources */,
+				8CCC1C1B2451E8330065EE4E /* EntityDatabaseProtocol.swift in Sources */,
+				8CCC1C0C2451E8330065EE4E /* Workspace+CoreDataModel.swift in Sources */,
+				8CCC1C052451E8330065EE4E /* CoreDataStack.swift in Sources */,
+				8CCC1C122451E8330065EE4E /* ManagedClient.swift in Sources */,
+				8CCC1C1A2451E8330065EE4E /* Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3430C4082423BD83009CF454 /* Sources */ = {
+		8CCC1BD22451E8070065EE4E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3430C4122423BD83009CF454 /* DatabaseTests.swift in Sources */,
+				8CCC1C2B2451E8470065EE4E /* MockPersistentContainer.swift in Sources */,
+				8CCC1C2C2451E8470065EE4E /* EntityDatabaseTests.swift in Sources */,
+				8CCC1C262451E8470065EE4E /* TimeEntryDatabaseTests.swift in Sources */,
+				8CCC1C272451E8470065EE4E /* ClientDatabaseTests.swift in Sources */,
+				8CCC1C2D2451E8470065EE4E /* ProjectDatabaseTests.swift in Sources */,
+				8CCC1C292451E8470065EE4E /* WorkspaceDatabaseTests.swift in Sources */,
+				8CCC1BDC2451E8070065EE4E /* DatabaseTests.swift in Sources */,
+				8CCC1C282451E8470065EE4E /* EntityDatabaseRxExtensionsTests.swift in Sources */,
+				8CCC1C2A2451E8470065EE4E /* TagDatabaseTests.swift in Sources */,
+				8CCC1C2E2451E8470065EE4E /* TaskDatabaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3430C40F2423BD83009CF454 /* PBXTargetDependency */ = {
+		8CCC1BD92451E8070065EE4E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3430C4022423BD83009CF454 /* Database */;
-			targetProxy = 3430C40E2423BD83009CF454 /* PBXContainerItemProxy */;
+			target = 8CCC1BCC2451E8070065EE4E /* Database */;
+			targetProxy = 8CCC1BD82451E8070065EE4E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3430C4152423BD83009CF454 /* Debug */ = {
+		8CCC1BDF2451E8070065EE4E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -329,7 +573,7 @@
 			};
 			name = Debug;
 		};
-		3430C4162423BD83009CF454 /* Release */ = {
+		8CCC1BE02451E8070065EE4E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -386,14 +630,14 @@
 			};
 			name = Release;
 		};
-		3430C4182423BD83009CF454 /* Debug */ = {
+		8CCC1BE22451E8070065EE4E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD73A9B85790856127435AAE /* Pods-Database.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B227VTMZ94;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -404,10 +648,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.toggl.aurora.Database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -415,14 +658,14 @@
 			};
 			name = Debug;
 		};
-		3430C4192423BD83009CF454 /* Release */ = {
+		8CCC1BE32451E8070065EE4E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DCB3B65FCCEDA76728B7A44 /* Pods-Database.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B227VTMZ94;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -433,18 +676,18 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.toggl.aurora.Database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		3430C41B2423BD83009CF454 /* Debug */ = {
+		8CCC1BE52451E8070065EE4E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C29963185E04CB03444D877 /* Pods-Database-DatabaseTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -462,8 +705,9 @@
 			};
 			name = Debug;
 		};
-		3430C41C2423BD83009CF454 /* Release */ = {
+		8CCC1BE62451E8070065EE4E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7ECC3CEC9682125AF62D40EE /* Pods-Database-DatabaseTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -484,47 +728,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3430C3FD2423BD83009CF454 /* Build configuration list for PBXProject "Database" */ = {
+		8CCC1BC72451E8070065EE4E /* Build configuration list for PBXProject "Database" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3430C4152423BD83009CF454 /* Debug */,
-				3430C4162423BD83009CF454 /* Release */,
+				8CCC1BDF2451E8070065EE4E /* Debug */,
+				8CCC1BE02451E8070065EE4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3430C4172423BD83009CF454 /* Build configuration list for PBXNativeTarget "Database" */ = {
+		8CCC1BE12451E8070065EE4E /* Build configuration list for PBXNativeTarget "Database" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3430C4182423BD83009CF454 /* Debug */,
-				3430C4192423BD83009CF454 /* Release */,
+				8CCC1BE22451E8070065EE4E /* Debug */,
+				8CCC1BE32451E8070065EE4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3430C41A2423BD83009CF454 /* Build configuration list for PBXNativeTarget "DatabaseTests" */ = {
+		8CCC1BE42451E8070065EE4E /* Build configuration list for PBXNativeTarget "DatabaseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3430C41B2423BD83009CF454 /* Debug */,
-				3430C41C2423BD83009CF454 /* Release */,
+				8CCC1BE52451E8070065EE4E /* Debug */,
+				8CCC1BE62451E8070065EE4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3430C41F2423BDBD009CF454 /* Database.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3430C4202423BDBD009CF454 /* Database.xcdatamodel */,
-			);
-			currentVersion = 3430C4202423BDBD009CF454 /* Database.xcdatamodel */;
-			path = Database.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 3430C3FA2423BD83009CF454 /* Project object */;
+	rootObject = 8CCC1BC42451E8070065EE4E /* Project object */;
 }

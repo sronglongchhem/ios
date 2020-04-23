@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3430C4232423BE91009CF454 /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C4222423BE91009CF454 /* Database.framework */; };
-		3430C4242423BE91009CF454 /* Database.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C4222423BE91009CF454 /* Database.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E0C68485A14BC45B4E06F59 /* libPods-AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7EB193330513F65A55D5DF /* libPods-AppTests.a */; };
 		8C2515C52403C0BD00BAD4B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2515C42403C0BD00BAD4B5 /* Assets.xcassets */; };
 		8C2515C82403C0BD00BAD4B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2515C62403C0BD00BAD4B5 /* LaunchScreen.storyboard */; };
@@ -39,7 +37,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3430C4242423BE91009CF454 /* Database.framework in Embed Frameworks */,
 				8C2518152403C59F00BAD4B5 /* TogglTrack.framework in Embed Frameworks */,
 				8C25180F2403C59F00BAD4B5 /* Assets.framework in Embed Frameworks */,
 			);
@@ -81,7 +78,6 @@
 				8C2518142403C59F00BAD4B5 /* TogglTrack.framework in Frameworks */,
 				8C25180E2403C59F00BAD4B5 /* Assets.framework in Frameworks */,
 				AA68ECB8DF37A98FDBCB93E1 /* libPods-App.a in Frameworks */,
-				3430C4232423BE91009CF454 /* Database.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

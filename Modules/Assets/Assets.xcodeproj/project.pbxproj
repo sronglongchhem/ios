@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0B54C624508E400078E250 /* Database.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */; };
 		8C2516A52403C19D00BAD4B5 /* Assets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C25169B2403C19D00BAD4B5 /* Assets.framework */; };
 		8C2516AA2403C19D00BAD4B5 /* AssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2516A92403C19D00BAD4B5 /* AssetsTests.swift */; };
 		8C2516AC2403C19D00BAD4B5 /* Assets.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C25169E2403C19D00BAD4B5 /* Assets.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C0B54C424508E0F0078E250 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		8C25169B2403C19D00BAD4B5 /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C25169E2403C19D00BAD4B5 /* Assets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assets.h; sourceTree = "<group>"; };
 		8C25169F2403C19D00BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		8C25169D2403C19D00BAD4B5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */,
 				8C2517BE2403C2CA00BAD4B5 /* Assets.swift */,
 				8C2517C62403C2EF00BAD4B5 /* Storyboards */,
 				8C2517B72403C2CA00BAD4B5 /* TextFiles */,
@@ -228,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C0B54C624508E400078E250 /* Database.xcdatamodeld in Resources */,
 				8C2517CA2403C2EF00BAD4B5 /* Timer.storyboard in Resources */,
 				8C2517C32403C2CA00BAD4B5 /* timeentries.txt in Resources */,
 				B4E1B2D2244E1E340082A68C /* Project.storyboard in Resources */,
@@ -524,6 +528,18 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8C0B54C424508E0F0078E250 /* Database.xcdatamodel */,
+			);
+			currentVersion = 8C0B54C424508E0F0078E250 /* Database.xcdatamodel */;
+			path = Database.xcdatamodeld;
+			sourceTree = "<group>";
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8C2516922403C19D00BAD4B5 /* Project object */;
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct TimeEntry: Entity, Equatable {
-    
+
     public var id: Int64
     public var description: String
     public var start: Date

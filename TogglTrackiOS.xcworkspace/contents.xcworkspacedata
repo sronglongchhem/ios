@@ -8,9 +8,6 @@
       location = "container:"
       name = "Modules">
       <FileRef
-         location = "group:Modules/Database/Database.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:Modules/Assets/Assets.xcodeproj">
       </FileRef>
       <FileRef
@@ -42,6 +39,9 @@
       <Group
          location = "container:"
          name = "Services">
+         <FileRef
+            location = "group:Modules/Database/Database.xcodeproj">
+         </FileRef>
          <FileRef
             location = "group:Modules/Analytics/Analytics.xcodeproj">
          </FileRef>

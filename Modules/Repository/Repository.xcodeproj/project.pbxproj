@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3430C4262423BF10009CF454 /* Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C4252423BF10009CF454 /* Database.framework */; };
-		34348ABF242CD3F700B7B006 /* TimeEntryDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */; };
 		51A7DFFE242B9A0B0015B02C /* StartTimeEntryDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */; };
 		8C2516ED2403C1E200BAD4B5 /* Repository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2516E32403C1E200BAD4B5 /* Repository.framework */; };
 		8C2516F22403C1E200BAD4B5 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2516F12403C1E200BAD4B5 /* RepositoryTests.swift */; };
 		8C2516F42403C1E200BAD4B5 /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2516E62403C1E200BAD4B5 /* Repository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C25179C2403C29F00BAD4B5 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25179B2403C29F00BAD4B5 /* Repository.swift */; };
 		8C25189C2403C73E00BAD4B5 /* API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C25189B2403C73E00BAD4B5 /* API.framework */; };
+		8CAEA1BD244F57D6008F9E4D /* OtherServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAEA1BC244F57D6008F9E4D /* OtherServices.framework */; };
 		B42C4E733838B93E08F239C9 /* Pods_Repository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57719FB87C24F3EDC78339F /* Pods_Repository.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +31,6 @@
 /* Begin PBXFileReference section */
 		1635ECD25702805E7A912F1F /* Pods-Repository.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Repository.release.xcconfig"; path = "Target Support Files/Pods-Repository/Pods-Repository.release.xcconfig"; sourceTree = "<group>"; };
 		3430C4252423BF10009CF454 /* Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryDAO.swift; sourceTree = "<group>"; };
 		51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTimeEntryDto.swift; sourceTree = "<group>"; };
 		8C2516E32403C1E200BAD4B5 /* Repository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Repository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2516E62403C1E200BAD4B5 /* Repository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
@@ -41,6 +40,7 @@
 		8C2516F32403C1E200BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C25179B2403C29F00BAD4B5 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		8C25189B2403C73E00BAD4B5 /* API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CAEA1BC244F57D6008F9E4D /* OtherServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OtherServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF19B74F87479C1647D502AF /* Pods-Repository.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Repository.debug.xcconfig"; path = "Target Support Files/Pods-Repository/Pods-Repository.debug.xcconfig"; sourceTree = "<group>"; };
 		D57719FB87C24F3EDC78339F /* Pods_Repository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Repository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3430C4262423BF10009CF454 /* Database.framework in Frameworks */,
+				8CAEA1BD244F57D6008F9E4D /* OtherServices.framework in Frameworks */,
 				8C25189C2403C73E00BAD4B5 /* API.framework in Frameworks */,
 				B42C4E733838B93E08F239C9 /* Pods_Repository.framework in Frameworks */,
 			);
@@ -71,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				51A7DFFD242B9A0B0015B02C /* StartTimeEntryDto.swift */,
-				34348ABE242CD3F700B7B006 /* TimeEntryDAO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -119,6 +119,7 @@
 		8C25189A2403C73E00BAD4B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CAEA1BC244F57D6008F9E4D /* OtherServices.framework */,
 				3430C4252423BF10009CF454 /* Database.framework */,
 				8C25189B2403C73E00BAD4B5 /* API.framework */,
 				D57719FB87C24F3EDC78339F /* Pods_Repository.framework */,
@@ -274,7 +275,6 @@
 			files = (
 				51A7DFFE242B9A0B0015B02C /* StartTimeEntryDto.swift in Sources */,
 				8C25179C2403C29F00BAD4B5 /* Repository.swift in Sources */,
-				34348ABF242CD3F700B7B006 /* TimeEntryDAO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

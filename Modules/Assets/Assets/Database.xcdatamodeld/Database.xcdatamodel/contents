@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16114.2" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ManagedClient" representedClassName="ManagedClient" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="projects" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedProject" inverseName="client" inverseEntity="ManagedProject"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWorkspace" inverseName="clients" inverseEntity="ManagedWorkspace"/>
+    </entity>
+    <entity name="ManagedProject" representedClassName="ManagedProject" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isBillable" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isPrivate" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedClient" inverseName="projects" inverseEntity="ManagedClient"/>
+        <relationship name="tasks" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTask" inverseName="project" inverseEntity="ManagedTask"/>
+        <relationship name="timeEntries" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTimeEntry" inverseName="project" inverseEntity="ManagedTimeEntry"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWorkspace" inverseName="projects" inverseEntity="ManagedWorkspace"/>
+    </entity>
+    <entity name="ManagedTag" representedClassName="ManagedTag" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="timeEntries" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTimeEntry" inverseName="tags" inverseEntity="ManagedTimeEntry"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWorkspace" inverseName="tags" inverseEntity="ManagedWorkspace"/>
+    </entity>
+    <entity name="ManagedTask" representedClassName="ManagedTask" syncable="YES">
+        <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="estimatedSeconds" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="trackedSeconds" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="project" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedProject" inverseName="tasks" inverseEntity="ManagedProject"/>
+        <relationship name="timeEntries" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTimeEntry" inverseName="task" inverseEntity="ManagedTimeEntry"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWorkspace" inverseName="tasks" inverseEntity="ManagedWorkspace"/>
+    </entity>
+    <entity name="ManagedTimeEntry" representedClassName="ManagedTimeEntry" syncable="YES">
+        <attribute name="billable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="start" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="textDescription" attributeType="String"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedProject" inverseName="timeEntries" inverseEntity="ManagedProject"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTag" inverseName="timeEntries" inverseEntity="ManagedTag"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTask" inverseName="timeEntries" inverseEntity="ManagedTask"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedWorkspace" inverseName="timeEntries" inverseEntity="ManagedWorkspace"/>
+    </entity>
+    <entity name="ManagedWorkspace" representedClassName="ManagedWorkspace" syncable="YES">
+        <attribute name="admin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="clients" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedClient" inverseName="workspace" inverseEntity="ManagedClient"/>
+        <relationship name="projects" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedProject" inverseName="workspace" inverseEntity="ManagedProject"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTag" inverseName="workspace" inverseEntity="ManagedTag"/>
+        <relationship name="tasks" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTask" inverseName="workspace" inverseEntity="ManagedTask"/>
+        <relationship name="timeEntries" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTimeEntry" inverseName="workspace" inverseEntity="ManagedTimeEntry"/>
+    </entity>
+    <elements>
+        <element name="ManagedClient" positionX="390.83203125" positionY="355.50390625" width="128" height="103"/>
+        <element name="ManagedProject" positionX="-15.23046875" positionY="-3.140625" width="128" height="193"/>
+        <element name="ManagedTag" positionX="2.15234375" positionY="228.44140625" width="128" height="103"/>
+        <element name="ManagedTask" positionX="11.5" positionY="417.45703125" width="128" height="163"/>
+        <element name="ManagedTimeEntry" positionX="-239.8828125" positionY="215.515625" width="128" height="178"/>
+        <element name="ManagedWorkspace" positionX="446.03515625" positionY="78.6796875" width="128" height="163"/>
+    </elements>
+</model>

@@ -13,4 +13,14 @@ public struct Tag: Codable, Entity, Equatable {
         
         case workspaceId = "workspace_id"
     }
+
+    public init(
+        id: Int64,
+        name: String,
+        workspaceId: Int64
+    ) {
+        self.id = id
+        self.name = name
+        self.workspaceId = workspaceId
+    }
 }

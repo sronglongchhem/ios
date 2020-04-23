@@ -23,4 +23,24 @@ public struct Task: Codable, Entity, Equatable {
         case workspaceId = "workspace_id"
         case userId = "user_id"
     }
+
+    public init(
+        id: Int64,
+        name: String,
+        active: Bool,
+        estimatedSeconds: Int,
+        trackedSeconds: Int,
+        projectId: Int64,
+        workspaceId: Int64,
+        userId: Int64?
+    ) {
+        self.id = id
+        self.name = name
+        self.active = active
+        self.estimatedSeconds = estimatedSeconds
+        self.trackedSeconds = trackedSeconds
+        self.projectId = projectId
+        self.workspaceId = workspaceId
+        self.userId = userId
+    }
 }

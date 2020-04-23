@@ -21,6 +21,7 @@
 		8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D272412885100B6DF30 /* Date+Extensions.swift */; };
 		8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D292412888D00B6DF30 /* Array+Extensions.swift */; };
 		8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */; };
+		8CA44A322450446700B3BAC2 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA44A312450446700B3BAC2 /* ArrayExtensions.swift */; };
 		B4B4F02C24351BE800DFBF2E /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F02B24351BE800DFBF2E /* Snackbar.swift */; };
 		B4B4F02E2435222A00DFBF2E /* UIView+ConstraintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F02D2435222A00DFBF2E /* UIView+ConstraintExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		8C509D272412885100B6DF30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8C509D292412888D00B6DF30 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		8CA44A312450446700B3BAC2 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		B4B4F02B24351BE800DFBF2E /* Snackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snackbar.swift; sourceTree = "<group>"; };
 		B4B4F02D2435222A00DFBF2E /* UIView+ConstraintExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintExtensions.swift"; sourceTree = "<group>"; };
 		BA966568DC4D267ABE8B8D26 /* Pods-Utils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Utils.debug.xcconfig"; path = "Target Support Files/Pods-Utils/Pods-Utils.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		8C2517512403C21900BAD4B5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8CA44A2E2450445300B3BAC2 /* TestUtils */,
 				3430C395242259A8009CF454 /* Operators */,
 				8C509D262412882C00B6DF30 /* Extensions */,
 				8C2517A22403C2AC00BAD4B5 /* RxExtensions */,
@@ -171,6 +174,14 @@
 				8C4EDC582429034000C03E14 /* TimeInterval+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8CA44A2E2450445300B3BAC2 /* TestUtils */ = {
+			isa = PBXGroup;
+			children = (
+				8CA44A312450446700B3BAC2 /* ArrayExtensions.swift */,
+			);
+			path = TestUtils;
 			sourceTree = "<group>";
 		};
 		E0BFFDC4FE5972557FE30D58 /* Pods */ = {
@@ -326,6 +337,7 @@
 				8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */,
 				3430C397242259BC009CF454 /* Apply.swift in Sources */,
 				8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */,
+				8CA44A322450446700B3BAC2 /* ArrayExtensions.swift in Sources */,
 				8C2517A82403C2AC00BAD4B5 /* Observable+Extensions.swift in Sources */,
 				8C4EDC592429034000C03E14 /* TimeInterval+Extensions.swift in Sources */,
 				8C1F535D2434A50A00D9F979 /* BaseTableViewCell.swift in Sources */,

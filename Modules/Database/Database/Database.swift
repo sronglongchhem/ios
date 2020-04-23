@@ -1,35 +1,25 @@
 import Foundation
+import Models
 import CoreData
 
-public struct SaveFailedError: Error {
-    public init() { }
-}
-
-public struct FetchFailedError: Error {
-    public init() { }
-}
-
 public class Database {
-    private let identifier = "com.toggl.aurora.Database"
-    private let model = "Database"
-    
-    lazy public var timeEntries: TimeEntriesDatabase = TimeEntries(database: self)
-    lazy public var tags: TagsDatabase = Tags(database: self)
-    
-    public init() { }
 
-    lazy public var persistentContainer: NSPersistentContainer = {
-        guard let bundle = Bundle(identifier: self.identifier) else { fatalError() }
-        guard let modelURL = bundle.url(forResource: self.model, withExtension: "momd") else { fatalError() }
-        guard let managedObjectModel =  NSManagedObjectModel(contentsOf: modelURL) else { fatalError() }
+    private var stack: CoreDataStack
 
-        let container = NSPersistentContainer(name: self.model, managedObjectModel: managedObjectModel)
-        container.loadPersistentStores { _, error in
+    public var timeEntries: EntityDatabase<TimeEntry>
+    public var workspaces: EntityDatabase<Workspace>
+    public var clients: EntityDatabase<Client>
+    public var projects: EntityDatabase<Project>
+    public var tasks: EntityDatabase<Task>
+    public var tags: EntityDatabase<Tag>
 
-            if let err = error {
-                fatalError("Loading of database failed:\(err)")
-            }
-        }
-        return container
-    }()
+    public init(persistentContainer: NSPersistentContainer? = nil) {
+        stack = CoreDataStack(persistentContainer: persistentContainer)
+        timeEntries = EntityDatabase<TimeEntry>(stack: stack)
+        workspaces = EntityDatabase<Workspace>(stack: stack)
+        clients = EntityDatabase<Client>(stack: stack)
+        projects = EntityDatabase<Project>(stack: stack)
+        tasks = EntityDatabase<Task>(stack: stack)
+        tags = EntityDatabase<Tag>(stack: stack)
+    }
 }
