@@ -689,7 +689,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C29963185E04CB03444D877 /* Pods-Database-DatabaseTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B227VTMZ94;
 				INFOPLIST_FILE = DatabaseTests/Info.plist;
@@ -709,7 +708,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7ECC3CEC9682125AF62D40EE /* Pods-Database-DatabaseTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B227VTMZ94;
 				INFOPLIST_FILE = DatabaseTests/Info.plist;

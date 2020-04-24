@@ -1,5 +1,10 @@
 import UIKit
 import TogglTrack
+import Firebase
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
+import Analytics
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -9,9 +14,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+        #if !DEBUG
+        FirebaseApp.configure()
+        MSAppCenter.start("{Our App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
+        #endif
+        
         // If we ever want to have multiple windows we should share the store and not create one for every TogglTrack instance
         window = UIWindow(windowScene: windowScene)
-        togglTrack = TogglTrack(window: window!)
+        togglTrack = TogglTrack(window: window!, analyticsServices: [FirebaseAnalyticsService(), AppCenterAnalyticsService()])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -8,26 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		343E37A424471E9700A65AFD /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E37A324471E9700A65AFD /* AnalyticsService.swift */; };
-		343E37A624471EBE00A65AFD /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E37A524471EBE00A65AFD /* FirebaseAnalyticsService.swift */; };
 		343E37A82447208D00A65AFD /* CompositeAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E37A72447208D00A65AFD /* CompositeAnalyticsService.swift */; };
-		343E37AE244740DA00A65AFD /* AppCenterAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E37AD244740DA00A65AFD /* AppCenterAnalyticsService.swift */; };
 		34406B13244632EC00C65C99 /* Analytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 34406B11244632EC00C65C99 /* Analytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34406B1C2446388800C65C99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34406B1B2446388800C65C99 /* Event.swift */; };
-		8F4DBA8EEDA83597ECAF45AB /* Pods_Analytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AF75C512D4CAC71F184427 /* Pods_Analytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C653DF5283E367FFDF642FC /* Pods-Analytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Analytics.debug.xcconfig"; path = "Target Support Files/Pods-Analytics/Pods-Analytics.debug.xcconfig"; sourceTree = "<group>"; };
-		2977CC7EEDA3B025636762B7 /* Pods-Analytics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Analytics.release.xcconfig"; path = "Target Support Files/Pods-Analytics/Pods-Analytics.release.xcconfig"; sourceTree = "<group>"; };
 		343E37A324471E9700A65AFD /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
-		343E37A524471EBE00A65AFD /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		343E37A72447208D00A65AFD /* CompositeAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeAnalyticsService.swift; sourceTree = "<group>"; };
-		343E37AD244740DA00A65AFD /* AppCenterAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterAnalyticsService.swift; sourceTree = "<group>"; };
 		34406B0E244632EC00C65C99 /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34406B11244632EC00C65C99 /* Analytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		34406B12244632EC00C65C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34406B1B2446388800C65C99 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		73AF75C512D4CAC71F184427 /* Pods_Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,28 +27,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F4DBA8EEDA83597ECAF45AB /* Pods_Analytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2DCEB189389EAE5AA9B795B9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				73AF75C512D4CAC71F184427 /* Pods_Analytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		34406B04244632EC00C65C99 = {
 			isa = PBXGroup;
 			children = (
 				34406B10244632EC00C65C99 /* Analytics */,
 				34406B0F244632EC00C65C99 /* Products */,
-				4C1E7C29BFBA304812EEE0E3 /* Pods */,
-				2DCEB189389EAE5AA9B795B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,21 +56,9 @@
 				34406B12244632EC00C65C99 /* Info.plist */,
 				34406B1B2446388800C65C99 /* Event.swift */,
 				343E37A324471E9700A65AFD /* AnalyticsService.swift */,
-				343E37A524471EBE00A65AFD /* FirebaseAnalyticsService.swift */,
-				343E37AD244740DA00A65AFD /* AppCenterAnalyticsService.swift */,
 				343E37A72447208D00A65AFD /* CompositeAnalyticsService.swift */,
 			);
 			path = Analytics;
-			sourceTree = "<group>";
-		};
-		4C1E7C29BFBA304812EEE0E3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0C653DF5283E367FFDF642FC /* Pods-Analytics.debug.xcconfig */,
-				2977CC7EEDA3B025636762B7 /* Pods-Analytics.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,7 +79,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34406B16244632EC00C65C99 /* Build configuration list for PBXNativeTarget "Analytics" */;
 			buildPhases = (
-				53FEC2B0C3E279A6590B6146 /* [CP] Check Pods Manifest.lock */,
 				34406B09244632EC00C65C99 /* Headers */,
 				34406B0A244632EC00C65C99 /* Sources */,
 				34406B0B244632EC00C65C99 /* Frameworks */,
@@ -168,31 +136,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		53FEC2B0C3E279A6590B6146 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Analytics-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		34406B0A244632EC00C65C99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -200,9 +143,7 @@
 			files = (
 				34406B1C2446388800C65C99 /* Event.swift in Sources */,
 				343E37A424471E9700A65AFD /* AnalyticsService.swift in Sources */,
-				343E37AE244740DA00A65AFD /* AppCenterAnalyticsService.swift in Sources */,
 				343E37A82447208D00A65AFD /* CompositeAnalyticsService.swift in Sources */,
-				343E37A624471EBE00A65AFD /* FirebaseAnalyticsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +272,6 @@
 		};
 		34406B17244632EC00C65C99 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C653DF5283E367FFDF642FC /* Pods-Analytics.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -359,7 +299,6 @@
 		};
 		34406B18244632EC00C65C99 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2977CC7EEDA3B025636762B7 /* Pods-Analytics.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;

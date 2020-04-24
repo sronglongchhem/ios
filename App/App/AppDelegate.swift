@@ -4,6 +4,7 @@ import Firebase
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import Analytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        togglTrack = TogglTrack(window: window!)
+        togglTrack = TogglTrack(window: window!, analyticsServices: [FirebaseAnalyticsService(), AppCenterAnalyticsService()])
         
         return true
     }

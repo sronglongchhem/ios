@@ -163,7 +163,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3430C40B2423BD83009CF454"
+               BlueprintIdentifier = "8CCC1BD52451E8070065EE4E"
                BuildableName = "DatabaseTests.xctest"
                BlueprintName = "DatabaseTests"
                ReferencedContainer = "container:../Modules/Database/Database.xcodeproj">
@@ -191,6 +191,12 @@
             ReferencedContainer = "container:App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "FIRDebugDisabled"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "DYLD_PRINT_STATISTICS"

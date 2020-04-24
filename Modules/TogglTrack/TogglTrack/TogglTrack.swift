@@ -7,6 +7,7 @@ import Repository
 import Networking
 import Models
 import Utils
+import Analytics
 
 public class TogglTrack {
     private let store: Store<AppState, AppAction>!
@@ -14,10 +15,10 @@ public class TogglTrack {
     private let router: Router
     private var disposeBag = DisposeBag()
 
-    public init(window: UIWindow) {
+    public init(window: UIWindow, analyticsServices: [AnalyticsService]) {
         
         let appFeature = AppFeature()
-        let appEnvironment = AppEnvironment()
+        let appEnvironment = AppEnvironment(analyticsServices: analyticsServices)
         
         store = Store(
             initialState: AppState(),

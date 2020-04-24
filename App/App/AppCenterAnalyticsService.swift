@@ -1,4 +1,5 @@
 import Foundation
+import Analytics
 import AppCenter
 import AppCenterAnalytics
 

@@ -22,15 +22,13 @@ public struct AppEnvironment {
         self.analytics = analytics
     }
 
-    public init() {
+    public init(analyticsServices: [AnalyticsService]) {
         self.api = API(urlSession: FakeURLSession())
 //        self.api = API(urlSession: URLSession(configuration: URLSessionConfiguration.default))
         self.time = Time()
         self.repository = Repository(api: api, database: Database(), time: time)
         self.schedulerProvider = SchedulerProvider()
-        let firebaseAnalytics = FirebaseAnalyticsService()
-        let appCenterAnalytics = AppCenterAnalyticsService()
-        self.analytics = CompositeAnalyticsService(analyticsServices: [firebaseAnalytics, appCenterAnalytics])
+        self.analytics = CompositeAnalyticsService(analyticsServices: analyticsServices)
     }
 }
 

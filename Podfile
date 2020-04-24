@@ -38,13 +38,13 @@ project 'Modules/UIUtils/UIUtils.xcodeproj'
 project 'Modules/Utils/Utils.xcodeproj'
 project 'Modules/Database/Database.xcodeproj'
 project 'Modules/OtherServices/OtherServices.xcodeproj'
-project 'Modules/Analytics/Analytics.xcodeproj'
 
 target :App do
     project 'App/App.xcodeproj'
+    analytics
 
     target :AppTests do
-        inherit! :search_paths
+      analytics
     end
 end
 
@@ -53,10 +53,6 @@ target :TogglTrack do
     rxswift
     rxcocoa
     rxdatasources
-
-    target :TogglTrackTests do
-        inherit! :search_paths
-    end
 end
 
 target :Onboarding do
@@ -133,13 +129,7 @@ target :OtherServices do
     rxswift
 end
 
-target :Analytics do
-    use_frameworks!
-    project 'Modules/Analytics/Analytics.xcodeproj'
-    analytics
-end
-
-dynamic_frameworks = [analytics]
+dynamic_frameworks = []
 # Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
 pre_install do |installer|
   installer.pod_targets.each do |pod|
