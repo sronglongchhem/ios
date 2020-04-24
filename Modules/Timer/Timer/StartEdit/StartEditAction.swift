@@ -9,6 +9,8 @@ public enum StartEditAction: Equatable {
     case timeEntryStarted(startedTimeEntry: TimeEntry, stoppedTimeEntry: TimeEntry?)
     case timeEntryUpdated(TimeEntry)
     
+    case autocompleteSuggestionTapped(AutocompleteSuggestionType)
+    
     case projectButtonTapped
     case tagButtonTapped
     case billableButtonTapped
@@ -39,6 +41,9 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case let .timeEntryUpdated(timeEntry):
             return "TimeEntryUpdated: \(timeEntry.description)"
+            
+        case let .autocompleteSuggestionTapped(suggestion):
+            return "AutocompleteSuggestionTapped \(suggestion)"
             
         case .billableButtonTapped:
             return "BillableButtonTapped"

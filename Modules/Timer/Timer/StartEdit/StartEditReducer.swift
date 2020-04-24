@@ -37,6 +37,9 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.editableTimeEntry = nil
             return []
             
+        case .autocompleteSuggestionTapped:
+            return []
+            
         case .billableButtonTapped:
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.billable = !editableTimeEntry.billable

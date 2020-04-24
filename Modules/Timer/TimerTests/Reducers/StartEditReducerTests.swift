@@ -183,6 +183,10 @@ class StartEditReducerTests: XCTestCase {
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
         })
     }
+    
+    func testAutocompleteSuggestionTapped() {
+        
+    }
 
     func testAutocompleteSuggestionsUpdatedUpdatesState() {
         let entities = TimeLogEntities()
