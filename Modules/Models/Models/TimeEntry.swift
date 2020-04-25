@@ -5,7 +5,7 @@ public struct TimeEntry: Entity, Equatable {
     public var id: Int64
     public var description: String
     public var start: Date
-    public var duration: Double?
+    public var duration: TimeInterval?
     public var billable: Bool
 
     public var workspaceId: Int64
