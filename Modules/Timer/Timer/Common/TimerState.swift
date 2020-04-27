@@ -7,6 +7,7 @@ public struct LocalTimerState: Equatable {
     internal var expandedGroups: Set<Int> = Set<Int>()
     internal var entriesPendingDeletion = Set<Int64>()
     internal var autocompleteSuggestions: [AutocompleteSuggestionType] = []
+    internal var dateTimePickMode: DateTimePickMode = .none
     
     public init() {
     }
@@ -49,7 +50,8 @@ extension TimerState {
                 user: user,
                 entities: entities,
                 editableTimeEntry: localTimerState.editableTimeEntry,
-                autocompleteSuggestions: localTimerState.autocompleteSuggestions
+                autocompleteSuggestions: localTimerState.autocompleteSuggestions,
+                dateTimePickMode: localTimerState.dateTimePickMode
             )
         }
         set {
@@ -57,6 +59,7 @@ extension TimerState {
             entities = newValue.entities
             localTimerState.editableTimeEntry = newValue.editableTimeEntry
             localTimerState.autocompleteSuggestions = newValue.autocompleteSuggestions
+            localTimerState.dateTimePickMode = newValue.dateTimePickMode
         }
     }
 

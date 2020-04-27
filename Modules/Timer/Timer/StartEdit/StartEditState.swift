@@ -7,4 +7,5 @@ public struct StartEditState: Equatable {
     var entities: TimeLogEntities
     var editableTimeEntry: EditableTimeEntry?
     var autocompleteSuggestions: [AutocompleteSuggestionType]
+    var dateTimePickMode: DateTimePickMode
 }
