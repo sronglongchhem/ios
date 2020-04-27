@@ -26,6 +26,10 @@ def analytics
   pod 'AppCenter'
 end
 
+def crashlytics
+  pod 'Firebase/Crashlytics'
+end
+
 project 'App/App.xcodeproj'
 project 'Modules/TogglTrack/TogglTrack.xcodeproj'
 project 'Modules/API/API.xcodeproj'
@@ -42,6 +46,7 @@ project 'Modules/OtherServices/OtherServices.xcodeproj'
 target :App do
     project 'App/App.xcodeproj'
     analytics
+    crashlytics
 
     target :AppTests do
       analytics

@@ -20,6 +20,7 @@
 		8C8FB103245322DB00F88E46 /* AppCenterAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8FB101245322DB00F88E46 /* AppCenterAnalyticsService.swift */; };
 		A280D5ED38B0D85BD7E254E8 /* libPods-App-AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B00C56E0AEB558CF2F77360 /* libPods-App-AppTests.a */; };
 		AA68ECB8DF37A98FDBCB93E1 /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC8D392F8B56D8C801EC9584 /* libPods-App.a */; };
+		B456A2BE24532A70003BE115 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B456A2BD24532A70003BE115 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		94C5C24F604EAAF62DD4C477 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		DD621FB1F1C2E26A75BFB7FA /* Pods-App-AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-AppTests.release.xcconfig"; path = "Target Support Files/Pods-App-AppTests/Pods-App-AppTests.release.xcconfig"; sourceTree = "<group>"; };
 		FC7289CB4C08BE5C4052AA63 /* Pods-App-AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-AppTests.debug.xcconfig"; path = "Target Support Files/Pods-App-AppTests/Pods-App-AppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B456A2BD24532A70003BE115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC8D392F8B56D8C801EC9584 /* libPods-App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 				8C2515C42403C0BD00BAD4B5 /* Assets.xcassets */,
 				8C2515C62403C0BD00BAD4B5 /* LaunchScreen.storyboard */,
 				8C2515C92403C0BD00BAD4B5 /* Info.plist */,
+				B456A2BD24532A70003BE115 /* GoogleService-Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -177,12 +180,14 @@
 			buildConfigurationList = 8C2515D72403C0BD00BAD4B5 /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				E90F329F2553038312FC049E /* [CP] Check Pods Manifest.lock */,
+				B456A2BF24532AAB003BE115 /* Configure GoogleService-Info.plist */,
 				8C5A8C93241A1A9B003DC3D0 /* Swiftlint */,
 				8C2515B42403C0BC00BAD4B5 /* Sources */,
 				8C2515B52403C0BC00BAD4B5 /* Frameworks */,
 				8C2515B62403C0BC00BAD4B5 /* Resources */,
 				8C2518162403C59F00BAD4B5 /* Embed Frameworks */,
 				8C1B1F26244585870098EB3B /* Set Build Number */,
+				B4D303062453116800097AE9 /* Configure Crashlytics */,
 				AC1183A424462A4A008B2078 /* Setup templates */,
 			);
 			buildRules = (
@@ -258,6 +263,7 @@
 			files = (
 				8C2515C82403C0BD00BAD4B5 /* LaunchScreen.storyboard in Resources */,
 				8C2515C52403C0BD00BAD4B5 /* Assets.xcassets in Resources */,
+				B456A2BE24532A70003BE115 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +350,42 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B456A2BF24532AAB003BE115 /* Configure GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Configure GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Scripts/GoogleService-Info.sh\n";
+		};
+		B4D303062453116800097AE9 /* Configure Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Configure Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		E90F329F2553038312FC049E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
