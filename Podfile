@@ -23,6 +23,7 @@ end
 
 def analytics
   pod 'Firebase/Analytics'
+  pod 'Firebase/Performance'
   pod 'AppCenter'
 end
 
