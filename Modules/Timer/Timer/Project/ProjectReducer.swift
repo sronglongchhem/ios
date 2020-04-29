@@ -12,6 +12,9 @@ func createProjectReducer(repository: TimeLogRepository) -> Reducer<ProjectState
         case .nameEntered(let name):
             state.editableProject?.name = name
             return []
+        case .privateProjectSwitchTapped:
+            state.editableProject?.isPrivate.toggle()
+            return []
         }
     }
 }

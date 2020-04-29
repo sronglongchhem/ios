@@ -37,4 +37,23 @@ class ProjectReducerTests: XCTestCase {
             }
         )
     }
+
+    func testTogglePrivateProject() {
+        let state = ProjectState(
+            editableProject: EditableProject.empty(workspaceId: mockUser.defaultWorkspace),
+            projects: [:]
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .privateProjectSwitchTapped) {
+                $0.editableProject?.isPrivate = false
+            },
+            Step(.send, .privateProjectSwitchTapped) {
+                $0.editableProject?.isPrivate = true
+            }
+        )
+    }
 }

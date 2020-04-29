@@ -72,4 +72,12 @@ extension Store {
     public func select<B>(_ selector: @escaping (State) -> B) -> Driver<B> where B: Equatable {
         return state.map(selector).distinctUntilChanged()
     }
+
+    public func compactSelect<B>(_ selector: @escaping (State) -> B?) -> Driver<B> {
+        return state.compactMap(selector)
+    }
+
+    func compactSelect<B>(_ selector: @escaping (State) -> B?) -> Driver<B> where B: Equatable {
+        return state.compactMap(selector).distinctUntilChanged()
+    }
 }

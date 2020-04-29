@@ -34,13 +34,23 @@ public class ProjectViewController: UIViewController, Storyboarded {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        store.select({ $0.editableProject })
-            .map({ $0?.name })
+        // Project name
+        store.compactSelect({ $0.editableProject?.name })
             .drive(projectNameTextField.rx.text)
             .disposed(by: disposeBag)
 
         projectNameTextField.rx.text.compactMap({ $0 })
             .map(ProjectAction.nameEntered)
+            .bind(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
+        // Private project
+        store.compactSelect({ $0.editableProject?.isPrivate })
+            .drive(onNext: { self.togglePrivateProjectButton.isHighlighted = $0 })
+            .disposed(by: disposeBag)
+
+        togglePrivateProjectButton.rx.tap
+            .mapTo(ProjectAction.privateProjectSwitchTapped)
             .bind(onNext: store.dispatch)
             .disposed(by: disposeBag)
     }

@@ -3,6 +3,7 @@ import Models
 
 public enum ProjectAction: Equatable {
     case nameEntered(String)
+    case privateProjectSwitchTapped
 }
 
 extension ProjectAction: CustomDebugStringConvertible {
@@ -11,6 +12,8 @@ extension ProjectAction: CustomDebugStringConvertible {
         switch self {
         case let .nameEntered(name):
             return "NameEntered \(name)"
+        case .privateProjectSwitchTapped:
+            return "PrivateProjectSwitchTapped"
         }
     }
 }
