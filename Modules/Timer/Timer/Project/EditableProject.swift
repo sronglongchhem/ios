@@ -9,6 +9,8 @@ public struct EditableProject: Equatable {
     
     public var workspaceId: Int64
     public var clientId: Int64?
+
+    public var hasError: Bool = false
     
     private init(
         name: String,

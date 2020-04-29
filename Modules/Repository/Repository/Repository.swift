@@ -15,6 +15,7 @@ public protocol TimeLogRepository {
     func startTimeEntry(_ timeEntry: StartTimeEntryDto) -> Single<(started: TimeEntry, stopped: TimeEntry?)>
     func updateTimeEntry(_ timeEntry: TimeEntry) -> Single<Void>
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void>
+    func createProject(_ project: CreateProjectDto) -> Single<Project>
 }
 
 public class Repository {
@@ -98,7 +99,8 @@ extension Repository: TimeLogRepository {
                 try database.timeEntries.update(entity: runningEntry)
                 stoppedTimeEntry = runningEntry
             }
-            
+
+            // NOTE: How we resolve the new id is a temporary hack, it's meant to change once the sync team gets to this.
             let newTimeEntry = TimeEntry(
                 id: (timeEntries.map({ $0.id }).max() ?? 0) + 1,
                 description: timeEntry.description,
@@ -119,5 +121,24 @@ extension Repository: TimeLogRepository {
     
     public func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
         return database.timeEntries.rx.delete(id: timeEntryId)
+    }
+
+    public func createProject(_ project: CreateProjectDto) -> Single<Project> {
+        do {
+            let projects = try database.projects.getAll()
+            // NOTE: How we resolve the new id is a temporary hack, it's meant to change once the sync team gets to this.
+            let newProject = Project(id: (projects.map({ $0.id }).max() ?? 0) + 1,
+                                     name: project.name,
+                                     isPrivate: project.isPrivate,
+                                     isActive: project.isActive,
+                                     color: project.color,
+                                     billable: project.billable,
+                                     workspaceId: project.workspaceId,
+                                     clientId: project.clientId)
+            try database.projects.insert(entity: newProject)
+            return .just(newProject)
+        } catch {
+            return .error(error)
+        }
     }
 }

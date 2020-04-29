@@ -9,6 +9,7 @@ class MockTimeLogRepository: TimeLogRepository {
     
     var stoppedTimeEntry: TimeEntry?
     var newTimeEntryId: Int64 = 999
+    var newProjectId: Int64 = 9999
     
     var workspaces = [Workspace]()
     var clients = [Client]()
@@ -62,5 +63,17 @@ class MockTimeLogRepository: TimeLogRepository {
 
     func deleteTimeEntry(timeEntryId: Int64) -> Single<Void> {
         return Single.just(())
+    }
+
+    func createProject(_ dto: CreateProjectDto) -> Single<Project> {
+        let project = Project(id: newProjectId,
+                              name: dto.name,
+                              isPrivate: dto.isPrivate,
+                              isActive: dto.isActive,
+                              color: dto.color,
+                              billable: dto.billable,
+                              workspaceId: dto.workspaceId,
+                              clientId: dto.clientId)
+        return Single.just(project)
     }
 }

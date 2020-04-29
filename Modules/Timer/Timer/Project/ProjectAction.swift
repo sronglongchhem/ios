@@ -4,6 +4,8 @@ import Models
 public enum ProjectAction: Equatable {
     case nameEntered(String)
     case privateProjectSwitchTapped
+    case doneButtonTapped
+    case projectCreated(Project)
 }
 
 extension ProjectAction: CustomDebugStringConvertible {
@@ -14,6 +16,10 @@ extension ProjectAction: CustomDebugStringConvertible {
             return "NameEntered \(name)"
         case .privateProjectSwitchTapped:
             return "PrivateProjectSwitchTapped"
+        case .doneButtonTapped:
+            return "DoneButtonTapped"
+        case .projectCreated(let project):
+            return "ProjectCreated \(project)"
         }
     }
 }

@@ -21,6 +21,7 @@
 		8C509D282412885100B6DF30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D272412885100B6DF30 /* Date+Extensions.swift */; };
 		8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D292412888D00B6DF30 /* Array+Extensions.swift */; };
 		8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */; };
+		B4523FE82450C65D00AB5EA0 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4523FE72450C65D00AB5EA0 /* Collection+Extensions.swift */; };
 		ACD3344D245200AB002278FD /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD3344C245200AB002278FD /* Tooltip.swift */; };
 		8CA44A322450446700B3BAC2 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA44A312450446700B3BAC2 /* ArrayExtensions.swift */; };
 		B4B4F02C24351BE800DFBF2E /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F02B24351BE800DFBF2E /* Snackbar.swift */; };
@@ -60,6 +61,7 @@
 		8C509D272412885100B6DF30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8C509D292412888D00B6DF30 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		B4523FE72450C65D00AB5EA0 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ACD3344C245200AB002278FD /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		8CA44A312450446700B3BAC2 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		B4B4F02B24351BE800DFBF2E /* Snackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snackbar.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				CC21B2FA2451DDDA0077393E /* WheelMathExtensions.swift */,
 				8C509D272412885100B6DF30 /* Date+Extensions.swift */,
+				B4523FE72450C65D00AB5EA0 /* Collection+Extensions.swift */,
 				8C509D292412888D00B6DF30 /* Array+Extensions.swift */,
 				8C5A8C96241AA3C2003DC3D0 /* UIColor+Extensions.swift */,
 				8C4EDC582429034000C03E14 /* TimeInterval+Extensions.swift */,
@@ -346,6 +349,7 @@
 				8C2517A52403C2AC00BAD4B5 /* Storyboarded.swift in Sources */,
 				8C509D2A2412888D00B6DF30 /* Array+Extensions.swift in Sources */,
 				3430C397242259BC009CF454 /* Apply.swift in Sources */,
+				B4523FE82450C65D00AB5EA0 /* Collection+Extensions.swift in Sources */,
 				8C5A8C97241AA3C2003DC3D0 /* UIColor+Extensions.swift in Sources */,
 				CC21B2FB2451DDDA0077393E /* WheelMathExtensions.swift in Sources */,
 				8CA44A322450446700B3BAC2 /* ArrayExtensions.swift in Sources */,

@@ -53,5 +53,11 @@ public class ProjectViewController: UIViewController, Storyboarded {
             .mapTo(ProjectAction.privateProjectSwitchTapped)
             .bind(onNext: store.dispatch)
             .disposed(by: disposeBag)
+        
+        // Done button
+        saveButton.rx.tap
+            .mapTo(ProjectAction.doneButtonTapped)
+            .bind(onNext: store.dispatch)
+            .disposed(by: disposeBag)
     }
 }
