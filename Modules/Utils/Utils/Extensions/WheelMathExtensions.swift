@@ -2,36 +2,36 @@ import Foundation
 import CoreGraphics
 import Darwin
 
-extension CGFloat {
+public extension CGFloat {
     static var tau: CGFloat { 2 * .pi }
+    static var quarterOfCircle: CGFloat { .tau / 4 }
+    static var fullCircle: CGFloat { .tau }
+    static var hoursOnTheClock: CGFloat { 12 }
+    static var minutesInAnHour: CGFloat { 60 }
+    static var secondsInAMinute: CGFloat { 60 }
 }
 
-extension TimeInterval {
-    private var quarterOfCircle: CGFloat { .tau / 4 }
-    private var fullCircle: CGFloat { .tau }
-    private var hoursOnTheClock: CGFloat { 12 }
-    private var minutesInAnHour: CGFloat { 60 }
-    private var secondsInAMinute: CGFloat { 60 }
+public extension TimeInterval {
 
     func toAngleOnTheDial() -> CGFloat {
-        self.toAngle() - quarterOfCircle
+        self.toAngle() - .quarterOfCircle
     }
 
     func toAngle() -> CGFloat {
-        return CGFloat(self) / CGFloat(minutesInAnHour * secondsInAMinute) * fullCircle
+        return CGFloat(self) / .minutesInAnHour * .secondsInAMinute * .fullCircle
     }
     
     func toPositiveAngle() -> CGFloat {
         var angle = CGFloat(self)
         while angle < 0 {
-            angle += fullCircle
+            angle += .fullCircle
         }
         return angle
     }
 
     func angleToTime() -> TimeInterval {
-        let timeInHours = CGFloat(self) / fullCircle
-        let timeinSeconds = timeInHours * minutesInAnHour * secondsInAMinute
+        let timeInHours = CGFloat(self) / .fullCircle
+        let timeinSeconds = timeInHours * .minutesInAnHour * .secondsInAMinute
         return Double(timeinSeconds)
     }
     
