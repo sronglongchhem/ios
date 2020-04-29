@@ -51,6 +51,7 @@
 		8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */; };
 		8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */; };
 		AC61F9062440BBF500534713 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC61F9082440BBF500534713 /* Localizable.strings */; };
+		AC823A01245874BB0078574D /* StartEditSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8239FF245874BB0078574D /* StartEditSelector.swift */; };
 		ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */; };
 		ACAA58272433A7ED003FDECA /* RunningTimeEntryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */; };
 		ACAA58282433A7ED003FDECA /* RunningTimeEntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */; };
@@ -135,6 +136,7 @@
 		8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditInputAccessoryView.swift; sourceTree = "<group>"; };
 		8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyLabelCell.swift; sourceTree = "<group>"; };
 		AC61F9072440BBF500534713 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AC8239FF245874BB0078574D /* StartEditSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditSelector.swift; sourceTree = "<group>"; };
 		ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryCoordinator.swift; sourceTree = "<group>"; };
 		ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryState.swift; sourceTree = "<group>"; };
 		ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryAction.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				8C509D182412644300B6DF30 /* StartEditFeature.swift */,
 				8C509D1224125AB500B6DF30 /* StartEditCoordinator.swift */,
 				8C008FD12409407B000A0C32 /* StartEditReducer.swift */,
+				AC8239FF245874BB0078574D /* StartEditSelector.swift */,
 				34C93C072453387300024F06 /* DateTimePickMode.swift */,
 			);
 			path = StartEdit;
@@ -647,6 +650,7 @@
 				ACAA58322434A1EE003FDECA /* RunningTimeEntryViewController.swift in Sources */,
 				8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */,
 				8C2517892403C27200BAD4B5 /* TimeEntryCell.swift in Sources */,
+				AC823A01245874BB0078574D /* StartEditSelector.swift in Sources */,
 				CC03C2782448AE1B0071FA55 /* ProjectAction.swift in Sources */,
 				8C509D202412874100B6DF30 /* TimeEntriesSelector.swift in Sources */,
 				8C509D152412603800B6DF30 /* TimerState.swift in Sources */,

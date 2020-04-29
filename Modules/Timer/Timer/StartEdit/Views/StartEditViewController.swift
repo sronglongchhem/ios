@@ -13,6 +13,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     public static var storyboardName = "Timer"
     public static var storyboardBundle = Assets.bundle
 
+    private let billableTooltipDuration: TimeInterval = 2
+
     var scrollView: UIScrollView?
     var smallStateHeight: CGFloat { headerHeight + cells[0].height }
 
@@ -80,16 +82,13 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .mapTo(StartEditAction.closeButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
-        
-        connectAccessoryViewButtons()
-    }
 
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        connectAccessoryViewButtons()
     }
 
     public func loseFocus() {
         descriptionTextField.resignFirstResponder()
+        Tooltip.dismiss()
     }
 
     public func focus() {
@@ -110,9 +109,16 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .disposed(by: disposeBag)
         
         startEditInputAccessoryView.billableButton.rx.tap
+            .do(onNext: showBillableTooltip)
             .mapTo(StartEditAction.billableButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
+    }
+
+    private func showBillableTooltip() {
+        Tooltip.show(from: self.startEditInputAccessoryView.billableButton,
+                     text: NSLocalizedString("Billable", comment: ""),
+                     duration: self.billableTooltipDuration)
     }
 
     private func displayTimeEntry(timeEntry: EditableTimeEntry?) {

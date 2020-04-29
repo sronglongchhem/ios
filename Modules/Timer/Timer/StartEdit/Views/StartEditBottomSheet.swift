@@ -63,13 +63,9 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
             .subscribe(onNext: keyboardWillChange(intersectionHeight:))
             .disposed(by: disposeBag)
 
-        store.select({ $0.editableTimeEntry })
-            .drive(onNext: { [weak self] editableTimeEntry in
-                if editableTimeEntry == nil {
-                    self?.hide()
-                } else {
-                    self?.show()
-                }
+        store.select(shouldShowEditView)
+            .drive(onNext: { [weak self] shouldShowEditView in
+                shouldShowEditView ? self?.show() : self?.hide()
             })
             .disposed(by: disposeBag)
 
