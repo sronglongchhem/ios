@@ -65,7 +65,7 @@ public class RunningTimeEntryViewController: UIViewController, Storyboarded {
         }
 
         timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
-            self?.timerLabel.text = Date().timeIntervalSince(runningTimeEntry.start).formattedDuration(ending: Date())
+            self?.timerLabel.text = Date().timeIntervalSince(runningTimeEntry.start).formattedDuration()
         }
         RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
 

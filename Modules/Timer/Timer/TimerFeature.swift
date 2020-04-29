@@ -17,6 +17,7 @@ public func createTimerReducer(repository: Repository, time: Time, schedulerProv
 }
 
 public class TimerFeature: BaseFeature<TimerState, TimerAction> {
+
     private enum Features {
         case timeEntriesLog
         case startEdit
@@ -24,28 +25,35 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
         case project
     }
 
-    private let features: [Features: BaseFeature<TimerState, TimerAction>] = [
-        .timeEntriesLog: TimeEntriesLogFeature()
-            .view { $0.view(
-                state: { $0.timeLogState },
-                action: { TimerAction.timeLog($0) })
-        },
-        .startEdit: StartEditFeature()
-            .view { $0.view(
-                state: { $0.startEditState },
-                action: { TimerAction.startEdit($0) })
-        },
-        .runningTimeEntry: RunningTimeEntryFeature()
-            .view { $0.view(
-                state: { $0.runningTimeEntryState },
-                action: { TimerAction.runningTimeEntry($0) })
-        },
-        .project: ProjectFeature()
-            .view { $0.view(
-                state: { $0.projectState },
-                action: { TimerAction.project($0) })
-        }
-    ]
+    private let time: Time
+    private let features: [Features: BaseFeature<TimerState, TimerAction>]
+
+    public init(time: Time) {
+        self.time = time
+
+        features = [
+               .timeEntriesLog: TimeEntriesLogFeature()
+                   .view { $0.view(
+                       state: { $0.timeLogState },
+                       action: { TimerAction.timeLog($0) })
+               },
+               .startEdit: StartEditFeature(time: time)
+                   .view { $0.view(
+                       state: { $0.startEditState },
+                       action: { TimerAction.startEdit($0) })
+               },
+               .runningTimeEntry: RunningTimeEntryFeature()
+                   .view { $0.view(
+                       state: { $0.runningTimeEntryState },
+                       action: { TimerAction.runningTimeEntry($0) })
+               },
+               .project: ProjectFeature()
+                   .view { $0.view(
+                       state: { $0.projectState },
+                       action: { TimerAction.project($0) })
+               }
+           ]
+    }
 
     // swiftlint:disable force_cast
     public override func mainCoordinator(store: Store<TimerState, TimerAction>) -> Coordinator {

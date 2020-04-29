@@ -5,6 +5,7 @@ import Architecture
 import RxSwift
 import RxCocoa
 import RxDataSources
+import OtherServices
 
 public typealias StartEditStore = Store<StartEditState, StartEditAction>
 
@@ -23,12 +24,15 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var durationView: UIView!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 
     public override var inputAccessoryView: UIView? { startEditInputAccessoryView }
 
     public var store: StartEditStore!
+    public var time: Time!
 
     private var disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<String, StartEditCellType>>!
@@ -40,11 +44,15 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         StartEditCellType.dummyCell("BILLABLE")
     ]
     private var headerHeight: CGFloat = 107
+    private var timer: Timer?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView = tableView
         handle.layer.cornerRadius = 2
+
+        durationView.layer.cornerRadius = 16
+        durationLabel.text = "--:--"
 
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: 200, height: headerHeight)
         tableView.separatorStyle = .none
@@ -128,6 +136,32 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         }
 
         descriptionTextField.text = timeEntry.description
+        setDurationLabel(for: timeEntry)
+    }
+
+    private func setDurationLabel(for timeEntry: EditableTimeEntry) {
+
+        timer?.invalidate()
+        timer = nil
+
+        guard let start = timeEntry.start else {
+            durationLabel.text = "00:00"
+            return
+        }
+
+        guard let duration = timeEntry.duration else {
+            timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+                self?.durationLabel.text = self?.time.now().timeIntervalSince(start).formattedDuration()
+            }
+            RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
+            return
+        }
+
+        durationLabel.text = duration.formattedDuration()
+    }
+
+    deinit {
+        timer?.invalidate()
     }
 }
 

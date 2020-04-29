@@ -38,7 +38,7 @@ enum TimeLogCellViewModel: Equatable {
         case let .groupedEntriesHeader(timeEntryViewModels, _):
             return timeEntryViewModels.map { $0.duration ?? 0 }
                 .reduce(0, +)
-                .formattedDuration(ending: Date())
+                .formattedDuration()
         }
     }
     

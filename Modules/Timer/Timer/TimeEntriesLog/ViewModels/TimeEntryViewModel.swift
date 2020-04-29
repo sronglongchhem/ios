@@ -42,7 +42,7 @@ public struct TimeEntryViewModel: Equatable {
                 
         self.start = timeEntry.start
         self.duration = timeEntry.duration
-        self.durationString = duration?.formattedDuration(ending: Date()) ?? nil
+        self.durationString = duration?.formattedDuration()
         self.end = duration.map({ timeEntry.start.addingTimeInterval($0) }) ?? nil
         isRunning = duration == nil
         

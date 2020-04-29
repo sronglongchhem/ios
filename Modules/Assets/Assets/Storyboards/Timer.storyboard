@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -145,15 +145,35 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbG-qs-ijW">
-                                            <rect key="frame" x="312" y="8" width="96" height="28"/>
-                                            <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <rect key="frame" x="322.5" y="20" width="81.5" height="32"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stopwatch" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-Cr-200">
+                                                    <rect key="frame" x="12" y="7.5" width="14" height="15"/>
+                                                    <color key="tintColor" red="0.34509803921568627" green="0.35686274509803922" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="14" id="BEN-wU-3mH"/>
+                                                        <constraint firstAttribute="height" constant="14" id="DsR-es-lOZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6B0-BH-kxC">
+                                                    <rect key="frame" x="32" y="7" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="96" id="dut-gq-hcD"/>
-                                                <constraint firstAttribute="height" constant="28" id="lYC-KZ-rGL"/>
+                                                <constraint firstItem="2HM-Cr-200" firstAttribute="centerY" secondItem="SbG-qs-ijW" secondAttribute="centerY" id="SNC-wS-w8G"/>
+                                                <constraint firstItem="6B0-BH-kxC" firstAttribute="centerY" secondItem="SbG-qs-ijW" secondAttribute="centerY" id="TY0-Sw-NpP"/>
+                                                <constraint firstItem="6B0-BH-kxC" firstAttribute="leading" secondItem="2HM-Cr-200" secondAttribute="trailing" constant="6" id="cRZ-i5-PeH"/>
+                                                <constraint firstAttribute="height" constant="32" id="lYC-KZ-rGL"/>
+                                                <constraint firstItem="2HM-Cr-200" firstAttribute="leading" secondItem="SbG-qs-ijW" secondAttribute="leading" constant="12" id="rUw-hA-Cms"/>
+                                                <constraint firstAttribute="trailing" secondItem="6B0-BH-kxC" secondAttribute="trailing" constant="12" id="rjq-xm-yKp"/>
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="I'm working on..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ars-hi-U6Y">
-                                            <rect key="frame" x="15" y="70" width="384" height="22"/>
+                                            <rect key="frame" x="15" y="71" width="384" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
@@ -163,8 +183,8 @@
                                         <constraint firstAttribute="bottom" secondItem="Ars-hi-U6Y" secondAttribute="bottom" constant="15" id="4SD-5i-ON3"/>
                                         <constraint firstAttribute="trailing" secondItem="Ars-hi-U6Y" secondAttribute="trailing" constant="15" id="EBn-Qg-o9Y"/>
                                         <constraint firstItem="Ars-hi-U6Y" firstAttribute="leading" secondItem="YYR-1H-mui" secondAttribute="leading" constant="15" id="Qt9-jE-d2F"/>
-                                        <constraint firstAttribute="trailing" secondItem="SbG-qs-ijW" secondAttribute="trailing" constant="6" id="TDR-Cq-Coe"/>
-                                        <constraint firstItem="SbG-qs-ijW" firstAttribute="top" secondItem="YYR-1H-mui" secondAttribute="top" constant="8" id="i2U-Tw-GUX"/>
+                                        <constraint firstAttribute="trailing" secondItem="SbG-qs-ijW" secondAttribute="trailing" constant="10" id="TDR-Cq-Coe"/>
+                                        <constraint firstItem="SbG-qs-ijW" firstAttribute="top" secondItem="YYR-1H-mui" secondAttribute="top" constant="20" id="i2U-Tw-GUX"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -240,6 +260,8 @@
                     <connections>
                         <outlet property="closeButton" destination="6f1-o6-T93" id="qf1-Rr-5PW"/>
                         <outlet property="descriptionTextField" destination="Ars-hi-U6Y" id="6sY-Jy-Kk1"/>
+                        <outlet property="durationLabel" destination="6B0-BH-kxC" id="dfp-c2-Pq1"/>
+                        <outlet property="durationView" destination="SbG-qs-ijW" id="fCr-fh-sse"/>
                         <outlet property="handle" destination="eCM-ov-S5k" id="upu-BG-MKJ"/>
                         <outlet property="headerView" destination="YYR-1H-mui" id="kHg-E9-k4Q"/>
                         <outlet property="startEditInputAccessoryView" destination="m53-j1-8QL" id="cOP-C4-ABP"/>
@@ -368,7 +390,7 @@
                                         <rect key="frame" x="16" y="18.5" width="318" height="35"/>
                                         <subviews>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="I'm working on..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-fS-kZU">
-                                                <rect key="frame" x="20" y="5" width="278" height="25.5"/>
+                                                <rect key="frame" x="20" y="5.5" width="278" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -434,6 +456,7 @@
     </scenes>
     <resources>
         <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="stopwatch" catalog="system" width="121" height="128"/>
         <image name="tag.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>

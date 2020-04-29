@@ -24,7 +24,7 @@ struct DayViewModel: Equatable {
                 .filter({ !$0.isInGroup })
                 .map({ $0.duration ?? 0 })
                 .reduce(0, +)
-                .formattedDuration(ending: Date())
+                .formattedDuration()
 
     }
 }

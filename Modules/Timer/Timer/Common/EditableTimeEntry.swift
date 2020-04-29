@@ -7,6 +7,8 @@ public struct EditableTimeEntry: Equatable {
     public var workspaceId: Int64
     public var description: String
     public var billable: Bool
+    public var start: Date?
+    public var duration: TimeInterval?
     public var editableProject: EditableProject?
     
     private init(
@@ -14,12 +16,16 @@ public struct EditableTimeEntry: Equatable {
         workspaceId: Int64,
         description: String,
         billable: Bool,
+        start: Date? = nil,
+        duration: TimeInterval? = nil,
         editableProject: EditableProject? = nil
     ) {
         self.ids = ids
         self.workspaceId = workspaceId
         self.description = description
         self.billable = billable
+        self.start = start
+        self.duration = duration
         self.editableProject = editableProject
     }
     
@@ -37,7 +43,9 @@ public struct EditableTimeEntry: Equatable {
             ids: [timeEntry.id],
             workspaceId: timeEntry.workspaceId,
             description: timeEntry.description,
-            billable: timeEntry.billable
+            billable: timeEntry.billable,
+            start: timeEntry.start,
+            duration: timeEntry.duration
         )
     }
     

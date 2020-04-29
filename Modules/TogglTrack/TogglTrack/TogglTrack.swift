@@ -16,9 +16,9 @@ public class TogglTrack {
     private var disposeBag = DisposeBag()
 
     public init(window: UIWindow, analyticsServices: [AnalyticsService]) {
-        
-        let appFeature = AppFeature()
+
         let appEnvironment = AppEnvironment(analyticsServices: analyticsServices)
+        let appFeature = AppFeature(time: appEnvironment.time)
         
         store = Store(
             initialState: AppState(),
