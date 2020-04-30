@@ -191,6 +191,66 @@ class StartEditReducerTests: XCTestCase {
         })
     }
     
+    func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .start
+        )
+        
+        let start = Date(timeIntervalSinceReferenceDate: 100)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePicked(start)) { $0.editableTimeEntry?.start = start }
+        )
+    }
+    
+    func test_dateTimePicked_forEndTimeWithAValidStartTime_shouldUpdateDuration() {
+        let start = Date(timeIntervalSinceReferenceDate: 100)
+        let end = Date(timeIntervalSinceReferenceDate: 200)
+        var timeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        timeEntry.start = Date(timeIntervalSinceReferenceDate: 100)
+        
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: timeEntry,
+            autocompleteSuggestions: [],
+            dateTimePickMode: .end
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePicked(end)) { $0.editableTimeEntry?.duration = end.timeIntervalSince(start) }
+        )
+    }
+    
+    func test_dateTimePicked_forEndTimeWithNoStartTime_shouldNotUpdateDuration() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .end
+        )
+        
+        let end = Date(timeIntervalSinceReferenceDate: 200)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePicked(end)) { $0.editableTimeEntry?.duration = nil }
+        )
+    }
+    
     func testAutocompleteSuggestionTapped() {
         
     }

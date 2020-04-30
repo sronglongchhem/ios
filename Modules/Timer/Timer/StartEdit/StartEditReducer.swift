@@ -25,11 +25,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             return doneButtonTapped(state, repository)
 
         case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
-            state.editableTimeEntry = nil
-            state.entities.timeEntries[startedTimeEntry.id] = startedTimeEntry
-            if let stoppedTimeEntry = stoppedTimeEntry {
-                state.entities.timeEntries[stoppedTimeEntry.id] = stoppedTimeEntry
-            }
+            timeEntryStarted(&state, startedTimeEntry, stoppedTimeEntry)
             return []
 
         case let .timeEntryUpdated(timeEntry):
@@ -38,6 +34,10 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             return []
             
         case .autocompleteSuggestionTapped:
+            return []
+            
+        case let .dateTimePicked(date):
+            dateTimePicked(&state, date: date)
             return []
             
         case .billableButtonTapped:
@@ -77,6 +77,14 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
     }
 }
 
+func timeEntryStarted(_ state: inout StartEditState, _ startedTimeEntry: TimeEntry, _ stoppedTimeEntry: TimeEntry?) {
+    state.editableTimeEntry = nil
+    state.entities.timeEntries[startedTimeEntry.id] = startedTimeEntry
+    if let stoppedTimeEntry = stoppedTimeEntry {
+        state.entities.timeEntries[stoppedTimeEntry.id] = stoppedTimeEntry
+    }
+}
+
 func startTimeEntry(_ timeEntry: StartTimeEntryDto, repository: TimeLogRepository) -> Effect<StartEditAction> {
     return repository
         .startTimeEntry(timeEntry)
@@ -100,6 +108,17 @@ func doneButtonTapped(_ state: StartEditState, _ repository: TimeLogRepository) 
 
     persistUpdatedTimeEntries(updatedTimeEnries)
     return []
+}
+
+func dateTimePicked(_ state: inout StartEditState, date: Date) {
+    if state.editableTimeEntry == nil {
+        fatalError("Trying to set time entry date when not editing a time entry")
+    }
+    if state.dateTimePickMode == .start {
+        state.editableTimeEntry!.start = date
+    } else if state.dateTimePickMode == .end && state.editableTimeEntry!.start != nil {
+        state.editableTimeEntry!.duration = date.timeIntervalSince(state.editableTimeEntry!.start!)
+    }
 }
 
 func updateAutocompleteSuggestionsEffect(_ state: StartEditState,

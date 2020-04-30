@@ -12,6 +12,8 @@ public enum StartEditAction: Equatable {
     
     case autocompleteSuggestionTapped(AutocompleteSuggestionType)
     
+    case dateTimePicked(Date)
+    
     case projectButtonTapped
     case tagButtonTapped
     case billableButtonTapped
@@ -45,6 +47,9 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case let .autocompleteSuggestionTapped(suggestion):
             return "AutocompleteSuggestionTapped \(suggestion)"
+            
+        case let .dateTimePicked(date):
+            return "dateTimePicked \(date)"
             
         case .billableButtonTapped:
             return "BillableButtonTapped"
