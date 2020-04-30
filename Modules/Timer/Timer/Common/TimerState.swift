@@ -25,6 +25,13 @@ public struct TimerState: Equatable {
     }
 }
 
+extension LocalTimerState {
+    public func isEditingGroup() -> Bool {
+        guard let numberOfEntriesBeingEdited = editableTimeEntry?.ids.count else { return false }
+        return numberOfEntriesBeingEdited > 1
+    }
+}
+
 extension TimerState {
     
     internal var timeLogState: TimeEntriesLogState {

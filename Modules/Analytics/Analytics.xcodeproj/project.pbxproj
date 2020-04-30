@@ -11,6 +11,10 @@
 		343E37A82447208D00A65AFD /* CompositeAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E37A72447208D00A65AFD /* CompositeAnalyticsService.swift */; };
 		34406B13244632EC00C65C99 /* Analytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 34406B11244632EC00C65C99 /* Analytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34406B1C2446388800C65C99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34406B1B2446388800C65C99 /* Event.swift */; };
+		CCEF063D2459C8F700B5A306 /* EditViewCloseReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEF063C2459C8F700B5A306 /* EditViewCloseReason.swift */; };
+		CCEF063F2459C95D00B5A306 /* EditViewOpenReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEF063E2459C95D00B5A306 /* EditViewOpenReason.swift */; };
+		CCEF06412459C99300B5A306 /* TimeEntryDeleteOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEF06402459C99300B5A306 /* TimeEntryDeleteOrigin.swift */; };
+		CCEF06432459C9C100B5A306 /* TimeEntryStopOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEF06422459C9C100B5A306 /* TimeEntryStopOrigin.swift */; };
 		8CAF7B3624581EC5006B961D /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF7B3524581EC5006B961D /* AnalyticsTests.swift */; };
 		8CAF7B3824581EC5006B961D /* Analytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34406B0E244632EC00C65C99 /* Analytics.framework */; };
 /* End PBXBuildFile section */
@@ -32,6 +36,10 @@
 		34406B11244632EC00C65C99 /* Analytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		34406B12244632EC00C65C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34406B1B2446388800C65C99 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CCEF063C2459C8F700B5A306 /* EditViewCloseReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewCloseReason.swift; sourceTree = "<group>"; };
+		CCEF063E2459C95D00B5A306 /* EditViewOpenReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewOpenReason.swift; sourceTree = "<group>"; };
+		CCEF06402459C99300B5A306 /* TimeEntryDeleteOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryDeleteOrigin.swift; sourceTree = "<group>"; };
+		CCEF06422459C9C100B5A306 /* TimeEntryStopOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryStopOrigin.swift; sourceTree = "<group>"; };
 		8CAF7B3324581EC5006B961D /* AnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAF7B3524581EC5006B961D /* AnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
 		8CAF7B3724581EC5006B961D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +94,7 @@
 		34406B10244632EC00C65C99 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				CCEF063B2459C8E000B5A306 /* Parameters */,
 				34406B11244632EC00C65C99 /* Analytics.h */,
 				34406B12244632EC00C65C99 /* Info.plist */,
 				34406B1B2446388800C65C99 /* Event.swift */,
@@ -93,6 +102,17 @@
 				343E37A72447208D00A65AFD /* CompositeAnalyticsService.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		CCEF063B2459C8E000B5A306 /* Parameters */ = {
+			isa = PBXGroup;
+			children = (
+				CCEF063C2459C8F700B5A306 /* EditViewCloseReason.swift */,
+				CCEF063E2459C95D00B5A306 /* EditViewOpenReason.swift */,
+				CCEF06402459C99300B5A306 /* TimeEntryDeleteOrigin.swift */,
+				CCEF06422459C9C100B5A306 /* TimeEntryStopOrigin.swift */,
+			);
+			path = Parameters;
 			sourceTree = "<group>";
 		};
 		8CAF7B3424581EC5006B961D /* AnalyticsTests */ = {
@@ -230,7 +250,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				34406B1C2446388800C65C99 /* Event.swift in Sources */,
+				CCEF06432459C9C100B5A306 /* TimeEntryStopOrigin.swift in Sources */,
+				CCEF063D2459C8F700B5A306 /* EditViewCloseReason.swift in Sources */,
 				343E37A424471E9700A65AFD /* AnalyticsService.swift in Sources */,
+				CCEF063F2459C95D00B5A306 /* EditViewOpenReason.swift in Sources */,
+				CCEF06412459C99300B5A306 /* TimeEntryDeleteOrigin.swift in Sources */,
 				343E37A82447208D00A65AFD /* CompositeAnalyticsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

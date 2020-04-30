@@ -81,9 +81,3 @@ extension AppAction: CustomDebugStringConvertible {
         }
     }
 }
-
-extension AppAction: Analytics.EventConvertible {
-    public func toEvent() -> Event? {
-        return nil
-    }
-}
