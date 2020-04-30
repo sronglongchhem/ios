@@ -5,6 +5,7 @@ import OtherServices
 @testable import Timer
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class StartEditReducerTests: XCTestCase {
     var now = Date(timeIntervalSince1970: 987654321)
     var mockRepository: MockTimeLogRepository!
@@ -310,6 +311,109 @@ class StartEditReducerTests: XCTestCase {
             steps:
             Step(.send, .billableButtonTapped) { $0.editableTimeEntry?.billable = true },
             Step(.send, .billableButtonTapped) { $0.editableTimeEntry?.billable = false }
+        )
+    }
+
+    func testDurationInputtedForRunningTimeEntry() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromSingle(TimeEntry(
+                id: 1,
+                description: "sss",
+                start: mockTime.now() - 10,
+                duration: nil,
+                billable: true,
+                workspaceId: mockUser.defaultWorkspace)),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        let newDuration: TimeInterval = 40
+        let newStartTime = mockTime.now() - newDuration
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .durationInputted(newDuration)) { $0.editableTimeEntry!.start = newStartTime }
+        )
+    }
+
+    func testDurationInputtedForStoppedTimeEntry() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromSingle(TimeEntry(
+                id: 1,
+                description: "sss",
+                start: mockTime.now() - 10,
+                duration: 100,
+                billable: true,
+                workspaceId: mockUser.defaultWorkspace)),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        let newDuration: TimeInterval = 200
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .durationInputted(newDuration)) { $0.editableTimeEntry!.duration = newDuration }
+        )
+    }
+
+    func testDurationInputtedWithInvalidDuration() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromSingle(TimeEntry(
+                id: 1,
+                description: "sss",
+                start: mockTime.now() - 10,
+                duration: 100,
+                billable: true,
+                workspaceId: mockUser.defaultWorkspace)),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        let newDuration: TimeInterval = -1
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .durationInputted(newDuration))
+        )
+    }
+
+    func testDurationInputtedForTimeEntryGroup() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromGroup(
+                ids: [0, 3, 4],
+                groupSample: TimeEntry(
+                    id: 1,
+                    description: "sss",
+                    start: mockTime.now() - 10,
+                    duration: 100,
+                    billable: true,
+                    workspaceId: mockUser.defaultWorkspace)),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        let newDuration: TimeInterval = 100
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .durationInputted(newDuration))
         )
     }
 

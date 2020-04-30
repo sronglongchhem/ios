@@ -63,4 +63,12 @@ extension EditableTimeEntry {
     func toStartTimeEntryDto() -> StartTimeEntryDto {
         return StartTimeEntryDto(workspaceId: self.workspaceId, description: self.description)
     }
+
+    var isRunningOrNew: Bool {
+        return self.duration == nil
+    }
+
+    var isGroup: Bool {
+        return self.ids.count > 1
+    }
 }

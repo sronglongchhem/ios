@@ -5,7 +5,7 @@ import RxSwift
 import Repository
 import OtherServices
 
-// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable cyclomatic_complexity function_body_length
 func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reducer<StartEditState, StartEditAction> {
     return Reducer {state, action in
         
@@ -59,6 +59,18 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.editableTimeEntry?.description = appendCharacter("#", toString: editableTimeEntry.description)
             return []
 
+        case let .durationInputted(duration):
+            guard duration >= 0,
+                let editableTimeEntry = state.editableTimeEntry,
+                !editableTimeEntry.isGroup
+                else { return[] }
+            if editableTimeEntry.isRunningOrNew {
+                let newStartTime = time.now() - duration
+                state.editableTimeEntry!.start = newStartTime
+            } else {
+                state.editableTimeEntry!.duration = duration
+            }
+            return []
         case let .setError(error):
             fatalError(error.description)
         }

@@ -2,6 +2,7 @@ import Foundation
 import Models
 
 public enum StartEditAction: Equatable {
+    case durationInputted(TimeInterval)
     case descriptionEntered(String, Int)
     case closeButtonTapped
     case dialogDismissed
@@ -59,6 +60,9 @@ extension StartEditAction: CustomDebugStringConvertible {
 
         case let .autocompleteSuggestionsUpdated(suggestions):
             return "AutocompleteSuggestionsUpdated \(suggestions)"
+
+        case let .durationInputted(duration):
+            return ".durationInputted \(duration)"
         }
     }
 }
