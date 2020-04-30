@@ -1,0 +1,2 @@
+#include "Models-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Models/Pods-Models.release.xcconfig"

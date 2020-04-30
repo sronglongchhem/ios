@@ -1,0 +1,2 @@
+#include "Networking-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Networking/Pods-Networking.release.xcconfig"

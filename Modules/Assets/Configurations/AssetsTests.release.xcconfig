@@ -1,0 +1,2 @@
+#include "AssetsTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Assets-AssetsTests/Pods-Assets-AssetsTests.release.xcconfig"

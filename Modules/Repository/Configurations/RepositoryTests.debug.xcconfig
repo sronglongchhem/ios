@@ -1,0 +1,2 @@
+#include "RepositoryTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Repository-RepositoryTests/Pods-Repository-RepositoryTests.debug.xcconfig"

@@ -1,0 +1,3 @@
+#include "AnalyticsTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Analytics-AnalyticsTests/Pods-Analytics-AnalyticsTests.release.xcconfig"
+

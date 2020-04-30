@@ -1,0 +1,2 @@
+#include "OtherServices-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-OtherServices/Pods-OtherServices.debug.xcconfig"

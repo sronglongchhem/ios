@@ -1,0 +1,2 @@
+#include "Assets-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Assets/Pods-Assets.debug.xcconfig"

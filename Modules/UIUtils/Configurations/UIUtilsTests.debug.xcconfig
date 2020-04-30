@@ -1,0 +1,2 @@
+#include "UIUtilsTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-UIUtils-UIUtilsTests/Pods-UIUtils-UIUtilsTests.debug.xcconfig"

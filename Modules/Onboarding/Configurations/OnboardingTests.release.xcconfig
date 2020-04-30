@@ -1,0 +1,2 @@
+#include "OnboardingTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Onboarding-OnboardingTests/Pods-Onboarding-OnboardingTests.release.xcconfig"

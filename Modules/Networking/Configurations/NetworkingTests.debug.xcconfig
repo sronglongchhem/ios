@@ -1,0 +1,2 @@
+#include "NetworkingTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Networking-NetworkingTests/Pods-Networking-NetworkingTests.debug.xcconfig"

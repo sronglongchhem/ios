@@ -1,0 +1,2 @@
+#include "Timer-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Timer/Pods-Timer.debug.xcconfig"

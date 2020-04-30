@@ -1,0 +1,2 @@
+#include "TimerTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Timer-TimerTests/Pods-Timer-TimerTests.release.xcconfig"

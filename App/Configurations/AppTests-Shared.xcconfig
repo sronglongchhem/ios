@@ -1,0 +1,4 @@
+#include "./base/Tests-Base.xcconfig"
+
+BUNDLE_LOADER = $(TEST_HOST)
+TEST_HOST = $(BUILT_PRODUCTS_DIR)/Aurora.app/Aurora

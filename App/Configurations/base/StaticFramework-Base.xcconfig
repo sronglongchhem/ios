@@ -1,0 +1,3 @@
+#include "Framework-Base.xcconfig"
+
+MACH_O_TYPE = staticlib

@@ -1,0 +1,2 @@
+#include "APITests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-API-APITests/Pods-API-APITests.debug.xcconfig"

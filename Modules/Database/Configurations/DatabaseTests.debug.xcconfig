@@ -1,0 +1,2 @@
+#include "DatabaseTests-Shared.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests.debug.xcconfig"

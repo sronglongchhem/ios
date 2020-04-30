@@ -1,0 +1,5 @@
+#include "./base/Aurora-Base.xcconfig"
+
+CURRENT_PROJECT_VERSION = 1 // This is set with a script
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
+PRODUCT_NAME = Aurora
