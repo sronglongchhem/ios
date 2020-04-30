@@ -36,7 +36,7 @@ class StartEditReducerTests: XCTestCase {
             initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, .descriptionEntered(expectedDescription)) {
+            Step(.send, .descriptionEntered(expectedDescription, expectedDescription.count)) {
                 $0.editableTimeEntry?.description = expectedDescription
             }
         )
@@ -314,7 +314,7 @@ class StartEditReducerTests: XCTestCase {
     }
 
     private func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
-        return Step(.send, StartEditAction.descriptionEntered(description)) {
+        return Step(.send, StartEditAction.descriptionEntered(description, description.count)) {
             $0.editableTimeEntry!.description = description
         }
     }

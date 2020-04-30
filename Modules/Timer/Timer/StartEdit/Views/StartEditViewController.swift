@@ -81,7 +81,9 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .drive(onNext: displayTimeEntry)
             .disposed(by: disposeBag)
         
-        descriptionTextField.rx.text.compactMap({ $0 })
+        descriptionTextField.rx.text.compactMap { [weak self] text in
+                (text, self?.descriptionCursorPosition()) as? (String, Int)
+            }
             .map(StartEditAction.descriptionEntered)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
@@ -121,6 +123,11 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .mapTo(StartEditAction.billableButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
+    }
+
+    private func descriptionCursorPosition() -> Int? {
+        guard let selectedRange = descriptionTextField.selectedTextRange else { return nil }
+        return descriptionTextField.offset(from: descriptionTextField.beginningOfDocument, to: selectedRange.start)
     }
 
     private func showBillableTooltip() {

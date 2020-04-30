@@ -11,11 +11,11 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
         
         switch action {
             
-        case let .descriptionEntered(description):
+        case let .descriptionEntered(description, position):
             if state.editableTimeEntry != nil {
                 state.editableTimeEntry!.description = description
             }
-            return []
+            return updateAutocompleteSuggestionsEffect(state, repository, description, position)
 
         case .closeButtonTapped, .dialogDismissed:
             state.editableTimeEntry = nil
@@ -87,6 +87,13 @@ func doneButtonTapped(_ state: StartEditState, _ repository: TimeLogRepository) 
             billable: editableTimeEntry.billable) }
 
     persistUpdatedTimeEntries(updatedTimeEnries)
+    return []
+}
+
+func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
+                                         _ repository: TimeLogRepository,
+                                         _ description: String,
+                                         _ position: Int) -> [Effect<StartEditAction>] {
     return []
 }
 

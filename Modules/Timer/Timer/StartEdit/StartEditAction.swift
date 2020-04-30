@@ -2,7 +2,7 @@ import Foundation
 import Models
 
 public enum StartEditAction: Equatable {
-    case descriptionEntered(String)
+    case descriptionEntered(String, Int)
     case closeButtonTapped
     case dialogDismissed
     case doneButtonTapped
@@ -24,8 +24,8 @@ extension StartEditAction: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
             
-        case let .descriptionEntered(description):
-            return "DescriptionEntered \(description)"
+        case let .descriptionEntered(description, position):
+            return "DescriptionEntered \(description), cursor position \(position)"
 
         case .closeButtonTapped:
             return "CloseButtonTapped"
