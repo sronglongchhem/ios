@@ -55,6 +55,7 @@
 		AC42284F24572F4B00DD8AB3 /* ClockDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42284E24572F4B00DD8AB3 /* ClockDial.swift */; };
 		AC61F9062440BBF500534713 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC61F9082440BBF500534713 /* Localizable.strings */; };
 		AC823A01245874BB0078574D /* StartEditSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8239FF245874BB0078574D /* StartEditSelector.swift */; };
+		AC823A05245ADA950078574D /* EditDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC823A04245ADA950078574D /* EditDurationView.swift */; };
 		ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */; };
 		ACAA58272433A7ED003FDECA /* RunningTimeEntryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */; };
 		ACAA58282433A7ED003FDECA /* RunningTimeEntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */; };
@@ -151,6 +152,7 @@
 		AC42284E24572F4B00DD8AB3 /* ClockDial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDial.swift; sourceTree = "<group>"; };
 		AC61F9072440BBF500534713 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AC8239FF245874BB0078574D /* StartEditSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditSelector.swift; sourceTree = "<group>"; };
+		AC823A04245ADA950078574D /* EditDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDurationView.swift; sourceTree = "<group>"; };
 		ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryCoordinator.swift; sourceTree = "<group>"; };
 		ACAA58212433A7ED003FDECA /* RunningTimeEntryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryState.swift; sourceTree = "<group>"; };
 		ACAA58222433A7ED003FDECA /* RunningTimeEntryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryAction.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				8C008FC324090C85000A0C32 /* StartEditViewController.swift */,
 				8C1F535A243487EC00D9F979 /* StartEditCellType.swift */,
 				8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */,
+				AC823A04245ADA950078574D /* EditDurationView.swift */,
 				AC42284D24572F3A00DD8AB3 /* Wheel */,
 			);
 			path = Views;
@@ -700,6 +703,7 @@
 				8C509D152412603800B6DF30 /* TimerState.swift in Sources */,
 				8C509D0E2412567900B6DF30 /* TimerAction.swift in Sources */,
 				8C509D1B241264A200B6DF30 /* TimerCoordinator.swift in Sources */,
+				AC823A05245ADA950078574D /* EditDurationView.swift in Sources */,
 				51FF7C3C2429120500CC2002 /* EditableTimeEntry.swift in Sources */,
 				8C509D1324125AB500B6DF30 /* StartEditCoordinator.swift in Sources */,
 				8C509D192412644300B6DF30 /* StartEditFeature.swift in Sources */,
