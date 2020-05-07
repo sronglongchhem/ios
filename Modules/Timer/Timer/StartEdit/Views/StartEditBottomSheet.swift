@@ -121,6 +121,7 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
     private func show() {
         state = .partial
         containedViewController.focus()
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
 
     private func layout() {

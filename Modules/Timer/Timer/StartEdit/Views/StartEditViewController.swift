@@ -123,6 +123,10 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .mapTo(StartEditAction.billableButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
+
+        startEditInputAccessoryView.acceptButton.rx.tap
+            .subscribe(onNext: { UIImpactFeedbackGenerator(style: .light).impactOccurred() })
+            .disposed(by: disposeBag)
     }
 
     private func descriptionCursorPosition() -> Int? {
