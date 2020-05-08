@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34F467EF2462C71800430AB4 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F467EE2462C71800430AB4 /* Label.swift */; };
+		34F467F12465880E00430AB4 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F467F02465880E00430AB4 /* TextStyles.swift */; };
 		8C0B54C624508E400078E250 /* Database.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */; };
 		8C2516A52403C19D00BAD4B5 /* Assets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C25169B2403C19D00BAD4B5 /* Assets.framework */; };
 		8C2516AA2403C19D00BAD4B5 /* AssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2516A92403C19D00BAD4B5 /* AssetsTests.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34F467EE2462C71800430AB4 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		34F467F02465880E00430AB4 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		8C0B54C424508E0F0078E250 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		8C25169B2403C19D00BAD4B5 /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C25169E2403C19D00BAD4B5 /* Assets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assets.h; sourceTree = "<group>"; };
@@ -82,6 +86,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34F467EC2462C6DF00430AB4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				34F467ED2462C6F600430AB4 /* Labels */,
+				34F467F02465880E00430AB4 /* TextStyles.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		34F467ED2462C6F600430AB4 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				34F467EE2462C71800430AB4 /* Label.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		8C2516912403C19D00BAD4B5 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +125,7 @@
 		8C25169D2403C19D00BAD4B5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				34F467EC2462C6DF00430AB4 /* Components */,
 				8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */,
 				8C2517BE2403C2CA00BAD4B5 /* Assets.swift */,
 				8C2517C62403C2EF00BAD4B5 /* Storyboards */,
@@ -283,6 +305,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34F467F12465880E00430AB4 /* TextStyles.swift in Sources */,
+				34F467EF2462C71800430AB4 /* Label.swift in Sources */,
 				8C2517C52403C2CA00BAD4B5 /* Assets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
