@@ -4,8 +4,21 @@ import Utils
 import CoreData
 @testable import Database
 
+class TimeEntryDatabaseTests: XCTestCase {
+
+    override func run() {
+        super.run()
+        let suite = XCTestSuite(forTestCaseClass: TimeEntryDatabaseTestCases.self)
+        suite.run()
+    }
+
+    func testDummy() {
+        XCTAssert(true)
+    }
+}
+
 // swiftlint:disable force_try
-class TimeEntryDatabaseTests: EntityDatabaseRxExtensionsTests<TimeEntry> {
+class TimeEntryDatabaseTestCases: EntityDatabaseRxExtensionsTests<TimeEntry> {
 
     let now = Date()
 
