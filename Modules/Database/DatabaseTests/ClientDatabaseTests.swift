@@ -4,20 +4,7 @@ import Utils
 import CoreData
 @testable import Database
 
-class ClientDatabaseTests: XCTestCase {
-
-    override func run() {
-        super.run()
-        let suite = XCTestSuite(forTestCaseClass: ClientDatabaseTestCases.self)
-        suite.run()
-    }
-
-    func testDummy() {
-        XCTAssert(true)
-    }
-}
-
-class ClientDatabaseTestCases: EntityDatabaseRxExtensionsTests<Client> {
+class ClientDatabaseTests: EntityDatabaseRxExtensionsTests<Client> {
 
     override var initialEntities: [Client] {
         [
