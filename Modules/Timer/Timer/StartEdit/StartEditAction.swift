@@ -15,6 +15,7 @@ public enum StartEditAction: Equatable {
     case dateTimePicked(Date)
     
     case projectButtonTapped
+    case addProjectChipTapped
     case tagButtonTapped
     case billableButtonTapped
 
@@ -59,6 +60,9 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case .projectButtonTapped:
             return "ProjectButtonTapped"
+
+        case .addProjectChipTapped:
+            return "AddProjectButtonTapped"
             
         case let .setError(error):
             return "SetError: \(error)"

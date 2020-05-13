@@ -93,6 +93,12 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
+        tableView.rx.itemSelected
+            .filter({ $0.item == 0 })
+            .mapTo(StartEditAction.addProjectChipTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
         connectAccessoryViewButtons()
     }
 

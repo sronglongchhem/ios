@@ -49,7 +49,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.autocompleteSuggestions = suggestions
             return []
             
-        case .projectButtonTapped:
+        case .projectButtonTapped, .addProjectChipTapped:
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.description = appendCharacter("@", toString: editableTimeEntry.description)
             return []
