@@ -17,6 +17,7 @@ public enum StartEditAction: Equatable {
     case projectButtonTapped
     case addProjectChipTapped
     case tagButtonTapped
+    case addTagChipTapped
     case billableButtonTapped
 
     case setError(ErrorType)
@@ -57,6 +58,9 @@ extension StartEditAction: CustomDebugStringConvertible {
             
         case .tagButtonTapped:
             return "TagButtonTapped"
+
+        case .addTagChipTapped:
+            return "AddTagChipTapped"
             
         case .projectButtonTapped:
             return "ProjectButtonTapped"

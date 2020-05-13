@@ -392,7 +392,45 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with a space at the end #" }
         )
     }
-    
+
+    func testAddTagChipTappedWithNoSpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.send, .addTagChipTapped) { $0.editableTimeEntry?.description = "test with no space at the end #" }
+        )
+    }
+
+    func testAddTagChipTappedWithASpaceAtTheEnd() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.send, .addTagChipTapped) { $0.editableTimeEntry?.description = "test with a space at the end #" }
+        )
+    }
+
     func testBillableButtonTapped() {
 
         let state = StartEditState(

@@ -37,7 +37,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     private var disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<String, StartEditCellType>>!
     private var cells = [
-        StartEditCellType.dummyCell("PROJECT AND TAGS"),
+        StartEditCellType.dummyCell("PROJECT"),
+        StartEditCellType.dummyCell("TAGS"),
         StartEditCellType.dummyCell("START"),
         StartEditCellType.dummyCell("END"),
         StartEditCellType.dummyCell("DURATION"),
@@ -46,6 +47,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     private var headerHeight: CGFloat = 107
     private var timer: Timer?
 
+    // swiftlint:disable function_body_length
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView = tableView
@@ -99,8 +101,15 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
+        tableView.rx.itemSelected
+            .filter({ $0.item == 1 })
+            .mapTo(StartEditAction.addTagChipTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
         connectAccessoryViewButtons()
     }
+    // swiftlint:enable function_body_length
 
     public func loseFocus() {
         descriptionTextField.resignFirstResponder()

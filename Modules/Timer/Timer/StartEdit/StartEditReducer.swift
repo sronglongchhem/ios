@@ -54,7 +54,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.editableTimeEntry?.description = appendCharacter("@", toString: editableTimeEntry.description)
             return []
             
-        case .tagButtonTapped:
+        case .tagButtonTapped, .addTagChipTapped:
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.description = appendCharacter("#", toString: editableTimeEntry.description)
             return []
