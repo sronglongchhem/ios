@@ -39,7 +39,8 @@ class StartEditReducerTests: XCTestCase {
             steps:
             Step(.send, .descriptionEntered(expectedDescription, expectedDescription.count)) {
                 $0.editableTimeEntry?.description = expectedDescription
-            }
+            },
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([]))
         )
     }
 
@@ -184,15 +185,21 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "h"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             descriptionEnteredStep(for: "he"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             descriptionEnteredStep(for: "hel"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             descriptionEnteredStep(for: "hell"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             descriptionEnteredStep(for: "hello"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, StartEditAction.doneButtonTapped),
             Step(.receive, StartEditAction.timeEntryStarted(startedTimeEntry: expectedStartedEntry, stoppedTimeEntry: nil)) {
                 $0.editableTimeEntry = nil
                 $0.entities.timeEntries[expectedStartedEntry.id] = expectedStartedEntry
-        })
+            }
+        )
     }
     
     func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
@@ -325,6 +332,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .projectButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end @" }
         )
     }
@@ -344,6 +352,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .projectButtonTapped) { $0.editableTimeEntry?.description = "test with a space at the end @" }
         )
     }
@@ -363,6 +372,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .addProjectChipTapped) { $0.editableTimeEntry?.description = "test with no space at the end @" }
         )
     }
@@ -382,6 +392,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .addProjectChipTapped) { $0.editableTimeEntry?.description = "test with a space at the end @" }
         )
     }
@@ -401,6 +412,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end #" }
         )
     }
@@ -420,6 +432,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with a space at the end #" }
         )
     }
@@ -439,6 +452,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with no space at the end"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .addTagChipTapped) { $0.editableTimeEntry?.description = "test with no space at the end #" }
         )
     }
@@ -458,6 +472,7 @@ class StartEditReducerTests: XCTestCase {
             reducer: reducer,
             steps:
             descriptionEnteredStep(for: "test with a space at the end "),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([])),
             Step(.send, .addTagChipTapped) { $0.editableTimeEntry?.description = "test with a space at the end #" }
         )
     }

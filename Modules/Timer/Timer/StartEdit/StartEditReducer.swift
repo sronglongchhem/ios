@@ -15,7 +15,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             if state.editableTimeEntry != nil {
                 state.editableTimeEntry!.description = description
             }
-            return updateAutocompleteSuggestionsEffect(state, repository, description, position)
+            return [updateAutocompleteSuggestionsEffect(state, repository, description, position)]
 
         case .closeButtonTapped, .dialogDismissed:
             state.editableTimeEntry = nil
@@ -127,8 +127,11 @@ func dateTimePicked(_ state: inout StartEditState, date: Date) {
 func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
                                          _ repository: TimeLogRepository,
                                          _ description: String,
-                                         _ position: Int) -> [Effect<StartEditAction>] {
-    return []
+                                         _ position: Int) -> Effect<StartEditAction> {
+    let newSuggestions: [AutocompleteSuggestion] = []
+    return Single.just(newSuggestions)
+            .map(StartEditAction.autocompleteSuggestionsUpdated)
+            .toEffect()
 }
 
 func persistUpdatedTimeEntries(_ timeEntries: [TimeEntry]) {
