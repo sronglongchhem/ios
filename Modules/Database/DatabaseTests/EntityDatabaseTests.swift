@@ -40,6 +40,7 @@ open class EntityDatabaseTests<EntityType: CoreDataModel>: XCTestCase where Enti
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return container
     }()
 
