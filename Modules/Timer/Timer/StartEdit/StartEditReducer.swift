@@ -33,7 +33,10 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.editableTimeEntry = nil
             return []
             
-        case .autocompleteSuggestionTapped:
+        case let .autocompleteSuggestionTapped(suggestion):
+            guard state.editableTimeEntry != nil else { fatalError() }
+
+            state.editableTimeEntry?.setDetails(from: suggestion)
             return []
             
         case let .dateTimePicked(date):
@@ -138,4 +141,28 @@ func appendCharacter( _ character: String, toString string: String) -> String {
         stringToAppend = " " + stringToAppend
     }
     return string + stringToAppend
+}
+
+extension EditableTimeEntry {
+    mutating func setDetails(from suggestion: AutocompleteSuggestion) {
+        switch suggestion {
+        case .timeEntrySuggestion(let timeEntry):
+            workspaceId = timeEntry.workspaceId
+            description = timeEntry.description
+            projectId = timeEntry.projectId
+            tagIds = timeEntry.tagIds
+            taskId = timeEntry.taskId
+            billable = timeEntry.billable
+        case .projectSuggestion:
+            fatalError()
+        case .taskSuggestion:
+            fatalError()
+        case .tagSuggestion:
+            fatalError()
+        case .createProjectSuggestion:
+            fatalError()
+        case .createTagSuggestion:
+            fatalError()
+        }
+    }
 }

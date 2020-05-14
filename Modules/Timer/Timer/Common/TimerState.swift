@@ -6,7 +6,7 @@ public struct LocalTimerState: Equatable {
     internal var editableTimeEntry: EditableTimeEntry?
     internal var expandedGroups: Set<Int> = Set<Int>()
     internal var entriesPendingDeletion = Set<Int64>()
-    internal var autocompleteSuggestions: [AutocompleteSuggestionType] = []
+    internal var autocompleteSuggestions: [AutocompleteSuggestion] = []
     internal var dateTimePickMode: DateTimePickMode = .none
     
     public init() {

@@ -11,24 +11,66 @@ class TimeEntryDatabaseTests: EntityDatabaseRxExtensionsTests<TimeEntry> {
 
     override var initialEntities: [TimeEntry] {
         [
-            TimeEntry(id: 0, description: "TimeEntry 0", start: now, duration: nil, billable: false, workspaceId: 0),
-            TimeEntry(id: 1, description: "TimeEntry 1", start: now.addingTimeInterval(-10), duration: 10, billable: false, workspaceId: 0),
-            TimeEntry(id: 2, description: "TimeEntry 2", start: now.addingTimeInterval(10), duration: 10, billable: false, workspaceId: 0)
+            TimeEntry(
+                id: 0,
+                description: "TimeEntry 0",
+                start: now,
+                duration: nil,
+                billable: false,
+                workspaceId: 0,
+                tagIds: []),
+            TimeEntry(
+                id: 1,
+                description: "TimeEntry 1",
+                start: now.addingTimeInterval(-10),
+                duration: 10,
+                billable: false,
+                workspaceId: 0,
+                tagIds: []),
+            TimeEntry(
+                id: 2,
+                description: "TimeEntry 2",
+                start: now.addingTimeInterval(10),
+                duration: 10,
+                billable: false,
+                workspaceId: 0,
+                tagIds: [])
         ]
     }
 
     override var insertedEntities: [TimeEntry] {
         [
-            TimeEntry(id: 3, description: "TimeEntry 3", start: now, duration: 10, billable: false, workspaceId: 0),
-            TimeEntry(id: 4, description: "TimeEntry 4", start: now, duration: 10, billable: false, workspaceId: 0)
+            TimeEntry(id: 3, description: "TimeEntry 3", start: now, duration: 10, billable: false, workspaceId: 0, tagIds: []),
+            TimeEntry(id: 4, description: "TimeEntry 4", start: now, duration: 10, billable: false, workspaceId: 0, tagIds: [])
         ]
     }
 
     override var updatedEntities: [TimeEntry] {
         [
-            TimeEntry(id: 0, description: "Updated name", start: now, duration: 10, billable: false, workspaceId: 0),
-            TimeEntry(id: 1, description: "TimeEntry 1", start: now, duration: 100, billable: false, workspaceId: 1),
-            TimeEntry(id: 2, description: "TimeEntry 2", start: now, duration: 10, billable: false, workspaceId: 0)
+            TimeEntry(
+                id: 0,
+                description: "Updated name",
+                start: now,
+                duration: 10,
+                billable: false,
+                workspaceId: 0,
+                tagIds: []),
+            TimeEntry(
+                id: 1,
+                description: "TimeEntry 1",
+                start: now,
+                duration: 100,
+                billable: false,
+                workspaceId: 1,
+                tagIds: []),
+            TimeEntry(
+                id: 2,
+                description: "TimeEntry 2",
+                start: now,
+                duration: 10,
+                billable: false,
+                workspaceId: 0,
+                tagIds: [])
         ]
     }
 

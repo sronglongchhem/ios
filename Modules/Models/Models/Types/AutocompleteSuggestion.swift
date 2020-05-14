@@ -1,6 +1,6 @@
 import Foundation
 
-public enum AutocompleteSuggestionType: Equatable {
+public enum AutocompleteSuggestion: Equatable {
     case timeEntrySuggestion(timeEntry: TimeEntry)
     case projectSuggestion(project: Project)
     case taskSuggestion(task: Task, project: Project)

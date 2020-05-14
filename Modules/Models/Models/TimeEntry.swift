@@ -11,7 +11,7 @@ public struct TimeEntry: Entity, Equatable {
     public var workspaceId: Int64
     public var projectId: Int64?
     public var taskId: Int64?
-    public var tagIds: [Int64]?
+    public var tagIds: [Int64]
     
     public init (
         id: Int64,
@@ -19,7 +19,8 @@ public struct TimeEntry: Entity, Equatable {
         start: Date,
         duration: Double?,
         billable: Bool,
-        workspaceId: Int64
+        workspaceId: Int64,
+        tagIds: [Int64] = []
     ) {
         self.id = id
         self.description = description
@@ -27,6 +28,7 @@ public struct TimeEntry: Entity, Equatable {
         self.duration = duration
         self.billable = billable
         self.workspaceId = workspaceId
+        self.tagIds = tagIds
     }
 }
 
@@ -75,7 +77,7 @@ extension TimeEntry: Codable {
         try container.encode(workspaceId, forKey: .workspaceId)
         try container.encode(projectId, forKey: .projectId)
         try container.encode(taskId, forKey: .taskId)
-        try container.encode(tagIds ?? [Int64](), forKey: .tagIds)
+        try container.encode(tagIds, forKey: .tagIds)
         try container.encode(createdWith, forKey: .createdWith)
     }
 }
@@ -88,6 +90,8 @@ public extension TimeEntry {
             start: self.start,
             duration: self.duration,
             billable: billable ?? self.billable,
-            workspaceId: self.workspaceId)
+            workspaceId: self.workspaceId,
+            tagIds: self.tagIds
+        )
     }
 }

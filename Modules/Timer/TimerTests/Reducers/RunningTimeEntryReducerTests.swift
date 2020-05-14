@@ -22,7 +22,7 @@ class RunningTimeEntryReducerTests: XCTestCase {
 
     func testCardTappedWithRunningEntry() {
 
-        let runningEntry = TimeEntry(id: 0, description: "", start: mockTime.now() - 1000, duration: nil, billable: false, workspaceId: 0)
+        let runningEntry = TimeEntry(id: 0, description: "", start: mockTime.now() - 1000, duration: nil, billable: false, workspaceId: 0, tagIds: [])
 
         var entities = TimeLogEntities()
         entities.timeEntries[runningEntry.id] = runningEntry
@@ -117,7 +117,8 @@ class RunningTimeEntryReducerTests: XCTestCase {
             start: mockTime.now(),
             duration: nil,
             billable: false,
-            workspaceId: mockUser.defaultWorkspace
+            workspaceId: mockUser.defaultWorkspace,
+            tagIds: []
         )
 
         let state = RunningTimeEntryState(

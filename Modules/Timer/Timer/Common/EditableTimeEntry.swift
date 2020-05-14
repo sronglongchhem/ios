@@ -9,6 +9,9 @@ public struct EditableTimeEntry: Equatable {
     public var billable: Bool
     public var start: Date?
     public var duration: TimeInterval?
+    public var projectId: Int64?
+    public var taskId: Int64?
+    public var tagIds: [Int64]
     public var editableProject: EditableProject?
     
     private init(
@@ -18,6 +21,9 @@ public struct EditableTimeEntry: Equatable {
         billable: Bool,
         start: Date? = nil,
         duration: TimeInterval? = nil,
+        projectId: Int64? = nil,
+        taskId: Int64? = nil,
+        tagIds: [Int64] = [],
         editableProject: EditableProject? = nil
     ) {
         self.ids = ids
@@ -26,6 +32,9 @@ public struct EditableTimeEntry: Equatable {
         self.billable = billable
         self.start = start
         self.duration = duration
+        self.projectId = projectId
+        self.taskId = taskId
+        self.tagIds = tagIds
         self.editableProject = editableProject
     }
     
@@ -45,7 +54,10 @@ public struct EditableTimeEntry: Equatable {
             description: timeEntry.description,
             billable: timeEntry.billable,
             start: timeEntry.start,
-            duration: timeEntry.duration
+            duration: timeEntry.duration,
+            projectId: timeEntry.projectId,
+            taskId: timeEntry.taskId,
+            tagIds: timeEntry.tagIds
         )
     }
     
@@ -54,14 +66,21 @@ public struct EditableTimeEntry: Equatable {
             ids: ids,
             workspaceId: groupSample.workspaceId,
             description: groupSample.description,
-            billable: groupSample.billable
+            billable: groupSample.billable,
+            projectId: groupSample.projectId,
+            taskId: groupSample.taskId,
+            tagIds: groupSample.tagIds
         )
     }
 }
 
 extension EditableTimeEntry {
     func toStartTimeEntryDto() -> StartTimeEntryDto {
-        return StartTimeEntryDto(workspaceId: self.workspaceId, description: self.description)
+        return StartTimeEntryDto(
+            workspaceId: self.workspaceId,
+            description: self.description,
+            tagIds: self.tagIds
+        )
     }
 
     var isRunningOrNew: Bool {

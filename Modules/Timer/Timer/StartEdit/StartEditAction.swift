@@ -10,7 +10,7 @@ public enum StartEditAction: Equatable {
     case timeEntryStarted(startedTimeEntry: TimeEntry, stoppedTimeEntry: TimeEntry?)
     case timeEntryUpdated(TimeEntry)
     
-    case autocompleteSuggestionTapped(AutocompleteSuggestionType)
+    case autocompleteSuggestionTapped(AutocompleteSuggestion)
     
     case dateTimePicked(Date)
     
@@ -21,7 +21,7 @@ public enum StartEditAction: Equatable {
     case billableButtonTapped
 
     case setError(ErrorType)
-    case autocompleteSuggestionsUpdated([AutocompleteSuggestionType])
+    case autocompleteSuggestionsUpdated([AutocompleteSuggestion])
 }
 
 extension StartEditAction: CustomDebugStringConvertible {

@@ -31,7 +31,7 @@ func createRunningTimeEntryReducer(repository: TimeLogRepository, time: Time) ->
 
         case .startButtonTapped:
             guard state.runningTimeEntry == nil, let workspaceId = state.user.value?.defaultWorkspace else { return [] }
-            let timeEntryDto = StartTimeEntryDto(workspaceId: workspaceId, description: "")
+            let timeEntryDto = StartTimeEntryDto.empty(workspaceId: workspaceId)
             return [startTimeEntryEffect(timeEntryDto, repository: repository)]
 
         case .timeEntryStarted(started: let started, stopped: let stopped):

@@ -53,7 +53,8 @@ class MockTimeLogRepository: TimeLogRepository {
             start: time.now(),
             duration: nil,
             billable: false,
-            workspaceId: timeEntry.workspaceId)
+            workspaceId: timeEntry.workspaceId,
+            tagIds: [])
         return Single.just((startedTimeEntry, stoppedTimeEntry))
     }
 

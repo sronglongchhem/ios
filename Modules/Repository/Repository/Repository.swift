@@ -107,7 +107,9 @@ extension Repository: TimeLogRepository {
                 start: time.now(),
                 duration: nil,
                 billable: false,
-                workspaceId: timeEntry.workspaceId)
+                workspaceId: timeEntry.workspaceId,
+                tagIds: timeEntry.tagIds
+            )
             try database.timeEntries.insert(entity: newTimeEntry)
             return Single.just((started: newTimeEntry, stopped: stoppedTimeEntry))
         } catch let error {

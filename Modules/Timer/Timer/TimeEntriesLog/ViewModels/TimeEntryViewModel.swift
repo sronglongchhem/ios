@@ -25,14 +25,14 @@ public struct TimeEntryViewModel: Equatable {
     public let descriptionColor: UIColor
     public let projectColor: UIColor
 
-    public let tags: [Tag]?
+    public let tags: [Tag]
     
     public init(
         timeEntry: TimeEntry,
         project: Project? = nil,
         client: Client? = nil,
         task: Task? = nil,
-        tags: [Tag]? = nil) {
+        tags: [Tag] = []) {
                 
         self.id = timeEntry.id
         self.groupId = timeEntry.groupId

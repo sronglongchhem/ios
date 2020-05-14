@@ -100,7 +100,8 @@ class StartEditReducerTests: XCTestCase {
             start: mockTime.now(),
             duration: nil,
             billable: editableTimeEntry.billable,
-            workspaceId: mockUser.defaultWorkspace
+            workspaceId: mockUser.defaultWorkspace,
+            tagIds: []
         )
 
         assertReducerFlow(
@@ -123,7 +124,8 @@ class StartEditReducerTests: XCTestCase {
             start: now.addingTimeInterval(-90),
             duration: nil,
             billable: false,
-            workspaceId: mockUser.defaultWorkspace
+            workspaceId: mockUser.defaultWorkspace,
+            tagIds: []
         )
 
         var entities = TimeLogEntities()
@@ -144,7 +146,8 @@ class StartEditReducerTests: XCTestCase {
             start: mockTime.now(),
             duration: nil,
             billable: false,
-            workspaceId: editableTimeEntry.workspaceId)
+            workspaceId: editableTimeEntry.workspaceId,
+            tagIds: [])
 
         assertReducerFlow(
             initialState: state,
@@ -173,7 +176,8 @@ class StartEditReducerTests: XCTestCase {
             start: mockTime.now(),
             duration: nil,
             billable: false,
-            workspaceId: editableTimeEntry.workspaceId)
+            workspaceId: editableTimeEntry.workspaceId,
+            tagIds: [])
 
         assertReducerFlow(
             initialState: state,
@@ -251,8 +255,35 @@ class StartEditReducerTests: XCTestCase {
         )
     }
     
-    func testAutocompleteSuggestionTapped() {
+    func testAutocompleteSuggestionTappedWithATimeEntrySuggestion() {
         
+        let oldTimeEntry = TimeEntry.with(description: "old description", billable: false)
+        var newTimeEntry = TimeEntry.with(id: 10, description: "new description", billable: true)
+        newTimeEntry.tagIds = [1, 2, 3]
+        newTimeEntry.projectId = 11
+        newTimeEntry.taskId = 12
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromSingle(oldTimeEntry),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .end
+        )
+        
+        let suggestion = AutocompleteSuggestion.timeEntrySuggestion(timeEntry: newTimeEntry)
+        
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .autocompleteSuggestionTapped(suggestion)) {
+                $0.editableTimeEntry?.workspaceId = newTimeEntry.workspaceId
+                $0.editableTimeEntry?.description = newTimeEntry.description
+                $0.editableTimeEntry?.projectId = newTimeEntry.projectId
+                $0.editableTimeEntry?.tagIds = newTimeEntry.tagIds
+                $0.editableTimeEntry?.taskId = newTimeEntry.taskId
+                $0.editableTimeEntry?.billable = newTimeEntry.billable
+        })
     }
 
     func testAutocompleteSuggestionsUpdatedUpdatesState() {
@@ -265,7 +296,7 @@ class StartEditReducerTests: XCTestCase {
             autocompleteSuggestions: [],
             dateTimePickMode: .none)
 
-        let autocompleteSuggestions: [AutocompleteSuggestionType] = [
+        let autocompleteSuggestions: [AutocompleteSuggestion] = [
             .timeEntrySuggestion(timeEntry: TimeEntry.with(id: 0, start: now.addingTimeInterval(-300), duration: 100)),
             .timeEntrySuggestion(timeEntry: TimeEntry.with(id: 1, start: now.addingTimeInterval(-200), duration: 100))
         ]
@@ -460,7 +491,8 @@ class StartEditReducerTests: XCTestCase {
                 start: mockTime.now() - 10,
                 duration: nil,
                 billable: true,
-                workspaceId: mockUser.defaultWorkspace)),
+                workspaceId: mockUser.defaultWorkspace,
+                tagIds: [])),
             autocompleteSuggestions: [],
             dateTimePickMode: .none
         )
@@ -486,7 +518,8 @@ class StartEditReducerTests: XCTestCase {
                 start: mockTime.now() - 10,
                 duration: 100,
                 billable: true,
-                workspaceId: mockUser.defaultWorkspace)),
+                workspaceId: mockUser.defaultWorkspace,
+                tagIds: [])),
             autocompleteSuggestions: [],
             dateTimePickMode: .none
         )
@@ -511,7 +544,8 @@ class StartEditReducerTests: XCTestCase {
                 start: mockTime.now() - 10,
                 duration: 100,
                 billable: true,
-                workspaceId: mockUser.defaultWorkspace)),
+                workspaceId: mockUser.defaultWorkspace,
+                tagIds: [])),
             autocompleteSuggestions: [],
             dateTimePickMode: .none
         )
@@ -538,7 +572,8 @@ class StartEditReducerTests: XCTestCase {
                     start: mockTime.now() - 10,
                     duration: 100,
                     billable: true,
-                    workspaceId: mockUser.defaultWorkspace)),
+                    workspaceId: mockUser.defaultWorkspace,
+                    tagIds: [])),
             autocompleteSuggestions: [],
             dateTimePickMode: .none
         )

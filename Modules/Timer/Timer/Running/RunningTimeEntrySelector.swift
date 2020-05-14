@@ -14,6 +14,6 @@ let runningTimeEntryViewModelSelector: (RunningTimeEntryState) -> TimeEntryViewM
         project: project,
         client: state.entities.getClient(project?.clientId),
         task: state.entities.getTask(timeEntry.taskId),
-        tags: timeEntry.tagIds?.compactMap(state.entities.getTag)
+        tags: timeEntry.tagIds.compactMap(state.entities.getTag)
     )
 }
