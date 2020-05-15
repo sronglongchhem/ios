@@ -9,8 +9,8 @@ func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
                                          _ description: String,
                                          _ position: Int) -> [Effect<StartEditAction>] {
     guard let query = state.editableTimeEntry?.description else { return [] }
-    let queryTerms = query.split(separator: " ").map { String($0) }
-    let timeEntries = queryTerms.flatMap { search(for: $0, in: state.entities)}
+    let words = query.split(separator: " ").map { String($0) }
+    let timeEntries = words.flatMap { search(for: $0, in: state.entities) }
     let suggestions = timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
     return [
         Single.just(suggestions)
