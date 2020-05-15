@@ -8,7 +8,8 @@ func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
                                          _ repository: TimeLogRepository,
                                          _ description: String,
                                          _ position: Int) -> [Effect<StartEditAction>] {
-    guard let query = state.editableTimeEntry?.description else { return [] }
+    guard let query = state.editableTimeEntry?.description
+        else { fatalError("No editable time entry while looking for autocomplete suggestions") }
     let words = query.split(separator: " ").map { String($0) }
     let timeEntries = words.flatMap { search(for: $0, in: state.entities) }
     let suggestions = timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
