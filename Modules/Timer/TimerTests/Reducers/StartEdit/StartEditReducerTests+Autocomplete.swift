@@ -12,15 +12,18 @@ extension StartEditReducerTests {
         let projects = projectsForAutocompletionTest()
         let tasks = tasksForAutocompletionTest()
         let timeEntries = timeEntriesForAutocompletionTest()
+        
         let expectedSuggestions = timeEntries[..<5].sorted(by: {leftHand, rightHand in
                 leftHand.description > rightHand.description
             }).map(AutocompleteSuggestion.timeEntrySuggestion)
+        
         var entities = TimeLogEntities()
         entities.tags = Dictionary(uniqueKeysWithValues: tags.map { ($0.id, $0) })
         entities.clients = Dictionary(uniqueKeysWithValues: clients.map { ($0.id, $0) })
         entities.projects = Dictionary(uniqueKeysWithValues: projects.map { ($0.id, $0) })
         entities.tasks = Dictionary(uniqueKeysWithValues: tasks.map { ($0.id, $0) })
         entities.timeEntries = Dictionary(uniqueKeysWithValues: timeEntries.map { ($0.id, $0) })
+        
         let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
