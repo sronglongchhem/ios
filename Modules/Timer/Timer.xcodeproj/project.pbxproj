@@ -75,6 +75,9 @@
 		CC03C27D2448AE1C0071FA55 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */; };
 		CC03C27E2448AE1C0071FA55 /* ProjectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */; };
 		CC03C2802448AF0A0071FA55 /* EditableProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03C27F2448AF0A0071FA55 /* EditableProject.swift */; };
+		CC5D320B2464A931005A1837 /* WheelForegroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320A2464A931005A1837 /* WheelForegroundView.swift */; };
+		CC5D320D24657CC5005A1837 /* Cap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320C24657CC5005A1837 /* Cap.swift */; };
+		CC5D320F24659308005A1837 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320E24659308005A1837 /* Arc.swift */; };
 		CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +175,9 @@
 		CC03C2762448AE1B0071FA55 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		CC03C2772448AE1B0071FA55 /* ProjectSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelector.swift; sourceTree = "<group>"; };
 		CC03C27F2448AF0A0071FA55 /* EditableProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableProject.swift; sourceTree = "<group>"; };
+		CC5D320A2464A931005A1837 /* WheelForegroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelForegroundView.swift; sourceTree = "<group>"; };
+		CC5D320C24657CC5005A1837 /* Cap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cap.swift; sourceTree = "<group>"; };
+		CC5D320E24659308005A1837 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryReducerTests.swift; sourceTree = "<group>"; };
 		D1A6B75657C3B9CF1F0B3ED1 /* Pods_Timer_TimerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer_TimerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB24E55169F474422BCBE49 /* Pods-Timer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.release.xcconfig"; path = "Target Support Files/Pods-Timer/Pods-Timer.release.xcconfig"; sourceTree = "<group>"; };
@@ -433,6 +439,9 @@
 				AC42284B245720E700DD8AB3 /* Wheel.swift */,
 				AC42284E24572F4B00DD8AB3 /* ClockDial.swift */,
 				AC4228492456EC5C00DD8AB3 /* WheelBackgroundView.swift */,
+				CC5D320A2464A931005A1837 /* WheelForegroundView.swift */,
+				CC5D320C24657CC5005A1837 /* Cap.swift */,
+				CC5D320E24659308005A1837 /* Arc.swift */,
 			);
 			path = Wheel;
 			sourceTree = "<group>";
@@ -686,9 +695,11 @@
 				8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */,
 				8C008FC424090C85000A0C32 /* StartEditViewController.swift in Sources */,
 				CC03C2802448AF0A0071FA55 /* EditableProject.swift in Sources */,
+				CC5D320D24657CC5005A1837 /* Cap.swift in Sources */,
 				8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */,
 				ACAA582A2433A7ED003FDECA /* RunningTimeEntryReducer.swift in Sources */,
 				CC03C27C2448AE1C0071FA55 /* ProjectState.swift in Sources */,
+				CC5D320F24659308005A1837 /* Arc.swift in Sources */,
 				8C008FD024093FF8000A0C32 /* StartEditAction.swift in Sources */,
 				ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */,
 				8C509D232412876A00B6DF30 /* TimeEntryViewModel.swift in Sources */,
@@ -705,6 +716,7 @@
 				8C509D1B241264A200B6DF30 /* TimerCoordinator.swift in Sources */,
 				AC823A05245ADA950078574D /* EditDurationView.swift in Sources */,
 				51FF7C3C2429120500CC2002 /* EditableTimeEntry.swift in Sources */,
+				CC5D320B2464A931005A1837 /* WheelForegroundView.swift in Sources */,
 				8C509D1324125AB500B6DF30 /* StartEditCoordinator.swift in Sources */,
 				8C509D192412644300B6DF30 /* StartEditFeature.swift in Sources */,
 				CC03C27A2448AE1C0071FA55 /* ProjectFeature.swift in Sources */,

@@ -61,8 +61,8 @@ class ClockDial: UIView {
         let scaledThickSegment = convertToCenteredRect(thickSegmentDimensions)
         let scaledThinSegment = convertToCenteredRect(thinSegmentDimensions)
 
-        for index in 1...Int(CGFloat.minutesInAnHour) {
-            let angle = -(.fullCircle * CGFloat(index) / .minutesInAnHour + angleOffsetCorrection)
+        for index in 1...Int.minutesInAnHour {
+            let angle = -(.fullCircle * CGFloat(index) / CGFloat(Int.minutesInAnHour) + angleOffsetCorrection)
             let correspondsToHourMark = index % Int(minuteSegmentsPerHourMark) == 0
             let (rect, color) = correspondsToHourMark
                 ? (scaledThickSegment, thickSegmentColor)

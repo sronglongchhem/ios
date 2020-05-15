@@ -23,11 +23,30 @@ private let encoderDateFormatter: DateFormatter =
 }()
 
 extension Date {
-    
+
+    public func clamp(between minBound: Date, and maxBound: Date) -> Date {
+        if self < minBound {
+            return minBound
+        }
+        if self > maxBound {
+            return maxBound
+        }
+        return self
+    }
+
     public func ignoreTimeComponents() -> Date {
         let units: NSCalendar.Unit = [ .year, .month, .day]
         let calendar = Calendar.current
         return calendar.date(from: (calendar as NSCalendar).components(units, from: self))!
+    }
+
+    public var roundedToClosestMinute: Date {
+        let calendar = Calendar.current
+        let secondsInAMinute = calendar.maximumRange(of: .second)!.upperBound
+        let seconds = calendar.component(.second, from: self)
+        return seconds >= (secondsInAMinute / 2)
+            ? calendar.date(byAdding: .second, value: secondsInAMinute - seconds, to: self)!
+            : calendar.date(byAdding: .second, value: -seconds, to: self)!
     }
     
     public func toDayString() -> String {

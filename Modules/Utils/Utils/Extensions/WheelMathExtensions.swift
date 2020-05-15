@@ -2,26 +2,43 @@ import Foundation
 import CoreGraphics
 import Darwin
 
+public extension Int {
+    static var hoursOnTheClock: Int { 12 }
+    static var minutesInAnHour: Int { 60 }
+    static var secondsInAMinute: Int { 60 }
+    static var secondsInAnHour: Int { minutesInAnHour * secondsInAMinute }
+}
+
 public extension CGFloat {
     static var tau: CGFloat { 2 * .pi }
     static var quarterOfCircle: CGFloat { .tau / 4 }
     static var fullCircle: CGFloat { .tau }
-    static var hoursOnTheClock: CGFloat { 12 }
-    static var minutesInAnHour: CGFloat { 60 }
-    static var secondsInAMinute: CGFloat { 60 }
+}
+
+public extension Date {
+    var angleOnTheDial: CGFloat {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.minute, .second], from: self)
+        let timeInterval = TimeInterval(components.minute! * .secondsInAMinute + components.second!)
+        return timeInterval.angle - .quarterOfCircle
+    }
 }
 
 public extension TimeInterval {
 
-    func toAngleOnTheDial() -> CGFloat {
-        self.toAngle() - .quarterOfCircle
-    }
+    var angle: CGFloat { CGFloat(self) / (CGFloat(Int.minutesInAnHour) * CGFloat(Int.secondsInAMinute)) * .fullCircle }
 
-    func toAngle() -> CGFloat {
-        return CGFloat(self) / .minutesInAnHour * .secondsInAMinute * .fullCircle
+    var positiveAngle: CGFloat {
+        var angle = CGFloat(self)
+        while angle < 0 {
+            angle += .fullCircle
+        }
+        return angle
     }
-    
-    func toPositiveAngle() -> CGFloat {
+}
+
+public extension CGFloat {
+    var positiveAngle: CGFloat {
         var angle = CGFloat(self)
         while angle < 0 {
             angle += .fullCircle
@@ -31,27 +48,26 @@ public extension TimeInterval {
 
     func angleToTime() -> TimeInterval {
         let timeInHours = CGFloat(self) / .fullCircle
-        let timeinSeconds = timeInHours * .minutesInAnHour * .secondsInAMinute
-        return Double(timeinSeconds)
+        let timeinSeconds = timeInHours * CGFloat(Int.minutesInAnHour) * CGFloat(Int.secondsInAMinute)
+        return TimeInterval(timeinSeconds)
     }
-    
-    func isBetween(startAngle: Double, endAngle: Double) -> Bool {
-        let angle = self.toPositiveAngle()
-        let positiveStartAngle = startAngle.toPositiveAngle()
-        let positiveEndAngle = endAngle.toPositiveAngle()
+
+    func isBetween(startAngle: CGFloat, endAngle: CGFloat) -> Bool {
+        let angle = self.positiveAngle
+        let positiveStartAngle = startAngle.positiveAngle
+        let positiveEndAngle = endAngle.positiveAngle
 
         if positiveStartAngle > positiveEndAngle {
             return positiveStartAngle <= angle || angle <= positiveEndAngle
         }
-        
+
         return (positiveStartAngle...positiveEndAngle) ~= angle
     }
 }
 
-extension CGPoint {
-    mutating func updateWithPointOnCircumference(center: CGPoint, angle: CGFloat, radius: CGFloat) {
-        self.x = center.x + radius * cos(angle)
-        self.y = center.y + radius * sin(angle)
+public extension CGPoint {
+    static func pointOnCircumference(center: CGPoint, angle: CGFloat, radius: CGFloat) -> CGPoint {
+        return CGPoint(x: center.x + radius * cos(angle), y: center.y + radius * sin(angle))
     }
 
     func angle(to otherPoint: CGPoint) -> CGFloat {
@@ -65,10 +81,10 @@ extension CGPoint {
     }
 }
 
-extension Int {
+public extension Int {
     func pingPongClamp(_ length: Int) -> Int {
-        guard length <= 0 else { fatalError("The length for clamping must be at positive integer, $length given.") }
-        guard self < 0 else { fatalError("The clamped number a non-negative integer, $this given.") }
+        guard length > 0 else { fatalError("The length for clamping must be at positive integer, \(length) given.") }
+        guard self >= 0 else { fatalError("The clamped number a non-negative integer, \(self) given.") }
 
         if length == 1 {
             return 0
@@ -84,7 +100,7 @@ extension Int {
     }
 }
 
-extension Array {
+public extension Array {
     func getPingPongIndexedItem(_ index: Int) -> Element {
         return self[index.pingPongClamp(count)]
     }

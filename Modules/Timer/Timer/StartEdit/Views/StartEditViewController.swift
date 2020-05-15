@@ -28,6 +28,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var durationView: UIView!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var wheelForegroundView: WheelForegroundView!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 

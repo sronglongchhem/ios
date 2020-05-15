@@ -237,17 +237,26 @@
                                                 <constraint firstAttribute="width" secondItem="cfR-zV-Svj" secondAttribute="height" multiplier="1:1" id="KNG-oa-rLJ"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAI-rD-M0Z" customClass="WheelForegroundView" customModule="Timer">
+                                            <rect key="frame" x="60" y="132" width="294" height="294"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstItem="HWR-bg-0A7" firstAttribute="top" secondItem="IsQ-6z-lVL" secondAttribute="top" constant="16" id="Gvy-PP-Q22"/>
                                         <constraint firstAttribute="trailing" secondItem="cfR-zV-Svj" secondAttribute="trailing" constant="60" id="NCt-of-sI8"/>
+                                        <constraint firstItem="DAI-rD-M0Z" firstAttribute="width" secondItem="DAI-rD-M0Z" secondAttribute="height" multiplier="1:1" id="PTq-uy-PKi"/>
                                         <constraint firstAttribute="bottom" secondItem="cfR-zV-Svj" secondAttribute="bottom" constant="16" id="aZ9-NO-bGx"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="top" secondItem="HWR-bg-0A7" secondAttribute="bottom" constant="26" id="efL-Ih-hol"/>
+                                        <constraint firstItem="DAI-rD-M0Z" firstAttribute="top" secondItem="cfR-zV-Svj" secondAttribute="top" id="hd8-Tk-wWS"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="leading" secondItem="IsQ-6z-lVL" secondAttribute="leading" constant="60" id="mWi-4V-lk5"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="centerX" secondItem="IsQ-6z-lVL" secondAttribute="centerX" id="qEf-N9-NEd"/>
                                         <constraint firstItem="HWR-bg-0A7" firstAttribute="width" secondItem="cfR-zV-Svj" secondAttribute="width" id="rzS-A3-SMV"/>
+                                        <constraint firstItem="DAI-rD-M0Z" firstAttribute="trailing" secondItem="cfR-zV-Svj" secondAttribute="trailing" id="sI6-oU-OYb"/>
                                         <constraint firstItem="HWR-bg-0A7" firstAttribute="centerX" secondItem="IsQ-6z-lVL" secondAttribute="centerX" id="sU3-eK-AyR"/>
+                                        <constraint firstItem="DAI-rD-M0Z" firstAttribute="bottom" secondItem="cfR-zV-Svj" secondAttribute="bottom" id="uOF-uV-bH7"/>
+                                        <constraint firstItem="DAI-rD-M0Z" firstAttribute="leading" secondItem="cfR-zV-Svj" secondAttribute="leading" id="wu6-JL-oVO"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="endDate" destination="ocN-Bd-xcj" id="00B-E2-UMd"/>
@@ -335,6 +344,7 @@
                         <outlet property="startDateButton" destination="JY9-P3-wvQ" id="yGL-fS-kdW"/>
                         <outlet property="startEditInputAccessoryView" destination="m53-j1-8QL" id="cOP-C4-ABP"/>
                         <outlet property="tableView" destination="pHX-AX-hhM" id="mOp-RU-MeZ"/>
+                        <outlet property="wheelForegroundView" destination="DAI-rD-M0Z" id="EV1-Rz-JJ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZvV-SO-Jt8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
