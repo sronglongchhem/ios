@@ -6,7 +6,7 @@ import OtherServices
 
 extension StartEditReducerTests {
     
-    func test_descriptionEntered_withNoTokens_shouldBringUpAppropriateAutocompleteSuggestions() {
+    func test_descriptionEntered_withNoTokens_shouldBringUpTimeEntryAutocompleteSuggestions() {
         let tags = tagsForAutocompletionTest()
         let clients = clientsForAutocompletionTest()
         let projects = projectsForAutocompletionTest()
