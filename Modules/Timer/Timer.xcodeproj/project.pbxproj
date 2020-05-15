@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3430C36C24213CEB009CF454 /* OtherServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C36B24213CEB009CF454 /* OtherServices.framework */; };
+		346B6A5B246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346B6A5A246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift */; };
+		346B6A5E246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346B6A5D246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift */; };
 		34C93C082453387300024F06 /* DateTimePickMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C93C072453387300024F06 /* DateTimePickMode.swift */; };
 		3F08D7D72EA783CBBD146B1F /* Pods_Timer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB2199F93BBF3239F419242 /* Pods_Timer.framework */; };
 		510BD5B824363CF80028C445 /* StartEditReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510BD5B724363CF80028C445 /* StartEditReducerTests.swift */; };
@@ -93,6 +95,8 @@
 		1DB2199F93BBF3239F419242 /* Pods_Timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3430C365241A8FE4009CF454 /* Time.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Time.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3430C36B24213CEB009CF454 /* OtherServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OtherServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		346B6A5A246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAutocompleteSuggestionsEffect.swift; sourceTree = "<group>"; };
+		346B6A5D246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartEditReducerTests+Autocomplete.swift"; sourceTree = "<group>"; };
 		34C93C072453387300024F06 /* DateTimePickMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickMode.swift; sourceTree = "<group>"; };
 		510BD5B724363CF80028C445 /* StartEditReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditReducerTests.swift; sourceTree = "<group>"; };
 		51FF7C3B2429120500CC2002 /* EditableTimeEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableTimeEntry.swift; sourceTree = "<group>"; };
@@ -217,6 +221,23 @@
 			path = ../../Pods;
 			sourceTree = "<group>";
 		};
+		346B6A59246EB7B100A76A1E /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				346B6A5A246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		346B6A5C246EB84700A76A1E /* StartEdit */ = {
+			isa = PBXGroup;
+			children = (
+				510BD5B724363CF80028C445 /* StartEditReducerTests.swift */,
+				346B6A5D246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift */,
+			);
+			path = StartEdit;
+			sourceTree = "<group>";
+		};
 		8C1DD94C242A1946005CE40A /* Selectors */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,10 +257,10 @@
 		8C2130C22424F44F000FC72C /* Reducers */ = {
 			isa = PBXGroup;
 			children = (
+				346B6A5C246EB84700A76A1E /* StartEdit */,
 				8C2130C82424F5CC000FC72C /* Mocks */,
 				CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */,
 				8C2130C32424F46D000FC72C /* TimeEntriesLogReducerTests.swift */,
-				510BD5B724363CF80028C445 /* StartEditReducerTests.swift */,
 				B417E98C244F78D0004D251F /* ProjectReducerTests.swift */,
 			);
 			path = Reducers;
@@ -346,6 +367,7 @@
 		8C509D352413E29B00B6DF30 /* StartEdit */ = {
 			isa = PBXGroup;
 			children = (
+				346B6A59246EB7B100A76A1E /* Effects */,
 				8C509D3A2413E31F00B6DF30 /* Views */,
 				8C008FCF24093FF8000A0C32 /* StartEditAction.swift */,
 				8CB54534240EA67400154473 /* StartEditState.swift */,
@@ -699,6 +721,7 @@
 				8C2517892403C27200BAD4B5 /* TimeEntryCell.swift in Sources */,
 				AC823A01245874BB0078574D /* StartEditSelector.swift in Sources */,
 				CC03C2782448AE1B0071FA55 /* ProjectAction.swift in Sources */,
+				346B6A5B246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift in Sources */,
 				8C509D202412874100B6DF30 /* TimeEntriesSelector.swift in Sources */,
 				8C509D152412603800B6DF30 /* TimerState.swift in Sources */,
 				8C509D0E2412567900B6DF30 /* TimerAction.swift in Sources */,
@@ -717,6 +740,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B417E98D244F78D0004D251F /* ProjectReducerTests.swift in Sources */,
+				346B6A5E246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift in Sources */,
 				CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */,
 				8C2130CA2424F5DE000FC72C /* MockTimeLogRepository.swift in Sources */,
 				8C2130C42424F46D000FC72C /* TimeEntriesLogReducerTests.swift in Sources */,
