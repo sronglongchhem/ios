@@ -48,7 +48,7 @@ func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [Ti
                 || tagNamesMatch(word, timeEntry)
                 || taksNameMatches(word, timeEntry)
         }
-    }.sorted(by: {leftHand, rightHand in
+    }.sorted(by: { leftHand, rightHand in
         leftHand.description > rightHand.description
     })
 }
