@@ -42,6 +42,44 @@ extension StartEditReducerTests {
             }
         )
     }
+    
+    func test_descriptionEntered_withProjectToken_shouldBringUpProjectAutocompleteSuggestions() {
+        let tags = tagsForAutocompletionTest()
+        let clients = clientsForAutocompletionTest()
+        let projects = projectsForAutocompletionTest()
+        let tasks = tasksForAutocompletionTest()
+        let timeEntries = timeEntriesForAutocompletionTest()
+        
+        var expectedSuggestions = [projects.first!, projects.last!].sorted(by: {leftHand, rightHand in
+                leftHand.name > rightHand.name
+            }).map(AutocompleteSuggestion.projectSuggestion)
+        expectedSuggestions.insert(AutocompleteSuggestion.createProjectSuggestion(name: "Match"), at: 0)
+        
+        var entities = TimeLogEntities()
+        entities.tags = Dictionary(uniqueKeysWithValues: tags.map { ($0.id, $0) })
+        entities.clients = Dictionary(uniqueKeysWithValues: clients.map { ($0.id, $0) })
+        entities.projects = Dictionary(uniqueKeysWithValues: projects.map { ($0.id, $0) })
+        entities.tasks = Dictionary(uniqueKeysWithValues: tasks.map { ($0.id, $0) })
+        entities.timeEntries = Dictionary(uniqueKeysWithValues: timeEntries.map { ($0.id, $0) })
+        
+        let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: entities,
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            descriptionEnteredStep(for: "Testing @Match"),
+            Step(.receive, StartEditAction.autocompleteSuggestionsUpdated(expectedSuggestions)) {
+                $0.autocompleteSuggestions = expectedSuggestions
+            }
+        )
+    }
  
     private func clientsForAutocompletionTest() -> [Client] {
         return [
