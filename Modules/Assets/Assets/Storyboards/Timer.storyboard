@@ -329,8 +329,10 @@
                         <outlet property="descriptionTextField" destination="Ars-hi-U6Y" id="6sY-Jy-Kk1"/>
                         <outlet property="durationLabel" destination="6B0-BH-kxC" id="dfp-c2-Pq1"/>
                         <outlet property="durationView" destination="SbG-qs-ijW" id="fCr-fh-sse"/>
+                        <outlet property="endDateButton" destination="ocN-Bd-xcj" id="7TS-do-TAO"/>
                         <outlet property="handle" destination="eCM-ov-S5k" id="upu-BG-MKJ"/>
                         <outlet property="headerView" destination="YYR-1H-mui" id="kHg-E9-k4Q"/>
+                        <outlet property="startDateButton" destination="JY9-P3-wvQ" id="yGL-fS-kdW"/>
                         <outlet property="startEditInputAccessoryView" destination="m53-j1-8QL" id="cOP-C4-ABP"/>
                         <outlet property="tableView" destination="pHX-AX-hhM" id="mOp-RU-MeZ"/>
                     </connections>

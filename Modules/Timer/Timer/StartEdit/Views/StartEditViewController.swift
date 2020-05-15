@@ -26,6 +26,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationView: UIView!
+    @IBOutlet weak var startDateButton: UIButton!
+    @IBOutlet weak var endDateButton: UIButton!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 
@@ -104,6 +106,16 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         tableView.rx.itemSelected
             .filter({ $0.item == 1 })
             .mapTo(StartEditAction.addTagChipTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
+        startDateButton.rx.tap
+            .mapTo(StartEditAction.pickerTapped(.start))
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
+        endDateButton.rx.tap
+            .mapTo(StartEditAction.pickerTapped(.end))
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
