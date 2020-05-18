@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		341A0280247268EB00EB25AF /* Project+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341A027F247268EB00EB25AF /* Project+Extensions.swift */; };
+		341A028424726AF200EB25AF /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341A028324726AF200EB25AF /* Task+Extensions.swift */; };
 		3430C36C24213CEB009CF454 /* OtherServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3430C36B24213CEB009CF454 /* OtherServices.framework */; };
 		346B6A5B246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346B6A5A246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift */; };
 		346B6A5E246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346B6A5D246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift */; };
@@ -93,6 +95,8 @@
 /* Begin PBXFileReference section */
 		1774F5621311F644B3258D92 /* Pods-Timer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.debug.xcconfig"; path = "Target Support Files/Pods-Timer/Pods-Timer.debug.xcconfig"; sourceTree = "<group>"; };
 		1DB2199F93BBF3239F419242 /* Pods_Timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		341A027F247268EB00EB25AF /* Project+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Extensions.swift"; sourceTree = "<group>"; };
+		341A028324726AF200EB25AF /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		3430C365241A8FE4009CF454 /* Time.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Time.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3430C36B24213CEB009CF454 /* OtherServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OtherServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		346B6A5A246EB7CC00A76A1E /* UpdateAutocompleteSuggestionsEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAutocompleteSuggestionsEffect.swift; sourceTree = "<group>"; };
@@ -279,6 +283,8 @@
 			children = (
 				8C2130CE2424F64F000FC72C /* ReducerAssert.swift */,
 				8C2130D02424F9EE000FC72C /* TimeEntry+Extensions.swift */,
+				341A027F247268EB00EB25AF /* Project+Extensions.swift */,
+				341A028324726AF200EB25AF /* Task+Extensions.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -742,8 +748,10 @@
 				B417E98D244F78D0004D251F /* ProjectReducerTests.swift in Sources */,
 				346B6A5E246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift in Sources */,
 				CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */,
+				341A0280247268EB00EB25AF /* Project+Extensions.swift in Sources */,
 				8C2130CA2424F5DE000FC72C /* MockTimeLogRepository.swift in Sources */,
 				8C2130C42424F46D000FC72C /* TimeEntriesLogReducerTests.swift in Sources */,
+				341A028424726AF200EB25AF /* Task+Extensions.swift in Sources */,
 				8C2130D12424F9EE000FC72C /* TimeEntry+Extensions.swift in Sources */,
 				8C2130CF2424F64F000FC72C /* ReducerAssert.swift in Sources */,
 				8C4EDC5B2429F8B200C03E14 /* TimeEntriesSelectorTests.swift in Sources */,
