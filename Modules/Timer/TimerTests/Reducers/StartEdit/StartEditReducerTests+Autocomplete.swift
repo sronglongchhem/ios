@@ -183,8 +183,8 @@ extension StartEditReducerTests {
             }
         )
     }
-    
-    func test_descriptionEntered_withNoTokens_shouldBringUpTimeEntryAutocompleteSuggestions() {
+
+    func test_autocomplete_withNoTokens_returnsTimeEntriesMatchingMultipleWordsAcrossMultipleEntities() {
         let tags = tagsForAutocompletionTest()
         let clients = clientsForAutocompletionTest()
         let projects = projectsForAutocompletionTest()
@@ -214,7 +214,7 @@ extension StartEditReducerTests {
             initialState: state,
             reducer: reducer,
             steps:
-            descriptionEnteredStep(for: "Match"),
+            descriptionEnteredStep(for: "word1 word2"),
             Step(.receive, StartEditAction.autocompleteSuggestionsUpdated(expectedSuggestions)) {
                 $0.autocompleteSuggestions = expectedSuggestions
             }
@@ -223,41 +223,26 @@ extension StartEditReducerTests {
  
     private func clientsForAutocompletionTest() -> [Client] {
         return [
-            Client(id: 0, name: "Not this one", workspaceId: mockUser.defaultWorkspace),
-            Client(id: 1, name: "Matching", workspaceId: mockUser.defaultWorkspace)
+            Client(id: 0, name: "word1", workspaceId: mockUser.defaultWorkspace),
+            Client(id: 1, name: "word1 word2", workspaceId: mockUser.defaultWorkspace)
         ]
     }
 
     private func projectsForAutocompletionTest() -> [Project] {
         return [
-            Project(
+            Project.with(
                 id: 0,
-                name: "Matching",
-                isPrivate: false,
-                isActive: true,
-                color: "#000000",
-                billable: nil,
-                workspaceId: mockUser.defaultWorkspace,
+                name: "word2word1",
                 clientId: 0
             ),
-            Project(
+            Project.with(
                 id: 1,
-                name: "Not this one",
-                isPrivate: false,
-                isActive: true,
-                color: "#000000",
-                billable: nil,
-                workspaceId: mockUser.defaultWorkspace,
+                name: "word1",
                 clientId: 0
             ),
-            Project(
+            Project.with(
                 id: 2,
-                name: "By client name",
-                isPrivate: false,
-                isActive: true,
-                color: "#000000",
-                billable: nil,
-                workspaceId: mockUser.defaultWorkspace,
+                name: "word2",
                 clientId: 1
             )
         ]
@@ -265,161 +250,78 @@ extension StartEditReducerTests {
 
     private func tagsForAutocompletionTest() -> [Tag] {
         return [
-            Tag(id: 0, name: "Matching", workspaceId: mockUser.defaultWorkspace),
-            Tag(id: 1, name: "Not this one", workspaceId: mockUser.defaultWorkspace)
+            Tag(id: 0, name: "word1 word2word3", workspaceId: mockUser.defaultWorkspace),
+            Tag(id: 1, name: "word1", workspaceId: mockUser.defaultWorkspace)
         ]
     }
 
     private func tasksForAutocompletionTest() -> [Task] {
         return [
-            Task(
-                id: 0,
-                name: "Matching",
-                active: true,
-                estimatedSeconds: 0,
-                trackedSeconds: 0,
-                projectId: 1,
-                workspaceId: mockUser.defaultWorkspace,
-                userId: nil
-            ),
-            Task(
-                id: 1,
-                name: "Nope",
-                active: true,
-                estimatedSeconds: 0,
-                trackedSeconds: 0,
-                projectId: 1,
-                workspaceId: mockUser.defaultWorkspace,
-                userId: nil
-            )
+            Task.with(id: 0, name: "word1word2", projectId: 1),
+            Task.with(id: 1, name: "word2", projectId: 1)
         ]
     }
 
     private func timeEntriesForAutocompletionTest() -> [TimeEntry] {
-        let duration = 6000.0
-        let startTime =  mockTime.now().addingTimeInterval(-duration)
         return [
-            timeEntryMatchByName(startTime, duration),
-            timeEntryMatchByProjectName(startTime, duration),
-            timeEntryMatchByClientName(startTime, duration),
-            timeEntryMatchByTagName(startTime, duration),
-            timeEntryMatchByTaskName(startTime, duration),
-            timeEntryDontMatchByName(startTime, duration),
-            timeEntryDontMatchByProjectName(startTime, duration),
-            timeEntryDontMatchByTagName(startTime, duration),
-            timeEntryDontMatchByTaskName(startTime, duration)
+            timeEntryMatchByName(),
+            timeEntryMatchByProjectName(),
+            timeEntryMatchByClientName(),
+            timeEntryMatchByTagName(),
+            timeEntryMatchByTaskName(),
+            timeEntryDontMatchByName(),
+            timeEntryDontMatchByProjectName(),
+            timeEntryDontMatchByTagName(),
+            timeEntryDontMatchByTaskName()
         ]
     }
 
-    private func timeEntryMatchByName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        return TimeEntry(
-            id: 0,
-            description: "Matching",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryMatchByName() -> TimeEntry {
+        return TimeEntry.with(id: 0, description: "a word2 word1")
     }
 
-    private func timeEntryMatchByProjectName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 1,
-            description: "By project name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryMatchByProjectName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 1, description: "b word2 word3")
         timeEntry.projectId = 0
         return timeEntry
     }
 
-    private func timeEntryMatchByClientName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 2,
-            description: "By client name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryMatchByClientName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 2, description: "c wo rd 2")
         timeEntry.projectId = 2
         return timeEntry
     }
 
-    private func timeEntryMatchByTagName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 3,
-            description: "By tag name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryMatchByTagName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 3, description: "d wo rd1 wo rd2")
         timeEntry.tagIds = [0]
         return timeEntry
     }
 
-    private func timeEntryMatchByTaskName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 4,
-            description: "By task name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryMatchByTaskName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 4, description: "e word1")
         timeEntry.taskId = 0
         return timeEntry
     }
 
-    private func timeEntryDontMatchByName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        return TimeEntry(
-            id: 5,
-            description: "Nope",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryDontMatchByName() -> TimeEntry {
+        return TimeEntry.with(id: 5, description: "f word4")
     }
 
-    private func timeEntryDontMatchByProjectName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 6,
-            description: "Nope",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryDontMatchByProjectName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 6, description: "g word5")
         timeEntry.projectId = 1
         return timeEntry
     }
 
-    private func timeEntryDontMatchByTagName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 7,
-            description: "By client name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryDontMatchByTagName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 7, description: "h w o r d 1 w o r d 2")
         timeEntry.tagIds = [1]
         return timeEntry
     }
 
-    private func timeEntryDontMatchByTaskName(_ startTime: Date, _ duration: Double) -> TimeEntry {
-        var timeEntry = TimeEntry(
-            id: 8,
-            description: "By task name",
-            start: startTime,
-            duration: duration,
-            billable: false,
-            workspaceId: mockUser.defaultWorkspace
-        )
+    private func timeEntryDontMatchByTaskName() -> TimeEntry {
+        var timeEntry = TimeEntry.with(id: 8, description: "i wor1dword2")
         timeEntry.taskId = 1
         return timeEntry
     }
