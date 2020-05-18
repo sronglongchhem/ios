@@ -4,20 +4,46 @@ import Models
 import RxSwift
 import Repository
 
+private let querySymbols: [Character] = ["@"]
+
 func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
                                          _ repository: TimeLogRepository,
                                          _ description: String,
                                          _ position: Int) -> [Effect<StartEditAction>] {
     guard let query = state.editableTimeEntry?.description
         else { fatalError("No editable time entry while looking for autocomplete suggestions") }
+    let result = Single.just(getSuggestions(for: query, at: position, in: state.entities))
+        .map(StartEditAction.autocompleteSuggestionsUpdated)
+        .toEffect()
+    return [result]
+}
+
+func getSuggestions(for query: String, at position: Int, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
+    let caretIndex = query.index(query.startIndex, offsetBy: position)
+    let querySymbolIndex = query[..<caretIndex]
+        .enumerated()
+        .filter { querySymbols.contains($0.element) }
+        .map { $0.offset }
+        .first(where: { index in
+            let previous = index - 1
+            let previousIndex = query.index(query.startIndex, offsetBy: previous)
+            return previous < 0 || query[previousIndex].isWhitespace
+        })
+    
+    if let index = querySymbolIndex {
+        let startIndex = query.index(query.startIndex, offsetBy: index + 1)
+        let endIndex = query.index(startIndex, offsetBy: query.count - index - 1)
+        let searchQuery = query[startIndex..<endIndex]
+        let words = searchQuery.split(separator: " ").map { String($0) }
+        let projects = searchProjects(for: words, in: entities)
+        var suggestions = projects.map(AutocompleteSuggestion.projectSuggestion)
+        suggestions.insert(AutocompleteSuggestion.createProjectSuggestion(name: String(searchQuery)), at: 0)
+        return suggestions
+    }
+    
     let words = query.split(separator: " ").map { String($0) }
-    let timeEntries = searchTimeEntries(for: words, in: state.entities)
-    let suggestions = timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
-    return [
-        Single.just(suggestions)
-            .map(StartEditAction.autocompleteSuggestionsUpdated)
-            .toEffect()
-    ]
+    let timeEntries = searchTimeEntries(for: words, in: entities)
+    return timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
 }
 
 func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [TimeEntry] {
@@ -50,5 +76,22 @@ func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [Ti
         }
     }.sorted(by: { leftHand, rightHand in
         leftHand.description > rightHand.description
+    })
+}
+
+func searchProjects(for words: [String], in entities: TimeLogEntities) -> [Project] {
+    
+    func clientNameMatches(_ word: String, _ project: Project) -> Bool {
+        guard let client = entities.getClient(project.clientId) else { return false }
+        return client.name.contains(word)
+    }
+    
+    return words.reduce(Array(entities.projects.values)) { projects, word in
+        return projects.filter { project in
+            return project.name.contains(word)
+                || clientNameMatches(word, project)
+        }
+    }.sorted(by: { leftHand, rightHand in
+        leftHand.name > rightHand.name
     })
 }
