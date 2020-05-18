@@ -26,8 +26,9 @@ func getSuggestions(for query: String, at position: Int, in entities: TimeLogEnt
         .map { $0.offset }
         .first(where: { index in
             let previous = index - 1
+            if previous < 0 { return true }
             let previousIndex = query.index(query.startIndex, offsetBy: previous)
-            return previous < 0 || query[previousIndex].isWhitespace
+            return query[previousIndex].isWhitespace
         })
     
     if let index = querySymbolIndex {
