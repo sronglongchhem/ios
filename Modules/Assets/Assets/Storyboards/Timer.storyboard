@@ -241,6 +241,35 @@
                                             <rect key="frame" x="60" y="132" width="294" height="294"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHd-J2-ISZ">
+                                            <rect key="frame" x="152" y="263" width="110.5" height="32"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stopwatch" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wAJ-Vk-teP">
+                                                    <rect key="frame" x="12" y="7.5" width="14" height="15"/>
+                                                    <color key="tintColor" red="0.34509803919999998" green="0.35686274509999999" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="14" id="G7o-bD-YUA"/>
+                                                        <constraint firstAttribute="height" constant="14" id="SkE-eJ-FJK"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00:00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7xI-DC-zF3" customClass="DurationTextField" customModule="Timer">
+                                                    <rect key="frame" x="32" y="0.0" width="66.5" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="7xI-DC-zF3" firstAttribute="centerY" secondItem="DHd-J2-ISZ" secondAttribute="centerY" id="2Ys-v1-ytt"/>
+                                                <constraint firstAttribute="bottom" secondItem="7xI-DC-zF3" secondAttribute="bottom" id="a8K-bn-cIG"/>
+                                                <constraint firstItem="wAJ-Vk-teP" firstAttribute="centerY" secondItem="DHd-J2-ISZ" secondAttribute="centerY" id="dKE-3H-iZM"/>
+                                                <constraint firstAttribute="trailing" secondItem="7xI-DC-zF3" secondAttribute="trailing" constant="12" id="ez2-7R-pl2"/>
+                                                <constraint firstAttribute="height" constant="32" id="kHu-Vw-Z6z"/>
+                                                <constraint firstItem="wAJ-Vk-teP" firstAttribute="leading" secondItem="DHd-J2-ISZ" secondAttribute="leading" constant="12" id="p7y-bz-SMo"/>
+                                                <constraint firstItem="7xI-DC-zF3" firstAttribute="top" secondItem="DHd-J2-ISZ" secondAttribute="top" id="y1P-g3-fxZ"/>
+                                                <constraint firstItem="7xI-DC-zF3" firstAttribute="leading" secondItem="wAJ-Vk-teP" secondAttribute="trailing" constant="6" id="zX2-jJ-frT"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
@@ -249,9 +278,11 @@
                                         <constraint firstItem="DAI-rD-M0Z" firstAttribute="width" secondItem="DAI-rD-M0Z" secondAttribute="height" multiplier="1:1" id="PTq-uy-PKi"/>
                                         <constraint firstAttribute="bottom" secondItem="cfR-zV-Svj" secondAttribute="bottom" constant="16" id="aZ9-NO-bGx"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="top" secondItem="HWR-bg-0A7" secondAttribute="bottom" constant="26" id="efL-Ih-hol"/>
+                                        <constraint firstItem="DHd-J2-ISZ" firstAttribute="centerY" secondItem="cfR-zV-Svj" secondAttribute="centerY" id="mQ1-AM-nA3"/>
                                         <constraint firstItem="DAI-rD-M0Z" firstAttribute="top" secondItem="cfR-zV-Svj" secondAttribute="top" id="hd8-Tk-wWS"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="leading" secondItem="IsQ-6z-lVL" secondAttribute="leading" constant="60" id="mWi-4V-lk5"/>
                                         <constraint firstItem="cfR-zV-Svj" firstAttribute="centerX" secondItem="IsQ-6z-lVL" secondAttribute="centerX" id="qEf-N9-NEd"/>
+                                        <constraint firstItem="DHd-J2-ISZ" firstAttribute="centerX" secondItem="cfR-zV-Svj" secondAttribute="centerX" id="rLO-x5-bp8"/>
                                         <constraint firstItem="HWR-bg-0A7" firstAttribute="width" secondItem="cfR-zV-Svj" secondAttribute="width" id="rzS-A3-SMV"/>
                                         <constraint firstItem="DAI-rD-M0Z" firstAttribute="trailing" secondItem="cfR-zV-Svj" secondAttribute="trailing" id="sI6-oU-OYb"/>
                                         <constraint firstItem="HWR-bg-0A7" firstAttribute="centerX" secondItem="IsQ-6z-lVL" secondAttribute="centerX" id="sU3-eK-AyR"/>
@@ -344,6 +375,8 @@
                         <outlet property="startDateButton" destination="JY9-P3-wvQ" id="yGL-fS-kdW"/>
                         <outlet property="startEditInputAccessoryView" destination="m53-j1-8QL" id="cOP-C4-ABP"/>
                         <outlet property="tableView" destination="pHX-AX-hhM" id="mOp-RU-MeZ"/>
+                        <outlet property="wheelDurationLabelTextField" destination="7xI-DC-zF3" id="Aya-6u-AKV"/>
+                        <outlet property="wheelDurationView" destination="DHd-J2-ISZ" id="e7I-86-pcJ"/>
                         <outlet property="wheelForegroundView" destination="DAI-rD-M0Z" id="EV1-Rz-JJ0"/>
                     </connections>
                 </viewController>

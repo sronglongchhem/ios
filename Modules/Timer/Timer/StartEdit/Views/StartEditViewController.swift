@@ -29,6 +29,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
     @IBOutlet weak var wheelForegroundView: WheelForegroundView!
+    @IBOutlet weak var wheelDurationView: UIView!
+    @IBOutlet weak var wheelDurationLabelTextField: DurationTextField!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 
@@ -58,6 +60,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
 
         durationView.layer.cornerRadius = 16
         durationLabel.text = "--:--"
+
+        wheelDurationView.layer.cornerRadius = 16
 
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: 200, height: headerHeight)
         tableView.separatorStyle = .none
@@ -175,28 +179,33 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         }
 
         descriptionTextField.text = timeEntry.description
-        setDurationLabel(for: timeEntry)
+        setDuration(for: timeEntry)
     }
 
-    private func setDurationLabel(for timeEntry: EditableTimeEntry) {
+    private func setDuration(for timeEntry: EditableTimeEntry) {
 
         timer?.invalidate()
         timer = nil
 
         guard let start = timeEntry.start else {
             durationLabel.text = "00:00"
+            wheelDurationLabelTextField.setFormattedDuration("00:00")
             return
         }
 
         guard let duration = timeEntry.duration else {
             timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
-                self?.durationLabel.text = self?.time.now().timeIntervalSince(start).formattedDuration()
+                let formattedDuration = self?.time.now().timeIntervalSince(start).formattedDuration()
+                self?.durationLabel.text = formattedDuration
+                self?.wheelDurationLabelTextField.setFormattedDuration(formattedDuration ?? "00:00")
             }
             RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
             return
         }
 
-        durationLabel.text = duration.formattedDuration()
+        let formattedDuration = duration.formattedDuration()
+        durationLabel.text = formattedDuration
+        wheelDurationLabelTextField.setFormattedDuration(formattedDuration)
     }
 
     deinit {

@@ -12,4 +12,18 @@ extension TimeInterval {
     public func formattedDuration() -> String {
         return TimeInterval.formatter.string(from: self)!
     }
+
+    public static func from(hours: Int) -> TimeInterval {
+        TimeInterval(hours * 60 * 60)
+    }
+
+    public static func from(minutes: Int) -> TimeInterval {
+        TimeInterval(minutes * 60)
+    }
+
+    public func clamp(_ range: ClosedRange<TimeInterval>) -> TimeInterval {
+        return range.lowerBound > self ? range.lowerBound
+            : range.upperBound < self ? range.upperBound
+            : self
+    }
 }

@@ -70,4 +70,5 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
 
 public struct TimerConstants {
     static let timeEntryDeletionDelaySeconds: Int = 5
+    static let maxTimeEntryDurationInHours: Int = 999
 }
