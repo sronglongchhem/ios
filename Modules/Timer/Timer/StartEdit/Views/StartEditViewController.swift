@@ -15,6 +15,9 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     public static var storyboardBundle = Assets.bundle
 
     private let billableTooltipDuration: TimeInterval = 2
+    private let datePickerHeight: CGFloat = 197
+    private let editDurationWithoutDatePickerHeight: CGFloat = 442
+    private let editDurationWithDatePickerHeight: CGFloat = 617
 
     var scrollView: UIScrollView?
     var smallStateHeight: CGFloat { headerHeight + cells[0].height }
@@ -28,9 +31,12 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var durationView: UIView!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var wheelForegroundView: WheelForegroundView!
     @IBOutlet weak var wheelDurationView: UIView!
     @IBOutlet weak var wheelDurationLabelTextField: DurationTextField!
+    @IBOutlet weak var editDurationView: UIView!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
 
@@ -124,6 +130,10 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
+        store.select({ $0.dateTimePickMode })
+            .drive(onNext: setDatePickerHeight(mode:))
+            .disposed(by: disposeBag)
+
         connectAccessoryViewButtons()
     }
     // swiftlint:enable function_body_length
@@ -206,6 +216,14 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         let formattedDuration = duration.formattedDuration()
         durationLabel.text = formattedDuration
         wheelDurationLabelTextField.setFormattedDuration(formattedDuration)
+    }
+
+    private func setDatePickerHeight(mode: DateTimePickMode) {
+        let animator = UIViewPropertyAnimator(duration: 0.225, curve: .easeInOut) {
+            self.datePickerContainerHeight.constant = mode == .none ? 0 : self.datePickerHeight
+            self.editDurationView.frame.size.height = mode == .none ? self.editDurationWithoutDatePickerHeight : self.editDurationWithDatePickerHeight
+        }
+        animator.startAnimation()
     }
 
     deinit {
