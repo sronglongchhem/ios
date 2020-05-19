@@ -46,7 +46,7 @@
                                                 <rect key="frame" x="8" y="50" width="398" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t11-Eq-pCI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="YX4-ha-olE"/>
                                                         </constraints>
@@ -56,17 +56,17 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ego-Oy-vD9">
-                                                        <rect key="frame" x="128.5" y="0.0" width="179.5" height="50"/>
+                                                        <rect key="frame" x="131" y="0.0" width="175.5" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="xoq-Zk-6Lj"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Toggl's workspace" image="briefcase.fill" catalog="system">
+                                                        <state key="normal" title="Toggl's workspace" image="icWorkspace">
                                                             <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
                                                     </button>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="247" translatesAutoresizingMaskIntoConstraints="NO" id="ufJ-0Y-hsi">
-                                                        <rect key="frame" x="316" y="0.0" width="32" height="50"/>
+                                                        <rect key="frame" x="314.5" y="0.0" width="33.5" height="50"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcS-xG-dh1">
@@ -76,7 +76,7 @@
                                                             <constraint firstAttribute="width" constant="42" id="QQt-27-Hud"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" image="circle.fill" catalog="system"/>
+                                                        <state key="normal" image="circle" catalog="system"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -112,12 +112,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7J0-fg-COE">
-                                        <rect key="frame" x="0.0" y="-0.5" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="10.5" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="bxc-9z-ORM"/>
                                             <constraint firstAttribute="height" constant="40" id="f26-uG-BOu"/>
                                         </constraints>
-                                        <state key="normal" image="xmark" catalog="system"/>
+                                        <state key="normal" image="icClose"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHK-fF-C7d">
                                         <rect key="frame" x="159.5" y="9.5" width="95.5" height="20.5"/>
@@ -175,10 +175,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="briefcase.fill" catalog="system" width="128" height="102"/>
-        <image name="circle.fill" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="icClose" width="10" height="10"/>
+        <image name="icWorkspace" width="16" height="16"/>
         <image name="lock" catalog="system" width="128" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

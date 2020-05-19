@@ -2,6 +2,7 @@ import UIKit
 import Architecture
 import Timer
 import RxSwift
+import Assets
 
 public final class MainCoordinator: TabBarCoordinator {
     private var store: Store<AppState, AppAction>
@@ -29,17 +30,17 @@ public final class MainCoordinator: TabBarCoordinator {
         
         timerCoordinator.start()
         let timer = timerCoordinator.rootViewController!
-        timer.tabBarItem = UITabBarItem(title: "Timer", image: nil, tag: 0)
+        timer.tabBarItem = UITabBarItem(title: "Timer", image: Images.TabBar.timer, tag: 0)
         
         let reports = UIViewController()
         reports.view.backgroundColor = .orange
         let reportsNav = UINavigationController(rootViewController: reports)
-        reportsNav.tabBarItem = UITabBarItem(title: "Reports", image: nil, tag: 1)
+        reportsNav.tabBarItem = UITabBarItem(title: "Reports", image: Images.TabBar.reports, tag: 1)
         
         let calendar = UIViewController()
         calendar.view.backgroundColor = .yellow
         let calendarNav = UINavigationController(rootViewController: calendar)
-        calendarNav.tabBarItem = UITabBarItem(title: "Calendar", image: nil, tag: 2)
+        calendarNav.tabBarItem = UITabBarItem(title: "Calendar", image: Images.TabBar.calendar, tag: 2)
 
         tabBarController.setViewControllers([timer, reportsNav, calendarNav], animated: false)
     }

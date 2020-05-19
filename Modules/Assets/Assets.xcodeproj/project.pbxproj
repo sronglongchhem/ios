@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8C0B54C624508E400078E250 /* Database.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 8C0B54C524508E0F0078E250 /* Database.xcdatamodeld */; };
-		8C2516A52403C19D00BAD4B5 /* Assets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C25169B2403C19D00BAD4B5 /* Assets.framework */; };
-		8C2516AA2403C19D00BAD4B5 /* AssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2516A92403C19D00BAD4B5 /* AssetsTests.swift */; };
 		8C2516AC2403C19D00BAD4B5 /* Assets.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C25169E2403C19D00BAD4B5 /* Assets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C2517BF2403C2CA00BAD4B5 /* workspaces.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C2517B82403C2CA00BAD4B5 /* workspaces.txt */; };
 		8C2517C02403C2CA00BAD4B5 /* me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C2517B92403C2CA00BAD4B5 /* me.txt */; };
@@ -28,24 +26,11 @@
 		B4E1B2D2244E1E340082A68C /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4E1B2D1244E1E340082A68C /* Project.storyboard */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8C2516A62403C19D00BAD4B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8C2516922403C19D00BAD4B5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C25169A2403C19D00BAD4B5;
-			remoteInfo = Assets;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		8C0B54C424508E0F0078E250 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		8C25169B2403C19D00BAD4B5 /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C25169E2403C19D00BAD4B5 /* Assets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assets.h; sourceTree = "<group>"; };
 		8C25169F2403C19D00BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C2516A42403C19D00BAD4B5 /* AssetsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssetsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C2516A92403C19D00BAD4B5 /* AssetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTests.swift; sourceTree = "<group>"; };
-		8C2516AB2403C19D00BAD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2517B82403C2CA00BAD4B5 /* workspaces.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = workspaces.txt; sourceTree = "<group>"; };
 		8C2517B92403C2CA00BAD4B5 /* me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = me.txt; sourceTree = "<group>"; };
 		8C2517BA2403C2CA00BAD4B5 /* projects.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = projects.txt; sourceTree = "<group>"; };
@@ -79,14 +64,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C2516A12403C19D00BAD4B5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C2516A52403C19D00BAD4B5 /* Assets.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,7 +72,6 @@
 			children = (
 				8CAF7A9124580C0C006B961D /* Configurations */,
 				8C25169D2403C19D00BAD4B5 /* Assets */,
-				8C2516A82403C19D00BAD4B5 /* AssetsTests */,
 				8C25169C2403C19D00BAD4B5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				8C25169B2403C19D00BAD4B5 /* Assets.framework */,
-				8C2516A42403C19D00BAD4B5 /* AssetsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,15 +98,6 @@
 				8C25169F2403C19D00BAD4B5 /* Info.plist */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		8C2516A82403C19D00BAD4B5 /* AssetsTests */ = {
-			isa = PBXGroup;
-			children = (
-				8C2516A92403C19D00BAD4B5 /* AssetsTests.swift */,
-				8C2516AB2403C19D00BAD4B5 /* Info.plist */,
-			);
-			path = AssetsTests;
 			sourceTree = "<group>";
 		};
 		8C2517B72403C2CA00BAD4B5 /* TextFiles */ = {
@@ -214,24 +180,6 @@
 			productReference = 8C25169B2403C19D00BAD4B5 /* Assets.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8C2516A32403C19D00BAD4B5 /* AssetsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8C2516B22403C19D00BAD4B5 /* Build configuration list for PBXNativeTarget "AssetsTests" */;
-			buildPhases = (
-				8C2516A02403C19D00BAD4B5 /* Sources */,
-				8C2516A12403C19D00BAD4B5 /* Frameworks */,
-				8C2516A22403C19D00BAD4B5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8C2516A72403C19D00BAD4B5 /* PBXTargetDependency */,
-			);
-			name = AssetsTests;
-			productName = AssetsTests;
-			productReference = 8C2516A42403C19D00BAD4B5 /* AssetsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -245,9 +193,6 @@
 					8C25169A2403C19D00BAD4B5 = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					8C2516A32403C19D00BAD4B5 = {
-						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -265,7 +210,6 @@
 			projectRoot = "";
 			targets = (
 				8C25169A2403C19D00BAD4B5 /* Assets */,
-				8C2516A32403C19D00BAD4B5 /* AssetsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -291,13 +235,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C2516A22403C19D00BAD4B5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -311,23 +248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C2516A02403C19D00BAD4B5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C2516AA2403C19D00BAD4B5 /* AssetsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8C2516A72403C19D00BAD4B5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8C25169A2403C19D00BAD4B5 /* Assets */;
-			targetProxy = 8C2516A62403C19D00BAD4B5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8C2516AD2403C19D00BAD4B5 /* Debug */ = {
@@ -358,20 +279,6 @@
 			};
 			name = Release;
 		};
-		8C2516B32403C19D00BAD4B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8CAF7A9824580C0C006B961D /* AssetsTests.debug.xcconfig */;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		8C2516B42403C19D00BAD4B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8CAF7A9324580C0C006B961D /* AssetsTests.release.xcconfig */;
-			buildSettings = {
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -389,15 +296,6 @@
 			buildConfigurations = (
 				8C2516B02403C19D00BAD4B5 /* Debug */,
 				8C2516B12403C19D00BAD4B5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8C2516B22403C19D00BAD4B5 /* Build configuration list for PBXNativeTarget "AssetsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8C2516B32403C19D00BAD4B5 /* Debug */,
-				8C2516B42403C19D00BAD4B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
