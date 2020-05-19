@@ -280,7 +280,24 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .pickerTapped(.none)) { $0.dateTimePickMode = .none }
         )
     }
-    
+
+    func testDateTimePikcingCancelled() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .end
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePickingCancelled) { $0.dateTimePickMode = .none }
+        )
+    }
+
     func testAutocompleteSuggestionTappedWithATimeEntrySuggestion() {
         
         let oldTimeEntry = TimeEntry.with(description: "old description", billable: false)

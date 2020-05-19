@@ -46,7 +46,11 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
         case let .pickerTapped(mode):
             state.dateTimePickMode = mode
             return []
-            
+
+        case .dateTimePickingCancelled:
+            state.dateTimePickMode = .none
+            return []
+
         case .billableButtonTapped:
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.billable = !editableTimeEntry.billable

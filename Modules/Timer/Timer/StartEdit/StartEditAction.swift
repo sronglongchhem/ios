@@ -14,7 +14,8 @@ public enum StartEditAction: Equatable {
     
     case dateTimePicked(Date)
     case pickerTapped(DateTimePickMode)
-    
+    case dateTimePickingCancelled
+
     case projectButtonTapped
     case addProjectChipTapped
     case tagButtonTapped
@@ -56,7 +57,10 @@ extension StartEditAction: CustomDebugStringConvertible {
 
         case let .pickerTapped(mode):
             return "pickerTakked \(mode)"
-            
+
+        case .dateTimePickingCancelled:
+            return "DateTimePickingCancelled"
+
         case .billableButtonTapped:
             return "BillableButtonTapped"
             
