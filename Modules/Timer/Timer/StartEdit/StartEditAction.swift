@@ -13,7 +13,8 @@ public enum StartEditAction: Equatable {
     case autocompleteSuggestionTapped(AutocompleteSuggestion)
     
     case dateTimePicked(Date)
-    case pickerTapped(DateTimePickMode)
+    case toggleStartDatePicker
+    case toggleStopDatePicker
     case dateTimePickingCancelled
 
     case projectButtonTapped
@@ -55,8 +56,11 @@ extension StartEditAction: CustomDebugStringConvertible {
         case let .dateTimePicked(date):
             return "dateTimePicked \(date)"
 
-        case let .pickerTapped(mode):
-            return "pickerTakked \(mode)"
+        case .toggleStartDatePicker:
+            return "ToggleStartDatePicker"
+
+        case .toggleStopDatePicker:
+            return "ToggleStopDatePicker"
 
         case .dateTimePickingCancelled:
             return "DateTimePickingCancelled"

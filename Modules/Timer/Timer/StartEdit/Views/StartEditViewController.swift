@@ -121,12 +121,12 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .disposed(by: disposeBag)
 
         startDateButton.rx.tap
-            .mapTo(StartEditAction.pickerTapped(.start))
+            .mapTo(StartEditAction.toggleStartDatePicker)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
         endDateButton.rx.tap
-            .mapTo(StartEditAction.pickerTapped(.end))
+            .mapTo(StartEditAction.toggleStopDatePicker)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
@@ -239,7 +239,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             datePicker.date = start
             datePicker.minimumDate = editableTimeEntry.minStart
             datePicker.maximumDate = editableTimeEntry.maxStart
-        case .end:
+        case .stop:
             guard let stop = editableTimeEntry.stop else { break }
             datePicker.date = stop
             datePicker.minimumDate = editableTimeEntry.minStop

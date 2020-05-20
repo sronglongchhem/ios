@@ -45,8 +45,14 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             dateTimePicked(&state, date: date)
             return []
 
-        case let .pickerTapped(mode):
-            state.dateTimePickMode = mode
+        case .toggleStartDatePicker:
+            let mode = state.dateTimePickMode
+            state.dateTimePickMode = mode == .start ? .none : .start
+            return []
+
+        case .toggleStopDatePicker:
+            let mode = state.dateTimePickMode
+            state.dateTimePickMode = mode == .stop ? .none : .stop
             return []
 
         case .dateTimePickingCancelled:
@@ -129,7 +135,7 @@ func dateTimePicked(_ state: inout StartEditState, date: Date) {
     }
     if state.dateTimePickMode == .start {
         state.editableTimeEntry!.start = date
-    } else if state.dateTimePickMode == .end && state.editableTimeEntry!.start != nil {
+    } else if state.dateTimePickMode == .stop && state.editableTimeEntry!.start != nil {
         state.editableTimeEntry!.duration = date.timeIntervalSince(state.editableTimeEntry!.start!)
     }
 }

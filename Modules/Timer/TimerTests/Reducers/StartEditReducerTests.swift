@@ -240,7 +240,7 @@ class StartEditReducerTests: XCTestCase {
         )
     }
     
-    func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
+    func testDateTimePickedForStartTimeShouldUpdateStartTime() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
             entities: TimeLogEntities(),
@@ -259,7 +259,7 @@ class StartEditReducerTests: XCTestCase {
         )
     }
     
-    func test_dateTimePicked_forEndTimeWithAValidStartTime_shouldUpdateDuration() {
+    func testDateTimePickedForStopTimeWithAValidStartTimeShouldUpdateDuration() {
         let start = Date(timeIntervalSinceReferenceDate: 100)
         let end = Date(timeIntervalSinceReferenceDate: 200)
         var timeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
@@ -270,7 +270,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: timeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .stop
         )
 
         assertReducerFlow(
@@ -281,13 +281,13 @@ class StartEditReducerTests: XCTestCase {
         )
     }
     
-    func test_dateTimePicked_forEndTimeWithNoStartTime_shouldNotUpdateDuration() {
+    func testDateTimePickedForEndTimeWithNoStartTimeShouldNotUpdateDuration() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .stop
         )
         
         let end = Date(timeIntervalSinceReferenceDate: 200)
@@ -313,9 +313,63 @@ class StartEditReducerTests: XCTestCase {
             initialState: state,
             reducer: reducer,
             steps:
-            Step(.send, .pickerTapped(.start)) { $0.dateTimePickMode = .start },
-            Step(.send, .pickerTapped(.end)) { $0.dateTimePickMode = .end },
-            Step(.send, .pickerTapped(.none)) { $0.dateTimePickMode = .none }
+            Step(.send, .toggleStartDatePicker) { $0.dateTimePickMode = .start },
+            Step(.send, .toggleStopDatePicker) { $0.dateTimePickMode = .stop },
+            Step(.send, .dateTimePickingCancelled) { $0.dateTimePickMode = .none }
+        )
+    }
+
+    func testStartDatePickerTappedTwice() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .toggleStartDatePicker) { $0.dateTimePickMode = .start },
+            Step(.send, .toggleStartDatePicker) { $0.dateTimePickMode = .none }
+        )
+    }
+
+    func testStopDatePickerTappedTwice() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .toggleStopDatePicker) { $0.dateTimePickMode = .stop },
+            Step(.send, .toggleStopDatePicker) { $0.dateTimePickMode = .none }
+        )
+    }
+
+    func testStartDatePickerAndThenStopDatePicker() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .toggleStartDatePicker) { $0.dateTimePickMode = .start },
+            Step(.send, .toggleStopDatePicker) { $0.dateTimePickMode = .stop }
         )
     }
 
@@ -325,7 +379,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .stop
         )
 
         assertReducerFlow(
@@ -348,7 +402,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.fromSingle(oldTimeEntry),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .stop
         )
         
         let suggestion = AutocompleteSuggestion.timeEntrySuggestion(timeEntry: newTimeEntry)
