@@ -30,9 +30,9 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationView: UIView!
     @IBOutlet weak var startDateContainer: UIView!
-    @IBOutlet weak var endDateContainer: UIView!
+    @IBOutlet weak var stopDateContainer: UIView!
     @IBOutlet weak var startDateButton: UIButton!
-    @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var stopDateButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var datePickerContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var wheelForegroundView: WheelForegroundView!
@@ -131,7 +131,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
-        endDateButton.rx.tap
+        stopDateButton.rx.tap
             .mapTo(StartEditAction.toggleStopDatePicker)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
@@ -273,7 +273,7 @@ extension StartEditViewController: UITableViewDelegate {
 extension StartEditViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let view = touch.view else { return true }
-        if view.isDescendant(of: startDateContainer) || view.isDescendant(of: endDateContainer) {
+        if view.isDescendant(of: startDateContainer) || view.isDescendant(of: stopDateContainer) {
             return false
         }
         return true

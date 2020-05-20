@@ -400,13 +400,13 @@
                         <outlet property="durationLabel" destination="6B0-BH-kxC" id="dfp-c2-Pq1"/>
                         <outlet property="durationView" destination="SbG-qs-ijW" id="fCr-fh-sse"/>
                         <outlet property="editDurationView" destination="IsQ-6z-lVL" id="8db-nx-WDs"/>
-                        <outlet property="endDateButton" destination="ocN-Bd-xcj" id="7TS-do-TAO"/>
-                        <outlet property="endDateContainer" destination="nDS-rF-BdT" id="DiZ-A4-Y0K"/>
                         <outlet property="handle" destination="eCM-ov-S5k" id="upu-BG-MKJ"/>
                         <outlet property="headerView" destination="YYR-1H-mui" id="kHg-E9-k4Q"/>
                         <outlet property="startDateButton" destination="JY9-P3-wvQ" id="yGL-fS-kdW"/>
                         <outlet property="startDateContainer" destination="P43-f0-xc3" id="eXy-oA-yIG"/>
                         <outlet property="startEditInputAccessoryView" destination="m53-j1-8QL" id="cOP-C4-ABP"/>
+                        <outlet property="stopDateButton" destination="ocN-Bd-xcj" id="7cx-pu-kl1"/>
+                        <outlet property="stopDateContainer" destination="nDS-rF-BdT" id="bqZ-m2-tcI"/>
                         <outlet property="tableView" destination="pHX-AX-hhM" id="mOp-RU-MeZ"/>
                         <outlet property="wheelDurationLabelTextField" destination="7xI-DC-zF3" id="Aya-6u-AKV"/>
                         <outlet property="wheelDurationView" destination="DHd-J2-ISZ" id="e7I-86-pcJ"/>
