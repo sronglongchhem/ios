@@ -29,6 +29,8 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationView: UIView!
+    @IBOutlet weak var startDateContainer: UIView!
+    @IBOutlet weak var endDateContainer: UIView!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -71,6 +73,10 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
 
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: 200, height: headerHeight)
         tableView.separatorStyle = .none
+
+        let cancelDatePickerGesture = UITapGestureRecognizer(target: self, action: #selector(cancelDatePicker))
+        cancelDatePickerGesture.delegate = self
+        tableView.addGestureRecognizer(cancelDatePickerGesture)
 
         dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, StartEditCellType>>(
             configureCell: { _, tableView, indexPath, item in
@@ -248,6 +254,10 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         }
     }
 
+    @objc private func cancelDatePicker() {
+        store.dispatch(.dateTimePickingCancelled)
+    }
+
     deinit {
         timer?.invalidate()
     }
@@ -257,5 +267,15 @@ extension StartEditViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return dataSource.sectionModels[0].items[indexPath.row].height
+    }
+}
+
+extension StartEditViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let view = touch.view else { return true }
+        if view.isDescendant(of: startDateContainer) || view.isDescendant(of: endDateContainer) {
+            return false
+        }
+        return true
     }
 }
