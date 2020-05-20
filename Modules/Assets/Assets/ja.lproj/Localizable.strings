@@ -1,0 +1,10 @@
+"undo" = "Undo";
+"billable" = "請求可能";
+"description" = "説明";
+"startTime" = "開始時刻";
+"endTime" = "終了時刻";
+"timer" = "タイマー";
+"reports" = "レポート";
+"calendar" = "カレンダー";
+"addClient" = "クライアントを追加";
+"newProject" = "新しいプロジェクト";

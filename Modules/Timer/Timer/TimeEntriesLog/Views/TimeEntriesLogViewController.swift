@@ -27,7 +27,7 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Time Log"
+        self.title = "Toggl"
         tableView.rowHeight = 72
     }
     
@@ -93,10 +93,8 @@ public class TimeEntriesLogViewController: UIViewController, Storyboarded {
 
     private func createSnackbar(for setOfIds: Set<Int64>) -> Snackbar {
         return Snackbar.with(
-            text: setOfIds.count > 1
-                ? String(format: NSLocalizedString("%d time entries deleted", comment: ""), setOfIds.count)
-                : NSLocalizedString("Time entry was deleted", comment: ""),
-            buttonTitle: NSLocalizedString("UNDO", comment: ""),
+            text: Strings.entriesDeleted(setOfIds.count),
+            buttonTitle: Strings.undo,
             store: store,
             action: .undoButtonTapped)
     }

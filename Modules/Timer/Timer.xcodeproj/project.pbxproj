@@ -55,7 +55,6 @@
 		AC42284A2456EC5C00DD8AB3 /* WheelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4228492456EC5C00DD8AB3 /* WheelBackgroundView.swift */; };
 		AC42284C245720E700DD8AB3 /* Wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42284B245720E700DD8AB3 /* Wheel.swift */; };
 		AC42284F24572F4B00DD8AB3 /* ClockDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC42284E24572F4B00DD8AB3 /* ClockDial.swift */; };
-		AC61F9062440BBF500534713 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC61F9082440BBF500534713 /* Localizable.strings */; };
 		AC823A01245874BB0078574D /* StartEditSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8239FF245874BB0078574D /* StartEditSelector.swift */; };
 		AC823A05245ADA950078574D /* EditDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC823A04245ADA950078574D /* EditDurationView.swift */; };
 		ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */; };
@@ -157,7 +156,6 @@
 		AC4228492456EC5C00DD8AB3 /* WheelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelBackgroundView.swift; sourceTree = "<group>"; };
 		AC42284B245720E700DD8AB3 /* Wheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheel.swift; sourceTree = "<group>"; };
 		AC42284E24572F4B00DD8AB3 /* ClockDial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDial.swift; sourceTree = "<group>"; };
-		AC61F9072440BBF500534713 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AC8239FF245874BB0078574D /* StartEditSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditSelector.swift; sourceTree = "<group>"; };
 		AC823A04245ADA950078574D /* EditDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDurationView.swift; sourceTree = "<group>"; };
 		ACAA58202433A7ED003FDECA /* RunningTimeEntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryCoordinator.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 				CC2E552A2448AD8C005A3B40 /* Project */,
 				8C2516C22403C1B000BAD4B5 /* Timer.h */,
 				8C2516C32403C1B000BAD4B5 /* Info.plist */,
-				AC61F9082440BBF500534713 /* Localizable.strings */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -601,7 +598,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC61F9062440BBF500534713 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,17 +760,6 @@
 			targetProxy = 8C2516CA2403C1B000BAD4B5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AC61F9082440BBF500534713 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AC61F9072440BBF500534713 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8C2516D12403C1B000BAD4B5 /* Debug */ = {

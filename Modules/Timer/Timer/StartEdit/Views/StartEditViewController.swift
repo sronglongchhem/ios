@@ -168,7 +168,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
 
     private func showBillableTooltip() {
         Tooltip.show(from: self.startEditInputAccessoryView.billableButton,
-                     text: NSLocalizedString("Billable", comment: ""),
+                     text: Strings.billable,
                      duration: self.billableTooltipDuration)
     }
 

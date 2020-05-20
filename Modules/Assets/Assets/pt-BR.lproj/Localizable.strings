@@ -1,0 +1,10 @@
+"undo" = "Desfazer";
+"billable" = "Faturável";
+"description" = "Descrição";
+"startTime" = "Horário de início";
+"endTime" = "Horário de termino";
+"timer" = "Registros de tempo";
+"reports" = "Relatórios";
+"calendar" = "Calendário";
+"addClient" = "Adicionar cliente";
+"newProject" = "Novo projeto";
