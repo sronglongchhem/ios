@@ -130,8 +130,10 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
-        store.select({ $0.dateTimePickMode })
-            .drive(onNext: setDatePickerHeight(mode:))
+        Driver.combineLatest(
+            store.select({ $0.dateTimePickMode }),
+            store.select({ $0.editableTimeEntry }))
+            .drive(onNext: { self.setDatePickerVisiblity(mode: $0, editableTimeEntry: $1) })
             .disposed(by: disposeBag)
 
         datePicker.rx.date
@@ -223,12 +225,27 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         wheelDurationLabelTextField.setFormattedDuration(formattedDuration)
     }
 
-    private func setDatePickerHeight(mode: DateTimePickMode) {
+    private func setDatePickerVisiblity(mode: DateTimePickMode, editableTimeEntry: EditableTimeEntry?) {
         let animator = UIViewPropertyAnimator(duration: 0.225, curve: .easeInOut) {
             self.datePickerContainerHeight.constant = mode == .none ? 0 : self.datePickerHeight
             self.editDurationView.frame.size.height = mode == .none ? self.editDurationWithoutDatePickerHeight : self.editDurationWithDatePickerHeight
         }
         animator.startAnimation()
+
+        guard let editableTimeEntry = editableTimeEntry else { return }
+        switch mode {
+        case .start:
+            guard let start = editableTimeEntry.start else { break }
+            datePicker.date = start
+            datePicker.minimumDate = editableTimeEntry.minStart
+            datePicker.maximumDate = editableTimeEntry.maxStart
+        case .end:
+            guard let stop = editableTimeEntry.stop else { break }
+            datePicker.date = stop
+            datePicker.minimumDate = editableTimeEntry.minStop
+            datePicker.maximumDate = editableTimeEntry.maxStop
+        case .none: break
+        }
     }
 
     deinit {
