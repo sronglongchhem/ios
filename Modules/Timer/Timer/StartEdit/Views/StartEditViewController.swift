@@ -134,6 +134,11 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .drive(onNext: setDatePickerHeight(mode:))
             .disposed(by: disposeBag)
 
+        datePicker.rx.date
+            .mapTo({ StartEditAction.dateTimePicked($0) })
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
         connectAccessoryViewButtons()
     }
     // swiftlint:enable function_body_length

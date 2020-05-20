@@ -201,6 +201,44 @@ class StartEditReducerTests: XCTestCase {
             }
         )
     }
+
+    func testDateTimePickedWhenPickerModeIsNone() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none
+        )
+
+        let picked = Date(timeIntervalSinceReferenceDate: 100)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePicked(picked)) { _ in }
+        )
+    }
+
+    func testDateTimePickedWhenEditableTimeEntryIsNil() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: nil,
+            autocompleteSuggestions: [],
+            dateTimePickMode: .start
+        )
+
+        let picked = Date(timeIntervalSinceReferenceDate: 100)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .dateTimePicked(picked)) { _ in }
+        )
+    }
     
     func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
         let state = StartEditState(

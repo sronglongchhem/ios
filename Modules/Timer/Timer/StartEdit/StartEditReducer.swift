@@ -40,6 +40,8 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             return []
             
         case let .dateTimePicked(date):
+            guard state.editableTimeEntry != nil else { return [] }
+            guard state.dateTimePickMode != .none else { return [] }
             dateTimePicked(&state, date: date)
             return []
 
