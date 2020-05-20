@@ -17,7 +17,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     private let billableTooltipDuration: TimeInterval = 2
     private let datePickerHeight: CGFloat = 197
     private let editDurationWithoutDatePickerHeight: CGFloat = 442
-    private let editDurationWithDatePickerHeight: CGFloat = 617
+    private let editDurationWithDatePickerHeight: CGFloat = 637
 
     var scrollView: UIScrollView?
     var smallStateHeight: CGFloat { headerHeight + cells[0].height }
