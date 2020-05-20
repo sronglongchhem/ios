@@ -201,7 +201,7 @@ class StartEditReducerTests: XCTestCase {
             }
         )
     }
-    
+
     func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
@@ -639,7 +639,7 @@ class StartEditReducerTests: XCTestCase {
         )
     }
 
-    private func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
+    func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
         return Step(.send, StartEditAction.descriptionEntered(description, description.count)) {
             $0.editableTimeEntry!.description = description
         }
