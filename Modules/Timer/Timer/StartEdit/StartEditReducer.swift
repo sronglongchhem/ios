@@ -195,10 +195,16 @@ extension EditableTimeEntry {
             workspaceId = project.workspaceId
             removeQueryFromDescription(projectToken, cursorPosition)
 
-        case .taskSuggestion:
-            fatalError()
-        case .tagSuggestion:
-            fatalError()
+        case .taskSuggestion(let task, let project):
+            taskId = task.id
+            projectId = project.id
+            workspaceId = project.workspaceId
+            removeQueryFromDescription(projectToken, cursorPosition)
+            
+        case .tagSuggestion(let tag):
+            tagIds.append(tag.id)
+            removeQueryFromDescription(tagToken, cursorPosition)
+            
         case .createProjectSuggestion:
             fatalError()
         case .createTagSuggestion:
