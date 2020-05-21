@@ -18,7 +18,7 @@ func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
     return [result]
 }
 
-func getSuggestions(for query: String, at position: Int, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
+private func getSuggestions(for query: String, at position: Int, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
     let caretIndex = query.index(query.startIndex, offsetBy: position)
     let querySymbolIndex = query[..<caretIndex]
         .enumerated()
@@ -47,7 +47,7 @@ func getSuggestions(for query: String, at position: Int, in entities: TimeLogEnt
     return timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
 }
 
-func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [TimeEntry] {
+private func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [TimeEntry] {
     func projectOrClientNameMatches(_ word: String, _ timeEntry: TimeEntry) -> Bool {
         guard let project = entities.getProject(timeEntry.projectId) else { return false }
         if project.name.contains(word) { return true }
@@ -80,7 +80,7 @@ func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [Ti
     })
 }
 
-func searchProjects(for words: [String], in entities: TimeLogEntities) -> [Project] {
+private func searchProjects(for words: [String], in entities: TimeLogEntities) -> [Project] {
     
     func clientNameMatches(_ word: String, _ project: Project) -> Bool {
         guard let client = entities.getClient(project.clientId) else { return false }
