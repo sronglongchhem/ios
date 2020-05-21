@@ -6,13 +6,10 @@ import Repository
 
 private let querySymbols: [Character] = ["@"]
 
-func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
-                                         _ repository: TimeLogRepository,
-                                         _ description: String,
+func updateAutocompleteSuggestionsEffect(_ description: String,
+                                         _ entities: TimeLogEntities,
                                          _ position: Int) -> [Effect<StartEditAction>] {
-    guard let query = state.editableTimeEntry?.description
-        else { fatalError("No editable time entry while looking for autocomplete suggestions") }
-    let result = Single.just(getSuggestions(for: query, at: position, in: state.entities))
+    let result = Single.just(getSuggestions(for: description, at: position, in: entities))
         .map(StartEditAction.autocompleteSuggestionsUpdated)
         .toEffect()
     return [result]

@@ -15,7 +15,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             if state.editableTimeEntry != nil {
                 state.editableTimeEntry!.description = description
             }
-            return updateAutocompleteSuggestionsEffect(state, repository, description, position)
+            return updateAutocompleteSuggestionsEffect(description, state.entities, position)
 
         case .closeButtonTapped, .dialogDismissed:
             state.editableTimeEntry = nil
