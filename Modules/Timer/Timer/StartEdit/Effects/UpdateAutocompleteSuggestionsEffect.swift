@@ -14,12 +14,12 @@ func updateAutocompleteSuggestionsEffect(
         return [Single.just(StartEditAction.autocompleteSuggestionsUpdated([])).toEffect()]
     }
     
-    let (token, actualQuery) = query.findTokenAndQueryMatchesForAutocomplete(["@", "#"], cursorPosition)
+    let (token, actualQuery) = query.findTokenAndQueryMatchesForAutocomplete([projectToken, tagToken], cursorPosition)
     
     let suggestions: [AutocompleteSuggestion] = {
         switch token {
-        case "@": return fetchProjectSuggestions(for: actualQuery)
-        case "#": return fetchTagSuggestions(for: actualQuery)
+        case projectToken: return fetchProjectSuggestions(for: actualQuery)
+        case tagToken: return fetchTagSuggestions(for: actualQuery)
         default: return fetchTimeEntrySuggestions(for: actualQuery, in: entities)
         }
     }()
