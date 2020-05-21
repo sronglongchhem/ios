@@ -4,15 +4,26 @@ import Models
 import RxSwift
 import Repository
 
-func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
-                                         _ repository: TimeLogRepository,
-                                         _ description: String,
-                                         _ position: Int) -> [Effect<StartEditAction>] {
-    guard let query = state.editableTimeEntry?.description
-        else { fatalError("No editable time entry while looking for autocomplete suggestions") }
-    let words = query.split(separator: " ").map { String($0) }
-    let timeEntries = searchTimeEntries(for: words, in: state.entities)
-    let suggestions = timeEntries.map(AutocompleteSuggestion.timeEntrySuggestion)
+func updateAutocompleteSuggestionsEffect(
+    _ query: String,
+    _ cursorPosition: Int,
+    _ entities: TimeLogEntities,
+    _ repository: TimeLogRepository
+) -> [Effect<StartEditAction>] {
+    if query.isEmpty {
+        return [Single.just(StartEditAction.autocompleteSuggestionsUpdated([])).toEffect()]
+    }
+    
+    let (token, actualQuery) = query.findTokenAndQueryMatchesForAutocomplete(["@", "#"], cursorPosition)
+    
+    let suggestions: [AutocompleteSuggestion] = {
+        switch token {
+        case "@": return fetchProjectSuggestions(for: actualQuery)
+        case "#": return fetchTagSuggestions(for: actualQuery)
+        default: return fetchTimeEntrySuggestions(for: actualQuery, in: entities)
+        }
+    }()
+        
     return [
         Single.just(suggestions)
             .map(StartEditAction.autocompleteSuggestionsUpdated)
@@ -20,7 +31,15 @@ func updateAutocompleteSuggestionsEffect(_ state: StartEditState,
     ]
 }
 
-func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [TimeEntry] {
+func fetchProjectSuggestions(for query: String) -> [AutocompleteSuggestion] {
+    return []
+}
+
+func fetchTagSuggestions(for query: String) -> [AutocompleteSuggestion] {
+    return []
+}
+
+func fetchTimeEntrySuggestions(for query: String, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
     func projectOrClientNameMatches(_ word: String, _ timeEntry: TimeEntry) -> Bool {
         guard let project = entities.getProject(timeEntry.projectId) else { return false }
         if project.name.contains(word) { return true }
@@ -40,6 +59,8 @@ func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [Ti
         guard let task = entities.getTask(timeEntry.taskId) else { return false }
         return task.name.contains(word)
     }
+    
+    let words = query.split(separator: " ").map { String($0) }
 
     return words.reduce(Array(entities.timeEntries.values)) { timeEntries, word in
         return timeEntries.filter { timeEntry in
@@ -50,5 +71,5 @@ func searchTimeEntries(for words: [String], in entities: TimeLogEntities) -> [Ti
         }
     }.sorted(by: { leftHand, rightHand in
         leftHand.description > rightHand.description
-    })
+    }).map(AutocompleteSuggestion.timeEntrySuggestion)
 }

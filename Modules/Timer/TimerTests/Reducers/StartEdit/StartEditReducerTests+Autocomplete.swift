@@ -23,7 +23,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,
@@ -59,7 +60,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,
@@ -99,7 +101,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,
@@ -135,7 +138,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,
@@ -171,7 +175,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,
@@ -208,7 +213,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 0)
 
         assertReducerFlow(
             initialState: state,

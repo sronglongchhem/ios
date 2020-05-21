@@ -13,9 +13,13 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             
         case let .descriptionEntered(description, position):
             if state.editableTimeEntry != nil {
+                state.cursorPosition = position
                 state.editableTimeEntry!.description = description
+
+                return updateAutocompleteSuggestionsEffect(description, position, state.entities, repository)
             }
-            return updateAutocompleteSuggestionsEffect(state, repository, description, position)
+            
+            return []
 
         case .closeButtonTapped, .dialogDismissed:
             state.editableTimeEntry = nil
@@ -36,7 +40,7 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
         case let .autocompleteSuggestionTapped(suggestion):
             guard state.editableTimeEntry != nil else { fatalError() }
 
-            state.editableTimeEntry?.setDetails(from: suggestion)
+            state.editableTimeEntry?.setDetails(from: suggestion, and: state.cursorPosition)
             return []
             
         case let .dateTimePicked(date):
@@ -145,7 +149,7 @@ func appendCharacter( _ character: String, toString string: String) -> String {
 }
 
 extension EditableTimeEntry {
-    mutating func setDetails(from suggestion: AutocompleteSuggestion) {
+    mutating func setDetails(from suggestion: AutocompleteSuggestion, and cursorPosition: Int) {
         switch suggestion {
         case .timeEntrySuggestion(let timeEntry):
             workspaceId = timeEntry.workspaceId
@@ -154,8 +158,16 @@ extension EditableTimeEntry {
             tagIds = timeEntry.tagIds
             taskId = timeEntry.taskId
             billable = timeEntry.billable
-        case .projectSuggestion:
-            fatalError()
+        case .projectSuggestion(let project):
+            projectId = project.id
+            workspaceId = project.workspaceId
+
+            let (optionalToken, currentQuery) = description.findTokenAndQueryMatchesForAutocomplete("@", cursorPosition)
+            guard let token = optionalToken else { return }
+            let delimiter = "\(String(token))\(currentQuery)"
+            guard let rangeToReplace = description.range(of: delimiter) else { return }
+            let newDescription = description.replacingCharacters(in: rangeToReplace, with: "")
+            description = newDescription
         case .taskSuggestion:
             fatalError()
         case .tagSuggestion:

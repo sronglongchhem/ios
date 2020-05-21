@@ -83,6 +83,8 @@
 		CC5D320B2464A931005A1837 /* WheelForegroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320A2464A931005A1837 /* WheelForegroundView.swift */; };
 		CC5D320D24657CC5005A1837 /* Cap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320C24657CC5005A1837 /* Cap.swift */; };
 		CC5D320F24659308005A1837 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5D320E24659308005A1837 /* Arc.swift */; };
+		CC8172342475B433004F1152 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8172332475B433004F1152 /* String+Extensions.swift */; };
+		CC8172372476A397004F1152 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8172362476A397004F1152 /* StringExtensionsTests.swift */; };
 		CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +190,8 @@
 		CC5D320A2464A931005A1837 /* WheelForegroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelForegroundView.swift; sourceTree = "<group>"; };
 		CC5D320C24657CC5005A1837 /* Cap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cap.swift; sourceTree = "<group>"; };
 		CC5D320E24659308005A1837 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
+		CC8172332475B433004F1152 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		CC8172362476A397004F1152 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		CCD8DDAB2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningTimeEntryReducerTests.swift; sourceTree = "<group>"; };
 		D1A6B75657C3B9CF1F0B3ED1 /* Pods_Timer_TimerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer_TimerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB24E55169F474422BCBE49 /* Pods-Timer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.release.xcconfig"; path = "Target Support Files/Pods-Timer/Pods-Timer.release.xcconfig"; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 		8C2516CC2403C1B000BAD4B5 /* TimerTests */ = {
 			isa = PBXGroup;
 			children = (
+				CC8172352476A387004F1152 /* Extensions */,
 				8C2130CD2424F641000FC72C /* TestUtils */,
 				8C1DD94C242A1946005CE40A /* Selectors */,
 				8C2130C22424F44F000FC72C /* Reducers */,
@@ -380,6 +385,7 @@
 		8C509D352413E29B00B6DF30 /* StartEdit */ = {
 			isa = PBXGroup;
 			children = (
+				CC8172322475B424004F1152 /* Extensions */,
 				346B6A59246EB7B100A76A1E /* Effects */,
 				8C509D3A2413E31F00B6DF30 /* Views */,
 				8C008FCF24093FF8000A0C32 /* StartEditAction.swift */,
@@ -528,6 +534,22 @@
 				CC03C27F2448AF0A0071FA55 /* EditableProject.swift */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		CC8172322475B424004F1152 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC8172332475B433004F1152 /* String+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CC8172352476A387004F1152 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC8172362476A397004F1152 /* StringExtensionsTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -743,6 +765,7 @@
 				8C008FD024093FF8000A0C32 /* StartEditAction.swift in Sources */,
 				ACAA58262433A7ED003FDECA /* RunningTimeEntryCoordinator.swift in Sources */,
 				8C509D232412876A00B6DF30 /* TimeEntryViewModel.swift in Sources */,
+				CC8172342475B433004F1152 /* String+Extensions.swift in Sources */,
 				8CB54535240EA67400154473 /* StartEditState.swift in Sources */,
 				ACAA585D24378106003FDECA /* SimpleBottomSheet.swift in Sources */,
 				ACAA58322434A1EE003FDECA /* RunningTimeEntryViewController.swift in Sources */,
@@ -769,6 +792,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC8172372476A397004F1152 /* StringExtensionsTests.swift in Sources */,
 				B417E98D244F78D0004D251F /* ProjectReducerTests.swift in Sources */,
 				346B6A5E246EB87700A76A1E /* StartEditReducerTests+Autocomplete.swift in Sources */,
 				CCD8DDAC2449EE9F00AC9932 /* RunningTimeEntryReducerTests.swift in Sources */,
