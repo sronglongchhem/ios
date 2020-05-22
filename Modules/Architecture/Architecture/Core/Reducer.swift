@@ -34,6 +34,13 @@ public struct Reducer<StateType, ActionType> {
     ) -> Reducer<StateType, GlobalAction> {
         return self.pullback(state: \StateType.self, action: action)
     }
+
+    public var optional: Reducer<StateType?, ActionType> {
+        .init { state, action in
+            guard state != nil else { return [] }
+            return self.reduce(&state!, action)
+        }
+    }
 }
 
 public func combine<State, Action>(
