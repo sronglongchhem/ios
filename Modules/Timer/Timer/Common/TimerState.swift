@@ -67,14 +67,12 @@ extension TimerState {
         get {
             RunningTimeEntryState(
                 user: user,
-                entities: entities,
-                editableTimeEntry: editableTimeEntry
+                entities: entities
             )
         }
         set {
             user = newValue.user
             entities = newValue.entities
-            editableTimeEntry = newValue.editableTimeEntry
         }
     }
     
