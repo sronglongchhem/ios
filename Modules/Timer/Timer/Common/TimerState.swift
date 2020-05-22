@@ -45,7 +45,6 @@ extension TimerState {
     internal var startEditState: StartEditState {
         get {
             StartEditState(
-                user: user,
                 entities: entities,
                 editableTimeEntry: editableTimeEntry,
                 autocompleteSuggestions: autocompleteSuggestions,
@@ -54,7 +53,6 @@ extension TimerState {
             )
         }
         set {
-            user = newValue.user
             entities = newValue.entities
             editableTimeEntry = newValue.editableTimeEntry
             autocompleteSuggestions = newValue.autocompleteSuggestions
