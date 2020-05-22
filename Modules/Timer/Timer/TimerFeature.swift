@@ -11,9 +11,10 @@ public func createTimerReducer(repository: Repository, time: Time, schedulerProv
         createStartEditReducer(repository: repository, time: time)
             .pullback(state: \.startEditState, action: \.startEdit),
         createRunningTimeEntryReducer(repository: repository, time: time)
-            .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry),
-        createProjectReducer(repository: repository)
-            .pullback(state: \.projectState, action: \.project)
+            .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry)
+//        ,
+//        createProjectReducer(repository: repository)
+//            .pullback(state: \.projectState, action: \.project)
     )
 }
 
@@ -47,12 +48,13 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
                    .view { $0.view(
                        state: { $0.runningTimeEntryState },
                        action: { TimerAction.runningTimeEntry($0) })
-               },
-               .project: ProjectFeature()
-                   .view { $0.view(
-                       state: { $0.projectState },
-                       action: { TimerAction.project($0) })
                }
+//            ,
+//               .project: ProjectFeature()
+//                   .view { $0.view(
+//                       state: { $0.projectState },
+//                       action: { TimerAction.project($0) })
+//               }
            ]
     }
 

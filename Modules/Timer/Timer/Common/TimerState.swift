@@ -76,17 +76,17 @@ extension TimerState {
         }
     }
     
-    internal var projectState: ProjectState {
-        get {
-            ProjectState(
-                editableProject: editableTimeEntry?.editableProject,
-                projects: entities.projects
-            )
-        }
-        set {
-            entities.projects = newValue.projects
-            guard var timeEntry = editableTimeEntry else { return }
-            timeEntry.editableProject = newValue.editableProject
-        }
-    }
+//    internal var projectState: ProjectState {
+//        get {
+//            ProjectState(
+//                editableProject: editableTimeEntry?.editableProject,
+//                projects: entities.projects
+//            )
+//        }
+//        set {
+//            entities.projects = newValue.projects
+//            guard var timeEntry = editableTimeEntry else { return }
+//            timeEntry.editableProject = newValue.editableProject
+//        }
+//    }
 }
