@@ -4,7 +4,13 @@ import Utils
 
 public struct TimeEntriesLogState: Equatable {
     var entities: TimeLogEntities
-    var expandedGroups: Set<Int>
-    var editableTimeEntry: EditableTimeEntry?
-    var entriesPendingDeletion = Set<Int64>()
+
+    internal var expandedGroups: Set<Int> = Set<Int>()
+    internal var entriesPendingDeletion = Set<Int64>()
+
+//    var editableTimeEntry: EditableTimeEntry?
+
+    public init(entities: TimeLogEntities) {
+        self.entities = entities
+    }
 }

@@ -6,9 +6,9 @@ public struct TimerState: Equatable {
     public var user: Loadable<User>
     public var entities: TimeLogEntities
 
+    private var _timeEntriesLogState: TimeEntriesLogState
+
     internal var editableTimeEntry: EditableTimeEntry?
-    internal var expandedGroups: Set<Int> = Set<Int>()
-    internal var entriesPendingDeletion = Set<Int64>()
     internal var autocompleteSuggestions: [AutocompleteSuggestion] = []
     internal var dateTimePickMode: DateTimePickMode = .none
     internal var cursorPosition: Int = 0
@@ -16,6 +16,8 @@ public struct TimerState: Equatable {
     public init(user: Loadable<User>, entities: TimeLogEntities) {
         self.user = user
         self.entities = entities
+
+        _timeEntriesLogState = TimeEntriesLogState(entities: entities)
     }
 }
 
@@ -30,18 +32,13 @@ extension TimerState {
     
     internal var timeLogState: TimeEntriesLogState {
         get {
-            TimeEntriesLogState(
-                entities: entities,
-                expandedGroups: expandedGroups,
-                editableTimeEntry: editableTimeEntry,
-                entriesPendingDeletion: entriesPendingDeletion
-            )
+            var copy = _timeEntriesLogState
+            copy.entities = entities
+            return copy
         }
         set {
+            _timeEntriesLogState = newValue
             entities = newValue.entities
-            expandedGroups = newValue.expandedGroups
-            editableTimeEntry = newValue.editableTimeEntry
-            entriesPendingDeletion = newValue.entriesPendingDeletion
         }
     }
     
