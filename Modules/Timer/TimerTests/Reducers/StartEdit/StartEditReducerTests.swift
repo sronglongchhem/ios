@@ -28,7 +28,8 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none,
+            cursorPosition: 0
         )
 
         let expectedDescription = "whatever"
@@ -39,6 +40,7 @@ class StartEditReducerTests: XCTestCase {
             steps:
             Step(.send, .descriptionEntered(expectedDescription, expectedDescription.count)) {
                 $0.editableTimeEntry?.description = expectedDescription
+                $0.cursorPosition = expectedDescription.count
             },
             Step(.receive, StartEditAction.autocompleteSuggestionsUpdated([]))
         )
@@ -51,7 +53,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -71,7 +73,8 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none,
+            cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -92,7 +95,8 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none,
+            cursorPosition: 0
         )
 
         let expectedStartedEntry = TimeEntry(
@@ -139,7 +143,7 @@ class StartEditReducerTests: XCTestCase {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none, cursorPosition: 0)
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
@@ -169,7 +173,7 @@ class StartEditReducerTests: XCTestCase {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none, cursorPosition: 0)
 
         let expectedStartedEntry = TimeEntry(
             id: mockRepository.newTimeEntryId,
@@ -208,7 +212,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .start
+            dateTimePickMode: .start, cursorPosition: 0
         )
         
         let start = Date(timeIntervalSinceReferenceDate: 100)
@@ -232,7 +236,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: timeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .end, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -249,7 +253,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .end, cursorPosition: 0
         )
         
         let end = Date(timeIntervalSinceReferenceDate: 200)
@@ -268,7 +272,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -287,7 +291,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .end, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -310,7 +314,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.fromSingle(oldTimeEntry),
             autocompleteSuggestions: [],
-            dateTimePickMode: .end
+            dateTimePickMode: .end, cursorPosition: 0
         )
         
         let suggestion = AutocompleteSuggestion.timeEntrySuggestion(timeEntry: newTimeEntry)
@@ -329,6 +333,32 @@ class StartEditReducerTests: XCTestCase {
         })
     }
 
+    func testAutocompleteSuggestionTappedWithAProjectSuggestion() {
+        
+        let timeEntry = TimeEntry.with(description: "old description @proj", billable: false)
+        let project = Project.with(id: 11, name: "Project", workspaceId: 10)
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromSingle(timeEntry),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .end,
+            cursorPosition: 19
+        )
+        
+        let suggestion = AutocompleteSuggestion.projectSuggestion(project: project)
+        
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .autocompleteSuggestionTapped(suggestion)) {
+                $0.editableTimeEntry?.description = "old description "
+                $0.editableTimeEntry?.projectId = project.id
+                $0.editableTimeEntry?.workspaceId = project.workspaceId
+        })
+    }
+
     func testAutocompleteSuggestionsUpdatedUpdatesState() {
         let entities = TimeLogEntities()
         let editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
@@ -337,7 +367,7 @@ class StartEditReducerTests: XCTestCase {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none, cursorPosition: 0)
 
         let autocompleteSuggestions: [AutocompleteSuggestion] = [
             .timeEntrySuggestion(timeEntry: TimeEntry.with(id: 0, start: now.addingTimeInterval(-300), duration: 100)),
@@ -360,7 +390,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -380,7 +410,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -400,7 +430,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -420,7 +450,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -440,7 +470,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -460,7 +490,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -480,7 +510,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -500,7 +530,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -520,7 +550,7 @@ class StartEditReducerTests: XCTestCase {
             entities: TimeLogEntities(),
             editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         assertReducerFlow(
@@ -545,7 +575,7 @@ class StartEditReducerTests: XCTestCase {
                 workspaceId: mockUser.defaultWorkspace,
                 tagIds: [])),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         let newDuration: TimeInterval = 40
@@ -572,7 +602,7 @@ class StartEditReducerTests: XCTestCase {
                 workspaceId: mockUser.defaultWorkspace,
                 tagIds: [])),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         let newDuration: TimeInterval = 200
@@ -598,7 +628,7 @@ class StartEditReducerTests: XCTestCase {
                 workspaceId: mockUser.defaultWorkspace,
                 tagIds: [])),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         let newDuration: TimeInterval = -1
@@ -626,7 +656,7 @@ class StartEditReducerTests: XCTestCase {
                     workspaceId: mockUser.defaultWorkspace,
                     tagIds: [])),
             autocompleteSuggestions: [],
-            dateTimePickMode: .none
+            dateTimePickMode: .none, cursorPosition: 0
         )
 
         let newDuration: TimeInterval = 100
@@ -642,6 +672,7 @@ class StartEditReducerTests: XCTestCase {
     func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
         return Step(.send, StartEditAction.descriptionEntered(description, description.count)) {
             $0.editableTimeEntry!.description = description
+            $0.cursorPosition = description.count
         }
     }
 }

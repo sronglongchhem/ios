@@ -23,7 +23,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 6)
 
         assertReducerFlow(
             initialState: state,
@@ -58,7 +59,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 6)
 
         assertReducerFlow(
             initialState: state,
@@ -96,7 +98,8 @@ extension StartEditReducerTests {
             entities: entities,
             editableTimeEntry: editableTimeEntry,
             autocompleteSuggestions: [],
-            dateTimePickMode: .none)
+            dateTimePickMode: .none,
+            cursorPosition: 20)
 
         assertReducerFlow(
             initialState: state,

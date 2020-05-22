@@ -8,4 +8,5 @@ public struct StartEditState: Equatable {
     var editableTimeEntry: EditableTimeEntry?
     var autocompleteSuggestions: [AutocompleteSuggestion]
     var dateTimePickMode: DateTimePickMode
+    var cursorPosition: Int
 }
