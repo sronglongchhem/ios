@@ -1,6 +1,7 @@
 import UIKit
 import Assets
 import Utils
+import UIUtils
 import Architecture
 import RxSwift
 import RxCocoa
@@ -89,10 +90,9 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         store.select({ $0.editableTimeEntry })
             .drive(onNext: displayTimeEntry)
             .disposed(by: disposeBag)
-        
-        descriptionTextField.rx.text.compactMap { [weak self] text in
-                (text, self?.descriptionCursorPosition()) as? (String, Int)
-            }
+
+        Observable.combineLatest(descriptionTextField.rx.text, descriptionTextField.rx.cursorPosition)
+            .map { [weak self] _ in (self?.descriptionTextField.text ?? "", self?.descriptionTextField.cursorPosition ?? 0)}
             .map(StartEditAction.descriptionEntered)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
@@ -148,7 +148,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     }
 
     public override var canBecomeFirstResponder: Bool { true }
-    
+
     private func connectAccessoryViewButtons() {
         startEditInputAccessoryView.projectButton.rx.tap
             .mapTo(StartEditAction.projectButtonTapped)
@@ -169,11 +169,6 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
         startEditInputAccessoryView.acceptButton.rx.tap
             .subscribe(onNext: { UIImpactFeedbackGenerator(style: .light).impactOccurred() })
             .disposed(by: disposeBag)
-    }
-
-    private func descriptionCursorPosition() -> Int? {
-        guard let selectedRange = descriptionTextField.selectedTextRange else { return nil }
-        return descriptionTextField.offset(from: descriptionTextField.beginningOfDocument, to: selectedRange.start)
     }
 
     private func showBillableTooltip() {
