@@ -206,6 +206,75 @@ class StartEditReducerTests: XCTestCase {
         )
     }
 
+    func test_stopButtonTapped_forTEWithNoStartTime_shouldSetEditableTimeEntryStartAndDuration() {
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .start,
+            cursorPosition: 0
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .stopButtonTapped) {
+                $0.editableTimeEntry?.start = self.mockTime.now()
+                $0.editableTimeEntry?.duration = 0
+            }
+        )
+    }
+
+    func test_stopButtonTapped_forTEWithNoDuration_shouldSetEditableTimeEntryDuration() {
+        let duration = TimeInterval(600)
+        var editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        editableTimeEntry.start = mockTime.now().addingTimeInterval(-duration)
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [],
+            dateTimePickMode: .start,
+            cursorPosition: 0
+        )
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .stopButtonTapped) { $0.editableTimeEntry?.duration = duration }
+        )
+    }
+
+    func test_stopButtonTapped_forTEWithDuration_shouldOpenEndPicker() {
+        var editableTimeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
+        editableTimeEntry.start = mockTime.now()
+        editableTimeEntry.duration = TimeInterval(600)
+
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: editableTimeEntry,
+            autocompleteSuggestions: [],
+            dateTimePickMode: .start,
+            cursorPosition: 0
+        )
+
+        let expectedPickerMode = DateTimePickMode.end
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .stopButtonTapped),
+            Step(.receive, .pickerTapped(expectedPickerMode)) { $0.dateTimePickMode = .end }
+        )
+    }
+
     func test_dateTimePicked_forStartTime_shouldUpdateStartTime() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
@@ -214,7 +283,7 @@ class StartEditReducerTests: XCTestCase {
             autocompleteSuggestions: [],
             dateTimePickMode: .start, cursorPosition: 0
         )
-        
+
         let start = Date(timeIntervalSinceReferenceDate: 100)
 
         assertReducerFlow(
@@ -224,13 +293,13 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .dateTimePicked(start)) { $0.editableTimeEntry?.start = start }
         )
     }
-    
+
     func test_dateTimePicked_forEndTimeWithAValidStartTime_shouldUpdateDuration() {
         let start = Date(timeIntervalSinceReferenceDate: 100)
         let end = Date(timeIntervalSinceReferenceDate: 200)
         var timeEntry = EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace)
         timeEntry.start = Date(timeIntervalSinceReferenceDate: 100)
-        
+
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
             entities: TimeLogEntities(),
@@ -246,7 +315,7 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .dateTimePicked(end)) { $0.editableTimeEntry?.duration = end.timeIntervalSince(start) }
         )
     }
-    
+
     func test_dateTimePicked_forEndTimeWithNoStartTime_shouldNotUpdateDuration() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),
@@ -255,7 +324,7 @@ class StartEditReducerTests: XCTestCase {
             autocompleteSuggestions: [],
             dateTimePickMode: .end, cursorPosition: 0
         )
-        
+
         let end = Date(timeIntervalSinceReferenceDate: 200)
 
         assertReducerFlow(
@@ -303,7 +372,7 @@ class StartEditReducerTests: XCTestCase {
     }
 
     func testAutocompleteSuggestionTappedWithATimeEntrySuggestion() {
-        
+
         let oldTimeEntry = TimeEntry.with(description: "old description", billable: false)
         var newTimeEntry = TimeEntry.with(id: 10, description: "new description", billable: true)
         newTimeEntry.tagIds = [1, 2, 3]
@@ -316,9 +385,9 @@ class StartEditReducerTests: XCTestCase {
             autocompleteSuggestions: [],
             dateTimePickMode: .end, cursorPosition: 0
         )
-        
+
         let suggestion = AutocompleteSuggestion.timeEntrySuggestion(timeEntry: newTimeEntry)
-        
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
@@ -334,7 +403,7 @@ class StartEditReducerTests: XCTestCase {
     }
 
     func testAutocompleteSuggestionTappedWithAProjectSuggestion() {
-        
+
         let timeEntry = TimeEntry.with(description: "old description @proj", billable: false)
         let project = Project.with(id: 11, name: "Project", workspaceId: 10)
         let state = StartEditState(
@@ -345,9 +414,9 @@ class StartEditReducerTests: XCTestCase {
             dateTimePickMode: .end,
             cursorPosition: 19
         )
-        
+
         let suggestion = AutocompleteSuggestion.projectSuggestion(project: project)
-        
+
         assertReducerFlow(
             initialState: state,
             reducer: reducer,
@@ -382,7 +451,7 @@ class StartEditReducerTests: XCTestCase {
                 $0.autocompleteSuggestions = autocompleteSuggestions
             })
     }
-    
+
     func testProjectButtonTappedNoSpaceAtTheEnd() {
 
         let state = StartEditState(
@@ -402,7 +471,7 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .projectButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end @" }
         )
     }
-    
+
     func testProjectButtonTappedASpaceAtTheEnd() {
 
         let state = StartEditState(
@@ -462,7 +531,7 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .addProjectChipTapped) { $0.editableTimeEntry?.description = "test with a space at the end @" }
         )
     }
-    
+
     func testTagButtonTappedWithNoSpaceAtTheEnd() {
 
         let state = StartEditState(
@@ -482,7 +551,7 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .tagButtonTapped) { $0.editableTimeEntry?.description = "test with no space at the end #" }
         )
     }
-    
+
     func testTagButtonTappedWithASpaceAtTheEnd() {
 
         let state = StartEditState(
@@ -668,7 +737,7 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .durationInputted(newDuration))
         )
     }
-    
+
     func test_tagCreated_addsTagToEntitiesAndEditableTimeEntry() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),

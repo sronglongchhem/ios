@@ -120,7 +120,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
             .disposed(by: disposeBag)
 
         endDateButton.rx.tap
-            .mapTo(StartEditAction.pickerTapped(.end))
+            .mapTo(StartEditAction.stopButtonTapped)
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 

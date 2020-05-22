@@ -4,6 +4,7 @@ import Models
 import RxSwift
 import Repository
 import OtherServices
+import Utils
 
 // swiftlint:disable cyclomatic_complexity function_body_length
 func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reducer<StartEditState, StartEditAction> {
@@ -27,6 +28,30 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
 
         case .doneButtonTapped:
             return doneButtonTapped(state, repository)
+
+        case .stopButtonTapped:
+            guard var editableTimeEntry = state.editableTimeEntry else {
+                fatalError("Trying to stop time entry when not editing a time entry")
+            }
+            
+            guard let startTime = editableTimeEntry.start else {
+                editableTimeEntry.start = time.now()
+                editableTimeEntry.duration = 0
+                state.editableTimeEntry = editableTimeEntry
+                return []
+            }
+            
+            if editableTimeEntry.duration == nil {
+                let maxDuration = TimeInterval.maximumTimeEntryDuration
+                let duration = time.now().timeIntervalSince(startTime)
+                if duration > 0 && duration <= maxDuration {
+                    editableTimeEntry.duration = duration
+                    state.editableTimeEntry = editableTimeEntry
+                }
+                return []
+            }
+            
+            return [Single.just(StartEditAction.pickerTapped(.end)).toEffect()]
 
         case let .timeEntryStarted(startedTimeEntry, stoppedTimeEntry):
             timeEntryStarted(&state, startedTimeEntry, stoppedTimeEntry)

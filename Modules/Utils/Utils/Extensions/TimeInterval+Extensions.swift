@@ -21,6 +21,8 @@ extension TimeInterval {
         TimeInterval(minutes * 60)
     }
 
+    public static var maximumTimeEntryDuration = TimeInterval.from(hours: 999)
+
     public func clamp(_ range: ClosedRange<TimeInterval>) -> TimeInterval {
         return range.lowerBound > self ? range.lowerBound
             : range.upperBound < self ? range.upperBound
