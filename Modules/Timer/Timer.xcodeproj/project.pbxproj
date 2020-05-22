@@ -52,6 +52,7 @@
 		8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C509D242412879200B6DF30 /* DayViewModel.swift */; };
 		8CB54533240E7DA100154473 /* TimeEntriesLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB54532240E7DA100154473 /* TimeEntriesLogViewController.swift */; };
 		8CB54535240EA67400154473 /* StartEditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB54534240EA67400154473 /* StartEditState.swift */; };
+		8CD1B4B32477CBFF00FB62BF /* TimerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1B4B22477CBFF00FB62BF /* TimerReducer.swift */; };
 		8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */; };
 		8CE495A62434B3E2008ABE48 /* DummyLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */; };
 		AC0131B3246AEF6000C42D39 /* DurationTextFieldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0131B2246AEF6000C42D39 /* DurationTextFieldInfo.swift */; };
@@ -159,6 +160,7 @@
 		8CAF7AD924581A41006B961D /* TimerTests-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "TimerTests-Shared.xcconfig"; sourceTree = "<group>"; };
 		8CB54532240E7DA100154473 /* TimeEntriesLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntriesLogViewController.swift; sourceTree = "<group>"; };
 		8CB54534240EA67400154473 /* StartEditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditState.swift; sourceTree = "<group>"; };
+		8CD1B4B22477CBFF00FB62BF /* TimerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerReducer.swift; sourceTree = "<group>"; };
 		8CE32668243601D500C6C014 /* StartEditInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditInputAccessoryView.swift; sourceTree = "<group>"; };
 		8CE495A52434B3E2008ABE48 /* DummyLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyLabelCell.swift; sourceTree = "<group>"; };
 		AC0131B2246AEF6000C42D39 /* DurationTextFieldInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationTextFieldInfo.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				8C509D0D2412567900B6DF30 /* TimerAction.swift */,
 				8C509D1A241264A200B6DF30 /* TimerCoordinator.swift */,
 				ACAA585C24378106003FDECA /* SimpleBottomSheet.swift */,
+				8CD1B4B22477CBFF00FB62BF /* TimerReducer.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				8CE32669243601D500C6C014 /* StartEditInputAccessoryView.swift in Sources */,
 				8C008FC424090C85000A0C32 /* StartEditViewController.swift in Sources */,
 				CC03C2802448AF0A0071FA55 /* EditableProject.swift in Sources */,
+				8CD1B4B32477CBFF00FB62BF /* TimerReducer.swift in Sources */,
 				CC5D320D24657CC5005A1837 /* Cap.swift in Sources */,
 				8C509D252412879200B6DF30 /* DayViewModel.swift in Sources */,
 				ACAA582A2433A7ED003FDECA /* RunningTimeEntryReducer.swift in Sources */,

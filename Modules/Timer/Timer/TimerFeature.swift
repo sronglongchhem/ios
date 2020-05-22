@@ -5,6 +5,7 @@ import OtherServices
 
 public func createTimerReducer(repository: Repository, time: Time, schedulerProvider: SchedulerProvider) -> Reducer<TimerState, TimerAction> {
     return combine(
+        timerReducer,
         createTimeEntriesLogReducer(repository: repository, time: time, schedulerProvider: schedulerProvider)
             .pullback(state: \.timeLogState, action: \.timeLog),
         createStartEditReducer(repository: repository, time: time)
