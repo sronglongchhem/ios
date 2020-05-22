@@ -51,7 +51,18 @@ func fetchProjectSuggestions(for query: String, in entities: TimeLogEntities) ->
 }
 
 func fetchTagSuggestions(for query: String, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
-    return []
+    let words = query.split(separator: " ").map { String($0) }
+    
+    var suggestions = words.reduce(Array(entities.tags.values)) { tags, word in
+        return tags.filter { tag in
+            return tag.name.contains(word)
+        }
+    }.sorted(by: { leftHand, rightHand in
+        leftHand.name > rightHand.name
+    }).map(AutocompleteSuggestion.tagSuggestion)
+    
+    suggestions.insert(AutocompleteSuggestion.createTagSuggestion(name: query), at: 0)
+    return suggestions
 }
 
 func fetchTimeEntrySuggestions(for query: String, in entities: TimeLogEntities) -> [AutocompleteSuggestion] {
