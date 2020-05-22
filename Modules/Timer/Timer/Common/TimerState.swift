@@ -2,31 +2,24 @@ import Foundation
 import Models
 import Utils
 
-public struct LocalTimerState: Equatable {
+public struct TimerState: Equatable {
+    public var user: Loadable<User>
+    public var entities: TimeLogEntities
+
     internal var editableTimeEntry: EditableTimeEntry?
     internal var expandedGroups: Set<Int> = Set<Int>()
     internal var entriesPendingDeletion = Set<Int64>()
     internal var autocompleteSuggestions: [AutocompleteSuggestion] = []
     internal var dateTimePickMode: DateTimePickMode = .none
     internal var cursorPosition: Int = 0
-    
-    public init() {
-    }
-}
 
-public struct TimerState: Equatable {
-    public var user: Loadable<User>
-    public var entities: TimeLogEntities
-    public var localTimerState: LocalTimerState
-    
-    public init(user: Loadable<User>, entities: TimeLogEntities, localTimerState: LocalTimerState) {
+    public init(user: Loadable<User>, entities: TimeLogEntities) {
         self.user = user
         self.entities = entities
-        self.localTimerState = localTimerState
     }
 }
 
-extension LocalTimerState {
+extension TimerState {
     public func isEditingGroup() -> Bool {
         guard let numberOfEntriesBeingEdited = editableTimeEntry?.ids.count else { return false }
         return numberOfEntriesBeingEdited > 1
@@ -39,16 +32,16 @@ extension TimerState {
         get {
             TimeEntriesLogState(
                 entities: entities,
-                expandedGroups: localTimerState.expandedGroups,
-                editableTimeEntry: localTimerState.editableTimeEntry,
-                entriesPendingDeletion: localTimerState.entriesPendingDeletion
+                expandedGroups: expandedGroups,
+                editableTimeEntry: editableTimeEntry,
+                entriesPendingDeletion: entriesPendingDeletion
             )
         }
         set {
             entities = newValue.entities
-            localTimerState.expandedGroups = newValue.expandedGroups
-            localTimerState.editableTimeEntry = newValue.editableTimeEntry
-            localTimerState.entriesPendingDeletion = newValue.entriesPendingDeletion
+            expandedGroups = newValue.expandedGroups
+            editableTimeEntry = newValue.editableTimeEntry
+            entriesPendingDeletion = newValue.entriesPendingDeletion
         }
     }
     
@@ -57,19 +50,19 @@ extension TimerState {
             StartEditState(
                 user: user,
                 entities: entities,
-                editableTimeEntry: localTimerState.editableTimeEntry,
-                autocompleteSuggestions: localTimerState.autocompleteSuggestions,
-                dateTimePickMode: localTimerState.dateTimePickMode,
-                cursorPosition: localTimerState.cursorPosition
+                editableTimeEntry: editableTimeEntry,
+                autocompleteSuggestions: autocompleteSuggestions,
+                dateTimePickMode: dateTimePickMode,
+                cursorPosition: cursorPosition
             )
         }
         set {
             user = newValue.user
             entities = newValue.entities
-            localTimerState.editableTimeEntry = newValue.editableTimeEntry
-            localTimerState.autocompleteSuggestions = newValue.autocompleteSuggestions
-            localTimerState.dateTimePickMode = newValue.dateTimePickMode
-            localTimerState.cursorPosition = newValue.cursorPosition
+            editableTimeEntry = newValue.editableTimeEntry
+            autocompleteSuggestions = newValue.autocompleteSuggestions
+            dateTimePickMode = newValue.dateTimePickMode
+            cursorPosition = newValue.cursorPosition
         }
     }
 
@@ -78,26 +71,26 @@ extension TimerState {
             RunningTimeEntryState(
                 user: user,
                 entities: entities,
-                editableTimeEntry: localTimerState.editableTimeEntry
+                editableTimeEntry: editableTimeEntry
             )
         }
         set {
             user = newValue.user
             entities = newValue.entities
-            localTimerState.editableTimeEntry = newValue.editableTimeEntry
+            editableTimeEntry = newValue.editableTimeEntry
         }
     }
     
     internal var projectState: ProjectState {
         get {
             ProjectState(
-                editableProject: localTimerState.editableTimeEntry?.editableProject,
+                editableProject: editableTimeEntry?.editableProject,
                 projects: entities.projects
             )
         }
         set {
             entities.projects = newValue.projects
-            guard var timeEntry = localTimerState.editableTimeEntry else { return }
+            guard var timeEntry = editableTimeEntry else { return }
             timeEntry.editableProject = newValue.editableProject
         }
     }

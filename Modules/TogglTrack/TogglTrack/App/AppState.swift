@@ -10,8 +10,13 @@ public struct AppState {
     public var user: Loadable<User> = .nothing
     public var entities: TimeLogEntities =  TimeLogEntities()
     
-    public var localOnboardingState: LocalOnboardingState = LocalOnboardingState()
-    public var localTimerState: LocalTimerState = LocalTimerState()
+    private var _onboardingState: OnboardingState
+    private var _timerState: TimerState
+
+    init() {
+        _onboardingState = OnboardingState(user: user, route: route)
+        _timerState = TimerState(user: user, entities: entities)
+    }
 }
 
 // Module specific states
@@ -32,32 +37,29 @@ extension AppState {
     
     var onboardingState: OnboardingState {
         get {
-            OnboardingState(
-                user: user,
-                route: route,
-                localOnboardingState: localOnboardingState
-            )
+            var copy = _onboardingState
+            copy.route = route
+            copy.user = user
+            return copy
         }
         set {
+            _onboardingState = newValue
             user = newValue.user
             route = newValue.route
-            localOnboardingState = newValue.localOnboardingState
         }
     }
     
     var timerState: TimerState {
         get {
-            TimerState(
-                user: user,
-                entities: entities,
-                localTimerState: localTimerState
-            )
+            var copy = _timerState
+            copy.entities = entities
+            copy.user = user
+            return copy
         }
-        
         set {
-            user = newValue.user
+            _timerState = newValue
             entities = newValue.entities
-            localTimerState = newValue.localTimerState
+            user = newValue.user
         }
     }
 }
