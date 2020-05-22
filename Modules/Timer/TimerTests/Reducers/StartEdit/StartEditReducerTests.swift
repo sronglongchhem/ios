@@ -738,6 +738,93 @@ class StartEditReducerTests: XCTestCase {
         )
     }
 
+    func testWheelStartDateChanged() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromGroup(
+                ids: [0, 3, 4],
+                groupSample: TimeEntry(
+                    id: 1,
+                    description: "sss",
+                    start: mockTime.now() - 10,
+                    duration: 100,
+                    billable: true,
+                    workspaceId: mockUser.defaultWorkspace,
+                    tagIds: [])),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none, cursorPosition: 0
+        )
+
+        let newStart = mockTime.now() - 20
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .wheelStartTimeChanged(newStart), { $0.editableTimeEntry!.start = newStart })
+        )
+    }
+
+    func testWheelDurationChanged() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromGroup(
+                ids: [0, 3, 4],
+                groupSample: TimeEntry(
+                    id: 1,
+                    description: "sss",
+                    start: mockTime.now() - 10,
+                    duration: 100,
+                    billable: true,
+                    workspaceId: mockUser.defaultWorkspace,
+                    tagIds: [])),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none, cursorPosition: 0
+        )
+
+        let newDuration: TimeInterval = 150
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .wheelDurationChanged(newDuration), { $0.editableTimeEntry!.duration = newDuration })
+        )
+    }
+
+    func testWheelStartAndDurationChanged() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.fromGroup(
+                ids: [0, 3, 4],
+                groupSample: TimeEntry(
+                    id: 1,
+                    description: "sss",
+                    start: mockTime.now() - 10,
+                    duration: 100,
+                    billable: true,
+                    workspaceId: mockUser.defaultWorkspace,
+                    tagIds: [])),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none, cursorPosition: 0
+        )
+
+        let newStart: Date = mockTime.now() - 20
+        let newDuration: TimeInterval = 150
+
+        assertReducerFlow(
+        initialState: state,
+        reducer: reducer,
+        steps:
+        Step(.send, .wheelStartAndDurationChanged(newStart, newDuration), {
+            $0.editableTimeEntry!.start = newStart
+            $0.editableTimeEntry!.duration = newDuration
+        }))
+    }
+
     func test_tagCreated_addsTagToEntitiesAndEditableTimeEntry() {
         let state = StartEditState(
             user: Loadable.loaded(mockUser),

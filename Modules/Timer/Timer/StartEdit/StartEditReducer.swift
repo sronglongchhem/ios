@@ -80,6 +80,21 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             state.dateTimePickMode = .none
             return []
 
+        case .wheelStartTimeChanged(let startDate):
+            state.editableTimeEntry?.start = startDate
+            return []
+
+        case .wheelDurationChanged(let duration):
+            guard duration >= 0 && duration < .maxTimeEntryDuration else { return [] }
+            state.editableTimeEntry?.duration = duration
+            return []
+
+        case .wheelStartAndDurationChanged(let startDate, let duration):
+            guard duration >= 0 && duration < .maxTimeEntryDuration else { return [] }
+            state.editableTimeEntry?.start = startDate
+            state.editableTimeEntry?.duration = duration
+            return []
+
         case .billableButtonTapped:
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.billable = !editableTimeEntry.billable

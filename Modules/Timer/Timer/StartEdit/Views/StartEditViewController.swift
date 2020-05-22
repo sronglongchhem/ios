@@ -29,7 +29,7 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
     @IBOutlet weak var wheelForegroundView: WheelForegroundView!
-    @IBOutlet weak var wheelDurationView: UIView!
+    @IBOutlet weak var wheelDurationView: DurationTextField!
     @IBOutlet weak var wheelDurationLabelTextField: DurationTextField!
 
     @IBOutlet var startEditInputAccessoryView: StartEditInputAccessoryView!
@@ -121,6 +121,16 @@ public class StartEditViewController: UIViewController, Storyboarded, BottomShee
 
         endDateButton.rx.tap
             .mapTo(StartEditAction.stopButtonTapped)
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
+        wheelForegroundView.rx.controlEvent(.valueChanged)
+            .mapTo({ _ in StartEditAction.wheelStartAndDurationChanged(self.wheelForegroundView.startTime, self.wheelForegroundView.duration) })
+            .subscribe(onNext: store.dispatch)
+            .disposed(by: disposeBag)
+
+        wheelDurationView.rx.duration
+            .mapTo({ StartEditAction.wheelDurationChanged($0) })
             .subscribe(onNext: store.dispatch)
             .disposed(by: disposeBag)
 
@@ -219,3 +229,4 @@ extension StartEditViewController: UITableViewDelegate {
         return dataSource.sectionModels[0].items[indexPath.row].height
     }
 }
+ 

@@ -31,6 +31,11 @@ public class WheelForegroundView: UIControl {
         }
     }
 
+    public var duration: TimeInterval {
+        get { return endTime.timeIntervalSince(startTime) }
+        set { endTime = startTime.addingTimeInterval(newValue) }
+    }
+    
     private var _isRunning: Bool = false
     public var isRunning: Bool {
         get { return _isRunning }

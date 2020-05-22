@@ -16,6 +16,9 @@ public enum StartEditAction: Equatable {
     case dateTimePicked(Date)
     case pickerTapped(DateTimePickMode)
     case dateTimePickingCancelled
+    case wheelStartTimeChanged(Date)
+    case wheelDurationChanged(TimeInterval)
+    case wheelStartAndDurationChanged(Date, TimeInterval)
 
     case projectButtonTapped
     case addProjectChipTapped
@@ -66,6 +69,15 @@ extension StartEditAction: CustomDebugStringConvertible {
 
         case .dateTimePickingCancelled:
             return "DateTimePickingCancelled"
+
+        case .wheelStartTimeChanged(let startDate):
+            return "wheelStartTimeChanged \(startDate)"
+
+        case .wheelDurationChanged(let duration):
+            return "wheelDurationChanged \(duration)"
+
+        case .wheelStartAndDurationChanged(let startDate, let duration):
+            return "wheelStartAndDurationChanged \(startDate) - \(duration)"
 
         case .billableButtonTapped:
             return "BillableButtonTapped"

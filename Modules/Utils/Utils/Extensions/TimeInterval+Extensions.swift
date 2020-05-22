@@ -29,3 +29,7 @@ extension TimeInterval {
             : self
     }
 }
+
+public extension TimeInterval {
+    static var maxTimeEntryDuration: TimeInterval { 999 * TimeInterval(Int.secondsInAnHour) }
+}
