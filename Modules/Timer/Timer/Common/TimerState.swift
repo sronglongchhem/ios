@@ -7,11 +7,7 @@ public struct TimerState: Equatable {
     public var entities: TimeLogEntities
 
     private var _timeEntriesLogState: TimeEntriesLogState
-
-    internal var editableTimeEntry: EditableTimeEntry?
-    internal var autocompleteSuggestions: [AutocompleteSuggestion] = []
-    internal var dateTimePickMode: DateTimePickMode = .none
-    internal var cursorPosition: Int = 0
+    private var _startEditState: StartEditState?
 
     public init(user: Loadable<User>, entities: TimeLogEntities) {
         self.user = user
@@ -23,7 +19,7 @@ public struct TimerState: Equatable {
 
 extension TimerState {
     public func isEditingGroup() -> Bool {
-        guard let numberOfEntriesBeingEdited = editableTimeEntry?.ids.count else { return false }
+        guard let numberOfEntriesBeingEdited = _startEditState?.editableTimeEntry.ids.count else { return false }
         return numberOfEntriesBeingEdited > 1
     }
 }
@@ -42,22 +38,20 @@ extension TimerState {
         }
     }
     
-    internal var startEditState: StartEditState {
+    internal var startEditState: StartEditState? {
         get {
-            StartEditState(
-                entities: entities,
-                editableTimeEntry: editableTimeEntry,
-                autocompleteSuggestions: autocompleteSuggestions,
-                dateTimePickMode: dateTimePickMode,
-                cursorPosition: cursorPosition
-            )
+            if _startEditState == nil {
+                return nil
+            }
+
+            var copy = _startEditState!
+            copy.entities = entities
+            return copy
         }
         set {
+            _startEditState = newValue
+            guard let newValue = newValue else { return }
             entities = newValue.entities
-            editableTimeEntry = newValue.editableTimeEntry
-            autocompleteSuggestions = newValue.autocompleteSuggestions
-            dateTimePickMode = newValue.dateTimePickMode
-            cursorPosition = newValue.cursorPosition
         }
     }
 

@@ -9,6 +9,7 @@ public func createTimerReducer(repository: Repository, time: Time, schedulerProv
         createTimeEntriesLogReducer(repository: repository, time: time, schedulerProvider: schedulerProvider)
             .pullback(state: \.timeLogState, action: \.timeLog),
         createStartEditReducer(repository: repository, time: time)
+            .optional
             .pullback(state: \.startEditState, action: \.startEdit),
         createRunningTimeEntryReducer(repository: repository, time: time)
             .pullback(state: \.runningTimeEntryState, action: \.runningTimeEntry)
@@ -41,7 +42,7 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
                },
                .startEdit: StartEditFeature(time: time)
                    .view { $0.view(
-                       state: { $0.startEditState },
+                       state: { $0.startEditState! },
                        action: { TimerAction.startEdit($0) })
                },
                .runningTimeEntry: RunningTimeEntryFeature()
@@ -64,8 +65,9 @@ public class TimerFeature: BaseFeature<TimerState, TimerAction> {
             store: store,
             timeLogCoordinator: features[.timeEntriesLog]!.mainCoordinator(store: store) as! TimeEntriesLogCoordinator,
             startEditCoordinator: features[.startEdit]!.mainCoordinator(store: store) as! StartEditCoordinator,
-            runningTimeEntryCoordinator: features[.runningTimeEntry]!.mainCoordinator(store: store) as! RunningTimeEntryCoordinator,
-            projectCoordinator: features[.project]!.mainCoordinator(store: store) as! ProjectCoordinator
+            runningTimeEntryCoordinator: features[.runningTimeEntry]!.mainCoordinator(store: store) as! RunningTimeEntryCoordinator
+//            ,
+//            projectCoordinator: features[.project]!.mainCoordinator(store: store) as! ProjectCoordinator
         )
     }
     // swiftlint:enable force_cast

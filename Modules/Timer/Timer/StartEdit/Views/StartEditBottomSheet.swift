@@ -63,12 +63,6 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
             .subscribe(onNext: keyboardWillChange(intersectionHeight:))
             .disposed(by: disposeBag)
 
-        store.select(shouldShowEditView)
-            .drive(onNext: { [weak self] shouldShowEditView in
-                shouldShowEditView ? self?.show() : self?.hide()
-            })
-            .disposed(by: disposeBag)
-
         let navigationController = UINavigationController(rootViewController: containedViewController)
         navigationController.navigationBar.isHidden = true
 
@@ -112,13 +106,13 @@ class StartEditBottomSheet<ContainedView: UIViewController>: UIViewController, U
         layout()
     }
 
-    private func hide() {
+    func hide() {
         state = .hidden
         containedViewController.loseFocus()
         containedViewController.resignFirstResponder()
     }
 
-    private func show() {
+    func show() {
         state = .partial
         containedViewController.focus()
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
