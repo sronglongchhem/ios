@@ -21,6 +21,8 @@ public enum StartEditAction: Equatable {
     case tagButtonTapped
     case addTagChipTapped
     case billableButtonTapped
+    
+    case tagCreated(Tag)
 
     case setError(ErrorType)
     case autocompleteSuggestionsUpdated([AutocompleteSuggestion])
@@ -75,6 +77,9 @@ extension StartEditAction: CustomDebugStringConvertible {
 
         case .addProjectChipTapped:
             return "AddProjectButtonTapped"
+            
+        case let .tagCreated(tag):
+            return "Tag created: \(tag.name)"
             
         case let .setError(error):
             return "SetError: \(error)"

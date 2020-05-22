@@ -668,6 +668,29 @@ class StartEditReducerTests: XCTestCase {
             Step(.send, .durationInputted(newDuration))
         )
     }
+    
+    func test_tagCreated_addsTagToEntitiesAndEditableTimeEntry() {
+        let state = StartEditState(
+            user: Loadable.loaded(mockUser),
+            entities: TimeLogEntities(),
+            editableTimeEntry: EditableTimeEntry.empty(workspaceId: mockUser.defaultWorkspace),
+            autocompleteSuggestions: [],
+            dateTimePickMode: .none,
+            cursorPosition: 0
+        )
+
+        let expectedTag = Tag(id: 0, name: "Test tag", workspaceId: mockUser.defaultWorkspace)
+
+        assertReducerFlow(
+            initialState: state,
+            reducer: reducer,
+            steps:
+            Step(.send, .tagCreated(expectedTag)) {
+                $0.entities.tags[expectedTag.id] = expectedTag
+                $0.editableTimeEntry!.tagIds.append(expectedTag.id)
+            }
+        )
+    }
 
     func descriptionEnteredStep(for description: String) -> Step<StartEditState, StartEditAction> {
         return Step(.send, StartEditAction.descriptionEntered(description, description.count)) {

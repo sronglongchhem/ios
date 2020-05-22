@@ -73,6 +73,12 @@ func createStartEditReducer(repository: TimeLogRepository, time: Time) -> Reduce
             guard let editableTimeEntry = state.editableTimeEntry else { return [] }
             state.editableTimeEntry?.description = appendCharacter("#", toString: editableTimeEntry.description)
             return []
+            
+        case let .tagCreated(tag):
+            state.entities.tags[tag.id] = tag
+            guard state.editableTimeEntry != nil else { fatalError() }
+            state.editableTimeEntry!.tagIds.append(tag.id)
+            return []
 
         case let .durationInputted(duration):
             guard duration >= 0,
