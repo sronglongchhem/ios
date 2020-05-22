@@ -46,7 +46,7 @@ func fetchProjectSuggestions(for query: String, in entities: TimeLogEntities) ->
     }.sorted(by: { leftHand, rightHand in
         leftHand.name > rightHand.name
     }).map(AutocompleteSuggestion.projectSuggestion)
-    suggestions.insert(AutocompleteSuggestion.createProjectSuggestion(name: String(query)), at: 0)
+    suggestions.insert(AutocompleteSuggestion.createProjectSuggestion(name: query), at: 0)
     return suggestions
 }
 
